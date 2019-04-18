@@ -1,0 +1,585 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0405AFFC226892E500C6787A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405AFFB226892E500C6787A /* AppDelegate.swift */; };
+		0405AFFE226892E500C6787A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405AFFD226892E500C6787A /* ViewController.swift */; };
+		0405B001226892E600C6787A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0405AFFF226892E600C6787A /* Main.storyboard */; };
+		0405B003226892E800C6787A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0405B002226892E800C6787A /* Assets.xcassets */; };
+		0405B006226892E800C6787A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0405B004226892E800C6787A /* LaunchScreen.storyboard */; };
+		0405B011226892E800C6787A /* Diamond_MelaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405B010226892E800C6787A /* Diamond_MelaTests.swift */; };
+		0405B01C226892E800C6787A /* Diamond_MelaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405B01B226892E800C6787A /* Diamond_MelaUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0405B00D226892E800C6787A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0405AFF0226892E500C6787A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0405AFF7226892E500C6787A;
+			remoteInfo = "Diamond Mela";
+		};
+		0405B018226892E800C6787A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0405AFF0226892E500C6787A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0405AFF7226892E500C6787A;
+			remoteInfo = "Diamond Mela";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0405AFF8226892E500C6787A /* Diamond Mela.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Diamond Mela.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0405AFFB226892E500C6787A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0405AFFD226892E500C6787A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0405B000226892E600C6787A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0405B002226892E800C6787A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0405B005226892E800C6787A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0405B007226892E800C6787A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0405B00C226892E800C6787A /* Diamond MelaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Diamond MelaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0405B010226892E800C6787A /* Diamond_MelaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diamond_MelaTests.swift; sourceTree = "<group>"; };
+		0405B012226892E800C6787A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0405B017226892E800C6787A /* Diamond MelaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Diamond MelaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0405B01B226892E800C6787A /* Diamond_MelaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diamond_MelaUITests.swift; sourceTree = "<group>"; };
+		0405B01D226892E800C6787A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0405AFF5226892E500C6787A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0405B009226892E800C6787A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0405B014226892E800C6787A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0405AFEF226892E500C6787A = {
+			isa = PBXGroup;
+			children = (
+				0405AFFA226892E500C6787A /* Diamond Mela */,
+				0405B00F226892E800C6787A /* Diamond MelaTests */,
+				0405B01A226892E800C6787A /* Diamond MelaUITests */,
+				0405AFF9226892E500C6787A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0405AFF9226892E500C6787A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0405AFF8226892E500C6787A /* Diamond Mela.app */,
+				0405B00C226892E800C6787A /* Diamond MelaTests.xctest */,
+				0405B017226892E800C6787A /* Diamond MelaUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0405AFFA226892E500C6787A /* Diamond Mela */ = {
+			isa = PBXGroup;
+			children = (
+				0405AFFB226892E500C6787A /* AppDelegate.swift */,
+				0405AFFD226892E500C6787A /* ViewController.swift */,
+				0405AFFF226892E600C6787A /* Main.storyboard */,
+				0405B002226892E800C6787A /* Assets.xcassets */,
+				0405B004226892E800C6787A /* LaunchScreen.storyboard */,
+				0405B007226892E800C6787A /* Info.plist */,
+			);
+			path = "Diamond Mela";
+			sourceTree = "<group>";
+		};
+		0405B00F226892E800C6787A /* Diamond MelaTests */ = {
+			isa = PBXGroup;
+			children = (
+				0405B010226892E800C6787A /* Diamond_MelaTests.swift */,
+				0405B012226892E800C6787A /* Info.plist */,
+			);
+			path = "Diamond MelaTests";
+			sourceTree = "<group>";
+		};
+		0405B01A226892E800C6787A /* Diamond MelaUITests */ = {
+			isa = PBXGroup;
+			children = (
+				0405B01B226892E800C6787A /* Diamond_MelaUITests.swift */,
+				0405B01D226892E800C6787A /* Info.plist */,
+			);
+			path = "Diamond MelaUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0405AFF7226892E500C6787A /* Diamond Mela */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0405B020226892E800C6787A /* Build configuration list for PBXNativeTarget "Diamond Mela" */;
+			buildPhases = (
+				0405AFF4226892E500C6787A /* Sources */,
+				0405AFF5226892E500C6787A /* Frameworks */,
+				0405AFF6226892E500C6787A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Diamond Mela";
+			productName = "Diamond Mela";
+			productReference = 0405AFF8226892E500C6787A /* Diamond Mela.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0405B00B226892E800C6787A /* Diamond MelaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0405B023226892E800C6787A /* Build configuration list for PBXNativeTarget "Diamond MelaTests" */;
+			buildPhases = (
+				0405B008226892E800C6787A /* Sources */,
+				0405B009226892E800C6787A /* Frameworks */,
+				0405B00A226892E800C6787A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0405B00E226892E800C6787A /* PBXTargetDependency */,
+			);
+			name = "Diamond MelaTests";
+			productName = "Diamond MelaTests";
+			productReference = 0405B00C226892E800C6787A /* Diamond MelaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		0405B016226892E800C6787A /* Diamond MelaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0405B026226892E800C6787A /* Build configuration list for PBXNativeTarget "Diamond MelaUITests" */;
+			buildPhases = (
+				0405B013226892E800C6787A /* Sources */,
+				0405B014226892E800C6787A /* Frameworks */,
+				0405B015226892E800C6787A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0405B019226892E800C6787A /* PBXTargetDependency */,
+			);
+			name = "Diamond MelaUITests";
+			productName = "Diamond MelaUITests";
+			productReference = 0405B017226892E800C6787A /* Diamond MelaUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0405AFF0226892E500C6787A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = Diamondmela;
+				TargetAttributes = {
+					0405AFF7226892E500C6787A = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					0405B00B226892E800C6787A = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 0405AFF7226892E500C6787A;
+					};
+					0405B016226892E800C6787A = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 0405AFF7226892E500C6787A;
+					};
+				};
+			};
+			buildConfigurationList = 0405AFF3226892E500C6787A /* Build configuration list for PBXProject "Diamond Mela" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0405AFEF226892E500C6787A;
+			productRefGroup = 0405AFF9226892E500C6787A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0405AFF7226892E500C6787A /* Diamond Mela */,
+				0405B00B226892E800C6787A /* Diamond MelaTests */,
+				0405B016226892E800C6787A /* Diamond MelaUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0405AFF6226892E500C6787A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0405B006226892E800C6787A /* LaunchScreen.storyboard in Resources */,
+				0405B003226892E800C6787A /* Assets.xcassets in Resources */,
+				0405B001226892E600C6787A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0405B00A226892E800C6787A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0405B015226892E800C6787A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0405AFF4226892E500C6787A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0405AFFE226892E500C6787A /* ViewController.swift in Sources */,
+				0405AFFC226892E500C6787A /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0405B008226892E800C6787A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0405B011226892E800C6787A /* Diamond_MelaTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0405B013226892E800C6787A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0405B01C226892E800C6787A /* Diamond_MelaUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0405B00E226892E800C6787A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0405AFF7226892E500C6787A /* Diamond Mela */;
+			targetProxy = 0405B00D226892E800C6787A /* PBXContainerItemProxy */;
+		};
+		0405B019226892E800C6787A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0405AFF7226892E500C6787A /* Diamond Mela */;
+			targetProxy = 0405B018226892E800C6787A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0405AFFF226892E600C6787A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0405B000226892E600C6787A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0405B004226892E800C6787A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0405B005226892E800C6787A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0405B01E226892E800C6787A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0405B01F226892E800C6787A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0405B021226892E800C6787A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Diamond Mela/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.diamondmela.Diamond-Mela";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0405B022226892E800C6787A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Diamond Mela/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.diamondmela.Diamond-Mela";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0405B024226892E800C6787A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Diamond MelaTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.diamondmela.Diamond-MelaTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Diamond Mela.app/Diamond Mela";
+			};
+			name = Debug;
+		};
+		0405B025226892E800C6787A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Diamond MelaTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.diamondmela.Diamond-MelaTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Diamond Mela.app/Diamond Mela";
+			};
+			name = Release;
+		};
+		0405B027226892E800C6787A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Diamond MelaUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.diamondmela.Diamond-MelaUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Diamond Mela";
+			};
+			name = Debug;
+		};
+		0405B028226892E800C6787A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Diamond MelaUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.diamondmela.Diamond-MelaUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Diamond Mela";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0405AFF3226892E500C6787A /* Build configuration list for PBXProject "Diamond Mela" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0405B01E226892E800C6787A /* Debug */,
+				0405B01F226892E800C6787A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0405B020226892E800C6787A /* Build configuration list for PBXNativeTarget "Diamond Mela" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0405B021226892E800C6787A /* Debug */,
+				0405B022226892E800C6787A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0405B023226892E800C6787A /* Build configuration list for PBXNativeTarget "Diamond MelaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0405B024226892E800C6787A /* Debug */,
+				0405B025226892E800C6787A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0405B026226892E800C6787A /* Build configuration list for PBXNativeTarget "Diamond MelaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0405B027226892E800C6787A /* Debug */,
+				0405B028226892E800C6787A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0405AFF0226892E500C6787A /* Project object */;
+}
