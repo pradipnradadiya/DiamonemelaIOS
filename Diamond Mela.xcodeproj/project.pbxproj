@@ -19,6 +19,7 @@
 		040B7C042297DF5000883E7A /* MyStockItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B7C032297DF5000883E7A /* MyStockItem.swift */; };
 		040C11192282A674005A3EAE /* Spinner in Resources */ = {isa = PBXBuildFile; fileRef = 040C11182282A674005A3EAE /* Spinner */; };
 		040C111B2282A683005A3EAE /* Font in Resources */ = {isa = PBXBuildFile; fileRef = 040C111A2282A683005A3EAE /* Font */; };
+		04109927229BCC2F001B27AB /* OrderSummaryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04109926229BCC2F001B27AB /* OrderSummaryVC.swift */; };
 		041679AA2295226400B8E7D5 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041679A92295226400B8E7D5 /* ListVC.swift */; };
 		041679AC229528C300B8E7D5 /* LoaderGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041679AB229528C300B8E7D5 /* LoaderGridCell.swift */; };
 		041679B0229552E300B8E7D5 /* ListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041679AF229552E300B8E7D5 /* ListItem.swift */; };
@@ -127,6 +128,7 @@
 		040B7C032297DF5000883E7A /* MyStockItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStockItem.swift; sourceTree = "<group>"; };
 		040C11182282A674005A3EAE /* Spinner */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Spinner; sourceTree = "<group>"; };
 		040C111A2282A683005A3EAE /* Font */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Font; sourceTree = "<group>"; };
+		04109926229BCC2F001B27AB /* OrderSummaryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSummaryVC.swift; sourceTree = "<group>"; };
 		041679A92295226400B8E7D5 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
 		041679AB229528C300B8E7D5 /* LoaderGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderGridCell.swift; sourceTree = "<group>"; };
 		041679AF229552E300B8E7D5 /* ListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItem.swift; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 				04B7640A2296DC90000D8D29 /* model */,
 				0468042D2281BB1A00A6F788 /* OrderTabVC.swift */,
 				04B7640E2296DE2E000D8D29 /* OrderDetailVC.swift */,
+				04109926229BCC2F001B27AB /* OrderSummaryVC.swift */,
 			);
 			path = order;
 			sourceTree = "<group>";
@@ -944,6 +947,7 @@
 				04779575228EBC5100499CE1 /* LoaderCell.swift in Sources */,
 				04A362E322995B7C00A76FBD /* SelectShippingVC.swift in Sources */,
 				041BB8EA2274270600FFBAA4 /* CreateReferralVC.swift in Sources */,
+				04109927229BCC2F001B27AB /* OrderSummaryVC.swift in Sources */,
 				0468042E2281BB1A00A6F788 /* OrderTabVC.swift in Sources */,
 				04A362DD229932D300A76FBD /* MyCartVC.swift in Sources */,
 				041679B0229552E300B8E7D5 /* ListItem.swift in Sources */,
