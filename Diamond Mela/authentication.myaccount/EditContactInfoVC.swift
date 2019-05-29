@@ -30,6 +30,7 @@ class EditContactInfoVC: UIViewController {
     @IBAction func btnCart(_ sender: Any) {
     }
     @IBAction func btnBack(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func btnSelectCountry(_ sender: Any) {

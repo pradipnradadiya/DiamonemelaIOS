@@ -37,6 +37,7 @@ class DownloadVC: UIViewController {
     }
     
     @IBAction func btnBack(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
     
 }

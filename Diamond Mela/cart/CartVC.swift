@@ -28,6 +28,7 @@ class CartVC: UIViewController{
        self.myShipping()
     }
     @IBAction func btnBack(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func btnCart(_ sender: Any) {

@@ -8,7 +8,7 @@ class MyCartVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+       self.listCart()
         // Do any additional setup after loading the view.
     }
     
@@ -37,7 +37,7 @@ extension MyCartVC{
                 self.showAlert(title: errorTitle, message: wrongLogin)
                 
             } else {
-               
+               let cartData=Mapper<CartProductListItem.Data>().mapArray(JSONArray: result["data"] as! [[String : Any]])
             }
             
         }
@@ -62,6 +62,7 @@ extension MyCartVC{
             }
             
         }
+        
     }
     
     func delteCartItem() {
@@ -83,6 +84,7 @@ extension MyCartVC{
             }
             
         }
+        
     }
     
     

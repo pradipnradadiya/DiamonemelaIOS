@@ -18,7 +18,8 @@ let loadingMsg:String="Please wait.."
 
 let internetAlert:String="Internet Alert"
 
-var customerId = "1190"
+var customerId = ""
+var groupId = ""
 
 
 //Common message
@@ -63,3 +64,7 @@ let ENTER_STATE:String = "Please enter state name."
 let ENTER_ADDRESS:String = "Please enter address."
 let ENTER_TEL:String = "Please enter telephone number."
 let ENTER_ZIP_CODE:String = "Please enter postal code."
+
+
+
+

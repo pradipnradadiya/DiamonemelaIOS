@@ -16,9 +16,3 @@ class ShippingVC: UIViewController {
     
 
 }
-
-extension ShippingVC{
-    func getSelectPaymentMethodList()  {
-        
-    }
-}

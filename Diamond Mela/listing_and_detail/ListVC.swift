@@ -8,7 +8,8 @@ class ListVC: UIViewController {
     var arrList = [ListItem.Data]()
     let refreshControl = UIRefreshControl()
     var hasMoredata: Bool = false
-    
+    var headerTitle: String?=""
+    var id:String?=""
     
     @IBOutlet weak var gridList: UICollectionView!
     @IBOutlet weak var btnfilter: UIButtonX!
@@ -16,8 +17,10 @@ class ListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getCategoryProduct(categoryId: "6", groupId: "6", page: String(pageCount), price: "", gold_purity: "", diamond_quality: "", diamond_shape: "", sku: "", availability: "", sort_by: "")
+        self.getCategoryProduct(categoryId: id!, groupId: groupId, page: String(pageCount), price: "", gold_purity: "", diamond_quality: "", diamond_shape: "", sku: "", availability: "", sort_by: "")
         // Do any additional setup after loading the view.
+        
+        self.navigationItem.title=headerTitle
         
         self.getSortFilter(url: Endpoint.getSortFilter.url)
     }

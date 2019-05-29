@@ -1,18 +1,10 @@
-//
-//  AppDelegate.swift
-//  Diamond Mela
-//
-//  Created by mac on 18/04/19.
-//  Copyright © 2019 Diamondmela. All rights reserved.
-//
-
 import UIKit
 let appDelegate = UIApplication.shared.delegate! as! AppDelegate
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    static var menu_bool = true
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

@@ -1,4 +1,5 @@
 import UIKit
+import SDWebImage
 
 class ListCell: UICollectionViewCell {
     
@@ -17,8 +18,14 @@ class ListCell: UICollectionViewCell {
             let amountString=Float((listData?.custom_price)!).asLocaleCurrency
             lblPrice.text=amountString
             
+            //self.imgProduct?.setImageWith("retrgegre", usingActivityIndicatorStyle: .gray)
             
-         //   imgProduct.setImageWith("", usingActivityIndicatorStyle: .gray)
+     //       imgProduct.sd_setImage(with: "\(IMAGE_URL)catalog/product\(listData?.thumbnail)")
+            
+            
+            imgProduct.sd_setImage(with: URL(string: "\(IMAGE_URL)catalog/product\(listData?.thumbnail! ?? "")"), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
+            
+            
         }
         
     }

@@ -14,6 +14,7 @@ class FilterVC: UIViewController {
     }
     
     @IBAction func btnBack(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
     
 }

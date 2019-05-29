@@ -27,6 +27,7 @@ class TransactionVC: UIViewController {
     @IBAction func btnSearch(_ sender: Any) {
     }
     @IBAction func btnBack(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

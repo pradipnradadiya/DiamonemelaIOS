@@ -53,6 +53,7 @@ class LoginVC: UIViewController {
 extension LoginVC {
     
     func loginCustomer() {
+        
         RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         
         let par = ["email": self.tvEmail.text!,"password": self.tvPassword.text!,"notification_token": "abc123","device_id": "sdf56sd5f6"] as [String : Any]

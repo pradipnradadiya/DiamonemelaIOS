@@ -1,0 +1,174 @@
+import UIKit
+import ObjectMapper
+import RappleProgressHUD
+
+class DrawerVC: UIViewController {
+
+   var arrHeader = [HeaderItem.Data]()
+    @IBOutlet weak var tblCategory: UITableView!
+    @IBOutlet weak var constraintTop: NSLayoutConstraint!
+    @IBOutlet var drawerView: UIView!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        var screenStatusBarHeight: CGFloat {
+            
+            if #available(iOS 11.0, *) {
+                if UIApplication.shared.keyWindow!.safeAreaInsets.top < 44 {
+                    return UIApplication.shared.keyWindow!.safeAreaInsets.top
+                }
+                return UIApplication.shared.keyWindow!.safeAreaInsets.top - 20
+            } else {
+                return 0
+            }
+            
+        }
+        
+         constraintTop.constant=constraintTop.constant + screenStatusBarHeight
+        
+       self.getHeaderMenuBestCategory(url: Endpoint.headerMenu.url)
+        // Do any additional setup after loading the view.
+        
+        
+        
+        
+        
+    }
+    @IBAction func btnContactUs(_ sender: Any) {
+        self.closeDrawer()
+        let contact = self.storyboard?.instantiateViewController(withIdentifier: "ContactUsVC") as? ContactUsVC
+        self.navigationController?.pushViewController(contact!, animated: true)
+        
+    }
+    @IBAction func btnLogout(_ sender: Any) {
+    }
+    @IBAction func btnCart(_ sender: Any) {
+        self.closeDrawer()
+        let cart = self.storyboard?.instantiateViewController(withIdentifier: "CartVC") as? CartVC
+        self.navigationController?.pushViewController(cart!, animated: true)
+        
+    }
+    @IBAction func btnPolicies(_ sender: Any) {
+        self.closeDrawer()
+        let policy = self.storyboard?.instantiateViewController(withIdentifier: "PrivacyPolicyVC") as? PrivacyPolicyVC
+        self.navigationController?.pushViewController(policy!, animated: true)
+    }
+    @IBAction func btnDownload(_ sender: Any) {
+        self.closeDrawer()
+        let download = self.storyboard?.instantiateViewController(withIdentifier: "DownloadVC") as? DownloadVC
+        self.navigationController?.pushViewController(download!, animated: true)
+    }
+    @IBAction func btnTransaction(_ sender: Any) {
+        self.closeDrawer()
+        let transaction = self.storyboard?.instantiateViewController(withIdentifier: "TransactionVC") as? TransactionVC
+        self.navigationController?.pushViewController(transaction!, animated: true)
+    }
+    @IBAction func btnMyOrder(_ sender: Any) {
+        self.closeDrawer()
+        let order = self.storyboard?.instantiateViewController(withIdentifier: "OrderTabVC") as? OrderTabVC
+        self.navigationController?.pushViewController(order!, animated: true)
+    }
+    @IBAction func btnMyStock(_ sender: Any) {
+    }
+    @IBAction func btnHome(_ sender: Any) {
+    }
+    
+    @IBAction func btnMyAccount(_ sender: Any) {
+        self.closeDrawer()
+        let editProfile = self.storyboard?.instantiateViewController(withIdentifier: "EditProfileVC") as? EditProfileVC
+        self.navigationController?.pushViewController(editProfile!, animated: true)
+    }
+    
+    @IBAction func btnCreateReferral(_ sender: Any) {
+        self.closeDrawer()
+        let referral = self.storyboard?.instantiateViewController(withIdentifier: "CreateReferralVC") as? CreateReferralVC
+        self.navigationController?.pushViewController(referral!, animated: true)
+    }
+    @objc func tapBlurButton(_ sender: UITapGestureRecognizer) {
+        print("tap Please")
+        let loc = sender.location(in: self.view)
+        let subview = view?.hitTest(loc, with: nil)
+        if(subview != self.drawerView){
+            //            AppDelegate.menu_bool = true
+//                        self.view.removeFromSuperview()
+        }else{
+            AppDelegate.menu_bool = true
+            self.view.removeFromSuperview()
+        }
+    }
+    
+    //using close drawer
+    func closeDrawer() {
+        AppDelegate.menu_bool = true
+        self.view.removeFromSuperview()
+    }
+
+}
+extension DrawerVC{
+    func getHeaderMenuBestCategory (url:String){
+        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        ApiManager.shared.apiHeaderBestCategory(url: url){ (result) in
+            RappleActivityIndicatorView.stopAnimation()
+            let status = result[STATUS_CODE] as? String
+            print(status as Any)
+            if status == FAILURE_CODE || status == nil {
+                
+            } else {
+                
+                //   let data=Mapper<HeaderItem>().map(JSON: result)
+                self.arrHeader=Mapper<HeaderItem.Data>().mapArray(JSONArray: result["data"] as! [[String : Any]])
+                self.reloadTable()
+               
+                
+            }
+            
+        }
+    }
+    
+    func reloadTable() {
+        if self.arrHeader.count > 0 {
+            //            self.lblNoData.isHidden = true
+        } else {
+            //            self.lblNoData.isHidden = false
+        }
+        self.tblCategory.reloadData()
+    }
+}
+
+
+extension DrawerVC: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.arrHeader.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
+        
+        let cell = self.tblCategory.dequeueReusableCell(withIdentifier: "DrawerCell", for: indexPath) as? DrawerCell
+        cell?.headerData = self.arrHeader[indexPath.row]
+        
+        
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        //        self.arrQA[indexPath.row].is_viewed=true
+        //        self.tblQA.reloadRows(at: [indexPath], with: .automatic)
+        
+        //        let qadetail = self.storyboard?.instantiateViewController(withIdentifier: "QADetailVC") as? QADetailVC
+        //        qadetail?.qa = self.arrQA[indexPath.row]
+        //        qadetail?.qid = self.arrQA[indexPath.row].iD!
+        //        self.navigationController?.pushViewController(qadetail!, animated: true)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+}
+
