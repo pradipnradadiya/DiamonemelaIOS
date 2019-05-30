@@ -35,6 +35,8 @@ class ListVC: UIViewController {
         self.openSortPopup()
     }
     
+    @IBAction func btnDownload(_ sender: Any) {
+    }
     @IBAction func btnSearch(_ sender: Any) {
     }
     
@@ -143,12 +145,9 @@ extension ListVC{
             } else {
                 let data=Mapper<SortFilterItem>().map(JSON: result)
                 
-             
-                
             }
             
         }
-        
         
     }
     
@@ -167,6 +166,7 @@ extension ListVC{
                 
             } else {
                 let data = Mapper<SortFilterItem>().map(JSON: result)
+                
             }
             
         }
@@ -210,14 +210,23 @@ extension ListVC: UICollectionViewDelegate, UICollectionViewDataSource,UICollect
             let cell = self.gridList.dequeueReusableCell(withReuseIdentifier: "LoaderGridCell", for: indexPath) as? LoaderGridCell
             cell?.gridIndicator.startAnimating()
            // self.getData()
-             self.getCategoryProduct(categoryId: "6", groupId: "6", page: String(pageCount), price: "", gold_purity: "", diamond_quality: "", diamond_shape: "", sku: "", availability: "", sort_by: "")
+            self.getCategoryProduct(categoryId: id!, groupId: groupId, page: String(pageCount), price: "", gold_purity: "", diamond_quality: "", diamond_shape: "", sku: "", availability: "", sort_by: "")
             return cell!
         }
         
         let cell = self.gridList.dequeueReusableCell(withReuseIdentifier: "ListCell", for: indexPath) as! ListCell
         
         cell.listData = self.arrList[indexPath.row]
+        
+        cell.actionBlockDownload = {
+            
+            self.arrList[indexPath.row].download_flag = 1
+            self.gridList.reloadItems(at: [indexPath])
+            self.addToDownloadProduct(productsId: self.arrList[indexPath.row].entity_id!, customerId: customerId)
+            
+        }
         return cell
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -30,4 +30,5 @@ class ReferralListCell: UITableViewCell {
     @IBAction func btnDelete(_ sender: Any) {
         self.actionBlockDelete?()
     }
+    
 }

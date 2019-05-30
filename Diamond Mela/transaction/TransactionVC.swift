@@ -39,7 +39,6 @@ extension TransactionVC {
             RESpinner.shared.show(view: self.view)
         }
         
-        
         let par = ["customer_id": customerId, "pagesize":pageCount] as [String : Any]
         RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         ApiManager.shared.apiGetTransactionList(params:par as [String : AnyObject]) { (result) in
@@ -54,9 +53,16 @@ extension TransactionVC {
                 
             } else {
                 let transactionList=Mapper<TransactionItem>().map(JSON: result)
+                self.lblTotalDebit.text="\(transactionList?.total_debit ?? 0)"
+                self.lblCredit.text="\(transactionList?.total_credit ?? 0)"
+                self.lblDeposit.text="\(transactionList?.total_deposite ?? 0)"
+                self.lblDebit.text="\(transactionList?.total_debit ?? 0)"
+                
+                
+                
                 let trasactionData=Mapper<TransactionItem.Data>().mapArray(JSONArray: result["data"] as! [[String : Any]])
                 
-                if trasactionData.count < pagesize {
+                if trasactionData.count < 10 {
                     self.hasMoredata = false
                 } else {
                     self.hasMoredata = true
@@ -114,7 +120,7 @@ extension TransactionVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         let cell = self.tblTransaction.dequeueReusableCell(withIdentifier: "TransactionListCell", for: indexPath) as? TransactionListCell
-//        cell?.QA = self.arrQA[indexPath.row]
+        cell?.transactionData = self.arrTransaction[indexPath.row]
         return cell!
     }
     
@@ -122,6 +128,16 @@ extension TransactionVC: UITableViewDelegate, UITableViewDataSource {
         if hasMoredata && indexPath.row == self.arrTransaction.count {
             return
         }
+        
+        if self.arrTransaction[indexPath.row].order_item?.count == 0 ||  self.arrTransaction[indexPath.row].order_item == nil{
+            
+        }else{
+            let detail = self.storyboard?.instantiateViewController(withIdentifier: "TransactionDetailVC") as? TransactionDetailVC
+            detail?.arrTransactionItem=self.arrTransaction[indexPath.row].order_item!
+                   
+            self.navigationController?.pushViewController(detail!, animated: true)
+        }
+        
         
 //        self.arrQA[indexPath.row].is_viewed=true
 //        self.tblQA.reloadRows(at: [indexPath], with: .automatic)

@@ -4,12 +4,15 @@ import RappleProgressHUD
 
 class DownloadVC: UIViewController {
 
+    @IBOutlet weak var btnWithPrice: UIButton!
+    @IBOutlet weak var btnWithoutPrice: UIButton!
     var pageCount: Int = 1
     var arrDownload = [DownloadItem.Data]()
     let refreshControl = UIRefreshControl()
     var hasMoredata: Bool = false
     
-    
+    var flag:String = "1"
+    var productIds:String = ""
     
     @IBOutlet weak var tblDownloadProduct: UITableView!
     override func viewDidLoad() {
@@ -20,9 +23,15 @@ class DownloadVC: UIViewController {
     }
     
     @IBAction func btnWithPrice(_ sender: Any) {
+        flag="1"
+        btnWithPrice.setImage(UIImage(named: "radio-select"), for: .normal)
+        btnWithoutPrice.setImage(UIImage(named: "radio"), for: .normal)
     }
     
     @IBAction func btnWithoutPrice(_ sender: Any) {
+        flag="0"
+        btnWithPrice.setImage(UIImage(named: "radio"), for: .normal)
+        btnWithoutPrice.setImage(UIImage(named: "radio-select"), for: .normal)
     }
     
     @IBAction func btnCart(_ sender: Any) {
@@ -31,9 +40,11 @@ class DownloadVC: UIViewController {
     @IBAction func btnSearch(_ sender: Any) {
     }
     @IBAction func btnDownloadAll(_ sender: Any) {
+        self.downloadAllProduct(customerId: customerId, productId: productIds, price: flag)
     }
     
     @IBAction func btnDeleteAll(_ sender: Any) {
+        self.deleteAllProduct(customerId: customerId, productId: productIds)
     }
     
     @IBAction func btnBack(_ sender: Any) {
@@ -43,6 +54,36 @@ class DownloadVC: UIViewController {
 }
 
 extension DownloadVC {
+    
+    func downloadAllProduct(customerId:String , productId:String,price:String){
+        
+        let par = ["customer_id": customerId, "product_ids":productId,"price":price] as [String : Any]
+        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        ApiManager.shared.apiDownloadAllProductList(params:par as [String : AnyObject]) { (result) in
+           
+            RappleActivityIndicatorView.stopAnimation()
+            
+            let status = result[STATUS_CODE] as? String
+            print(status as Any)
+            if status == FAILURE_CODE || status == nil {
+                
+                
+            } else {
+               
+                
+                
+                
+            }
+            
+        }
+    }
+    
+    func deleteAllProduct(customerId:String , productId:String){
+        
+    }
+    
+    
+    
     
     func getDownloadList(showLoader: Bool = false) {
         
@@ -128,7 +169,20 @@ extension DownloadVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         let cell = self.tblDownloadProduct.dequeueReusableCell(withIdentifier: "DownloadListCell", for: indexPath) as? DownloadListCell
-        //        cell?.QA = self.arrQA[indexPath.row]
+        
+            cell?.downloadData = self.arrDownload[indexPath.row]
+        
+        cell?.actionBlockDelete = {
+            self.deleteAllProduct(customerId: customerId, productId: self.arrDownload[indexPath.row].product_id!)
+            
+            self.arrDownload.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        
+        cell?.actionBlockDownload = {
+            self.downloadAllProduct(customerId: customerId, productId: self.arrDownload[indexPath.row].product_id!, price: self.flag)
+            
+        }
         return cell!
     }
     

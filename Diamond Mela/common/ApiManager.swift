@@ -42,6 +42,8 @@ enum Endpoint {
     
     //Download
     case getDownloadProductList
+    case downloadAllProduct
+    case deleteAllProduct
     
     //Transaction
     case getTransactionList
@@ -63,14 +65,14 @@ enum Endpoint {
     //Policy
     case policy
     
-    
     //Cart
     case cartList
     case updateCartItem
     case deleteCartItem
     case paymentMethodList
     case paymentSave
-    
+    case orderSummary
+    case placeOrder
     var url: String {
         
         let baseUrl: String = BASE_URL
@@ -92,8 +94,12 @@ enum Endpoint {
         case .paymentSave:
             return baseUrl+"dmlapi/addtocart/paymentsave"
             
+        case .orderSummary:
+            return baseUrl+"dmlapi/addtocart/orderdetailsview"
             
-            
+        case .placeOrder:
+            return baseUrl+"dmlapi/addtocart/createorders"
+          
         //------------------Policy----------------------
         case .policy:
             return baseUrl+"dmlapi/home/policycontent"
@@ -129,6 +135,12 @@ enum Endpoint {
         //------------------Download-----------------------------
         case .getDownloadProductList:
             return baseUrl+"dmlapi/downloadproduct/downloadview/"
+            
+        case .deleteAllProduct:
+            return baseUrl+"dmlapi/downloadproduct/DeleteAllProduct/"
+            
+        case .downloadAllProduct:
+            return baseUrl+"dmlapi/downloadproduct/DownloadAllImage/"
             
         //------------------My Account---------------------------
         case .getAllAddress:
@@ -401,6 +413,37 @@ class ApiManager {
             
         }
     }
+    
+    func apiDownloadAllProductList( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
+        
+        self.apiAlamofire(url: Endpoint.downloadAllProduct.url, method:.post, params: params) { (response) in
+            
+            let status = response["status"] as? String
+            if status == "error" {
+                completHandler(response)
+            } else {
+                completHandler(response)
+            }
+            
+        }
+    }
+    
+    func apiDeleteAllProductList( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
+        
+        self.apiAlamofire(url: Endpoint.deleteAllProduct.url, method:.post, params: params) { (response) in
+            
+            let status = response["status"] as? String
+            if status == "error" {
+                completHandler(response)
+            } else {
+                completHandler(response)
+            }
+            
+        }
+    }
+    
+    
+    
     
     
     //***************************** MY ACCOUNT **********************************************
@@ -769,6 +812,36 @@ class ApiManager {
     func apiPaymentSave( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
         
         self.apiAlamofire(url: Endpoint.paymentSave.url, method:.post, params: params) { (response) in
+            
+            let status = response["status"] as? String
+            if status == "error" {
+                completHandler(response)
+            } else {
+                completHandler(response)
+            }
+            
+        }
+        
+    }
+    
+    func apiOrderSummary( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
+        
+        self.apiAlamofire(url: Endpoint.orderSummary.url, method:.post, params: params) { (response) in
+            
+            let status = response["status"] as? String
+            if status == "error" {
+                completHandler(response)
+            } else {
+                completHandler(response)
+            }
+            
+        }
+        
+    }
+    
+    func apiPlaceOrder( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
+        
+        self.apiAlamofire(url: Endpoint.placeOrder.url, method:.post, params: params) { (response) in
             
             let status = response["status"] as? String
             if status == "error" {

@@ -48,11 +48,8 @@ extension ManageReferralVC{
             } else {
                 let referralData=Mapper<ReferralItem.Data>().mapArray(JSONArray: result["data"] as! [[String : Any]])
                 
-                
-              
                     self.tblManageReferral.reloadData()
                     self.arrReferral = referralData
-               
                     self.reloadTable()
                
             }

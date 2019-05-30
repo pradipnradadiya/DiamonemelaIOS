@@ -4,13 +4,14 @@ import RappleProgressHUD
 
 class DrawerVC: UIViewController {
 
-   var arrHeader = [HeaderItem.Data]()
+    @IBOutlet weak var tblHeightConstraint: NSLayoutConstraint!
+    var arrHeader = [HeaderItem.Data]()
     @IBOutlet weak var tblCategory: UITableView!
     @IBOutlet weak var constraintTop: NSLayoutConstraint!
     @IBOutlet var drawerView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tblHeightConstraint.constant=0
         var screenStatusBarHeight: CGFloat {
             
             if #available(iOS 11.0, *) {
@@ -34,6 +35,17 @@ class DrawerVC: UIViewController {
         
         
     }
+    
+    @IBAction func btnOurCollection(_ sender: UIButton) {
+        if sender.isSelected {
+            tblHeightConstraint.constant=0
+            sender.isSelected=false
+        }else{
+           tblHeightConstraint.constant=400
+            sender.isSelected=true
+        }
+    }
+    
     @IBAction func btnContactUs(_ sender: Any) {
         self.closeDrawer()
         let contact = self.storyboard?.instantiateViewController(withIdentifier: "ContactUsVC") as? ContactUsVC
@@ -155,14 +167,10 @@ extension DrawerVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
-        //        self.arrQA[indexPath.row].is_viewed=true
-        //        self.tblQA.reloadRows(at: [indexPath], with: .automatic)
-        
-        //        let qadetail = self.storyboard?.instantiateViewController(withIdentifier: "QADetailVC") as? QADetailVC
-        //        qadetail?.qa = self.arrQA[indexPath.row]
-        //        qadetail?.qid = self.arrQA[indexPath.row].iD!
-        //        self.navigationController?.pushViewController(qadetail!, animated: true)
+        let list = self.storyboard?.instantiateViewController(withIdentifier: "ListVC") as? ListVC
+        list?.headerTitle = self.arrHeader[indexPath.row].name
+        list?.id = self.arrHeader[indexPath.row].entity_id
+        self.navigationController?.pushViewController(list!, animated: true)
         
     }
     

@@ -10,6 +10,13 @@ class DownloadListCell: UITableViewCell {
     @IBOutlet weak var btnDownload: UIButton!
     @IBOutlet weak var lblPrice: UILabel!
     @IBOutlet weak var imgProduct: UIImageView!
+    
+    var downloadData:DownloadItem.Data?{
+        didSet{
+            
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

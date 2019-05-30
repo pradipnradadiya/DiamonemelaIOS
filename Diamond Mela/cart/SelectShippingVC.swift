@@ -3,10 +3,14 @@ import ObjectMapper
 import RappleProgressHUD
 class SelectShippingVC: UIViewController {
 
+    @IBOutlet weak var btnContinue: UIButton!
+    @IBOutlet weak var tblShipping: UITableView!
     var shippingData = [PaymentMethodItem.Shipping_charges]()
+    var paymentTypes:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.reloadTable()
         print(shippingData[0].method_title as Any)
         // Do any additional setup after loading the view.
     }
@@ -15,17 +19,32 @@ class SelectShippingVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-
+    @IBAction func btnContinue(_ sender: Any) {
+        let orderSummary = self.storyboard?.instantiateViewController(withIdentifier: "OrderSummaryVC") as? OrderSummaryVC
+        self.navigationController?.pushViewController(orderSummary!, animated: true)
+    }
+    
 }
+
 extension SelectShippingVC {
     
-    func savePayment()  {
+    
+    func reloadTable(){
+        if self.shippingData.count > 0 {
+            //            self.lblNoData.isHidden = true
+        } else {
+            //            self.lblNoData.isHidden = false
+        }
+        self.tblShipping.reloadData()
+    }
+    
+    func savePayment(shippingMethod:String,shippingPrice:String)  {
         RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         
         let par = ["customer_id": customerId,
-                   "payment_method":"",
-                   "shipping_method":"",
-                   "shipping_price":""]
+                   "payment_method":paymentTypes,
+                   "shipping_method":shippingMethod,
+                   "shipping_price":shippingPrice]
         
         ApiManager.shared.apiPaymentSave(params:par as [String : AnyObject]) { (result) in
             
@@ -34,12 +53,49 @@ extension SelectShippingVC {
             let status = result[STATUS_CODE] as? String
             print(status as Any)
             if status == FAILURE_CODE || status == nil {
-                
-                
+                                
             } else {
                 
             }
             
         }
     }
+}
+
+
+extension SelectShippingVC: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.shippingData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = self.tblShipping.dequeueReusableCell(withIdentifier: "ShippingCell", for: indexPath) as? ShippingCell
+        cell?.shippingData = self.shippingData[indexPath.row]
+        
+        
+        
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        savePayment(shippingMethod: self.shippingData[indexPath.row].code!, shippingPrice: "\(self.shippingData[indexPath.row].price ?? 0)")
+        
+        //        self.arrQA[indexPath.row].is_viewed=true
+        //        self.tblQA.reloadRows(at: [indexPath], with: .automatic)
+        
+        //        let qadetail = self.storyboard?.instantiateViewController(withIdentifier: "QADetailVC") as? QADetailVC
+        //        qadetail?.qa = self.arrQA[indexPath.row]
+        //        qadetail?.qid = self.arrQA[indexPath.row].iD!
+        //        self.navigationController?.pushViewController(qadetail!, animated: true)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
 }
