@@ -2,6 +2,8 @@ import UIKit
 
 class FilterVC: UIViewController {
 
+    var arrFilterData = [SortFilterItem.Data]()
+    
     @IBOutlet weak var tblFilterData: UITableView!
     @IBOutlet weak var tblFilterTitle: UITableView!
     override func viewDidLoad() {
@@ -18,3 +20,5 @@ class FilterVC: UIViewController {
     }
     
 }
+
+

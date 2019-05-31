@@ -35,6 +35,12 @@ class HomeVC: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
+    @IBAction func btnViewAll(_ sender: Any) {
+        
+        let popProduct = self.storyboard?.instantiateViewController(withIdentifier: "PopularProductVC") as? PopularProductVC
+        self.navigationController?.pushViewController(popProduct!, animated: true)
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,6 +51,7 @@ class HomeVC: UIViewController {
                 customerId=dataObject.data?.entity_id! ?? ""
                 groupId=dataObject.data?.group_id ?? ""
                 print(customerId)
+                
             }
         }
         

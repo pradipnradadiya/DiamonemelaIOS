@@ -60,7 +60,9 @@ enum Endpoint {
     
     //Order
     case getOrder
-    
+    case getOrderDetail
+    case cancelOrder
+    case printOrder
     
     //Policy
     case policy
@@ -73,11 +75,22 @@ enum Endpoint {
     case paymentSave
     case orderSummary
     case placeOrder
+    
+    
+    //My Stock
+    case myStockList
+    
     var url: String {
         
         let baseUrl: String = BASE_URL
         
         switch self {
+            
+        //-------------------My Stock-------------------
+        case .myStockList:
+            return baseUrl+"dmlapi/mystock/MystockView"
+            
+            
         //------------------Cart------------------------
         case .cartList:
             return baseUrl+"dmlapi/addtocart/listcartitems"
@@ -104,9 +117,21 @@ enum Endpoint {
         case .policy:
             return baseUrl+"dmlapi/home/policycontent"
             
+            
         //------------------Order------------------------
         case .getOrder:
             return baseUrl+"dmlapi/allorder/orderview/"
+            
+        case .getOrderDetail:
+            return baseUrl+"dmlapi/allorder/OrderViewDetail/"
+            
+        case .cancelOrder:
+            return baseUrl+"dmlapi/allorder/CancelOrder"
+            
+        case .printOrder:
+            return baseUrl+"dmlapi/allorder/downloadpdf"
+            
+            
             
         //------------------Listing----------------------------
         case .productList:
@@ -732,6 +757,54 @@ class ApiManager {
         
     }
     
+    
+    func apiGetOrderDetail( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
+        
+        self.apiAlamofire(url: Endpoint.getOrderDetail.url, method:.post, params: params) { (response) in
+            
+            let status = response["status"] as? String
+            if status == "error" {
+                completHandler(response)
+            } else {
+                completHandler(response)
+            }
+            
+        }
+        
+    }
+    
+    
+    
+    func apiCancelOrder( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
+        
+        self.apiAlamofire(url: Endpoint.cancelOrder.url, method:.post, params: params) { (response) in
+            
+            let status = response["status"] as? String
+            if status == "error" {
+                completHandler(response)
+            } else {
+                completHandler(response)
+            }
+            
+        }
+        
+    }
+    
+    func apiPrintOrder( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
+        
+        self.apiAlamofire(url: Endpoint.printOrder.url, method:.post, params: params) { (response) in
+            
+            let status = response["status"] as? String
+            if status == "error" {
+                completHandler(response)
+            } else {
+                completHandler(response)
+            }
+            
+        }
+        
+    }
+    
     //***********************************Policy***********************************
     func apiPolicy( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
         
@@ -842,6 +915,23 @@ class ApiManager {
     func apiPlaceOrder( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
         
         self.apiAlamofire(url: Endpoint.placeOrder.url, method:.post, params: params) { (response) in
+            
+            let status = response["status"] as? String
+            if status == "error" {
+                completHandler(response)
+            } else {
+                completHandler(response)
+            }
+            
+        }
+        
+    }
+    
+    
+    //***************************MY STOCK********************************
+    func apiMyStockList( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
+        
+        self.apiAlamofire(url: Endpoint.myStockList.url, method:.post, params: params) { (response) in
             
             let status = response["status"] as? String
             if status == "error" {

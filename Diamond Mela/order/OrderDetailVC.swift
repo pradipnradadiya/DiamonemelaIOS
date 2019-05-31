@@ -1,15 +1,41 @@
 import UIKit
-
+import ObjectMapper
+import RappleProgressHUD
 class OrderDetailVC: UIViewController {
 
+    @IBOutlet weak var lblGrandTotal: UILabel!
+    @IBOutlet weak var lblTax: UILabel!
+    @IBOutlet weak var lblShippingCharge: UILabel!
+    @IBOutlet weak var lblSubTotal: UILabel!
+    @IBOutlet weak var tblOrderDetail: UITableView!
+    @IBOutlet weak var lblPaymentMethod: UILabel!
+    @IBOutlet weak var lblShippingMethod: UILabel!
+    @IBOutlet weak var lblShippingAddress: UILabel!
+    @IBOutlet weak var lblBillingAddress: UILabel!
+    @IBOutlet weak var lblOrderDate: UILabel!
+    
+    @IBOutlet weak var buttonCancelOrder: UIButtonX!
+    @IBOutlet weak var btnPrintOrder: UIButtonX!
+    
+    var orderId:String = ""
+    var arrOrderDetail = [OrderDetailItem.Order_item]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.getOrderDetail(orderId: orderId)
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func btnPrintOrder(_ sender: Any) {
+        self.printOrder(orderId: orderId, groupId: groupId)
+    }
+    
+    @IBAction func btnCancelOrder(_ sender: Any) {
+        self.cancelOrder(orderId: orderId)
+    }
+    
     @IBAction func btnCart(_ sender: Any) {
+        
     }
     
     @IBAction func btnBack(_ sender: Any) {
@@ -17,5 +43,139 @@ class OrderDetailVC: UIViewController {
     }
     
     @IBAction func btnSearch(_ sender: Any) {
+        
     }
+}
+
+
+extension OrderDetailVC{
+    
+    func getOrderDetail(orderId:String){
+        let par = ["orderid": orderId]
+        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        ApiManager.shared.apiGetOrderDetail(params:par as [String : AnyObject]) { (result) in
+            
+            RappleActivityIndicatorView.stopAnimation()
+            
+            let status = result[STATUS_CODE] as? String
+            print(status as Any)
+            if status == FAILURE_CODE || status == nil {
+                
+                
+            } else {
+                let orderDetailData=Mapper<OrderDetailItem>().map(JSON: result)
+                
+                let data=Mapper<OrderDetailItem.Data>().mapArray(JSONArray: result["data"] as! [[String : Any]])
+                
+                self.arrOrderDetail=data[0].order_item!
+                
+//                self.arrOrderDetail=Mapper<OrderDetailItem.Order_item>().mapArray(JSONArray: result["order_item"] as! [[String : Any]])
+                
+                self.reloadTable()
+                
+                self.lblGrandTotal.text=orderDetailData?.data?[0].order_grandtotal!
+                self.lblTax.text=orderDetailData?.data?[0].oder_taxamount
+                self.lblShippingCharge.text=orderDetailData?.data?[0].order_shippingamount
+                self.lblSubTotal.text=orderDetailData?.data?[0].order_subtotal
+                self.lblPaymentMethod.text=orderDetailData?.data?[0].payment_method
+                self.lblShippingMethod.text=orderDetailData?.data?[0].shipping_description
+                self.lblShippingAddress.text=orderDetailData?.data?[0].shiiping_address
+                self.lblBillingAddress.text=orderDetailData?.data?[0].billing_address
+                self.lblOrderDate.text=orderDetailData?.data?[0].order_date
+                
+          
+            }
+            
+        }
+    }
+    
+    func cancelOrder(orderId:String) {
+        
+        let par = ["orderid": orderId]
+        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        ApiManager.shared.apiCancelOrder(params:par as [String : AnyObject]) { (result) in
+            
+            RappleActivityIndicatorView.stopAnimation()
+            
+            let status = result[STATUS_CODE] as? String
+            print(status as Any)
+            if status == FAILURE_CODE || status == nil {
+                
+                
+            } else {
+                
+            }
+            
+        }
+    }
+    
+    func printOrder(orderId:String,groupId:String) {
+        
+        let par = ["order_id": orderId, "customer_id":customerId,"group_id":groupId]
+        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        ApiManager.shared.apiDeleteAllProductList(params:par as [String : AnyObject]) { (result) in
+            
+            RappleActivityIndicatorView.stopAnimation()
+            
+            let status = result[STATUS_CODE] as? String
+            print(status as Any)
+            if status == FAILURE_CODE || status == nil {
+                
+                
+            } else {
+                
+            }
+            
+        }
+    }
+    
+    func reloadTable() {
+        if self.arrOrderDetail.count > 0 {
+            //            self.lblNoData.isHidden = true
+        } else {
+            //            self.lblNoData.isHidden = false
+        }
+        self.tblOrderDetail.reloadData()
+    }
+    
+}
+
+
+extension OrderDetailVC: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.arrOrderDetail.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
+        
+        let cell = self.tblOrderDetail.dequeueReusableCell(withIdentifier: "OrderDetailCell", for: indexPath) as? OrderDetailCell
+        
+        
+        cell?.orderDetailData = self.arrOrderDetail[indexPath.row]
+        
+       
+        
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        //        self.arrQA[indexPath.row].is_viewed=true
+        //        self.tblQA.reloadRows(at: [indexPath], with: .automatic)
+        
+        //        let qadetail = self.storyboard?.instantiateViewController(withIdentifier: "QADetailVC") as? QADetailVC
+        //        qadetail?.qa = self.arrQA[indexPath.row]
+        //        qadetail?.qid = self.arrQA[indexPath.row].iD!
+        //        self.navigationController?.pushViewController(qadetail!, animated: true)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
 }

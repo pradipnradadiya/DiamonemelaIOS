@@ -40,11 +40,40 @@ class DownloadVC: UIViewController {
     @IBAction func btnSearch(_ sender: Any) {
     }
     @IBAction func btnDownloadAll(_ sender: Any) {
-        self.downloadAllProduct(customerId: customerId, productId: productIds, price: flag)
+        
+        for (prodictId) in arrDownload.enumerated(){
+            if prodictId.element.isSelected == true{
+                print(prodictId.element.isSelected as Any)
+                productIds.append("\(prodictId.element.product_id!),")
+                
+            }else{
+                
+            }
+            
+        }
+        
+         self.downloadAllProduct(customerId: customerId, productId: productIds, price: flag)
+        //self.downloadAllProduct(customerId: customerId, productId: productIds, price: flag)
+        
     }
     
     @IBAction func btnDeleteAll(_ sender: Any) {
+        
+        for (prodictId) in arrDownload.enumerated(){
+            if prodictId.element.isSelected == true{
+                print(prodictId.element.isSelected as Any)
+                productIds.append("\(prodictId.element.product_id!),")
+                
+            }else{
+                
+            }
+           
+            
+        }
+        
         self.deleteAllProduct(customerId: customerId, productId: productIds)
+       
+        
     }
     
     @IBAction func btnBack(_ sender: Any) {
@@ -69,17 +98,29 @@ extension DownloadVC {
                 
                 
             } else {
-               
-                
-                
-                
+   
             }
             
         }
     }
     
     func deleteAllProduct(customerId:String , productId:String){
-        
+        let par = ["customer_id": customerId, "product_ids":productId] as [String : Any]
+        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        ApiManager.shared.apiDeleteAllProductList(params:par as [String : AnyObject]) { (result) in
+            
+            RappleActivityIndicatorView.stopAnimation()
+            
+            let status = result[STATUS_CODE] as? String
+            print(status as Any)
+            if status == FAILURE_CODE || status == nil {
+                
+                
+            } else {
+                
+            }
+            
+        }
     }
     
     
@@ -174,7 +215,6 @@ extension DownloadVC: UITableViewDelegate, UITableViewDataSource {
         
         cell?.actionBlockDelete = {
             self.deleteAllProduct(customerId: customerId, productId: self.arrDownload[indexPath.row].product_id!)
-            
             self.arrDownload.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
@@ -183,6 +223,18 @@ extension DownloadVC: UITableViewDelegate, UITableViewDataSource {
             self.downloadAllProduct(customerId: customerId, productId: self.arrDownload[indexPath.row].product_id!, price: self.flag)
             
         }
+        
+        cell?.actionBlockSelect = {
+            
+            if self.arrDownload[indexPath.row].isSelected == true {
+                self.arrDownload[indexPath.row].isSelected = false
+            }else{
+                 self.arrDownload[indexPath.row].isSelected = true
+            }
+           self.tblDownloadProduct.reloadRows(at: [indexPath], with: .automatic)
+            
+        }
+        
         return cell!
     }
     

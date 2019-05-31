@@ -62,9 +62,10 @@ class EditAddressVC: UIViewController {
             billingFlag = "0";
             sender.isSelected=true
         }
-        
-        
+                
     }
+    
+    
     @IBAction func btnCart(_ sender: Any) {
     }
     @IBAction func btnSearch(_ sender: Any) {

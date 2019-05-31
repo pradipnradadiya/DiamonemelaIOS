@@ -6,6 +6,7 @@ class ListVC: UIViewController {
 
     var pageCount: Int = 1
     var arrList = [ListItem.Data]()
+    var filterData = [SortFilterItem.Data]()
     let refreshControl = UIRefreshControl()
     var hasMoredata: Bool = false
     var headerTitle: String?=""
@@ -29,6 +30,11 @@ class ListVC: UIViewController {
     }
     
     @IBAction func btnFilter(_ sender: Any) {
+        
+        let filter = self.storyboard?.instantiateViewController(withIdentifier: "FilterVC") as? FilterVC
+        filter?.arrFilterData = filterData
+        self.navigationController?.pushViewController(filter!, animated: true)
+        
     }
     
     @IBAction func btnSortBy(_ sender: Any) {
@@ -143,8 +149,9 @@ extension ListVC{
             if status == FAILURE_CODE || status == nil {
                 
             } else {
-                let data=Mapper<SortFilterItem>().map(JSON: result)
+                let sortfilterData=Mapper<SortFilterItem>().map(JSON: result)
                 
+                self.filterData = (sortfilterData?.data)!
             }
             
         }
@@ -165,7 +172,7 @@ extension ListVC{
             if status == FAILURE_CODE || status == nil {
                 
             } else {
-                let data = Mapper<SortFilterItem>().map(JSON: result)
+                
                 
             }
             

@@ -27,6 +27,7 @@ struct DownloadItem : Mappable {
         var price : Int?
         var image : String?
         var flag : String?
+        var isSelected : Bool? = false
         
         init?(map: Map) {
             

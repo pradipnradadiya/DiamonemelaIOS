@@ -62,6 +62,26 @@ class OrderTabVC: UIViewController {
 
 extension OrderTabVC{
     
+    func cancelOrder(orderId:String) {
+        
+        let par = ["orderid": orderId]
+        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        ApiManager.shared.apiCancelOrder(params:par as [String : AnyObject]) { (result) in
+            
+            RappleActivityIndicatorView.stopAnimation()
+            
+            let status = result[STATUS_CODE] as? String
+            print(status as Any)
+            if status == FAILURE_CODE || status == nil {
+                
+                
+            } else {
+                
+            }
+            
+        }
+    }
+    
     func getOrders(showLoader: Bool = false) {
         if showLoader {
             RESpinner.shared.show(view: self.view)
@@ -150,6 +170,25 @@ extension OrderTabVC: UITableViewDelegate, UITableViewDataSource {
         cell?.orderData = self.arrOrders[indexPath.row]
         
         cell?.rowPosition=indexPath.row
+        
+        cell?.actionBlockView = {
+            let orderDetail = self.storyboard?.instantiateViewController(withIdentifier: "OrderDetailVC") as? OrderDetailVC
+            orderDetail?.orderId = self.arrOrders[indexPath.row].orderid!
+            self.navigationController?.pushViewController(orderDetail!, animated: true)
+        }
+        
+        cell?.actionBlockPrint = {
+            
+            
+        }
+        
+        cell?.actionBlockCancel = {
+            
+            self.cancelOrder(orderId: self.arrOrders[indexPath.row].orderid!)
+        }
+        
+        
+        
         return cell!
     }
     
@@ -157,14 +196,10 @@ extension OrderTabVC: UITableViewDelegate, UITableViewDataSource {
         if hasMoredata && indexPath.row == self.arrOrders.count {
             return
         }
-        
-        //        self.arrQA[indexPath.row].is_viewed=true
-        //        self.tblQA.reloadRows(at: [indexPath], with: .automatic)
-        
-        //        let qadetail = self.storyboard?.instantiateViewController(withIdentifier: "QADetailVC") as? QADetailVC
-        //        qadetail?.qa = self.arrQA[indexPath.row]
-        //        qadetail?.qid = self.arrQA[indexPath.row].iD!
-        //        self.navigationController?.pushViewController(qadetail!, animated: true)
+      
+                let orderDetail = self.storyboard?.instantiateViewController(withIdentifier: "OrderDetailVC") as? OrderDetailVC
+        orderDetail?.orderId = self.arrOrders[indexPath.row].orderid!
+                self.navigationController?.pushViewController(orderDetail!, animated: true)
         
     }
     
