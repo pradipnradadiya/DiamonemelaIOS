@@ -18,6 +18,8 @@ class DownloadVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getDownloadList(showLoader: true)
+        
+        
         // Do any additional setup after loading the view.
         
     }

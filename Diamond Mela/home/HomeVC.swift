@@ -28,6 +28,8 @@ class HomeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        FilterVC.dict.removeAll()
+        FilterVC.filterFlag = 0
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -41,6 +43,9 @@ class HomeVC: UIViewController {
         self.navigationController?.pushViewController(popProduct!, animated: true)
         
     }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

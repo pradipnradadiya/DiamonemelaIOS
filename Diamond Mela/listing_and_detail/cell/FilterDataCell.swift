@@ -1,15 +1,29 @@
-//
-//  FilterDataCell.swift
-//  Diamond Mela
-//
-//  Created by mac on 31/05/19.
-//  Copyright © 2019 Diamondmela. All rights reserved.
-//
-
 import UIKit
 
 class FilterDataCell: UITableViewCell {
 
+    
+    @IBOutlet weak var lblRadioTitle: UILabel!
+    @IBOutlet weak var btnRadio: UIButton!
+    
+    
+    var filterData:SortFilterItem.Option_data?{
+        didSet{
+            lblRadioTitle.text=filterData?.label
+            
+            if filterData?.isSelected == true {
+//                lblRadioTitle.textColor=UIColor.red
+                btnRadio.setImage(UIImage(named: "radio-select"), for: .normal)
+                
+            }else{
+//                lblRadioTitle.textColor=UIColor.black
+                 btnRadio.setImage(UIImage(named: "radio"), for: .normal)
+            }
+//
+        }
+        
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,4 +35,6 @@ class FilterDataCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func btnRadioClick(_ sender: Any) {
+    }
 }

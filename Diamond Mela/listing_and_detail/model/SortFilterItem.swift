@@ -60,6 +60,7 @@ struct SortFilterItem : Mappable {
     struct Option_data : Mappable {
         var label : String?
         var value : String?
+        var isSelected : Bool? = false
         
         init?(map: Map) {
             

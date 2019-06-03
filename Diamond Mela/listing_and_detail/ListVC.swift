@@ -6,11 +6,24 @@ class ListVC: UIViewController {
 
     var pageCount: Int = 1
     var arrList = [ListItem.Data]()
+    
+    
     var filterData = [SortFilterItem.Data]()
     let refreshControl = UIRefreshControl()
     var hasMoredata: Bool = false
     var headerTitle: String?=""
     var id:String?=""
+    
+    
+    var price:String = ""
+    var gold_purity:String = ""
+    var diamond_quality:String = ""
+    var diamond_shape:String = ""
+    var sku:String = ""
+    var availability:String = ""
+    var sort_by:String = "";
+    
+    
     
     @IBOutlet weak var gridList: UICollectionView!
     @IBOutlet weak var btnfilter: UIButtonX!
@@ -25,6 +38,47 @@ class ListVC: UIViewController {
         
         self.getSortFilter(url: Endpoint.getSortFilter.url)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+       
+        
+        
+        if FilterVC.filterFlag == 1{
+            
+            self.pageCount = 1
+            self.arrList.removeAll()
+            self.hasMoredata = false
+            
+            for (key, value) in FilterVC.dict {
+                print("\(key): \(value)")
+                
+                if ("price" == key){
+                    price=value as! String
+                }else if("gold_purity" == key){
+                    gold_purity=value as! String
+                }else if("diamond_quality" == key){
+                    diamond_quality=value as! String
+                }else if("diamond_shape" == key){
+                    diamond_shape=value as! String
+                }else if("sku" == key){
+                    sku=value as! String
+                }else if("availability" == key){
+                    availability=value as! String
+                }
+            }
+            
+            
+            if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
+                self.getCategoryProduct(categoryId: id!, groupId: groupId, page: String(pageCount), price: price, gold_purity: gold_purity, diamond_quality: diamond_quality, diamond_shape: diamond_shape, sku: sku, availability: availability, sort_by: sort_by)
+            }else{
+                self.getCategoryProduct(categoryId: id!, groupId: "", page: String(pageCount), price: price, gold_purity: gold_purity, diamond_quality: diamond_quality, diamond_shape: diamond_shape, sku: sku, availability: availability, sort_by: sort_by)
+            }
+        }
+    }
+    
+    
     
     @IBAction func btnCart(_ sender: Any) {
     }
@@ -44,6 +98,9 @@ class ListVC: UIViewController {
     @IBAction func btnDownload(_ sender: Any) {
     }
     @IBAction func btnSearch(_ sender: Any) {
+        
+        
+        
     }
     
     @IBAction func btnBack(_ sender: Any) {
@@ -133,8 +190,6 @@ extension ListVC{
         }
         
         
-        
-        
     }
     
     
@@ -217,7 +272,7 @@ extension ListVC: UICollectionViewDelegate, UICollectionViewDataSource,UICollect
             let cell = self.gridList.dequeueReusableCell(withReuseIdentifier: "LoaderGridCell", for: indexPath) as? LoaderGridCell
             cell?.gridIndicator.startAnimating()
            // self.getData()
-            self.getCategoryProduct(categoryId: id!, groupId: groupId, page: String(pageCount), price: "", gold_purity: "", diamond_quality: "", diamond_shape: "", sku: "", availability: "", sort_by: "")
+            self.getCategoryProduct(categoryId: id!, groupId: groupId, page: String(pageCount), price: price, gold_purity: gold_purity, diamond_quality: diamond_quality, diamond_shape: diamond_shape, sku: sku, availability: availability, sort_by: sort_by)
             return cell!
         }
         
@@ -226,7 +281,6 @@ extension ListVC: UICollectionViewDelegate, UICollectionViewDataSource,UICollect
         cell.listData = self.arrList[indexPath.row]
         
         cell.actionBlockDownload = {
-            
             self.arrList[indexPath.row].download_flag = 1
             self.gridList.reloadItems(at: [indexPath])
             self.addToDownloadProduct(productsId: self.arrList[indexPath.row].entity_id!, customerId: customerId)
@@ -237,6 +291,11 @@ extension ListVC: UICollectionViewDelegate, UICollectionViewDataSource,UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        
+        let productDetail = self.storyboard?.instantiateViewController(withIdentifier: "ProductDetailVC") as? ProductDetailVC
+        self.navigationController?.pushViewController(productDetail!, animated: true)
+        
         
 //        self.arrEvents[indexPath.row].is_viewed=true
 //        self.gridEvent.reloadItems(at: [indexPath])
