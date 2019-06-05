@@ -10,14 +10,14 @@ struct ProductDetailItem : Mappable {
     var slider : [String]?
     var rts_slider : [Rts_slider]?
     var ringsize : [Ringsize]?
-    var bangle_size : [String]?
-    var bracelets_size : [String]?
-    var pendent_earring : [String]?
+    var bangle_size : [BangleSize]?
+    var bracelets_size : [BraceletsSize]?
+    var pendent_earring : [PendentEarring]?
     var stone_clarity : [Stone_clarity]?
     var carat : [String]?
     var metal : [String]?
     var belt_price : String?
-    var gemstonedetails : [String]?
+    var gemstonedetails : [GemstoneDetail]?
     var metalprice : [Int]?
     var diamondmainprice : [Diamondmainprice]?
     var product_details : [Product_details]?
@@ -90,7 +90,6 @@ struct ProductDetailItem : Mappable {
             is_sold <- map["is_sold"]
             isreadytoship <- map["isreadytoship"]
             is_salable <- map["is_salable"]
-           
             diamond_weight <- map["diamond_weight"]
         }
         
@@ -211,5 +210,85 @@ struct ProductDetailItem : Mappable {
         }
         
     }
+    
+    
+    struct BangleSize : Mappable {
+        var value : String?
+        var label : String?
+        var product_id : String?
+        
+        init?(map: Map) {
+            
+        }
+        
+        mutating func mapping(map: Map) {
+            
+            value <- map["value"]
+            label <- map["label"]
+            product_id <- map["product_id"]
+        }
+        
+    }
+    
+    struct BraceletsSize : Mappable {
+        var value : String?
+        var label : String?
+        var product_id : String?
+        
+        init?(map: Map) {
+            
+        }
+        
+        mutating func mapping(map: Map) {
+            
+            value <- map["value"]
+            label <- map["label"]
+            product_id <- map["product_id"]
+        }
+        
+    }
+    
+    struct PendentEarring : Mappable {
+        var value : String?
+        var label : String?
+        var product_id : String?
+        
+        init?(map: Map) {
+            
+        }
+        
+        mutating func mapping(map: Map) {
+            
+            value <- map["value"]
+            label <- map["label"]
+            product_id <- map["product_id"]
+        }
+        
+    }
+    
+    struct GemstoneDetail : Mappable {
+        var type : String?
+        var shape : String?
+        var setting : String?
+        var approx_size : String?
+        var pieces : String?
+        var gemstoneprice : String?
+        
+        init?(map: Map) {
+            
+        }
+        
+        mutating func mapping(map: Map) {
+            
+            type <- map["type"]
+            shape <- map["shape"]
+            setting <- map["setting"]
+            approx_size <- map["approx_size"]
+            pieces <- map["pieces"]
+            gemstoneprice <- map["gemstoneprice"]
+        }
+        
+    }
+    
     
 }
