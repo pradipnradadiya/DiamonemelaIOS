@@ -53,10 +53,15 @@ enum Endpoint {
     case referralList
     case deleteReferral
     
-    //Listing
+    //Listing and Detail
     case productList
     case getSortFilter
     case addToDownloadProduct
+    case getProductDetail
+    case rtsProductClick
+    case addToCart
+    
+    
     
     //Order
     case getOrder
@@ -142,6 +147,15 @@ enum Endpoint {
             
         case .addToDownloadProduct:
             return baseUrl+"dmlapi/downloadproduct/addtodownloadlisting"
+            
+        case .getProductDetail:
+            return baseUrl+"dmlapi/product/getproductdetails"
+            
+        case .rtsProductClick:
+            return baseUrl+"dmlapi/product/getrtssliderdetails"
+            
+        case .addToCart:
+            return baseUrl+"dmlapi/addtocart/addcartcustom"
             
         //------------------Referral---------------------------
         case .createReferral:
@@ -730,6 +744,51 @@ class ApiManager {
     func apiAddToDownload( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
         
         self.apiAlamofire(url: Endpoint.addToDownloadProduct.url, method:.post, params: params) { (response) in
+            
+            let status = response["status"] as? String
+            if status == "error" {
+                completHandler(response)
+            } else {
+                completHandler(response)
+            }
+            
+        }
+        
+    }
+    
+    func apiGetProductDetail( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
+        
+        self.apiAlamofire(url: Endpoint.getProductDetail.url, method:.post, params: params) { (response) in
+            
+            let status = response["status"] as? String
+            if status == "error" {
+                completHandler(response)
+            } else {
+                completHandler(response)
+            }
+            
+        }
+        
+    }
+    
+    func apiRtsProductClick( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
+        
+        self.apiAlamofire(url: Endpoint.rtsProductClick.url, method:.post, params: params) { (response) in
+            
+            let status = response["status"] as? String
+            if status == "error" {
+                completHandler(response)
+            } else {
+                completHandler(response)
+            }
+            
+        }
+        
+    }
+    
+    func apiAddToCart( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
+        
+        self.apiAlamofire(url: Endpoint.addToCart.url, method:.post, params: params) { (response) in
             
             let status = response["status"] as? String
             if status == "error" {

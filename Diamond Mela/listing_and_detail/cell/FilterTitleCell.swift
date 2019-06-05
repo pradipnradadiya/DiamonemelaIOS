@@ -1,15 +1,12 @@
-//
-//  FilterTitleCell.swift
-//  Diamond Mela
-//
-//  Created by mac on 31/05/19.
-//  Copyright © 2019 Diamondmela. All rights reserved.
-//
 
 import UIKit
 
 class FilterTitleCell: UITableViewCell {
 
+    @IBOutlet weak var viewFilterTitle: UIView!
+    @IBOutlet weak var imgArrow: UIImageView!
+    @IBOutlet weak var imgIcon: UIImageView!
+    @IBOutlet weak var lblTitle: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -17,8 +14,19 @@ class FilterTitleCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+          //viewFilterTitle.backgroundColor=UIColor.rgb(red: 155, green: 15, blue: 86)
+        
         // Configure the view for the selected state
     }
+    
+    var filterTitleData:SortFilterItem.Data?{
+        didSet{
+            lblTitle.text=filterTitleData?.label
+        }
+    }
+    
 
 }
+
+
+

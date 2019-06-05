@@ -27,16 +27,16 @@ var groupId = ""
 let internetNotConnectMsg : String?="Make sure your device is connected to the internet."
 
 
-let RING_ID : String?="14"
-let BRACELETS_ID : String?="124"
-let BANGLE_ID : String?="9"
-let EARRINGS_ID : String?="6"
-let PENDANTS_SETS_ID : String?="287"
-let PENDANTS_ID : String?="7"
-let NOSEPIN_ID : String?="289"
-let NECKLACE_ID : String?="290"
-let COLLECTION_ID : String?="291"
-let RUBBER_ID : String?="295"
+let RING_ID : String="14"
+let BRACELETS_ID : String="124"
+let BANGLE_ID : String="9"
+let EARRINGS_ID : String="6"
+let PENDANTS_SETS_ID : String="287"
+let PENDANTS_ID : String="7"
+let NOSEPIN_ID : String="289"
+let NECKLACE_ID : String="290"
+let COLLECTION_ID : String="291"
+let RUBBER_ID : String="295"
 
 
 //-----------Common Message-----------------

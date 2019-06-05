@@ -294,6 +294,7 @@ extension ListVC: UICollectionViewDelegate, UICollectionViewDataSource,UICollect
         
         
         let productDetail = self.storyboard?.instantiateViewController(withIdentifier: "ProductDetailVC") as? ProductDetailVC
+        productDetail?.productId=self.arrList[indexPath.row].entity_id!
         self.navigationController?.pushViewController(productDetail!, animated: true)
         
         

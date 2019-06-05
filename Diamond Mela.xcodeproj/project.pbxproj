@@ -38,6 +38,20 @@
 		0417482122A16D1D00C75E3E /* FilterTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417482022A16D1D00C75E3E /* FilterTitleCell.swift */; };
 		0417482322A16D3900C75E3E /* FilterDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417482222A16D3900C75E3E /* FilterDataCell.swift */; };
 		041A3B8922A552A6008F9A47 /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041A3B8822A552A6008F9A47 /* ProductDetailVC.swift */; };
+		041B1AB622A794C600920223 /* ProductDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B1AB522A794C600920223 /* ProductDetailItem.swift */; };
+		041B1AB822A7981800920223 /* RTSItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B1AB722A7981800920223 /* RTSItem.swift */; };
+		041B1ABA22A7C8EC00920223 /* RingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B1AB922A7C8EC00920223 /* RingCell.swift */; };
+		041B1ABC22A7C91300920223 /* BangleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B1ABB22A7C91300920223 /* BangleCell.swift */; };
+		041B1ABE22A7C93000920223 /* BraceletsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B1ABD22A7C93000920223 /* BraceletsCell.swift */; };
+		041B1AC022A7C95100920223 /* CaratCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B1ABF22A7C95100920223 /* CaratCell.swift */; };
+		041B1AC222A7C96D00920223 /* DiamondCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B1AC122A7C96D00920223 /* DiamondCell.swift */; };
+		041B1AC422A7C98800920223 /* DiamondDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B1AC322A7C98700920223 /* DiamondDetailCell.swift */; };
+		041B1AC622A7C9C000920223 /* RTSCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B1AC522A7C9C000920223 /* RTSCell.swift */; };
+		041B1AC822A7CB0700920223 /* PendentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B1AC722A7CB0700920223 /* PendentCell.swift */; };
+		041B1ACA22A7CB2E00920223 /* MetalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B1AC922A7CB2E00920223 /* MetalCell.swift */; };
+		041B1ACC22A7CB6100920223 /* GemstoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B1ACB22A7CB6100920223 /* GemstoneCell.swift */; };
+		041B1ACE22A7CCB600920223 /* SliderPagerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B1ACD22A7CCB600920223 /* SliderPagerCell.swift */; };
+		041B1AD022A7CCCC00920223 /* SliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B1ACF22A7CCCC00920223 /* SliderCell.swift */; };
 		041BB8EA2274270600FFBAA4 /* CreateReferralVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041BB8E92274270600FFBAA4 /* CreateReferralVC.swift */; };
 		041BB8EC2274274400FFBAA4 /* ManageReferralVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041BB8EB2274274400FFBAA4 /* ManageReferralVC.swift */; };
 		041BB8F022742A3E00FFBAA4 /* DownloadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041BB8EF22742A3E00FFBAA4 /* DownloadVC.swift */; };
@@ -171,6 +185,20 @@
 		0417482022A16D1D00C75E3E /* FilterTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTitleCell.swift; sourceTree = "<group>"; };
 		0417482222A16D3900C75E3E /* FilterDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDataCell.swift; sourceTree = "<group>"; };
 		041A3B8822A552A6008F9A47 /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
+		041B1AB522A794C600920223 /* ProductDetailItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailItem.swift; sourceTree = "<group>"; };
+		041B1AB722A7981800920223 /* RTSItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTSItem.swift; sourceTree = "<group>"; };
+		041B1AB922A7C8EC00920223 /* RingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingCell.swift; sourceTree = "<group>"; };
+		041B1ABB22A7C91300920223 /* BangleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangleCell.swift; sourceTree = "<group>"; };
+		041B1ABD22A7C93000920223 /* BraceletsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BraceletsCell.swift; sourceTree = "<group>"; };
+		041B1ABF22A7C95100920223 /* CaratCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaratCell.swift; sourceTree = "<group>"; };
+		041B1AC122A7C96D00920223 /* DiamondCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondCell.swift; sourceTree = "<group>"; };
+		041B1AC322A7C98700920223 /* DiamondDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondDetailCell.swift; sourceTree = "<group>"; };
+		041B1AC522A7C9C000920223 /* RTSCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTSCell.swift; sourceTree = "<group>"; };
+		041B1AC722A7CB0700920223 /* PendentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendentCell.swift; sourceTree = "<group>"; };
+		041B1AC922A7CB2E00920223 /* MetalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalCell.swift; sourceTree = "<group>"; };
+		041B1ACB22A7CB6100920223 /* GemstoneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GemstoneCell.swift; sourceTree = "<group>"; };
+		041B1ACD22A7CCB600920223 /* SliderPagerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderPagerCell.swift; sourceTree = "<group>"; };
+		041B1ACF22A7CCCC00920223 /* SliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCell.swift; sourceTree = "<group>"; };
 		041BB8E92274270600FFBAA4 /* CreateReferralVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReferralVC.swift; sourceTree = "<group>"; };
 		041BB8EB2274274400FFBAA4 /* ManageReferralVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageReferralVC.swift; sourceTree = "<group>"; };
 		041BB8EF22742A3E00FFBAA4 /* DownloadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadVC.swift; sourceTree = "<group>"; };
@@ -546,6 +574,8 @@
 			children = (
 				041679AF229552E300B8E7D5 /* ListItem.swift */,
 				041679B322956E0C00B8E7D5 /* SortFilterItem.swift */,
+				041B1AB522A794C600920223 /* ProductDetailItem.swift */,
+				041B1AB722A7981800920223 /* RTSItem.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -556,6 +586,18 @@
 				041679B12295544000B8E7D5 /* ListCell.swift */,
 				0417482022A16D1D00C75E3E /* FilterTitleCell.swift */,
 				0417482222A16D3900C75E3E /* FilterDataCell.swift */,
+				041B1AB922A7C8EC00920223 /* RingCell.swift */,
+				041B1ABB22A7C91300920223 /* BangleCell.swift */,
+				041B1ABD22A7C93000920223 /* BraceletsCell.swift */,
+				041B1ABF22A7C95100920223 /* CaratCell.swift */,
+				041B1AC122A7C96D00920223 /* DiamondCell.swift */,
+				041B1AC322A7C98700920223 /* DiamondDetailCell.swift */,
+				041B1AC522A7C9C000920223 /* RTSCell.swift */,
+				041B1AC722A7CB0700920223 /* PendentCell.swift */,
+				041B1AC922A7CB2E00920223 /* MetalCell.swift */,
+				041B1ACB22A7CB6100920223 /* GemstoneCell.swift */,
+				041B1ACD22A7CCB600920223 /* SliderPagerCell.swift */,
+				041B1ACF22A7CCCC00920223 /* SliderCell.swift */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -1007,14 +1049,17 @@
 				04A362DF229932F000A76FBD /* ShippingVC.swift in Sources */,
 				040B7C002297DF2400883E7A /* MyStockVC.swift in Sources */,
 				04B764052296C0C8000D8D29 /* PopularProductItem.swift in Sources */,
+				041B1AC622A7C9C000920223 /* RTSCell.swift in Sources */,
 				04B7640F2296DE2E000D8D29 /* OrderDetailVC.swift in Sources */,
 				04A8FCF0229EBB5B007ACE2E /* MostSellingCell.swift in Sources */,
+				041B1ACE22A7CCB600920223 /* SliderPagerCell.swift in Sources */,
 				041BB8FE22745E1000FFBAA4 /* BlackWhiteTextLabel.swift in Sources */,
 				0474C6A2228D3D750077E489 /* DownloadItem.swift in Sources */,
 				04326BED2272D89200D549C7 /* UITextFieldX.swift in Sources */,
 				04779577228EBDDB00499CE1 /* TransactionListCell.swift in Sources */,
 				04046350229D5457003A9FD6 /* BannerCell.swift in Sources */,
 				043CC8002269D46C00669BFE /* ConnectionCheck.swift in Sources */,
+				041B1AB822A7981800920223 /* RTSItem.swift in Sources */,
 				047C582122843203001B0E06 /* EditProfileVC.swift in Sources */,
 				0441E830229FA74A00ABD01E /* MyCartCell.swift in Sources */,
 				041BFC14228C1706002782B3 /* EditContactInfoVC.swift in Sources */,
@@ -1026,18 +1071,22 @@
 				04B7640D2296DCB0000D8D29 /* OrderCell.swift in Sources */,
 				0474C6A6228D4A860077E489 /* ReferralItem.swift in Sources */,
 				0477957F228ED06F00499CE1 /* ReferralListCell.swift in Sources */,
+				041B1ABC22A7C91300920223 /* BangleCell.swift in Sources */,
 				041BB902227468C900FFBAA4 /* BlackWhiteBackgroundView.swift in Sources */,
 				041BB8F822744FB100FFBAA4 /* DmlButton.swift in Sources */,
 				04326BE92272D89200D549C7 /* UIButtonX.swift in Sources */,
 				04A362E12299334400A76FBD /* PaymentVC.swift in Sources */,
 				041BB8FC22745D5400FFBAA4 /* BlackWhiteTextButton.swift in Sources */,
 				0477957B228EC1E700499CE1 /* RESpinnerExtensions.swift in Sources */,
+				041B1AB622A794C600920223 /* ProductDetailItem.swift in Sources */,
 				040437892297B97E00710D22 /* OrderItem.swift in Sources */,
 				0477957D228ECB0E00499CE1 /* DownloadListCell.swift in Sources */,
 				043CC8032269EE4300669BFE /* LoginItem.swift in Sources */,
 				04326BEE2272D89200D549C7 /* UILabelX.swift in Sources */,
 				041BFC10228BEF95002782B3 /* AddressManageResponse.swift in Sources */,
+				041B1AC822A7CB0700920223 /* PendentCell.swift in Sources */,
 				0417481F22A15D1C00C75E3E /* MyStockCell.swift in Sources */,
+				041B1ABE22A7C93000920223 /* BraceletsCell.swift in Sources */,
 				04779582228EF57A00499CE1 /* ManageAddressCell.swift in Sources */,
 				041BB8FA2274574B00FFBAA4 /* UIColor.swift in Sources */,
 				043CC7FC2269B98400669BFE /* AppConstants.swift in Sources */,
@@ -1046,6 +1095,7 @@
 				04779575228EBC5100499CE1 /* LoaderCell.swift in Sources */,
 				04A362E322995B7C00A76FBD /* SelectShippingVC.swift in Sources */,
 				041BB8EA2274270600FFBAA4 /* CreateReferralVC.swift in Sources */,
+				041B1AD022A7CCCC00920223 /* SliderCell.swift in Sources */,
 				04109927229BCC2F001B27AB /* OrderSummaryVC.swift in Sources */,
 				0468042E2281BB1A00A6F788 /* OrderTabVC.swift in Sources */,
 				041A3B8922A552A6008F9A47 /* ProductDetailVC.swift in Sources */,
@@ -1054,6 +1104,7 @@
 				041679AA2295226400B8E7D5 /* ListVC.swift in Sources */,
 				04B764072296C0E4000D8D29 /* MostSellingProductItem.swift in Sources */,
 				041CD05B22928521003A5CCC /* BankItem.swift in Sources */,
+				041B1ACA22A7CB2E00920223 /* MetalCell.swift in Sources */,
 				04326BEB2272D89200D549C7 /* UIViewX.swift in Sources */,
 				04B764032296C0AE000D8D29 /* HeaderItem.swift in Sources */,
 				0441E838229FE3E500ABD01E /* OrderSummaryCell.swift in Sources */,
@@ -1063,6 +1114,7 @@
 				0405AFFE226892E500C6787A /* ViewController.swift in Sources */,
 				04A8FCEE229E96A9007ACE2E /* DrawerCell.swift in Sources */,
 				0405AFFC226892E500C6787A /* AppDelegate.swift in Sources */,
+				041B1ACC22A7CB6100920223 /* GemstoneCell.swift in Sources */,
 				0474C6A4228D42510077E489 /* TransactionItem.swift in Sources */,
 				04B764092296C262000D8D29 /* BannerItem.swift in Sources */,
 				041679AC229528C300B8E7D5 /* LoaderGridCell.swift in Sources */,
@@ -1076,13 +1128,17 @@
 				0441E836229FDC4500ABD01E /* OrderSummaryItem.swift in Sources */,
 				0417481D22A144BF00C75E3E /* PopularProductCell.swift in Sources */,
 				04326BEA2272D89200D549C7 /* UIImageViewX.swift in Sources */,
+				041B1AC222A7C96D00920223 /* DiamondCell.swift in Sources */,
+				041B1ABA22A7C8EC00920223 /* RingCell.swift in Sources */,
 				041BFC18228C38AB002782B3 /* StateResponse.swift in Sources */,
 				0478A8D12297F66B00B75BD1 /* PrivacyPolicyVC.swift in Sources */,
+				041B1AC422A7C98800920223 /* DiamondDetailCell.swift in Sources */,
 				041BB8F422742B4D00FFBAA4 /* TransactionVC.swift in Sources */,
 				041BB8EC2274274400FFBAA4 /* ManageReferralVC.swift in Sources */,
 				043CC7F52269A12900669BFE /* ForgotPasswordVC.swift in Sources */,
 				0441E834229FC20300ABD01E /* ShippingCell.swift in Sources */,
 				0417481522A10E6200C75E3E /* OrderDetailCell.swift in Sources */,
+				041B1AC022A7C95100920223 /* CaratCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
