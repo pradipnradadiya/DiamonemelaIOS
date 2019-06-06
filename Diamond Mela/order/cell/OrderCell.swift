@@ -6,6 +6,7 @@ class OrderCell: UITableViewCell {
     var actionBlockPrint: (() -> Void)? = nil
     var actionBlockCancel: (() -> Void)? = nil
     
+    @IBOutlet weak var lblStatus: UILabel!
     @IBOutlet weak var lblOrderNo: UILabel!
     @IBOutlet weak var btnViewMore: UIButton!
     @IBOutlet weak var lblGrandTotal: UILabel!
@@ -16,7 +17,6 @@ class OrderCell: UITableViewCell {
     @IBOutlet weak var imgProduct: UIImageViewX!
     
     var rowPosition:Int?
-    
     @IBOutlet weak var btnView: UIButton!
     @IBOutlet weak var btnPrint: UIButton!
     @IBOutlet weak var btnCancel: UIButton!
@@ -29,6 +29,24 @@ class OrderCell: UITableViewCell {
             }else{
                 btnViewMore.isHidden=true
             }
+            
+            if (orderData?.order_items?.count)! > 0{
+                lblSku.text=orderData?.order_items?[0].product_sku
+                lblTitle.text=orderData?.order_items?[0].product_name
+                lblMetalDetail.text=orderData?.order_items?[0].product_metalquality
+                lblStoneDetail.text=orderData?.order_items?[0].product_stonequality
+                imgProduct.sd_setImage(with: URL(string: (orderData?.order_items?[0].image)!), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
+                
+            }else{
+                
+            }
+            
+            
+            lblGrandTotal.text=orderData?.grand_total
+            lblOrderNo.text=orderData?.orderno
+            lblStatus.text=orderData?.order_status
+            
+            
         }
     }
     

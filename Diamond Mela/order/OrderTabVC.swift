@@ -183,7 +183,6 @@ extension OrderTabVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell?.actionBlockCancel = {
-            
             self.cancelOrder(orderId: self.arrOrders[indexPath.row].orderid!)
         }
         

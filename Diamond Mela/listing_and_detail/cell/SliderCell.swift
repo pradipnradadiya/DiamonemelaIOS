@@ -10,6 +10,7 @@ class SliderCell: UICollectionViewCell {
             imgProduct.sd_setImage(with: URL(string: (slider[count])), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
             count += 1
         }
+        
     }
     
 }

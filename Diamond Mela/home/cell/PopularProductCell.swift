@@ -29,6 +29,7 @@ class PopularProductCell: UICollectionViewCell {
                 }else{
                     btnQty.isHidden=true
                 }
+                
             }else{
                 btnQty.isHidden=true
             }
@@ -52,9 +53,10 @@ class PopularProductCell: UICollectionViewCell {
         }
     }
     
-    
-    
+        
     @IBAction func btnDownload(_ sender: Any) {
         self.actionBlockDownload?()
     }
+    
+    
 }

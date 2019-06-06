@@ -92,6 +92,7 @@
 		0441E83C22A0020900ABD01E /* TransactionDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0441E83B22A0020900ABD01E /* TransactionDetailVC.swift */; };
 		045C03D522854A2100581E95 /* ManageBankVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045C03D422854A2100581E95 /* ManageBankVC.swift */; };
 		045FA898229E7128006B84FD /* auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045FA897229E7128006B84FD /* auth.storyboard */; };
+		0461D42722A9335C005FC54E /* PrintVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0461D42622A9335C005FC54E /* PrintVC.swift */; };
 		0468042E2281BB1A00A6F788 /* OrderTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468042D2281BB1A00A6F788 /* OrderTabVC.swift */; };
 		0474C6A2228D3D750077E489 /* DownloadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474C6A1228D3D750077E489 /* DownloadItem.swift */; };
 		0474C6A4228D42510077E489 /* TransactionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474C6A3228D42510077E489 /* TransactionItem.swift */; };
@@ -239,6 +240,7 @@
 		0441E83B22A0020900ABD01E /* TransactionDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailVC.swift; sourceTree = "<group>"; };
 		045C03D422854A2100581E95 /* ManageBankVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageBankVC.swift; sourceTree = "<group>"; };
 		045FA897229E7128006B84FD /* auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = auth.storyboard; sourceTree = "<group>"; };
+		0461D42622A9335C005FC54E /* PrintVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintVC.swift; sourceTree = "<group>"; };
 		0468042D2281BB1A00A6F788 /* OrderTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTabVC.swift; sourceTree = "<group>"; };
 		0474C6A1228D3D750077E489 /* DownloadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadItem.swift; sourceTree = "<group>"; };
 		0474C6A3228D42510077E489 /* TransactionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionItem.swift; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 				0468042D2281BB1A00A6F788 /* OrderTabVC.swift */,
 				04B7640E2296DE2E000D8D29 /* OrderDetailVC.swift */,
 				04109926229BCC2F001B27AB /* OrderSummaryVC.swift */,
+				0461D42622A9335C005FC54E /* PrintVC.swift */,
 			);
 			path = order;
 			sourceTree = "<group>";
@@ -1105,6 +1108,7 @@
 				04B764072296C0E4000D8D29 /* MostSellingProductItem.swift in Sources */,
 				041CD05B22928521003A5CCC /* BankItem.swift in Sources */,
 				041B1ACA22A7CB2E00920223 /* MetalCell.swift in Sources */,
+				0461D42722A9335C005FC54E /* PrintVC.swift in Sources */,
 				04326BEB2272D89200D549C7 /* UIViewX.swift in Sources */,
 				04B764032296C0AE000D8D29 /* HeaderItem.swift in Sources */,
 				0441E838229FE3E500ABD01E /* OrderSummaryCell.swift in Sources */,

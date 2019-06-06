@@ -3491,6 +3491,41 @@
             </objects>
             <point key="canvasLocation" x="11950.72463768116" y="1881.521739130435"/>
         </scene>
+        <!--Printer Option-->
+        <scene sceneID="XJm-gD-Uiu">
+            <objects>
+                <viewController storyboardIdentifier="PrintVC" id="ioB-fv-kjX" customClass="PrintVC" customModule="Diamond_Mela" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gIe-Vb-yHm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Krc-hw-Htn">
+                                <rect key="frame" x="48" y="304" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="9Wm-Ug-6CH"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Printer Option" id="ORk-Ts-Vk0">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Lmi-2D-EGE">
+                            <connections>
+                                <action selector="btnCancel:" destination="ioB-fv-kjX" id="aC3-vu-ITX"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Print" id="Ns8-HB-M9u"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="btnCancel" destination="Lmi-2D-EGE" id="vjp-1M-zeg"/>
+                        <outlet property="btnPrint" destination="Ns8-HB-M9u" id="9kD-E8-QmO"/>
+                        <outlet property="webView" destination="Krc-hw-Htn" id="cyo-Du-FAT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tHZ-fA-Gjp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="13865.21739130435" y="1889.6739130434785"/>
+        </scene>
         <!--Edit Profile-->
         <scene sceneID="n95-FD-4XT">
             <objects>
@@ -4121,7 +4156,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z28-U5-poz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="14589.85507246377" y="1068.75"/>
+            <point key="canvasLocation" x="15497.101449275364" y="1068.75"/>
         </scene>
         <!--Manage Address-->
         <scene sceneID="0Na-5F-WB3">
@@ -4989,7 +5024,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fdf-1x-PZF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="23581.159420289856" y="1170.6521739130435"/>
+            <point key="canvasLocation" x="24488.405797101452" y="1170.6521739130435"/>
         </scene>
         <!--Manage Bank-->
         <scene sceneID="pVx-40-3yW">
@@ -8450,6 +8485,7 @@
                                             <outlet property="lblMetalDetail" destination="nm2-zH-FpQ" id="SIS-6v-aOU"/>
                                             <outlet property="lblOrderNo" destination="dJI-FE-Rvp" id="B4W-V1-if7"/>
                                             <outlet property="lblSku" destination="khe-GL-GsO" id="Iv0-8l-Nzm"/>
+                                            <outlet property="lblStatus" destination="tNU-UV-0g0" id="aaC-K5-weV"/>
                                             <outlet property="lblStoneDetail" destination="ZaZ-QU-g9Q" id="gxN-Pn-zn3"/>
                                             <outlet property="lblTitle" destination="G6J-IT-acs" id="4i3-xB-0zh"/>
                                         </connections>
@@ -10116,14 +10152,14 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xng-yy-aPy">
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xng-yy-aPy">
                                                         <rect key="frame" x="0.0" y="37" width="398" height="363"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DiamondDetailCell" rowHeight="264" id="P96-Mg-KK4" customClass="DiamondDetailCell" customModule="Diamond_Mela" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="28" width="398" height="264"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
-                                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P96-Mg-KK4" id="yOh-ov-0Oy">
+                                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P96-Mg-KK4" id="yOh-ov-0Oy">
                                                                     <rect key="frame" x="0.0" y="0.0" width="398" height="263.66666666666669"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
@@ -10147,7 +10183,7 @@
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6iL-9C-gYv">
                                                                                             <rect key="frame" x="191" y="0.0" width="191" height="30"/>
-                                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
@@ -10177,7 +10213,7 @@
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zz1-gO-eDY">
                                                                                             <rect key="frame" x="191" y="0.0" width="191" height="30"/>
-                                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
@@ -10214,7 +10250,7 @@
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oDV-Va-FEu">
                                                                                             <rect key="frame" x="191" y="0.0" width="191" height="30"/>
-                                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
@@ -10251,7 +10287,7 @@
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oth-7C-0LX">
                                                                                             <rect key="frame" x="191" y="0.0" width="191" height="30"/>
-                                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
@@ -10288,7 +10324,7 @@
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yvi-dH-FlV">
                                                                                             <rect key="frame" x="191" y="0.0" width="191" height="30"/>
-                                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
@@ -10325,7 +10361,7 @@
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sY2-fK-aaf">
                                                                                             <rect key="frame" x="191" y="0.0" width="191" height="30"/>
-                                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
@@ -10355,7 +10391,7 @@
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qUn-03-Hb4">
                                                                                             <rect key="frame" x="191" y="0.0" width="191" height="30"/>
-                                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
@@ -10428,6 +10464,7 @@
                                                                                 <constraint firstAttribute="trailing" secondItem="81p-n0-dBy" secondAttribute="trailing" constant="8" id="a4i-Cb-qXa"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="6I5-4B-Arw" secondAttribute="trailing" constant="8" id="aFa-BA-74a"/>
                                                                                 <constraint firstItem="G8F-Vy-eQg" firstAttribute="leading" secondItem="TjH-sO-l0e" secondAttribute="leading" constant="8" id="bhX-sP-L1h"/>
+                                                                                <constraint firstAttribute="height" constant="263.67000000000002" id="dAd-BL-koC"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="uM7-oq-GPC" secondAttribute="trailing" constant="8" id="ddQ-Qt-68y"/>
                                                                                 <constraint firstItem="mcN-Y5-bez" firstAttribute="top" secondItem="fxZ-Pc-FnE" secondAttribute="bottom" id="doD-Zm-nlg"/>
                                                                                 <constraint firstItem="6I5-4B-Arw" firstAttribute="top" secondItem="vYB-m2-KjI" secondAttribute="bottom" id="fSp-Yb-KZP"/>
@@ -10453,8 +10490,22 @@
                                                                         <constraint firstItem="TjH-sO-l0e" firstAttribute="leading" secondItem="yOh-ov-0Oy" secondAttribute="leading" id="sI4-DS-oRv"/>
                                                                     </constraints>
                                                                 </tableViewCellContentView>
+                                                                <connections>
+                                                                    <outlet property="lblCaratRate" destination="sY2-fK-aaf" id="ub2-A2-6S0"/>
+                                                                    <outlet property="lblDiamondIndex" destination="G8F-Vy-eQg" id="hgC-mH-aIJ"/>
+                                                                    <outlet property="lblEstimatedValue" destination="qUn-03-Hb4" id="p8b-Es-uvl"/>
+                                                                    <outlet property="lblPieces" destination="oth-7C-0LX" id="tem-Ob-cqS"/>
+                                                                    <outlet property="lblQuality" destination="oDV-Va-FEu" id="Gtc-bb-Btk"/>
+                                                                    <outlet property="lblSetting" destination="zz1-gO-eDY" id="6di-ti-1mT"/>
+                                                                    <outlet property="lblShape" destination="6iL-9C-gYv" id="j9z-Vo-qhU"/>
+                                                                    <outlet property="lblTotalWeight" destination="Yvi-dH-FlV" id="IXe-B7-M7W"/>
+                                                                </connections>
                                                             </tableViewCell>
                                                         </prototypes>
+                                                        <connections>
+                                                            <outlet property="dataSource" destination="2cV-s2-kXO" id="VpQ-7I-9Ok"/>
+                                                            <outlet property="delegate" destination="2cV-s2-kXO" id="4ju-K3-MLN"/>
+                                                        </connections>
                                                     </tableView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -12431,7 +12482,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="swG-wG-8Ga" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4544.927536231884" y="1765.7608695652175"/>
+            <point key="canvasLocation" x="4000" y="1766"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aa6-zg-woX">
@@ -12522,6 +12573,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TF9-M1-JA0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="266.66666666666669" y="3901.630434782609"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Sf7-NA-6FY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ik7-kv-mwj" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7kv-rH-zfj">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ioB-fv-kjX" kind="relationship" relationship="rootViewController" id="Nvi-KD-y1j"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rEI-d7-Qqj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="12957.971014492754" y="1889.6739130434785"/>
         </scene>
     </scenes>
     <resources>
