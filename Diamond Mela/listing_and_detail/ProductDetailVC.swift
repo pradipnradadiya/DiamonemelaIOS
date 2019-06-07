@@ -198,23 +198,24 @@ extension ProductDetailVC{
                 
                 self.lblProductCertificateNo.text=productDetailData?.product_details?[0].certificate_no
               
-                self.lblGrandTotal.text=productDetailData?.product_details?[0].price
+                self.lblGrandTotal.text=priceFormat2("\(productDetailData?.product_details?[0].price ?? "")")
                 
                 //metal detail
                 self.lblMetalPurity.text=productDetailData?.metaldetails?[0].metalquality
                 
                 self.lblMetalWeight.text=productDetailData?.metaldetails?[0].metalweight
               
-                self.lblMetalEstimatedTotal.text="\(productDetailData?.metaldetails?[0].metalestimatedprice ?? 0)"
+                self.lblMetalEstimatedTotal.text=priceFormat2("\(productDetailData?.metaldetails?[0].metalestimatedprice ?? 0)")
                
                 
                 //metal and diamone piece and price
-                self.lblMetalPrice.text="\(productDetailData?.metalprice ?? [0])"
+                self.lblMetalPrice.text="\(productDetailData?.metalprice! ?? [0])"
                
                 self.lblCountDiamond.text="Diamond(\(productDetailData?.diamondmainprice?[0].pices ?? ""))"
                 
-                self.lblDiamondPrice.text=productDetailData?.diamondmainprice?[0].dimondprice
-                self.lblFinalPrice.text=productDetailData?.product_details?[0].price
+                self.lblDiamondPrice.text=priceFormat2("\(productDetailData?.diamondmainprice?[0].dimondprice ?? "")")
+                
+                self.lblFinalPrice.text=priceFormat2("\(productDetailData?.product_details?[0].price ?? "")")
             
                 
             }
@@ -313,17 +314,17 @@ extension ProductDetailVC{
                 
                 self.lblMetalWeight.text=productDetail?.metaldetails?[0].metalweight
                 
-                self.lblMetalEstimatedTotal.text="\(productDetail?.metaldetails?[0].metalestimatedprice ?? 0)"
+                self.lblMetalEstimatedTotal.text=priceFormat2("\(productDetail?.metaldetails?[0].metalestimatedprice ?? 0)")
                 
                 
                 //metal and diamone piece and price
-                self.lblMetalPrice.text="\(productDetail?.metalprice ?? [0])"
+                self.lblMetalPrice.text="\(productDetail?.metalprice! ?? [0])"
                 
                 self.lblCountDiamond.text="Diamond(\(productDetail?.diamondmainprice?[0].pices ?? ""))"
                 
-                self.lblDiamondPrice.text=productDetail?.diamondmainprice?[0].dimondprice
+                self.lblDiamondPrice.text=priceFormat2("\(productDetail?.diamondmainprice?[0].dimondprice ?? "")")
                 
-                self.lblFinalPrice.text=productDetail?.product_details?[0].price
+                self.lblFinalPrice.text=priceFormat2("\(productDetail?.product_details?[0].price ?? "")")
                 
             }
             

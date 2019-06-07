@@ -27,10 +27,7 @@ class SignUpVC: UIViewController {
         
         self.getCountry(url: Endpoint.getCountryList.url)
         
-        
-        
-        
-        
+                
         // The list of array to display. Can be changed dynamically
         
         selectCountry.optionArray = ["Option 1", "Option 2", "Option 3"]
@@ -59,8 +56,14 @@ class SignUpVC: UIViewController {
     }
     
     
-    @IBAction func btnCheckUncheck(_ sender: Any) {
-        
+    @IBAction func btnCheckUncheck(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.setImage(UIImage(named: "checked"), for: .normal)
+            sender.isSelected=false
+        }else{
+            sender.setImage(UIImage(named: "unchecked"), for: .normal)
+            sender.isSelected=true
+        }
     }
 }
 

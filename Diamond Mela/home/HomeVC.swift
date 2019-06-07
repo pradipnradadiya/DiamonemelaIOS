@@ -355,6 +355,7 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource,UICollect
                 list?.id = self.arrHeader[indexPath.row].entity_id
                 self.navigationController?.pushViewController(list!, animated: true)
         }
+            
         else if collectionView == self.gridBestCategory {
             let list = self.storyboard?.instantiateViewController(withIdentifier: "ListVC") as? ListVC
             list?.headerTitle = self.arrHeader[indexPath.row].name
@@ -367,6 +368,7 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource,UICollect
 //            list?.id = self.arrMostSellingProducts[indexPath.row].entity_id
 //            self.navigationController?.pushViewController(list!, animated: true)
         }
+            
         else{
             
         }

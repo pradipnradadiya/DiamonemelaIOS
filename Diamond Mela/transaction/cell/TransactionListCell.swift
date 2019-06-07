@@ -8,7 +8,7 @@ class TransactionListCell: UITableViewCell {
     
     var transactionData:TransactionItem.Data?{
         didSet{
-            lblPrice.text="\(transactionData?.transction_price ?? 0)"
+            lblPrice.text=priceFormat2("\(transactionData?.transction_price ?? 0)")
             lblCrDr.text=transactionData?.description
             lblOrderId.text=transactionData?.increment_id
         }

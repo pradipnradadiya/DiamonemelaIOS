@@ -23,6 +23,9 @@ class ManageReferralVC: UIViewController {
     @IBAction func btnManageReferral(_ sender: Any) {
     }
     @IBAction func btnAddReferral(_ sender: Any) {
+        let manageReferral = self.storyboard?.instantiateViewController(withIdentifier: "CreateReferralVC") as? CreateReferralVC
+        self.navigationController?.pushViewController(manageReferral!, animated: true)
+        //self.navigationController?.popViewController(animated: true)
     }
     
 }

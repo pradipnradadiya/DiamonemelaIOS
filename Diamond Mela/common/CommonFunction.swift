@@ -51,6 +51,30 @@ func userAlreadyExist(kUsernameKey: String) -> Bool {
     return saveTheme.string(forKey: kUsernameKey) != nil
 }
 
+func priceFormat(_ price: String)-> String {
+    let formatter = NumberFormatter()              // Cache this, NumberFormatter creation is expensive.
+    formatter.locale = Locale(identifier: "en_IN") // Here indian locale with english language is used
+    formatter.numberStyle = .decimal
+    
+    let asd = formatter.string(from: NSNumber(value: Int(price)!)) // "10,00,000"
+    
+    return "Rs. "+asd!
+    
+}
+
+
+
+func priceFormat2(_ price: String)-> String {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .currency
+    formatter.locale = NSLocale.current
+    return formatter.string(from: NSNumber(value: Float(price)!))!
+    
+}
+
+
+
+
 extension Dictionary {
     var prettyPrintedJSON: String? {
         do {

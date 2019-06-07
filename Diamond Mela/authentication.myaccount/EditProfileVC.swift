@@ -48,6 +48,10 @@ class EditProfileVC: UIViewController {
     }
     
     @IBAction func btnChangePassword(_ sender: Any) {
+        
+        let pwd = self.storyboard?.instantiateViewController(withIdentifier: "ChangePasswordVC") as? ChangePasswordVC
+        self.navigationController?.pushViewController(pwd!, animated: true)
+        
         /*
         let alert = UIAlertController(title: "Change Password", message: nil, preferredStyle: .alert)
         
@@ -87,6 +91,8 @@ class EditProfileVC: UIViewController {
     }
     
     @IBAction func btnContactInformationEdit(_ sender: Any) {
+        let address = self.storyboard?.instantiateViewController(withIdentifier: "EditContactInfoVC") as? EditContactInfoVC
+        self.navigationController?.pushViewController(address!, animated: true)
     }
     
     @IBAction func btnDefaultShippingAddressEdit(_ sender: Any) {
@@ -162,7 +168,6 @@ extension EditProfileVC {
                 self.addressData = Mapper<AddressManageResponse>().map(JSON: result)
                 print(self.addressData?.default_billing?.country as Any)
                 print(self.addressData?.default_shipping?.country as Any)
-                
                 
                 
                 //--------Default Billing---------

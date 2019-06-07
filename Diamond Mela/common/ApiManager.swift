@@ -18,6 +18,7 @@ enum Endpoint {
     case getAllState
     
     
+    
     //-----------Home page--------------------
     case bannerSlider
     case headerMenu
@@ -84,6 +85,10 @@ enum Endpoint {
     
     //My Stock
     case myStockList
+    case saleOrder
+    
+    //download - cart count
+    case getCartDownloadCount
     
     var url: String {
         
@@ -94,6 +99,9 @@ enum Endpoint {
         //-------------------My Stock-------------------
         case .myStockList:
             return baseUrl+"dmlapi/mystock/MystockView"
+            
+        case .saleOrder:
+            return baseUrl+"dmlapi/Mystock/addmystockproduct"
             
             
         //------------------Cart------------------------
@@ -224,6 +232,8 @@ enum Endpoint {
         case .getStateList:
             return baseUrl+"dmlapi/customers/getallregionlist/"
             
+       
+            
             
         //------------------Authentication-----------------------
         case .login:
@@ -254,6 +264,11 @@ enum Endpoint {
             
         case .mostSellingProducts:
             return baseUrl+"dmlapi/home/bestsellerproduct"
+            
+            //-------------download/cart count-----------------
+            
+        case .getCartDownloadCount:
+            return baseUrl+"dmlapi/addtocart/getcountCartandDownload"
             
             
         }
@@ -1002,5 +1017,37 @@ class ApiManager {
         }
         
     }
+    
+    func apiMyStockSaleOrder( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
+        
+        self.apiAlamofire(url: Endpoint.saleOrder.url, method:.post, params: params) { (response) in
+            
+            let status = response["status"] as? String
+            if status == "error" {
+                completHandler(response)
+            } else {
+                completHandler(response)
+            }
+            
+        }
+        
+    }
+    
+    //*************************** Cart/Download count ********************************
+    func apiGetDownloadCartCount( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
+        
+        self.apiAlamofire(url: Endpoint.getCartDownloadCount.url, method:.post, params: params) { (response) in
+            
+            let status = response["status"] as? String
+            if status == "error" {
+                completHandler(response)
+            } else {
+                completHandler(response)
+            }
+            
+        }
+        
+    }
+    
     
 }

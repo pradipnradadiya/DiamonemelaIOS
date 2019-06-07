@@ -204,7 +204,7 @@ extension EditAddressVC{
     }
     
     func getState(url : String){
-        let par = ["country_id": "countryId"]
+        let par = ["country_id": countryId]
         RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         ApiManager.shared.apiGetState(params:par as [String : AnyObject]) { (result) in
             

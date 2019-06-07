@@ -27,12 +27,12 @@ class PrintVC: UIViewController {
         printController.printPageRenderer = nil
         printController.printingItems = nil
         printController.printingItem = printFile
+        
         //New stuff
         
         printController.printInfo = printInfo
         printController.showsPageRange = true
         printController.showsNumberOfCopies = true
-        
         printController.present(from: btnPrint, animated: true, completionHandler: nil)
         
         

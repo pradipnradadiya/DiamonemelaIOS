@@ -4,11 +4,47 @@ import RappleProgressHUD
 
 class DrawerVC: UIViewController {
 
+    @IBOutlet weak var lblCartCount: UILabelX!
+    @IBOutlet weak var lblDownloadCount: UILabelX!
+    @IBOutlet weak var buttonLogin: UIButton!
+    @IBOutlet weak var imgDot: UIImageViewX!
+    @IBOutlet weak var btnSignUp: UIButton!
+    @IBOutlet weak var btnLogin: UIButton!
+    @IBOutlet weak var btnUname: UIButton!
     @IBOutlet weak var tblHeightConstraint: NSLayoutConstraint!
     var arrHeader = [HeaderItem.Data]()
     @IBOutlet weak var tblCategory: UITableView!
     @IBOutlet weak var constraintTop: NSLayoutConstraint!
     @IBOutlet var drawerView: UIView!
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
+            
+            buttonLogin.isHidden = true
+            btnSignUp.isHidden = true
+            imgDot.isHidden = true
+            btnUname.isHidden = false
+            
+            if let dataObject = Mapper<LoginItem>().map(JSONString: dataArrayString)  {
+                
+                btnUname.setTitle("\(dataObject.data?.firstname ?? "") \(dataObject.data?.lastname ?? "")", for: .normal)
+                
+            }
+            
+            
+        }else{
+            btnUname.isHidden = true
+            buttonLogin.isHidden = false
+            btnSignUp.isHidden = false
+            imgDot.isHidden = false
+        }
+        
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tblHeightConstraint.constant=0
@@ -25,17 +61,32 @@ class DrawerVC: UIViewController {
             
         }
         
-         constraintTop.constant=constraintTop.constant + screenStatusBarHeight
+    constraintTop.constant=constraintTop.constant + screenStatusBarHeight
         
        self.getHeaderMenuBestCategory(url: Endpoint.headerMenu.url)
         // Do any additional setup after loading the view.
-        
-        
+               
         
         
         
     }
     
+    @IBAction func btnLogin(_ sender: Any) {
+        self.closeDrawer()
+        let login = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC
+        self.navigationController?.pushViewController(login!, animated: true)
+    }
+    @IBAction func btnSignUp(_ sender: Any) {
+        self.closeDrawer()
+        let signup = self.storyboard?.instantiateViewController(withIdentifier: "SignUpVC") as? SignUpVC
+        self.navigationController?.pushViewController(signup!, animated: true)
+    }
+    @IBAction func btnUnameClick(_ sender: Any) {
+        
+        let profile = self.storyboard?.instantiateViewController(withIdentifier: "EditProfileVC") as? EditProfileVC
+        self.navigationController?.pushViewController(profile!, animated: true)
+        
+    }
     @IBAction func btnOurCollection(_ sender: UIButton) {
         if sender.isSelected {
             tblHeightConstraint.constant=0

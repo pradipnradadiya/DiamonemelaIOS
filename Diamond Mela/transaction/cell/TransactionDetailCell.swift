@@ -16,7 +16,7 @@ class TransactionDetailCell: UITableViewCell {
             lblSku.text=transactionDetail?.product_sku
             lblStoneDetail.text=transactionDetail?.product_stonequality
             lblMetalWeight.text=transactionDetail?.product_metalweight
-            lblPrice.text=transactionDetail?.product_price
+            lblPrice.text=priceFormat2("\(transactionDetail?.product_price ?? "")")
         }
     }
     

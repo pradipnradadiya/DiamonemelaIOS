@@ -121,7 +121,6 @@ extension OrderDetailVC{
             print(status as Any)
             if status == FAILURE_CODE || status == nil {
                 
-                
             } else {
                 let pdfUrl = result["pdf"] as? String
                
@@ -133,7 +132,6 @@ extension OrderDetailVC{
                 printInfo.jobName = "Order invoice"
                 printInfo.duplex = UIPrintInfo.Duplex.none
                 printInfo.orientation = UIPrintInfo.Orientation.portrait
-                
                 
                 let link:URL = URL.init(string: pdfUrl!)!
                 print(link.absoluteString)
@@ -151,10 +149,7 @@ extension OrderDetailVC{
                 
                 printController.present(animated: true, completionHandler: nil)
                 
-                //printController.present(from: btnPrintOrder, animated: true, completionHandler: nil)
-                
-                
-                
+//                printController.present(from: btnPrintOrder, animated: true, completionHandler: nil)
 //                let print = self.storyboard?.instantiateViewController(withIdentifier: "PrintVC") as? PrintVC
 //                print?.printFile = pdfUrl!
 //                self.navigationController?.pushViewController(print!, animated: true)

@@ -42,7 +42,9 @@ class ListCell: UICollectionViewCell {
             
             lblSku.text=listData?.sku
             lblProName.text=listData?.name
-            let amountString=Float((listData?.custom_price)!).asLocaleCurrency
+//            let amountString=Float((listData?.custom_price)!).asLocaleCurrency
+//            let amountString = priceFormat("\(listData?.custom_price ?? 0)")
+            let amountString = priceFormat2("\(listData?.custom_price ?? 0)")
             lblPrice.text=amountString
             
             //self.imgProduct?.setImageWith("retrgegre", usingActivityIndicatorStyle: .gray)

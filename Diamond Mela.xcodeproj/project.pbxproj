@@ -37,6 +37,7 @@
 		0417481F22A15D1C00C75E3E /* MyStockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417481E22A15D1C00C75E3E /* MyStockCell.swift */; };
 		0417482122A16D1D00C75E3E /* FilterTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417482022A16D1D00C75E3E /* FilterTitleCell.swift */; };
 		0417482322A16D3900C75E3E /* FilterDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417482222A16D3900C75E3E /* FilterDataCell.swift */; };
+		0418F14A22AA557C006AE324 /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418F14922AA557C006AE324 /* ChangePasswordVC.swift */; };
 		041A3B8922A552A6008F9A47 /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041A3B8822A552A6008F9A47 /* ProductDetailVC.swift */; };
 		041B1AB622A794C600920223 /* ProductDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B1AB522A794C600920223 /* ProductDetailItem.swift */; };
 		041B1AB822A7981800920223 /* RTSItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B1AB722A7981800920223 /* RTSItem.swift */; };
@@ -185,6 +186,7 @@
 		0417481E22A15D1C00C75E3E /* MyStockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStockCell.swift; sourceTree = "<group>"; };
 		0417482022A16D1D00C75E3E /* FilterTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTitleCell.swift; sourceTree = "<group>"; };
 		0417482222A16D3900C75E3E /* FilterDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDataCell.swift; sourceTree = "<group>"; };
+		0418F14922AA557C006AE324 /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		041A3B8822A552A6008F9A47 /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
 		041B1AB522A794C600920223 /* ProductDetailItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailItem.swift; sourceTree = "<group>"; };
 		041B1AB722A7981800920223 /* RTSItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTSItem.swift; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 				045C03D422854A2100581E95 /* ManageBankVC.swift */,
 				041BFC11228C16D0002782B3 /* EditAddressVC.swift */,
 				041BFC13228C1706002782B3 /* EditContactInfoVC.swift */,
+				0418F14922AA557C006AE324 /* ChangePasswordVC.swift */,
 			);
 			path = authentication.myaccount;
 			sourceTree = "<group>";
@@ -1067,6 +1070,7 @@
 				0441E830229FA74A00ABD01E /* MyCartCell.swift in Sources */,
 				041BFC14228C1706002782B3 /* EditContactInfoVC.swift in Sources */,
 				041BFC12228C16D0002782B3 /* EditAddressVC.swift in Sources */,
+				0418F14A22AA557C006AE324 /* ChangePasswordVC.swift in Sources */,
 				045C03D522854A2100581E95 /* ManageBankVC.swift in Sources */,
 				04A362E7229965CB00A76FBD /* CartProductListItem.swift in Sources */,
 				04B763FC2296853F000D8D29 /* FilterVC.swift in Sources */,

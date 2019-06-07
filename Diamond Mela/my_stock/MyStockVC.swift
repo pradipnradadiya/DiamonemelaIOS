@@ -8,8 +8,7 @@ class MyStockVC: UIViewController {
     var arrList = [MyStockItem.Data]()
     let refreshControl = UIRefreshControl()
     var hasMoredata: Bool = false
-    
-    
+        
     @IBOutlet weak var gridMyStock: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +73,28 @@ extension MyStockVC{
         }
     }
     
+    func saleProduct(product:String){
+        let par = ["product":product,"customer_id": customerId]
+        
+        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        ApiManager.shared.apiMyStockSaleOrder(params:par as [String : AnyObject]) { (result) in
+            
+            RappleActivityIndicatorView.stopAnimation()
+            
+            let status = result[STATUS_CODE] as? String
+            print(status as Any)
+            if status == FAILURE_CODE || status == nil {
+                
+            } else {
+                let msg = result["message"] as? String
+                self.showAlert(title: SUCCESS, message: msg!)
+                
+            }
+            
+        }
+        
+    }
+    
     func reloadTable() {
         
     }
@@ -107,6 +128,11 @@ extension MyStockVC: UICollectionViewDelegate, UICollectionViewDataSource,UIColl
         
         cell.myStockData = self.arrList[indexPath.row]
         
+        cell.actionBlockSaleProduct = {
+            
+            self.saleProduct(product: self.arrList[indexPath.row].product_id!)
+            
+        }
        
         return cell
         

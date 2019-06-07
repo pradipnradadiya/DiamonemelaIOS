@@ -8,7 +8,13 @@ class LoginVC: UIViewController {
     @IBOutlet weak var tvEmail: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
+            let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? HomeVC
+            self.navigationController?.pushViewController(homeVC!, animated: true)
+           
+        }
+        
         // Do any additional setup after loading the view.
     }
     
@@ -16,7 +22,17 @@ class LoginVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func btnCheckUncheck(_ sender: Any) {
+    @IBAction func btnCheckUncheck(_ sender: UIButton) {
+        
+        if sender.isSelected {
+            sender.setImage(UIImage(named: "checked"), for: .normal)
+           
+            sender.isSelected=false
+        }else{
+            sender.setImage(UIImage(named: "unchecked"), for: .normal)
+            sender.isSelected=true
+        }
+        
     }
     
     @IBAction func btnLogin(_ sender: Any) {
@@ -90,12 +106,14 @@ extension LoginVC {
                 }
                 
                */
+                let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? HomeVC
+                self.navigationController?.pushViewController(homeVC!, animated: true)
                 
                 
                 
-                let initialViewController = self.storyboard!.instantiateViewController(withIdentifier: "EditProfileVC")
-                appDelegate.window?.rootViewController = initialViewController
-                appDelegate.window?.makeKeyAndVisible()
+//                let initialViewController = self.storyboard!.instantiateViewController(withIdentifier: "HomeVC")
+//                appDelegate.window?.rootViewController = initialViewController
+//                appDelegate.window?.makeKeyAndVisible()
                 
                 
                 }

@@ -40,9 +40,8 @@ class OrderCell: UITableViewCell {
             }else{
                 
             }
-            
-            
-            lblGrandTotal.text=orderData?.grand_total
+                        
+            lblGrandTotal.text=priceFormat2("\(orderData?.grand_total ?? "")")
             lblOrderNo.text=orderData?.orderno
             lblStatus.text=orderData?.order_status
             

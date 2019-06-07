@@ -53,10 +53,10 @@ extension TransactionVC {
                 
             } else {
                 let transactionList=Mapper<TransactionItem>().map(JSON: result)
-                self.lblTotalDebit.text="\(transactionList?.total_debit ?? 0)"
-                self.lblCredit.text="\(transactionList?.total_credit ?? 0)"
-                self.lblDeposit.text="\(transactionList?.total_deposite ?? 0)"
-                self.lblDebit.text="\(transactionList?.total_debit ?? 0)"
+                self.lblTotalDebit.text=priceFormat2("\(transactionList?.total_debit ?? 0)")
+                self.lblCredit.text=priceFormat2("\(transactionList?.total_credit ?? 0)")
+                self.lblDeposit.text=priceFormat2("\(transactionList?.total_deposite ?? 0)")
+                self.lblDebit.text=priceFormat2("\(transactionList?.total_debit ?? 0)")
                 
                 
                 

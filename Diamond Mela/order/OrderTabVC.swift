@@ -74,7 +74,6 @@ extension OrderTabVC{
             print(status as Any)
             if status == FAILURE_CODE || status == nil {
                 
-                
             } else {
                 
             }
@@ -129,6 +128,65 @@ extension OrderTabVC{
         }
     }
     
+    func printOrder(orderId:String,groupId:String) {
+        
+        let par = ["order_id": orderId, "customer_id":customerId,"group_id":groupId]
+        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        ApiManager.shared.apiPrintOrder(params:par as [String : AnyObject]) { (result) in
+            
+            RappleActivityIndicatorView.stopAnimation()
+            
+            let status = result[STATUS_CODE] as? String
+            print(status as Any)
+            if status == FAILURE_CODE || status == nil {
+                
+                
+            } else {
+                let pdfUrl = result["pdf"] as? String
+                
+                
+                let printController = UIPrintInteractionController.shared
+                
+                let printInfo = UIPrintInfo(dictionary:nil)
+                printInfo.outputType = UIPrintInfo.OutputType.general
+                printInfo.jobName = "Order invoice"
+                printInfo.duplex = UIPrintInfo.Duplex.none
+                printInfo.orientation = UIPrintInfo.Orientation.portrait
+                
+                
+                let link:URL = URL.init(string: pdfUrl!)!
+                print(link.absoluteString)
+                //New stuff
+                printController.printPageRenderer = nil
+                printController.printingItems = nil
+                printController.printingItem = link.absoluteString
+                //New stuff
+                
+                printController.printInfo = printInfo
+                printController.showsPageRange = true
+                printController.showsNumberOfCopies = true
+                // printController.present(animated: true, completionHandler: nil)
+                
+                
+                printController.present(animated: true, completionHandler: nil)
+                
+                //printController.present(from: btnPrintOrder, animated: true, completionHandler: nil)
+                
+                
+                
+                //                let print = self.storyboard?.instantiateViewController(withIdentifier: "PrintVC") as? PrintVC
+                //                print?.printFile = pdfUrl!
+                //                self.navigationController?.pushViewController(print!, animated: true)
+                
+                
+                
+            }
+            
+        }
+    }
+    
+    
+    
     func reloadTable() {
         if self.arrOrders.count > 0 {
             //            self.lblNoData.isHidden = true
@@ -178,16 +236,13 @@ extension OrderTabVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell?.actionBlockPrint = {
-            
+            self.printOrder(orderId: self.arrOrders[indexPath.row].orderid!, groupId: groupId)
             
         }
         
         cell?.actionBlockCancel = {
             self.cancelOrder(orderId: self.arrOrders[indexPath.row].orderid!)
         }
-        
-        
-        
         return cell!
     }
     

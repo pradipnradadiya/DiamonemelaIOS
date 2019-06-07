@@ -19,7 +19,24 @@ class EditContactInfoVC: UIViewController {
     @IBOutlet weak var tvFnm: JVFloatLabeledTextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
+            
+            if let dataObject = Mapper<LoginItem>().map(JSONString: dataArrayString)  {
+                
+                self.tvFnm.text=dataObject.data?.firstname
+                self.tvLnm.text=dataObject.data?.lastname
+                self.tvEmail.text=dataObject.data?.email
+                self.tvContact.text=dataObject.data?.telephone
+                self.tvAddress.text=dataObject.data?.street
+                self.tvCity.text=dataObject.data?.city
+                self.tvZipCode.text=dataObject.data?.postcode
+                //self.tvPancardNo.text=dataObject.data?.p
+//                self.tvGstin.text=dataObject.data?._isfranchisee
+                
+                
+                
+            }
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -81,19 +98,20 @@ extension EditContactInfoVC{
     
     
     func editContactInfo(){
-    let par = ["notification_token": "",
-               "customer_id": "",
-               "firstname": "",
-               "lastname": "",
-               "email": "",
-               "contact_number": "",
-               "street": "",
-               "country_id": "",
-               "region": "",
-               "city": "",
-               "postcode": "",
-               "pancardno": "",
-               "gstin": ""]
+    let par = ["notification_token": "SDFSDFDS664564",
+               "customer_id": customerId,
+               "firstname": tvFnm.text!,
+               "lastname": tvLnm.text!,
+               "email": tvEmail.text!,
+               "contact_number": tvContact.text!,
+               "street": tvAddress.text!,
+               "country_id": "IN",
+               "region": "491",
+               "city": tvCity.text!,
+               "postcode": tvZipCode.text!,
+               "pancardno": tvPancardNo.text!,
+               "gstin": tvGstin.text!]
+        
     RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
     ApiManager.shared.apiEditContactInfo(params:par as [String : AnyObject]) { (result) in
     
@@ -102,10 +120,22 @@ extension EditContactInfoVC{
     let status = result[STATUS_CODE] as? String
     print(status as Any)
     if status == FAILURE_CODE || status == nil {
-    
-    
+        
     } else {
-    
+        
+        // create the alert
+        let alert = UIAlertController(title: "Success", message: "Information edit successfully.", preferredStyle: UIAlertController.Style.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { action in
+            self.navigationController?.popViewController(animated: true)
+            
+        }))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+        
+       
     }
     
     }

@@ -17,8 +17,7 @@ class LoginItem: Mappable {
         customer_role <- map["customer_role"]
         data <- map["data"]
     }
-    
-    
+        
     
     struct Data : Mappable {
         var entity_id : String?
