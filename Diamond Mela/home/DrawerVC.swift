@@ -59,6 +59,11 @@ class DrawerVC: UIViewController {
                 return 0
             }
             
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapBlurButton(_:)))
+            self.view.addGestureRecognizer(tapGesture)
+            // Do any additional setup after loading the view.
+            
+            
         }
         
     constraintTop.constant=constraintTop.constant + screenStatusBarHeight
@@ -132,6 +137,10 @@ class DrawerVC: UIViewController {
         self.navigationController?.pushViewController(order!, animated: true)
     }
     @IBAction func btnMyStock(_ sender: Any) {
+        self.closeDrawer()
+        let myStock = self.storyboard?.instantiateViewController(withIdentifier: "MyStockVC") as? MyStockVC
+        self.navigationController?.pushViewController(myStock!, animated: true)
+        
     }
     @IBAction func btnHome(_ sender: Any) {
     }
@@ -147,6 +156,7 @@ class DrawerVC: UIViewController {
         let referral = self.storyboard?.instantiateViewController(withIdentifier: "CreateReferralVC") as? CreateReferralVC
         self.navigationController?.pushViewController(referral!, animated: true)
     }
+    
     @objc func tapBlurButton(_ sender: UITapGestureRecognizer) {
         print("tap Please")
         let loc = sender.location(in: self.view)
@@ -159,6 +169,8 @@ class DrawerVC: UIViewController {
             self.view.removeFromSuperview()
         }
     }
+    
+    
     
     //using close drawer
     func closeDrawer() {
@@ -206,14 +218,11 @@ extension DrawerVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
-        
+      
         let cell = self.tblCategory.dequeueReusableCell(withIdentifier: "DrawerCell", for: indexPath) as? DrawerCell
         cell?.headerData = self.arrHeader[indexPath.row]
-        
-        
         return cell!
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

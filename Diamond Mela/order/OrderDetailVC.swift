@@ -126,7 +126,7 @@ extension OrderDetailVC{
                
                 
                 let printController = UIPrintInteractionController.shared
-                
+            
                 let printInfo = UIPrintInfo(dictionary:nil)
                 printInfo.outputType = UIPrintInfo.OutputType.general
                 printInfo.jobName = "Order invoice"
@@ -136,8 +136,8 @@ extension OrderDetailVC{
                 let link:URL = URL.init(string: pdfUrl!)!
                 print(link.absoluteString)
                 //New stuff
-                printController.printPageRenderer = nil
-                printController.printingItems = nil
+               // printController.printPageRenderer = nil
+               // printController.printingItems = nil
                 printController.printingItem = link.absoluteString
                 //New stuff
                 

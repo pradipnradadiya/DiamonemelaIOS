@@ -66,5 +66,7 @@ let ENTER_TEL:String = "Please enter telephone number."
 let ENTER_ZIP_CODE:String = "Please enter postal code."
 
 
+var arrFilterData = [SortFilterItem.Data]()
 
-
+let w :Float = 50
+let h :Float = 45

@@ -5,6 +5,14 @@ import RappleProgressHUD
 class ProductDetailVC: UIViewController {
 
     
+    @IBOutlet weak var gridRtsHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var viewCustomizeJewelarry: UIView!
+    
+    @IBOutlet weak var constraintViewJeweHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var constraintBangleHeight: NSLayoutConstraint!
+    
     var ringOptionId:String=""
     var ringOptionTypeId:String=""
     var stoneOptionId:String=""
@@ -19,13 +27,16 @@ class ProductDetailVC: UIViewController {
     static var metalValue = "Yellow Gold";
     static var diamondValue = "SI-IJ";
     static var ringValue = "12";
-    static var braceletProductId = "";
-    static var bangleProductId = "";
-    static var pendentProId = "";
+    static var braceletProductValue = "";
+    static var bangleProductValue = "";
+    static var pendentValue = "";
     
     var sliderImage: [String] = []
     var arrRTS = [ProductDetailItem.Rts_slider]()
     var arrRing = [ProductDetailItem.Ringsize]()
+    var arrBangle = [ProductDetailItem.BangleSize]()
+    var arrBracelet = [ProductDetailItem.BraceletsSize]()
+    var arrPendents = [ProductDetailItem.PendentEarring]()
     var arrDiamond = [ProductDetailItem.Stone_clarity]()
     var arrCarat: [String] = []
     var arrMetal : [String] = []
@@ -33,6 +44,13 @@ class ProductDetailVC: UIViewController {
     var arrDiamondDetail = [ProductDetailItem.Diamonddetails]()
     var arrDiamondDetailRTS = [RTSItem.Diamonddetails]()
     
+    @IBOutlet weak var viewRing: UIView!
+    @IBOutlet weak var viewPendent: UIView!
+    @IBOutlet weak var viewBangle: UIView!
+    @IBOutlet weak var viewBracelet: UIView!
+    @IBOutlet weak var gridPendent: UICollectionView!
+    @IBOutlet weak var gridBracelet: UICollectionView!
+    @IBOutlet weak var gridBangle: UICollectionView!
     @IBOutlet weak var btnSoldOut: UIButton!
     @IBOutlet weak var btnBuyNow: UIButton!
     @IBOutlet weak var btnAddToCart: UIButton!
@@ -134,28 +152,20 @@ extension ProductDetailVC{
             let status = result[STATUS_CODE] as? String
             print(status as Any)
             if status == FAILURE_CODE || status == nil {
-                
+              
                 
             } else {
                 
                 let productDetailData=Mapper<ProductDetailItem>().map(JSON: result)
                 self.productCategoryId=(productDetailData?.category_id!)!
-                self.sliderImage = (productDetailData?.slider)!
-                self.arrRTS = (productDetailData?.rts_slider)!
-                self.arrRing = (productDetailData?.ringsize)!
-                self.arrDiamond = (productDetailData?.stone_clarity)!
-                self.arrCarat = (productDetailData?.carat)!
-                self.arrMetal = (productDetailData?.metal)!
-                self.arrDiamondDetail = (productDetailData?.diamonddetails)!
+                self.sliderImage = productDetailData?.slider ?? [""]
+                
+              
                 
                 self.gridPager.reloadData()
                 self.gridSlider.reloadData()
-                self.gridRtsSlider.reloadData()
-                self.gridRingSize.reloadData()
-                self.gridDiamond.reloadData()
-                self.gridCarat.reloadData()
-                self.gridMetal.reloadData()
-                self.tblDiamondDetail.reloadData()
+                
+                
                 
                 
                 if productDetailData?.stock == "0"{
@@ -169,13 +179,26 @@ extension ProductDetailVC{
                 }
                 
                 if self.productCategoryId == RING_ID{
-                    
+                    self.viewRing.isHidden = false
+                    self.viewBangle.isHidden = true
+                    self.viewBracelet.isHidden = true
+                    self.viewPendent.isHidden = true
                 }else if self.productCategoryId == BRACELETS_ID{
+                    self.viewRing.isHidden = true
+                    self.viewBangle.isHidden = true
+                    self.viewBracelet.isHidden = false
+                    self.viewPendent.isHidden = true
                     
                 }else if self.productCategoryId == BANGLE_ID{
-                    
+                    self.viewRing.isHidden = true
+                    self.viewBangle.isHidden = false
+                    self.viewBracelet.isHidden = true
+                    self.viewPendent.isHidden = true
                 }else if self.productCategoryId == PENDANTS_SETS_ID{
-                    
+                    self.viewRing.isHidden = true
+                    self.viewBangle.isHidden = true
+                    self.viewBracelet.isHidden = true
+                    self.viewPendent.isHidden = false
                 }else{
                     
                 }
@@ -185,11 +208,53 @@ extension ProductDetailVC{
                 //using for Image slider
                 
                 if productDetailData?.products == "simple"{
-                    
-                }else{
-                    self.cProductId = (productDetailData?.simpleproductid)!
+                    self.arrRTS = (productDetailData?.rts_slider)!
+                    self.gridRtsSlider.reloadData()
                 }
                 
+                else{
+                    self.cProductId = (productDetailData?.simpleproductid)!
+                    self.arrRing = (productDetailData?.ringsize)!
+                    self.arrDiamond = (productDetailData?.stone_clarity)!
+                    self.arrCarat = (productDetailData?.carat)!
+                    self.arrMetal = (productDetailData?.metal)!
+                    self.arrBangle = (productDetailData?.bangle_size)!
+                    self.arrBracelet = (productDetailData?.bracelets_size)!
+                    self.arrPendents = (productDetailData?.pendent_earring)!
+                    
+                    if !self.arrBangle.isEmpty{
+                        ProductDetailVC.bangleProductValue = self.arrBangle[0].label!
+                        self.gridBangle.reloadData()
+                    }
+                    
+                    if !self.arrBracelet.isEmpty{
+                        ProductDetailVC.braceletProductValue = self.arrBracelet[0].label!
+                        self.gridBracelet.reloadData()
+                    }
+                    
+                    if !self.arrPendents.isEmpty{
+                        ProductDetailVC.pendentValue = self.arrPendents[0].label!
+                        self.gridPendent.reloadData()
+                    }
+                    
+                    if !self.arrRing.isEmpty{
+                        self.gridRingSize.reloadData()
+                    }
+                    
+                    self.gridDiamond.reloadData()
+                    self.gridCarat.reloadData()
+                    self.gridMetal.reloadData()
+                    
+                    self.arrRTS = (productDetailData?.rts_slider)!
+                    
+                    if !self.arrRTS.isEmpty{
+                        self.gridRtsSlider.reloadData()
+                    }
+                    
+                }
+                
+                 self.arrDiamondDetail = (productDetailData?.diamonddetails)!
+                 self.tblDiamondDetail.reloadData()
                 
                 //product detail
                 self.lblProductName.text=productDetailData?.product_details?[0].product_name
@@ -216,8 +281,7 @@ extension ProductDetailVC{
                 self.lblDiamondPrice.text=priceFormat2("\(productDetailData?.diamondmainprice?[0].dimondprice ?? "")")
                 
                 self.lblFinalPrice.text=priceFormat2("\(productDetailData?.product_details?[0].price ?? "")")
-            
-                
+                            
             }
             
         }
@@ -251,8 +315,8 @@ extension ProductDetailVC{
                 let productDetail=Mapper<ProductDetailItem>().map(JSON: result)
               //  self.sliderImage = (productDetail?.slider)!
                 //self.arrRTS = (productDetail?.rts_slider)!
-                self.arrRing = (productDetail?.ringsize)!
-                self.arrDiamond = (productDetail?.stone_clarity)!
+              //  self.arrRing = (productDetail?.ringsize)!
+              //  self.arrDiamond = (productDetail?.stone_clarity)!
               //  self.arrCarat = (productDetail?.carat)!
              //   self.arrMetal = (productDetail?.metal)!
                  self.arrDiamondDetail = (productDetail?.diamonddetails)!
@@ -262,8 +326,8 @@ extension ProductDetailVC{
                 //self.gridSlider.reloadData()
             //    self.gridRtsSlider.reloadData()
                // self.gridRtsSlider.reloadData()
-                self.gridRingSize.reloadData()
-                self.gridDiamond.reloadData()
+            //   self.gridRingSize.reloadData()
+              //  self.gridDiamond.reloadData()
               //  self.gridCarat.reloadData()
               //  self.gridMetal.reloadData()
                 self.tblDiamondDetail.reloadData()
@@ -314,7 +378,7 @@ extension ProductDetailVC{
                 
                 self.lblMetalWeight.text=productDetail?.metaldetails?[0].metalweight
                 
-                self.lblMetalEstimatedTotal.text=priceFormat2("\(productDetail?.metaldetails?[0].metalestimatedprice ?? 0)")
+                self.lblMetalEstimatedTotal.text="\(productDetail?.metaldetails?[0].metalestimatedprice ?? 0)"
                 
                 
                 //metal and diamone piece and price
@@ -322,9 +386,9 @@ extension ProductDetailVC{
                 
                 self.lblCountDiamond.text="Diamond(\(productDetail?.diamondmainprice?[0].pices ?? ""))"
                 
-                self.lblDiamondPrice.text=priceFormat2("\(productDetail?.diamondmainprice?[0].dimondprice ?? "")")
+                self.lblDiamondPrice.text="\(productDetail?.diamondmainprice?[0].dimondprice ?? "")"
                 
-                self.lblFinalPrice.text=priceFormat2("\(productDetail?.product_details?[0].price ?? "")")
+                self.lblFinalPrice.text="\(productDetail?.product_details?[0].price ?? "")"
                 
             }
             
@@ -433,14 +497,7 @@ extension ProductDetailVC{
 
 extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
-    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    //        if collectionView == self.gridHeader {
-    //            return CGSize(width: gridHeader.frame.width / 3, height: gridHeader.frame.height)
-    //        }else{
-    //            return CGSize(width: gridBanner.frame.width, height: gridBanner.frame.height)
-    //        }
-    //
-    //    }
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView==self.gridPager{
@@ -453,6 +510,15 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
             
         else if collectionView==self.gridRingSize{
             return self.arrRing.count
+        }
+        else if collectionView==self.gridBangle{
+            return self.arrBangle.count
+        }
+        else if collectionView==self.gridBracelet{
+            return self.arrBracelet.count
+        }
+        else if collectionView==self.gridPendent{
+            return self.arrPendents.count
         }
             
         else if collectionView==self.gridDiamond{
@@ -477,7 +543,7 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
         if collectionView==self.gridPager{
             let cell = self.gridPager.dequeueReusableCell(withReuseIdentifier: "SliderPagerCell", for: indexPath) as! SliderPagerCell
             cell.slider = [self.sliderImage[indexPath.row]]
-            cell.count=indexPath.row
+            
             return cell
         }
             
@@ -491,8 +557,60 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
         else if collectionView==self.gridRingSize{
             let cell = self.gridRingSize.dequeueReusableCell(withReuseIdentifier: "RingCell", for: indexPath) as! RingCell
             cell.ringSize = self.arrRing[indexPath.row]
+            cell.actionClick = {
+                ProductDetailVC.ringValue = self.arrRing[indexPath.row].title!
+                
+                self.ringOptionId=self.arrRing[indexPath.row].option_id!
+                self.ringOptionTypeId=self.arrRing[indexPath.row].option_type_id!
+                self.gridRingSize.reloadData()
+                
+                self.getProductDetailRefresh(productId: self.productId, metalCarat: ProductDetailVC.caratValue, metalQualityColor: ProductDetailVC.metalValue, ringSize: ProductDetailVC.ringValue, stoneQuality: ProductDetailVC.diamondValue, bangleProId: "", braceletProId: "", pendentProId: "", clickAction: "")
+            }
+            
+            return cell
+        }
+            
+        else if collectionView==self.gridBangle{
+            let cell = self.gridBangle.dequeueReusableCell(withReuseIdentifier: "BangleCell", for: indexPath) as! BangleCell
+            cell.bangleData = self.arrBangle[indexPath.row]
+            cell.actionClick = {
+                ProductDetailVC.bangleProductValue = self.arrBangle[indexPath.row].label!
+                
+                self.gridBangle.reloadData()
+                
+                self.getProductDetailRefresh(productId: self.productId, metalCarat: ProductDetailVC.caratValue, metalQualityColor: ProductDetailVC.metalValue, ringSize: ProductDetailVC.ringValue, stoneQuality: ProductDetailVC.diamondValue, bangleProId: "", braceletProId: "", pendentProId: "", clickAction: "")
+            }
+            
+            return cell
+        }
+            
+        else if collectionView==self.gridBracelet{
+            let cell = self.gridBracelet.dequeueReusableCell(withReuseIdentifier: "BraceletsCell", for: indexPath) as! BraceletsCell
+            cell.braceletData = self.arrBracelet[indexPath.row]
+            cell.actionClick = {
+                ProductDetailVC.braceletProductValue = self.arrBracelet[indexPath.row].label!
+                
+               
+                self.gridBracelet.reloadData()
+                
+                self.getProductDetailRefresh(productId: self.productId, metalCarat: ProductDetailVC.caratValue, metalQualityColor: ProductDetailVC.metalValue, ringSize: ProductDetailVC.ringValue, stoneQuality: ProductDetailVC.diamondValue, bangleProId: "", braceletProId: "", pendentProId: "", clickAction: "")
+            }
+            
+            return cell
+        }
             
             
+        else if collectionView==self.gridPendent{
+            let cell = self.gridPendent.dequeueReusableCell(withReuseIdentifier: "PendentCell", for: indexPath) as! PendentCell
+            cell.pendentData = self.arrPendents[indexPath.row]
+            cell.actionClick = {
+                ProductDetailVC.pendentValue = self.arrPendents[indexPath.row].label!
+                
+               
+                self.gridPendent.reloadData()
+                
+                self.getProductDetailRefresh(productId: self.productId, metalCarat: ProductDetailVC.caratValue, metalQualityColor: ProductDetailVC.metalValue, ringSize: ProductDetailVC.ringValue, stoneQuality: ProductDetailVC.diamondValue, bangleProId: "", braceletProId: "", pendentProId: "", clickAction: "")
+            }
             
             return cell
         }
@@ -500,27 +618,55 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
         else if collectionView==self.gridDiamond{
             let cell = self.gridDiamond.dequeueReusableCell(withReuseIdentifier: "DiamondCell", for: indexPath) as! DiamondCell
             cell.diamondData = self.arrDiamond[indexPath.row]
+            
+            cell.actionClick = {
+                ProductDetailVC.diamondValue = self.arrDiamond[indexPath.row].title!
+                
+                
+                self.gridDiamond.reloadData()
+                
+                self.stoneOptionId=self.arrDiamond[indexPath.row].option_id!
+                self.stoneOptionTypeId=self.arrDiamond[indexPath.row].option_type_id!
+                
+                self.getProductDetailRefresh(productId: self.productId, metalCarat: ProductDetailVC.caratValue, metalQualityColor: ProductDetailVC.metalValue, ringSize: "", stoneQuality: ProductDetailVC.diamondValue, bangleProId: "", braceletProId: "", pendentProId: "", clickAction: "")
+            }
+            
             return cell
         }
             
         else if collectionView==self.gridCarat{
             let cell = self.gridCarat.dequeueReusableCell(withReuseIdentifier: "CaratCell", for: indexPath) as! CaratCell
             cell.caratData = [self.arrCarat[indexPath.row]]
-            cell.count = indexPath.row
+            
+            cell.actionClick = {
+                ProductDetailVC.caratValue = self.arrCarat[indexPath.row]
+                 self.gridCarat.reloadData()
+                
+                 self.getProductDetailRefresh(productId: self.productId, metalCarat: ProductDetailVC.caratValue, metalQualityColor: ProductDetailVC.metalValue, ringSize: "", stoneQuality: ProductDetailVC.diamondValue, bangleProId: "", braceletProId: "", pendentProId: "", clickAction: "")
+            }
+            
+            
             return cell
         }
             
         else if collectionView==self.gridMetal{
             let cell = self.gridMetal.dequeueReusableCell(withReuseIdentifier: "MetalCell", for: indexPath) as! MetalCell
             cell.metalData = [self.arrMetal[indexPath.row]]
-            cell.count = indexPath.row
+            cell.actionClick = {
+                ProductDetailVC.metalValue = self.arrMetal[indexPath.row]
+                self.gridMetal.reloadData()
+                
+                self.getProductDetailRefresh(productId: self.productId, metalCarat: ProductDetailVC.caratValue, metalQualityColor: ProductDetailVC.metalValue, ringSize: "", stoneQuality: ProductDetailVC.diamondValue, bangleProId: "", braceletProId: "", pendentProId: "", clickAction: "")
+            }
+            
+            
             return cell
         }
             
         else{
             let cell = self.gridSlider.dequeueReusableCell(withReuseIdentifier: "SliderCell", for: indexPath) as! SliderCell
             cell.slider = [self.sliderImage[indexPath.row]]
-            cell.count=indexPath.row
+           
             return cell
         }
        
@@ -528,12 +674,22 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
+        if collectionView==self.gridPager{
+            print(indexPath.row)
+        }
     }
+    
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView==self.gridPager{
             
+        }
+        else if collectionView == self.gridSlider {
+        
+            
+            self.gridPager.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }
             
         else if collectionView==self.gridRtsSlider{
@@ -542,33 +698,20 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
         }
             
         else if collectionView==self.gridRingSize{
-            ProductDetailVC.ringValue = self.arrRing[indexPath.row].title!
-            
-            
-            self.ringOptionId=self.arrRing[indexPath.row].option_id!
-            self.ringOptionTypeId=self.arrRing[indexPath.row].option_type_id!
-
-            
-            self.getProductDetailRefresh(productId: productId, metalCarat: ProductDetailVC.caratValue, metalQualityColor: ProductDetailVC.metalValue, ringSize: ProductDetailVC.ringValue, stoneQuality: ProductDetailVC.diamondValue, bangleProId: "", braceletProId: "", pendentProId: "", clickAction: "")
+          
         }
             
         else if collectionView==self.gridDiamond{
-            ProductDetailVC.diamondValue = self.arrDiamond[indexPath.row].title!
             
-            self.stoneOptionId=self.arrDiamond[indexPath.row].option_id!
-            self.stoneOptionTypeId=self.arrDiamond[indexPath.row].option_type_id!
             
-            self.getProductDetailRefresh(productId: productId, metalCarat: ProductDetailVC.caratValue, metalQualityColor: ProductDetailVC.metalValue, ringSize: "", stoneQuality: ProductDetailVC.diamondValue, bangleProId: "", braceletProId: "", pendentProId: "", clickAction: "")
         }
             
         else if collectionView==self.gridCarat{
-            ProductDetailVC.caratValue = self.arrCarat[indexPath.row]
-            self.getProductDetailRefresh(productId: productId, metalCarat: ProductDetailVC.caratValue, metalQualityColor: ProductDetailVC.metalValue, ringSize: "", stoneQuality: ProductDetailVC.diamondValue, bangleProId: "", braceletProId: "", pendentProId: "", clickAction: "")
+            
         }
             
         else if collectionView==self.gridMetal{
-            ProductDetailVC.metalValue = self.arrMetal[indexPath.row]
-            self.getProductDetailRefresh(productId: productId, metalCarat: ProductDetailVC.caratValue, metalQualityColor: ProductDetailVC.metalValue, ringSize: "", stoneQuality: ProductDetailVC.diamondValue, bangleProId: "", braceletProId: "", pendentProId: "", clickAction: "")
+           
         }
             
         else{
@@ -577,6 +720,93 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+//        if collectionView==self.gridDiamond{
+//            let str = self.arrDiamond[indexPath.row].title
+//            let width = str!.size(withAttributes: [
+//                NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)
+//                ])
+//             return CGSize(width: width.width + 20, height : 50)
+//        }
+//
+//        return CGSize(width: 100, height : 100)
+        
+        
+        if collectionView==self.gridPager{
+           return CGSize(width: gridPager.frame.width, height :237)
+        }
+            
+        else if collectionView==self.gridRtsSlider{
+          
+            return CGSize(width: 136, height :178)
+        }
+            
+        else if collectionView==self.gridRingSize{
+            let str = self.arrRing[indexPath.row].title
+            let width = str!.size(withAttributes: [
+                NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)
+                ])
+            return CGSize(width: width.width + CGFloat(w), height : CGFloat(h))
+        }
+            
+        else if collectionView==self.gridBangle{
+            let str = self.arrBangle[indexPath.row].label
+            let width = str!.size(withAttributes: [
+                NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)
+                ])
+            return CGSize(width: width.width + CGFloat(w), height : CGFloat(h))
+        }
+            
+        else if collectionView==self.gridBracelet{
+            let str = self.arrBracelet[indexPath.row].label
+            let width = str!.size(withAttributes: [
+                NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)
+                ])
+            return CGSize(width: width.width + CGFloat(w), height : CGFloat(h))
+        }
+            
+        else if collectionView==self.gridPendent{
+            let str = self.arrPendents[indexPath.row].label
+            let width = str!.size(withAttributes: [
+                NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)
+                ])
+            return CGSize(width: width.width + CGFloat(w), height : CGFloat(h))
+        }
+            
+        else if collectionView==self.gridDiamond{
+            let str = self.arrDiamond[indexPath.row].title
+            let width = str!.size(withAttributes: [
+                NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)
+                ])
+            return CGSize(width: width.width + CGFloat(w), height : CGFloat(h))
+        }
+            
+        else if collectionView==self.gridCarat{
+            let str = self.arrCarat[indexPath.row]
+            let width = str.size(withAttributes: [
+                NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)
+                ])
+            return CGSize(width: width.width + CGFloat(w), height : CGFloat(h))
+        }
+            
+        else if collectionView==self.gridMetal{
+            let str = self.arrMetal[indexPath.row]
+            let width = str.size(withAttributes: [
+                NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)
+                ])
+            return CGSize(width: width.width + CGFloat(w), height : CGFloat(h))
+        }
+            
+        else{
+             return CGSize(width:93, height : 84)
+        }
+        
+        
+        
+    }
+    
+  
 }
 
 extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
@@ -615,3 +845,18 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+extension ProductDetailVC: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        var visibleRect = CGRect()
+        
+        visibleRect.origin = self.gridPager.contentOffset
+        visibleRect.size = self.gridPager.bounds.size
+        
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        
+        guard let indexPath = self.gridPager.indexPathForItem(at: visiblePoint) else { return }
+        
+        print(indexPath.row)
+    }
+    
+}

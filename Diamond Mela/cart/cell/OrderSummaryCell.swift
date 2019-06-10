@@ -9,6 +9,7 @@ class OrderSummaryCell: UITableViewCell {
     @IBOutlet weak var lblMetalQuality: UILabel!
     @IBOutlet weak var lblStoneQuality: UILabel!
     @IBOutlet weak var lblSku: UILabel!
+    
     var orderData : OrderSummaryItem.Data?{
         didSet{
             lblSku.text=orderData?.sku
@@ -17,7 +18,7 @@ class OrderSummaryCell: UITableViewCell {
 //            lblSize.text=orderData?.ringsize
             lblQty.text="\(orderData?.qty ?? 0)"
             lblQtyPrice.text="\(orderData?.price ?? 0)"
-            lblPrice.text="\(orderData?.subtotal ?? 0)"
+            lblPrice.text=priceFormat2("\(orderData?.subtotal ?? 0)")
         }
     }
     
@@ -30,6 +31,7 @@ class OrderSummaryCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        
     }
 
 }

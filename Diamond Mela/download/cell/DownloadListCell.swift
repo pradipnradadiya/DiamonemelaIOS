@@ -15,7 +15,7 @@ class DownloadListCell: UITableViewCell {
     
     var downloadData:DownloadItem.Data?{
         didSet{
-            lblPrice.text="\(downloadData?.price ?? 0)"
+            lblPrice.text=priceFormat2("\(downloadData?.price ?? 0)")
             imgProduct.sd_setImage(with: URL(string: (downloadData?.image)!), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
             
             

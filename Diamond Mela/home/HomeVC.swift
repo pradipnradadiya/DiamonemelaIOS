@@ -25,6 +25,7 @@ class HomeVC: UIViewController {
     //slide menu
     var menu_vc : DrawerVC!
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -69,11 +70,14 @@ class HomeVC: UIViewController {
         
         //using slide drawer
         menu_vc=self.storyboard?.instantiateViewController(withIdentifier: "DrawerVC") as? DrawerVC
+        
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToGesture))
+        
         swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
         self.view.addGestureRecognizer(swipeLeft)
         
-        
+       //  let tapView = UITapGestureRecognizer(target: self, action: #selector(self.respondToTapGesture))
+      //  self.view.addGestureRecognizer(tapView)
         // Do any additional setup after loading the view.
     }
 
@@ -103,6 +107,13 @@ class HomeVC: UIViewController {
         default:
             print("default")
         }
+    }
+    
+    @objc func respondToTapGesture(gesture : UITapGestureRecognizer){
+        
+        
+            closeMenu()
+       
     }
     
     func showMenu() {
@@ -271,14 +282,20 @@ extension HomeVC{
 
 extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        if collectionView == self.gridHeader {
-//            return CGSize(width: gridHeader.frame.width / 3, height: gridHeader.frame.height)
-//        }else{
-//            return CGSize(width: gridBanner.frame.width, height: gridBanner.frame.height)
-//        }
-//
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == self.gridBestCategory {
+            return CGSize(width: gridBestCategory.frame.width / 2 - 5, height: 224)
+            
+        }else if collectionView == self.gridHeader {
+             return CGSize(width: 67, height: 82)
+        }
+        else if collectionView == self.gridMostSellingProduct{
+            return CGSize(width: 174, height: 220)
+        }
+        else {
+            return CGSize(width: self.gridBanner.frame.width, height: 224)
+        }
+    }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.gridHeader {
@@ -364,9 +381,9 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource,UICollect
         }
             
         else if collectionView == self.gridMostSellingProduct {
-//            let list = self.storyboard?.instantiateViewController(withIdentifier: "ListVC") as? ListVC
-//            list?.id = self.arrMostSellingProducts[indexPath.row].entity_id
-//            self.navigationController?.pushViewController(list!, animated: true)
+            let list = self.storyboard?.instantiateViewController(withIdentifier: "ProductDetailVC") as? ProductDetailVC
+            list?.productId = self.arrMostSellingProducts[indexPath.row].entity_id!
+            self.navigationController?.pushViewController(list!, animated: true)
         }
             
         else{

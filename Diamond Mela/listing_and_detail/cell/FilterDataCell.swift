@@ -6,7 +6,7 @@ class FilterDataCell: UITableViewCell {
     @IBOutlet weak var lblRadioTitle: UILabel!
     @IBOutlet weak var btnRadio: UIButton!
     
-    
+  
     var filterData:SortFilterItem.Option_data?{
         didSet{
             lblRadioTitle.text=filterData?.label

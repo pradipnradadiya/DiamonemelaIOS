@@ -23,7 +23,7 @@ class ListVC: UIViewController {
     var availability:String = ""
     var sort_by:String = "";
     
-    
+      var sheetData = [SortFilterItem.Sort_by]()
     
     @IBOutlet weak var gridList: UICollectionView!
     @IBOutlet weak var btnfilter: UIButtonX!
@@ -86,7 +86,7 @@ class ListVC: UIViewController {
     @IBAction func btnFilter(_ sender: Any) {
         
         let filter = self.storyboard?.instantiateViewController(withIdentifier: "FilterVC") as? FilterVC
-        filter?.arrFilterData = filterData
+        //filter?.arrFilterData = filterData
         self.navigationController?.pushViewController(filter!, animated: true)
         
     }
@@ -109,9 +109,27 @@ class ListVC: UIViewController {
     
     func openSortPopup() {
         let selectedValue = "Men" //update this for selected value
-        let action = UIAlertController.actionSheetWithItems(items: [("Men","Men"),("Women","Women"),("Both","Both")], currentSelection: selectedValue, action: { (value)  in
-           // self.lblGender.text = value
-        })
+        //[("Men","Men"),("Women","Women"),("Both","Both")]
+        
+        let action = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        for obj in self.sheetData {
+            
+          
+//                if let selection = currentSelection, value == selection {
+//                    // Note that checkmark and space have a neutral text flow direction so this is correct for RTL
+//                    title = "✔︎ " + title
+//                }
+                action.addAction(
+                    UIAlertAction(title: obj.label, style: .default) {_ in
+                        print(obj.value)
+                        //action(obj.value)
+                    }
+                )
+           
+        }
+//        let action = UIAlertController.actionSheetWithItems(items: arrData, currentSelection: selectedValue, action: { (value)  in
+//           // self.lblGender.text = value
+//        })
         action.addAction(UIAlertAction.init(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
         //Present the controller
         
@@ -205,8 +223,9 @@ extension ListVC{
                 
             } else {
                 let sortfilterData=Mapper<SortFilterItem>().map(JSON: result)
+                arrFilterData = (sortfilterData?.data)!
                 
-                self.filterData = (sortfilterData?.data)!
+                self.sheetData = (sortfilterData?.sort_by)!
             }
             
         }

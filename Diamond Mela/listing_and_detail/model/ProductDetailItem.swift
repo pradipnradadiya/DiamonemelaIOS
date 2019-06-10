@@ -216,6 +216,7 @@ struct ProductDetailItem : Mappable {
         var value : String?
         var label : String?
         var product_id : String?
+        var isSelected : Bool = false
         
         init?(map: Map) {
             
@@ -234,6 +235,7 @@ struct ProductDetailItem : Mappable {
         var value : String?
         var label : String?
         var product_id : String?
+        var isSelected : Bool = false
         
         init?(map: Map) {
             
@@ -252,6 +254,7 @@ struct ProductDetailItem : Mappable {
         var value : String?
         var label : String?
         var product_id : String?
+        var isSelected : Bool = false
         
         init?(map: Map) {
             

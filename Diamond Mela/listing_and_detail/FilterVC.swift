@@ -2,8 +2,8 @@ import UIKit
 
 class FilterVC: UIViewController {
 
-    var arrFilterData = [SortFilterItem.Data]()
-    var arrFilterDataCopy = [SortFilterItem.Data]()
+   
+     var arrFilterDataCopy = [SortFilterItem.Data]()
     
     @IBOutlet weak var tblFilterData: UITableView!
     @IBOutlet weak var tblFilterTitle: UITableView!
@@ -15,6 +15,8 @@ class FilterVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         arrFilterDataCopy=arrFilterData
         
@@ -48,7 +50,7 @@ class FilterVC: UIViewController {
 
 extension FilterVC{
     func reloadTable() {
-        if self.arrFilterData.count > 0 {
+        if arrFilterData.count > 0 {
             //            self.lblNoData.isHidden = true
         } else {
             //            self.lblNoData.isHidden = false
@@ -58,7 +60,7 @@ extension FilterVC{
     
     
     func reloadFilterDataTable(position:Int) {
-        if self.arrFilterData[position].option_data!.count > 0 {
+        if arrFilterData[position].option_data!.count > 0 {
             //            self.lblNoData.isHidden = true
         } else {
             //            self.lblNoData.isHidden = false
@@ -77,9 +79,9 @@ extension FilterVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tblFilterTitle {
-            return self.arrFilterData.count
+            return arrFilterData.count
         }else{
-            return self.arrFilterData[position].option_data!.count
+            return arrFilterData[position].option_data!.count
         }
         
     }
@@ -87,11 +89,11 @@ extension FilterVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tblFilterTitle {
             let cell = self.tblFilterTitle.dequeueReusableCell(withIdentifier: "FilterTitleCell", for: indexPath) as? FilterTitleCell
-            cell?.filterTitleData = self.arrFilterData[indexPath.row]
+            cell?.filterTitleData = arrFilterData[indexPath.row]
             return cell!
         }else{
             let cell = self.tblFilterData.dequeueReusableCell(withIdentifier: "FilterDataCell", for: indexPath) as? FilterDataCell
-            cell?.filterData = self.arrFilterData[self.position].option_data![indexPath.row]
+            cell?.filterData = arrFilterData[self.position].option_data![indexPath.row]
             return cell!
         }
         
@@ -106,7 +108,7 @@ extension FilterVC: UITableViewDelegate, UITableViewDataSource {
           //  let cell = tableView.cellForRow(at: indexPath) as! FilterTitleCell
             
 //            cell.viewFilterTitle.backgroundColor=UIColor.rgb(red: 155, green: 15, blue: 86)
-            if self.arrFilterData[indexPath.row].option_type=="text"{
+            if arrFilterData[indexPath.row].option_type=="text"{
                 self.tblFilterData.isHidden=true
             }else{
                 self.tblFilterData.isHidden=false
@@ -117,15 +119,15 @@ extension FilterVC: UITableViewDelegate, UITableViewDataSource {
         else{
             //self.position=indexPath.row
             
-            FilterVC.dict[self.arrFilterData[self.position].option_name!]=self.arrFilterData[self.position].option_data![indexPath.row].value
+            FilterVC.dict[arrFilterData[self.position].option_name!]=arrFilterData[self.position].option_data![indexPath.row].value
             
             var i:Int=0
-            for _ in self.arrFilterData[self.position].option_data!{
-                self.arrFilterData[self.position].option_data![i].isSelected = false
+            for _ in arrFilterData[self.position].option_data!{
+                arrFilterData[self.position].option_data![i].isSelected = false
                 i += 1
             }
             
-            self.arrFilterData[self.position].option_data![indexPath.row].isSelected = true
+            arrFilterData[self.position].option_data![indexPath.row].isSelected = true
             self.reloadFilterDataTable(position: position)
             
             

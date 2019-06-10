@@ -86,6 +86,11 @@ extension Dictionary {
     }
 }
 
+extension UIColor {
+    static var selectButtonColor = UIColor.init(red: 155/255, green: 15/255, blue: 86/255, alpha: 1)
+    static var unSelectButtonColor = UIColor.init(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
+}
+
 extension UIViewController {
     func showAlert(title: String, message: String) {
         let alertController = UIAlertController(title: title, message:

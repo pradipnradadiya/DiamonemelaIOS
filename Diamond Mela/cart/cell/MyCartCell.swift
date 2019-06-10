@@ -18,7 +18,7 @@ class MyCartCell: UITableViewCell {
     var myCart:CartProductListItem.Data?{
         didSet{
             lblQty.text="\(myCart?.qty ?? 0)"
-            lblPrice.text=myCart?.price
+            lblPrice.text=priceFormat2("\(myCart?.price ?? "")")
             lblStoneDetail.text=myCart?.stonedetails
             lblMetalDetail.text=myCart?.metaldetails
 //            lblSize.text=myCart?.ringsize

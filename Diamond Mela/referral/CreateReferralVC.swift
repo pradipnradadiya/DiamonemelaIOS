@@ -5,7 +5,8 @@ import JVFloatLabeledTextField
 
 class CreateReferralVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     
-    
+    typealias CompletionBloack = (String, String) -> Void
+    var myCompletion: CompletionBloack?
 
     @IBOutlet weak var tvDiscount: JVFloatLabeledTextField!
     @IBOutlet weak var tvTel: JVFloatLabeledTextField!
@@ -20,10 +21,32 @@ class CreateReferralVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         let pickerView = UIPickerView()
         pickerView.delegate = self
+       
+        ///
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
+        toolBar.sizeToFit()
         
+        //let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "donePicker")
+       // let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.cancelTapped))
+        
+        toolBar.setItems([cancelButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        
+       
+        ///
         tvDiscount.inputView = pickerView
+         tvDiscount.inputAccessoryView = toolBar
         pwd = generateRandomDigits(15)
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func cancelTapped() {
+      tvDiscount.resignFirstResponder()
     }
     
     @IBAction func btnCart(_ sender: Any) {
@@ -56,6 +79,12 @@ class CreateReferralVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     }
     
     @IBAction func btnBack(_ sender: Any) {
+        var sa = "dwd"
+        var dsd = "dasas";
+        if self.myCompletion != nil {
+            self.myCompletion!(dsd, sa)
+        }
+        
         self.navigationController?.popViewController(animated: true)
     }
     
