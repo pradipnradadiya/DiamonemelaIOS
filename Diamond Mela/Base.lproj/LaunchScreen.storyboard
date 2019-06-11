@@ -18,16 +18,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="ehc-gb-j2L">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="ehc-gb-j2L">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ehc-gb-j2L" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Kg9-Xh-0OV"/>
-                            <constraint firstItem="ehc-gb-j2L" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="gZP-Q3-iCx"/>
-                            <constraint firstItem="ehc-gb-j2L" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="uwu-5L-McC"/>
-                            <constraint firstItem="ehc-gb-j2L" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="zhc-oD-C0i"/>
+                            <constraint firstItem="ehc-gb-j2L" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="67F-ND-aIb"/>
+                            <constraint firstItem="ehc-gb-j2L" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="WnL-bh-CaY"/>
+                            <constraint firstItem="ehc-gb-j2L" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="aYu-F1-BXS"/>
+                            <constraint firstItem="ehc-gb-j2L" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="lc6-Og-Wkr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

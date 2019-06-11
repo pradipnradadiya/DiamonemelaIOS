@@ -89,6 +89,12 @@ extension Dictionary {
 extension UIColor {
     static var selectButtonColor = UIColor.init(red: 155/255, green: 15/255, blue: 86/255, alpha: 1)
     static var unSelectButtonColor = UIColor.init(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
+    
+    static var rtsStartColor = UIColor.init(red: 142/255, green: 142/255, blue: 142/255, alpha: 1)
+    static var rtsEndColor = UIColor.init(red: 185/255, green: 185/255, blue: 185/255, alpha: 1)
+    
+    
+    
 }
 
 extension UIViewController {

@@ -29,9 +29,10 @@ class ListVC: UIViewController {
     @IBOutlet weak var btnfilter: UIButtonX!
     @IBOutlet weak var btnsort: UIButtonX!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getCategoryProduct(categoryId: id!, groupId: groupId, page: String(pageCount), price: "", gold_purity: "", diamond_quality: "", diamond_shape: "", sku: "", availability: "", sort_by: "")
+        self.getCategoryProduct(categoryId: id!, groupId: groupId, page: String(pageCount), price: "", gold_purity: "", diamond_quality: "", diamond_shape: "", sku: "", availability: "", sort_by: "",showLoader: true)
         // Do any additional setup after loading the view.
         
         self.navigationItem.title=headerTitle
@@ -134,6 +135,7 @@ class ListVC: UIViewController {
         //Present the controller
         
         self.present(action, animated: true, completion: nil)
+        
     }
     
     
@@ -160,7 +162,12 @@ extension UIAlertController {
     
     
 extension ListVC{
-    func getCategoryProduct(categoryId:String,groupId:String,page:String,price:String,gold_purity:String,diamond_quality:String,diamond_shape:String,sku:String,availability:String,sort_by:String) {
+    func getCategoryProduct(categoryId:String,groupId:String,page:String,price:String,gold_purity:String,diamond_quality:String,diamond_shape:String,sku:String,availability:String,sort_by:String,showLoader: Bool = false) {
+        
+        if showLoader {
+            RESpinner.shared.show(view: self.view)
+
+        }
         
         let par = ["customer_id": customerId,
                    "category_id": categoryId,
@@ -173,10 +180,14 @@ extension ListVC{
                    "sku": sku,
                    "availability": availability,
                    "sort_by":sort_by]
-        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        
+       
+        
         ApiManager.shared.apiList(params:par as [String : AnyObject]) { (result) in
             
-            RappleActivityIndicatorView.stopAnimation()
+            
+            
+        RESpinner.shared.hide()
             
             let status = result[STATUS_CODE] as? String
             print(status as Any)
@@ -184,7 +195,7 @@ extension ListVC{
                 
             } else {
                 let data = Mapper<ListItem>().map(JSON: result)
-                
+            
                 let listData = Mapper<ListItem.Data>().mapArray(JSONArray: result["data"] as! [[String : Any]])
                 
                 if listData.count < pagesize {
@@ -206,8 +217,7 @@ extension ListVC{
             }
             
         }
-        
-        
+
     }
     
     
@@ -215,13 +225,18 @@ extension ListVC{
     func getSortFilter(url:String) {
         
         RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        
         ApiManager.shared.apiGetSortFilter(url: url){ (result) in
-            RappleActivityIndicatorView.stopAnimation()
+         
+            
+//
+            
             let status = result[STATUS_CODE] as? String
             print(status as Any)
             if status == FAILURE_CODE || status == nil {
                 
             } else {
+                 RappleActivityIndicatorView.stopAnimation()
                 let sortfilterData=Mapper<SortFilterItem>().map(JSON: result)
                 arrFilterData = (sortfilterData?.data)!
                 

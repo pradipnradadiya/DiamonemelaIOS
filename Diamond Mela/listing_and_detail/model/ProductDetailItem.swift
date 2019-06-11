@@ -69,6 +69,7 @@ struct ProductDetailItem : Mappable {
         var isreadytoship : String?
         var is_salable : String?
         var diamond_weight : Double?
+        var isSelected : Bool? = false
         
         init?(map: Map) {
             

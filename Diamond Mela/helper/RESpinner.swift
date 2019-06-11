@@ -37,14 +37,14 @@ public class RESpinner {
     /* Spinner overlay with custom loading view */
     
     public func show(view: UIView!) {
-      
+        
         activityIndicator.stopAnimating()
         imageView.removeFromSuperview()
         overlayView.removeFromSuperview()
         
         overlayView = UIView(frame: UIScreen.main.bounds)
         overlayView.backgroundColor = UIColor.clear
-        imageView.image = UIImage(named: "progress_circular")
+        imageView.image = UIImage(named: "progress_loader")
         imageView.center = overlayView.center
         overlayView.addSubview(imageView)
         imageView.startRotating()

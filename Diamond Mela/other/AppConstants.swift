@@ -40,7 +40,6 @@ let RUBBER_ID : String="295"
 
 
 //-----------Common Message-----------------
-
 let STATUS_CODE: String="status"
 let FAILURE_CODE: String="failure"
 let SUCCESS: String="Success"
@@ -49,13 +48,11 @@ let errorTitle: String="Error"
 
 
 //User defaults key's name
-
 let USER_SESSION_DATA_KEY:String="user_data_key"
 let INDIA_CODE:String="IN"
 
 
 //validation message
-
 let ENTER_FNM:String = "Please enter first name."
 let ENTER_LNM:String = "Please enter last name."
 let ENTER_EMAIL:String = "Please enter email id."

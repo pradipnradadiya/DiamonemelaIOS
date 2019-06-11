@@ -44,15 +44,17 @@ extension MyCartVC{
                 
             } else {
                 let carts=Mapper<CartProductListItem>().map(JSON: result)
-                self.lblSubTotal.text="\(carts?.subtotal ?? 0)"
-                self.lblTax.text="\(carts?.tax ?? 0)"
-                self.lblGrandTotal.text="\(carts?.grandtotal ?? 0)"
+                self.lblSubTotal.text=priceFormat2("\(carts?.subtotal ?? 0)")
+                self.lblTax.text=priceFormat2("\(carts?.tax ?? 0)")
+                self.lblGrandTotal.text=priceFormat2("\(carts?.grandtotal ?? 0)")
                 
                 self.arrCart=Mapper<CartProductListItem.Data>().mapArray(JSONArray: result["data"] as! [[String : Any]])
                 self.reloadTable()
+                
             }
             
         }
+        
     }
     
     
@@ -64,8 +66,7 @@ extension MyCartVC{
         }
         self.tblCart.reloadData()
     }
-    
-    
+
     func updateCart() {
         RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         
@@ -78,7 +79,7 @@ extension MyCartVC{
             let status = result[STATUS_CODE] as? String
             print(status as Any)
             if status == FAILURE_CODE || status == nil {
-                self.showAlert(title: errorTitle, message: wrongLogin)
+//                self.showAlert(title: errorTitle, message: wrongLogin)
                 
             } else {
                 

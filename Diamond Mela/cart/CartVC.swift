@@ -22,21 +22,18 @@ class CartVC: UIViewController{
     }
     
     @IBAction func btnPayment(_ sender: Any) {
-       self.myPayment()
+//       self.myPayment()
     }
     @IBAction func btnShipping(_ sender: Any) {
-       self.myShipping()
+//       self.myShipping()
     }
     @IBAction func btnBack(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func btnCart(_ sender: Any) {
-      self.myCart()
+//      self.myCart()
     }
-    
-    
-   
     
     
 }
