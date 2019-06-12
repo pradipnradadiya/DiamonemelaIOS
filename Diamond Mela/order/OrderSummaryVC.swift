@@ -63,10 +63,10 @@ extension OrderSummaryVC{
                     }
                 }
                 
-                self.lblSubTotal.text="\(orderSummary?.subtotal ?? 0)"
-                self.lblShippingCharge.text="\(orderSummary?.shipping_charges ?? 0)"
-                self.lblTax.text="\(orderSummary?.tax_ammount ?? 0)"
-                self.lblGrandTotal.text="\(orderSummary?.grand_total ?? 0)"
+                self.lblSubTotal.text=priceFormat2("\(orderSummary?.subtotal ?? 0)")
+                self.lblShippingCharge.text=priceFormat2("\(orderSummary?.shipping_charges ?? 0)")
+                self.lblTax.text=priceFormat2("\(orderSummary?.tax_ammount ?? 0)")
+                self.lblGrandTotal.text=priceFormat2("\(orderSummary?.grand_total ?? 0)")
                 
                 
                 
@@ -102,7 +102,20 @@ extension OrderSummaryVC{
                 
                 
             } else {
-              
+                let alert = UIAlertController(title: SUCCESS, message: result["message"] as? String, preferredStyle: .alert)
+                
+                let ok = UIAlertAction(title: OK, style: .default, handler: { action in
+                    
+                    let signup = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? HomeVC
+                    self.navigationController?.pushViewController(signup!, animated: true)
+                    
+                    
+                })
+                alert.addAction(ok)
+                
+                DispatchQueue.main.async(execute: {
+                    self.present(alert, animated: true)
+                })
                 
             }
             

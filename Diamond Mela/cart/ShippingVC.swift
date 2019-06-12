@@ -13,9 +13,9 @@ class ShippingVC: UIViewController {
         if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
             
             if let dataObject = Mapper<LoginItem>().map(JSONString: dataArrayString)  {
-                lblDefaultBilling.text="\(dataObject.data?.default_billing_new?.firstname ?? "") ,\(dataObject.data?.default_billing_new?.lastname ?? ""), \(dataObject.data?.default_billing_new?.street ?? "") ,\(dataObject.data?.default_billing_new?.city ?? ""), \(dataObject.data?.default_billing_new?.postcode ?? "")"
+                lblDefaultBilling.text="\(dataObject.data?.default_billing_new?.firstname ?? "") \(dataObject.data?.default_billing_new?.lastname ?? ""), \n\(dataObject.data?.default_billing_new?.street ?? "") ,\n\(dataObject.data?.default_billing_new?.city ?? ""), \(dataObject.data?.default_billing_new?.postcode ?? ""),\n\(dataObject.data?.default_billing_new?.country_id ?? ""),\n\(dataObject.data?.default_billing_new?.telephone ?? "")"
                 
-                lblDefaultShipping.text="\(dataObject.data?.default_shipping_new?.firstname ?? "") ,\(dataObject.data?.default_shipping_new?.lastname ?? ""), \(dataObject.data?.default_shipping_new?.street ?? "") ,\(dataObject.data?.default_shipping_new?.city ?? ""), \(dataObject.data?.default_shipping_new?.postcode ?? "")"
+                lblDefaultShipping.text="\(dataObject.data?.default_shipping_new?.firstname ?? "") \(dataObject.data?.default_shipping_new?.lastname ?? ""), \n\(dataObject.data?.default_shipping_new?.street ?? "") ,\n\(dataObject.data?.default_shipping_new?.city ?? ""), \(dataObject.data?.default_shipping_new?.postcode ?? ""),\n\(dataObject.data?.default_shipping_new?.country_id ?? ""),\n\(dataObject.data?.default_shipping_new?.telephone ?? "")"
                 
                 
             }

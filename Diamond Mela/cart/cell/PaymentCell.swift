@@ -2,16 +2,28 @@ import UIKit
 
 class PaymentCell: UITableViewCell {
 
-    @IBOutlet weak var imgMethodLogo: UIImageView!
+    
     @IBOutlet weak var lblPlacing: UILabel!
     @IBOutlet weak var lblAddress: UILabel!
     @IBOutlet weak var lblPaymentTitle: UILabel!
     @IBOutlet weak var imgCheckUncheck: UIImageView!
-    var actionClick: (() -> Void)? = nil
+    
+    var paymentVcInstance = PaymentVC()
+    
+    var actionClickPayment: (() -> Void)? = nil
     var payment:PaymentMethodItem.Data?{
+        
         didSet{
             lblPaymentTitle.text=payment?.label
             lblAddress.text=payment?.info
+            
+            if payment?.isSelected == true{
+                imgCheckUncheck.image = UIImage.init(named: "radio-select")
+                paymentVcInstance.paymentTypes = payment?.value ?? ""
+            }else{
+                imgCheckUncheck.image = UIImage.init(named: "radio")
+            }
+            
         }
     }
     
@@ -27,6 +39,6 @@ class PaymentCell: UITableViewCell {
     }
 
     @IBAction func btnClick(_ sender: Any) {
-        self.actionClick?()
+        self.actionClickPayment?()
     }
 }

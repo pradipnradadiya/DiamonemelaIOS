@@ -47,6 +47,7 @@ extension PaymentVC{
                 self.shippingData=Mapper<PaymentMethodItem.Shipping_charges>().mapArray(JSONArray: result["shipping_charges"] as! [[String : Any]])
                 
                  self.arrPaymentMethod=Mapper<PaymentMethodItem.Data>().mapArray(JSONArray: result["data"] as! [[String : Any]])
+                self.arrPaymentMethod[0].isSelected = true
                 self.reloadTable()
                 
             }
@@ -75,12 +76,38 @@ extension PaymentVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = self.tblPaymentMethodSelect.dequeueReusableCell(withIdentifier: "PaymentCell", for: indexPath) as? PaymentCell
-        cell?.payment = self.arrPaymentMethod[indexPath.row]
-        cell?.actionClick = {
-            self.paymentTypes=self.arrPaymentMethod[indexPath.row].value!
+        if indexPath.row == 0{
+            let cell = self.tblPaymentMethodSelect.dequeueReusableCell(withIdentifier: "PaymentCell", for: indexPath) as? PaymentCell
+            cell?.payment = self.arrPaymentMethod[indexPath.row]
+            
+            cell?.actionClickPayment = {
+                self.paymentTypes=self.arrPaymentMethod[indexPath.row].value!
+                self.arrPaymentMethod[0].isSelected = true
+                self.arrPaymentMethod[1].isSelected = false
+                self.reloadTable()
+                
+            }
+            
+            return cell!
+            
+        }else{
+            let cell = self.tblPaymentMethodSelect.dequeueReusableCell(withIdentifier: "PaymentCell2", for: indexPath) as? PaymentCell2
+            cell?.payment = self.arrPaymentMethod[indexPath.row]
+            
+            cell?.actionClick = {
+                self.paymentTypes=self.arrPaymentMethod[indexPath.row].value!
+                
+                self.arrPaymentMethod[0].isSelected = false
+                self.arrPaymentMethod[1].isSelected = true
+                
+                self.reloadTable()
+                
+            }
+            
+            return cell!
         }
-        return cell!
+        
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -28,7 +28,7 @@ struct PaymentMethodItem : Mappable {
         var method : String?
         var price : Int?
         var method_title : String?
-        
+        var isSelected : Bool? = false
         init?(map: Map) {
             
         }
@@ -52,6 +52,7 @@ struct PaymentMethodItem : Mappable {
         var value : String?
         var info : String?
         var image : String?
+        var isSelected : Bool? = false
         
         init?(map: Map) {
             

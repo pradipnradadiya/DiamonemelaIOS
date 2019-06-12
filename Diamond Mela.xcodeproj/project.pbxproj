@@ -19,6 +19,8 @@
 		0405B006226892E800C6787A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0405B004226892E800C6787A /* LaunchScreen.storyboard */; };
 		0405B011226892E800C6787A /* Diamond_MelaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405B010226892E800C6787A /* Diamond_MelaTests.swift */; };
 		0405B01C226892E800C6787A /* Diamond_MelaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405B01B226892E800C6787A /* Diamond_MelaUITests.swift */; };
+		0408082522B0E54C00C95492 /* PaymentCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0408082422B0E54C00C95492 /* PaymentCell2.swift */; };
+		0408082722B1086500C95492 /* ShippingCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0408082622B1086500C95492 /* ShippingCell2.swift */; };
 		040B7C002297DF2400883E7A /* MyStockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B7BFF2297DF2400883E7A /* MyStockVC.swift */; };
 		040B7C042297DF5000883E7A /* MyStockItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B7C032297DF5000883E7A /* MyStockItem.swift */; };
 		040C11192282A674005A3EAE /* Spinner in Resources */ = {isa = PBXBuildFile; fileRef = 040C11182282A674005A3EAE /* Spinner */; };
@@ -168,6 +170,8 @@
 		0405B017226892E800C6787A /* Diamond MelaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Diamond MelaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0405B01B226892E800C6787A /* Diamond_MelaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diamond_MelaUITests.swift; sourceTree = "<group>"; };
 		0405B01D226892E800C6787A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0408082422B0E54C00C95492 /* PaymentCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCell2.swift; sourceTree = "<group>"; };
+		0408082622B1086500C95492 /* ShippingCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShippingCell2.swift; sourceTree = "<group>"; };
 		040B7BFF2297DF2400883E7A /* MyStockVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStockVC.swift; sourceTree = "<group>"; };
 		040B7C032297DF5000883E7A /* MyStockItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStockItem.swift; sourceTree = "<group>"; };
 		040C11182282A674005A3EAE /* Spinner */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Spinner; sourceTree = "<group>"; };
@@ -744,6 +748,8 @@
 				0441E831229FB88200ABD01E /* PaymentCell.swift */,
 				0441E833229FC20300ABD01E /* ShippingCell.swift */,
 				0441E837229FE3E500ABD01E /* OrderSummaryCell.swift */,
+				0408082422B0E54C00C95492 /* PaymentCell2.swift */,
+				0408082622B1086500C95492 /* ShippingCell2.swift */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -1067,6 +1073,7 @@
 				043CC8002269D46C00669BFE /* ConnectionCheck.swift in Sources */,
 				041B1AB822A7981800920223 /* RTSItem.swift in Sources */,
 				047C582122843203001B0E06 /* EditProfileVC.swift in Sources */,
+				0408082722B1086500C95492 /* ShippingCell2.swift in Sources */,
 				0441E830229FA74A00ABD01E /* MyCartCell.swift in Sources */,
 				041BFC14228C1706002782B3 /* EditContactInfoVC.swift in Sources */,
 				041BFC12228C16D0002782B3 /* EditAddressVC.swift in Sources */,
@@ -1113,6 +1120,7 @@
 				041CD05B22928521003A5CCC /* BankItem.swift in Sources */,
 				041B1ACA22A7CB2E00920223 /* MetalCell.swift in Sources */,
 				0461D42722A9335C005FC54E /* PrintVC.swift in Sources */,
+				0408082522B0E54C00C95492 /* PaymentCell2.swift in Sources */,
 				04326BEB2272D89200D549C7 /* UIViewX.swift in Sources */,
 				04B764032296C0AE000D8D29 /* HeaderItem.swift in Sources */,
 				0441E838229FE3E500ABD01E /* OrderSummaryCell.swift in Sources */,

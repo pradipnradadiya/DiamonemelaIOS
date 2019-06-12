@@ -6,6 +6,7 @@ class MyCartVC: UIViewController {
     
     var arrCart = [CartProductListItem.Data]()
     
+    @IBOutlet weak var btnContinue: UIButton!
     @IBOutlet weak var lblGrandTotal: UILabel!
     @IBOutlet weak var lblTax: UILabel!
     @IBOutlet weak var lblSubTotal: UILabel!
@@ -67,10 +68,38 @@ extension MyCartVC{
         self.tblCart.reloadData()
     }
 
-    func updateCart() {
+    
+    
+    func updateCartTotal() {
         RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         
-        let par = ["customer_id": customerId,"item_id":"","qty":""]
+        let par = ["customer_id": customerId]
+        ApiManager.shared.apiCartList(params:par as [String : AnyObject]) { (result) in
+            
+            RappleActivityIndicatorView.stopAnimation()
+            
+            let status = result[STATUS_CODE] as? String
+            print(status as Any)
+            if status == FAILURE_CODE || status == nil {
+                self.showAlert(title: errorTitle, message: wrongLogin)
+                self.btnContinue.isEnabled = false
+                
+            } else {
+                let carts=Mapper<CartProductListItem>().map(JSON: result)
+                self.lblSubTotal.text=priceFormat2("\(carts?.subtotal ?? 0)")
+                self.lblTax.text=priceFormat2("\(carts?.tax ?? 0)")
+                self.lblGrandTotal.text=priceFormat2("\(carts?.grandtotal ?? 0)")
+             
+            }
+            
+        }
+        
+    }
+    
+    func updateCart(itemId:String,qty:String) {
+        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        print(qty)
+        let par = ["customer_id": customerId,"item_id":itemId,"qty":qty]
         
         ApiManager.shared.apiUpdateCart(params:par as [String : AnyObject]) { (result) in
             
@@ -82,17 +111,17 @@ extension MyCartVC{
 //                self.showAlert(title: errorTitle, message: wrongLogin)
                 
             } else {
-                
+                self.updateCartTotal()
             }
             
         }
         
     }
     
-    func delteCartItem() {
+    func delteCartItem(itemId:String) {
         RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         
-        let par = ["customer_id": customerId,"item_id":""]
+        let par = ["customer_id": customerId,"item_id":itemId]
         
         ApiManager.shared.apiDeleteCart(params:par as [String : AnyObject]) { (result) in
             
@@ -101,18 +130,16 @@ extension MyCartVC{
             let status = result[STATUS_CODE] as? String
             print(status as Any)
             if status == FAILURE_CODE || status == nil {
-                self.showAlert(title: errorTitle, message: wrongLogin)
+                
                 
             } else {
-                
+                 self.updateCartTotal()
             }
             
         }
         
     }
-    
-    
-    
+  
 }
 
 
@@ -129,17 +156,52 @@ extension MyCartVC: UITableViewDelegate, UITableViewDataSource {
         
         cell?.actionBlockRemove =  {
             
-//            self.deleteReferral(referralCustomerId: self.arrReferral[indexPath.row].entity_id!)
-//            self.arrReferral.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
+            let refreshAlert = UIAlertController(title: DELETE, message: ARE_U_SURE_DEL, preferredStyle: UIAlertController.Style.alert)
+            
+            refreshAlert.addAction(UIAlertAction(title: OK, style: .default, handler: { (action: UIAlertAction!) in
+                
+                self.delteCartItem(itemId: self.arrCart[indexPath.row].itemid ?? "")
+                self.arrCart.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+              
+            }))
+            
+            refreshAlert.addAction(UIAlertAction(title: CANCEL, style: .cancel, handler: { (action: UIAlertAction!) in
+                
+            }))
+            
+            self.present(refreshAlert, animated: true, completion: nil)
+            
+            
+           
         }
         
         cell?.actionBlockPlus = {
+            var qty:Int = self.arrCart[indexPath.row].qty ?? 0
+                qty += 1
+            cell?.lblQty.text = String(qty)
+            self.arrCart[indexPath.row].qty = qty
+            self.tblCart.reloadRows(at: [indexPath], with: .fade)
+            self.updateCart(itemId: self.arrCart[indexPath.row].itemid!,qty: String(qty))
+            
             
         }
         
         cell?.actionBlockMinus = {
+            var qty:Int = self.arrCart[indexPath.row].qty ?? 0
             
+            if qty == 1 {
+                cell?.lblQty.text = String(qty)
+                 self.arrCart[indexPath.row].qty = qty
+                 self.tblCart.reloadRows(at: [indexPath], with: .fade)
+                 //self.updateCart(itemId: self.arrCart[indexPath.row].itemid!,qty: String(qty))
+            }else{
+                qty -= 1
+                cell?.lblQty.text = String(qty)
+                 self.arrCart[indexPath.row].qty = qty
+                 self.tblCart.reloadRows(at: [indexPath], with: .fade)
+                 self.updateCart(itemId: self.arrCart[indexPath.row].itemid!,qty: String(qty))
+            }
         }
         
         return cell!

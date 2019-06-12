@@ -4,6 +4,8 @@ class MyCartCell: UITableViewCell {
     
     @IBOutlet weak var lblSku: UILabel!
     
+    @IBOutlet weak var btnPlus: UIButtonX!
+    @IBOutlet weak var btnMinus: UIButtonX!
     @IBOutlet weak var lblQty: UILabel!
     @IBOutlet weak var lblPrice: UILabel!
     @IBOutlet weak var lblStoneDetail: UILabel!
@@ -24,6 +26,13 @@ class MyCartCell: UITableViewCell {
 //            lblSize.text=myCart?.ringsize
             imgProduct.sd_setImage(with: URL(string: (myCart?.image)!), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
             
+            if myCart?.product_type == "simple" {
+                btnPlus.isHidden = true
+                btnMinus.isHidden = true
+            }else{
+                btnPlus.isHidden = false
+                btnMinus.isHidden = false
+            }
             
             
             

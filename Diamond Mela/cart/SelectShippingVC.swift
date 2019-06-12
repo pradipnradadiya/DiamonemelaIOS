@@ -70,28 +70,71 @@ extension SelectShippingVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = self.tblShipping.dequeueReusableCell(withIdentifier: "ShippingCell", for: indexPath) as? ShippingCell
-        cell?.shippingData = self.shippingData[indexPath.row]
-        
-        
-        
-        return cell!
+        if indexPath.row == 0{
+            let cell = self.tblShipping.dequeueReusableCell(withIdentifier: "ShippingCell", for: indexPath) as? ShippingCell
+            cell?.shippingData = self.shippingData[indexPath.row]
+       
+            return cell!
+            
+        }else{
+            let cell = self.tblShipping.dequeueReusableCell(withIdentifier: "ShippingCell2", for: indexPath) as? ShippingCell2
+            cell?.shippingData = self.shippingData[indexPath.row]
+            
+            return cell!
+        }
+     
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     
+        if indexPath.row == 0{
+            
+            savePayment(shippingMethod: self.shippingData[indexPath.row].code!, shippingPrice: "\(self.shippingData[indexPath.row].price ?? 0)")
+            
+            
+            var i :Int = 0
+            for _ in self.shippingData{
+               print(i)
+                
+                if i != indexPath.row{
+                    self.shippingData[i].isSelected = false
+                }else{
+                    self.shippingData[i].isSelected = true
+                }
+                
+                i += 1
+            }
+            
+            self.tblShipping.reloadData()
+            
+            
+            
+            
+            
+            
+        }else{
+            
+             savePayment(shippingMethod: self.shippingData[indexPath.row].code!, shippingPrice: "\(self.shippingData[indexPath.row].price ?? 0)")
+            
+            var i :Int = 0
+            for _ in self.shippingData{
+                print(i)
+                
+                if i != indexPath.row{
+                    self.shippingData[i].isSelected = false
+                }else{
+                    self.shippingData[i].isSelected = true
+                }
+                
+                i += 1
+            }
+            
+            self.tblShipping.reloadData()
+            
+           
+        }
         
-        
-        savePayment(shippingMethod: self.shippingData[indexPath.row].code!, shippingPrice: "\(self.shippingData[indexPath.row].price ?? 0)")
-        
-        //        self.arrQA[indexPath.row].is_viewed=true
-        //        self.tblQA.reloadRows(at: [indexPath], with: .automatic)
-        
-        //        let qadetail = self.storyboard?.instantiateViewController(withIdentifier: "QADetailVC") as? QADetailVC
-        //        qadetail?.qa = self.arrQA[indexPath.row]
-        //        qadetail?.qid = self.arrQA[indexPath.row].iD!
-        //        self.navigationController?.pushViewController(qadetail!, animated: true)
-        
+    
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
