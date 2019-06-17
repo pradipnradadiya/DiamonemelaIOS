@@ -46,6 +46,27 @@ class OrderCell: UITableViewCell {
             lblStatus.text=orderData?.order_status
             
             
+            
+            if orderData?.order_status == "Canceled"{
+                btnCancel.isEnabled = false
+                btnPrint.isEnabled = false
+                btnView.isEnabled = true
+            }
+            
+            if orderData?.order_status == "Pending"{
+                btnCancel.isEnabled = true
+                btnPrint.isEnabled = false
+                btnView.isEnabled = true
+            }
+            
+            if orderData?.order_status == "Complete"{
+                btnCancel.isEnabled = false
+                btnPrint.isEnabled = true
+                btnView.isEnabled = true
+            }
+            
+            
+            
         }
     }
     

@@ -8,6 +8,7 @@ class CreateReferralVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     typealias CompletionBloack = (String, String) -> Void
     var myCompletion: CompletionBloack?
 
+    @IBOutlet weak var lblCartCount: UILabelX!
     @IBOutlet weak var tvDiscount: JVFloatLabeledTextField!
     @IBOutlet weak var tvTel: JVFloatLabeledTextField!
     @IBOutlet weak var tvEmail: JVFloatLabeledTextField!
@@ -18,7 +19,7 @@ class CreateReferralVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     var pwd : String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        lblCartCount.text = "5"
         let pickerView = UIPickerView()
         pickerView.delegate = self
        
@@ -50,8 +51,11 @@ class CreateReferralVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     }
     
     @IBAction func btnCart(_ sender: Any) {
+        let cart = self.storyboard?.instantiateViewController(withIdentifier: "CartVC") as? CartVC
+        self.navigationController?.pushViewController(cart!, animated: true)
     }
     @IBAction func btnSearch(_ sender: Any) {
+        
     }
     @IBAction func btnManageReferral(_ sender: Any) {
         let manageReferral = self.storyboard?.instantiateViewController(withIdentifier: "ManageReferralVC") as? ManageReferralVC

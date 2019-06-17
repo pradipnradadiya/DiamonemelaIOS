@@ -69,12 +69,14 @@ class HomeVC: UIViewController {
         
         
         //using slide drawer
-        menu_vc=self.storyboard?.instantiateViewController(withIdentifier: "DrawerVC") as? DrawerVC
-        
+        menu_vc=self.storyboard?.instantiateViewController(withIdentifier: "DrawerVC") as! DrawerVC
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToGesture))
-        
         swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
         self.view.addGestureRecognizer(swipeLeft)
+        
+        
+        
+        
         
        //  let tapView = UITapGestureRecognizer(target: self, action: #selector(self.respondToTapGesture))
       //  self.view.addGestureRecognizer(tapView)
@@ -102,23 +104,17 @@ class HomeVC: UIViewController {
     @objc func respondToGesture(gesture : UISwipeGestureRecognizer){
         switch gesture.direction {
         case UISwipeGestureRecognizer.Direction.left:
-            print("left swipe")
+            //            print("left swipe")
             closeMenu()
         default:
             print("default")
         }
     }
     
-    @objc func respondToTapGesture(gesture : UITapGestureRecognizer){
-        
-        
-            closeMenu()
-       
-    }
-    
     func showMenu() {
         
         UIView.animate(withDuration: 0.1) {()->Void in
+            
             self.menu_vc.view.frame=CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
             self.menu_vc.view.backgroundColor=UIColor.black.withAlphaComponent(0.6)
             self.addChild(self.menu_vc)
@@ -126,6 +122,17 @@ class HomeVC: UIViewController {
             AppDelegate.menu_bool = false
             
         }
+        
+    }
+    
+    func closeMenu() {
+        UIView.animate(withDuration: 0.3, animations: {()->Void in
+            
+            self.menu_vc.view.frame=CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
+        }){(finished) in
+            self.menu_vc.view.removeFromSuperview()
+        }
+        AppDelegate.menu_bool = true
         
     }
     
@@ -146,16 +153,8 @@ class HomeVC: UIViewController {
         let transaction = self.storyboard?.instantiateViewController(withIdentifier: "TransactionVC") as? TransactionVC
         self.navigationController?.pushViewController(transaction!, animated: true)
     }
-    func closeMenu() {
-        UIView.animate(withDuration: 0.3, animations: {()->Void in
-            
-            self.menu_vc.view.frame=CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
-        }){(finished) in
-            self.menu_vc.view.removeFromSuperview()
-        }
-        AppDelegate.menu_bool = true
-        
-    }
+    
+    
     
 }
 

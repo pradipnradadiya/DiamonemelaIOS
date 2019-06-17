@@ -4,6 +4,7 @@ import RappleProgressHUD
 
 class ListVC: UIViewController {
 
+    @IBOutlet weak var viewNoData: UIView!
     var pageCount: Int = 1
     var arrList = [ListItem.Data]()
     
@@ -109,20 +110,29 @@ class ListVC: UIViewController {
     }
     
     func openSortPopup() {
-        let selectedValue = "Men" //update this for selected value
+        let selectedValue = sort_by //update this for selected value
         //[("Men","Men"),("Women","Women"),("Both","Both")]
         
         let action = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         for obj in self.sheetData {
             
-          
+//
 //                if let selection = currentSelection, value == selection {
 //                    // Note that checkmark and space have a neutral text flow direction so this is correct for RTL
 //                    title = "✔︎ " + title
 //                }
+//
                 action.addAction(
                     UIAlertAction(title: obj.label, style: .default) {_ in
-                        print(obj.value)
+                        //print(obj.value)
+                        self.sort_by = obj.value!
+                        
+                        if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
+                            self.getCategoryProduct(categoryId: self.id!, groupId: groupId, page: String(self.pageCount), price: self.price, gold_purity: self.gold_purity, diamond_quality: self.diamond_quality, diamond_shape: self.diamond_shape, sku: self.sku, availability: self.availability, sort_by: self.sort_by)
+                        }else{
+                            self.getCategoryProduct(categoryId: self.id!, groupId: "", page: String(self.pageCount), price: self.price, gold_purity: self.gold_purity, diamond_quality: self.diamond_quality, diamond_shape: self.diamond_shape, sku: self.sku, availability: self.availability, sort_by: self.sort_by)
+                        }
+                        
                         //action(obj.value)
                     }
                 )
@@ -131,7 +141,10 @@ class ListVC: UIViewController {
 //        let action = UIAlertController.actionSheetWithItems(items: arrData, currentSelection: selectedValue, action: { (value)  in
 //           // self.lblGender.text = value
 //        })
-        action.addAction(UIAlertAction.init(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        action.addAction(UIAlertAction.init(title: "Cancel and Clear", style: UIAlertAction.Style.cancel){_ in
+            self.sort_by = ""
+        }
+        )
         //Present the controller
         
         self.present(action, animated: true, completion: nil)
@@ -192,7 +205,7 @@ extension ListVC{
             let status = result[STATUS_CODE] as? String
             print(status as Any)
             if status == FAILURE_CODE || status == nil {
-                
+                self.reloadTable()
             } else {
                 let data = Mapper<ListItem>().map(JSON: result)
             
@@ -271,9 +284,9 @@ extension ListVC{
     
     func reloadTable() {
         if self.arrList.count > 0 {
-//            self.lblNoData.isHidden = true
+            self.viewNoData.isHidden = true
         } else {
-//            self.lblNoData.isHidden = false
+            self.viewNoData.isHidden = false
         }
         self.gridList.reloadData()
     }

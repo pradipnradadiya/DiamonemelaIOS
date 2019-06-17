@@ -41,10 +41,10 @@ extension ManageReferralVC{
         }
         
         let par = ["customer_id": customerId]
-        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+//        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         ApiManager.shared.apiReferralList(params:par as [String : AnyObject]) { (result) in
              RESpinner.shared.hide()
-            RappleActivityIndicatorView.stopAnimation()
+//            RappleActivityIndicatorView.stopAnimation()
             
             let status = result[STATUS_CODE] as? String
             print(status as Any)

@@ -6,7 +6,7 @@ class BestCategoryCell: UICollectionViewCell {
     @IBOutlet weak var imgCategoryIcon: UIImageView!
     var bestCategoryData:HeaderItem.Data?{
         didSet{
-            imgTitle.text=bestCategoryData?.name
+            imgTitle.text=bestCategoryData?.name!.uppercased()
             imgCategoryIcon.sd_setImage(with: URL(string: "\(bestCategoryData?.category_img ?? "")"), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
         
         }

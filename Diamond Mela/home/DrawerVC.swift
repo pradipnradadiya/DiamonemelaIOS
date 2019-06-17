@@ -20,6 +20,7 @@ class DrawerVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
             
             buttonLogin.isHidden = true
@@ -47,6 +48,10 @@ class DrawerVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapBlurButton(_:)))
+        self.view.addGestureRecognizer(tapGesture)
+       
         tblHeightConstraint.constant=0
         var screenStatusBarHeight: CGFloat {
             
@@ -58,11 +63,7 @@ class DrawerVC: UIViewController {
             } else {
                 return 0
             }
-            
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapBlurButton(_:)))
-            self.view.addGestureRecognizer(tapGesture)
-            // Do any additional setup after loading the view.
-            
+        
             
         }
         
@@ -70,10 +71,7 @@ class DrawerVC: UIViewController {
         
        self.getHeaderMenuBestCategory(url: Endpoint.headerMenu.url)
         // Do any additional setup after loading the view.
-               
-        
-        
-        
+    
     }
     
     @IBAction func btnLogin(_ sender: Any) {
@@ -109,11 +107,48 @@ class DrawerVC: UIViewController {
         
     }
     @IBAction func btnLogout(_ sender: Any) {
+        
+        // Declare Alert
+        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to Logout?", preferredStyle: .alert)
+        
+        // Create OK button with action handler
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+            print("Ok button click...")
+            self.logoutFun()
+        })
+        
+        // Create Cancel button with action handlder
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
+            print("Cancel button click...")
+        }
+        
+        //Add OK and Cancel button to dialog message
+        dialogMessage.addAction(ok)
+        dialogMessage.addAction(cancel)
+        
+        // Present dialog message to user
+        self.present(dialogMessage, animated: true, completion: nil)
+        
+    }
+    func logoutFun()  {
+//        customerId = ""
+//        userSessionData.removeObject(forKey: USER_SESSION_DATA_KEY)
+        let login = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC
+        self.navigationController?.pushViewController(login!, animated: true)
+        
     }
     @IBAction func btnCart(_ sender: Any) {
-        self.closeDrawer()
-        let cart = self.storyboard?.instantiateViewController(withIdentifier: "CartVC") as? CartVC
-        self.navigationController?.pushViewController(cart!, animated: true)
+        if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
+            self.closeDrawer()
+            let cart = self.storyboard?.instantiateViewController(withIdentifier: "CartVC") as? CartVC
+            self.navigationController?.pushViewController(cart!, animated: true)
+        }
+            
+        else{
+            
+        }
+        
+        
         
     }
     @IBAction func btnPolicies(_ sender: Any) {
@@ -122,48 +157,60 @@ class DrawerVC: UIViewController {
         self.navigationController?.pushViewController(policy!, animated: true)
     }
     @IBAction func btnDownload(_ sender: Any) {
+         if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
         self.closeDrawer()
         let download = self.storyboard?.instantiateViewController(withIdentifier: "DownloadVC") as? DownloadVC
         self.navigationController?.pushViewController(download!, animated: true)
+        }
     }
     @IBAction func btnTransaction(_ sender: Any) {
+         if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
         self.closeDrawer()
         let transaction = self.storyboard?.instantiateViewController(withIdentifier: "TransactionVC") as? TransactionVC
         self.navigationController?.pushViewController(transaction!, animated: true)
+        }
     }
     @IBAction func btnMyOrder(_ sender: Any) {
+         if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
         self.closeDrawer()
         let order = self.storyboard?.instantiateViewController(withIdentifier: "OrderTabVC") as? OrderTabVC
         self.navigationController?.pushViewController(order!, animated: true)
+        }
     }
     @IBAction func btnMyStock(_ sender: Any) {
+         if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
         self.closeDrawer()
         let myStock = self.storyboard?.instantiateViewController(withIdentifier: "MyStockVC") as? MyStockVC
         self.navigationController?.pushViewController(myStock!, animated: true)
+        }
         
     }
     @IBAction func btnHome(_ sender: Any) {
     }
     
     @IBAction func btnMyAccount(_ sender: Any) {
+         if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
         self.closeDrawer()
         let editProfile = self.storyboard?.instantiateViewController(withIdentifier: "EditProfileVC") as? EditProfileVC
         self.navigationController?.pushViewController(editProfile!, animated: true)
+        }
     }
     
     @IBAction func btnCreateReferral(_ sender: Any) {
+         if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
         self.closeDrawer()
         let referral = self.storyboard?.instantiateViewController(withIdentifier: "CreateReferralVC") as? CreateReferralVC
         self.navigationController?.pushViewController(referral!, animated: true)
+        }
     }
     
     @objc func tapBlurButton(_ sender: UITapGestureRecognizer) {
-        print("tap Please")
+        print("Please Help!")
         let loc = sender.location(in: self.view)
         let subview = view?.hitTest(loc, with: nil)
         if(subview != self.drawerView){
             //            AppDelegate.menu_bool = true
-//                        self.view.removeFromSuperview()
+            //            self.view.removeFromSuperview()
         }else{
             AppDelegate.menu_bool = true
             self.view.removeFromSuperview()
@@ -184,6 +231,7 @@ extension DrawerVC{
         RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         ApiManager.shared.apiHeaderBestCategory(url: url){ (result) in
             RappleActivityIndicatorView.stopAnimation()
+            self.getDownloadCartCoubnt()
             let status = result[STATUS_CODE] as? String
             print(status as Any)
             if status == FAILURE_CODE || status == nil {
@@ -199,6 +247,49 @@ extension DrawerVC{
             
         }
     }
+    
+    
+    func getDownloadCartCoubnt() {
+        let par = ["customer_id": customerId]
+        
+        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        ApiManager.shared.apiGetDownloadCartCount(params:par as [String : AnyObject]) { (result) in
+            
+            RappleActivityIndicatorView.stopAnimation()
+            
+            let status = result[STATUS_CODE] as? String
+            print(status as Any)
+            if status == FAILURE_CODE || status == nil {
+                
+            } else {
+                let total_qty = result["total_qty"] as? Int
+                let download_count = result["download_count"] as? Int
+                
+                
+                //Cart count
+                if total_qty != 0{
+                    self.lblCartCount.isHidden = false
+                    self.lblCartCount.text = "\(total_qty ?? 0)"
+                    
+                }else{
+                    self.lblCartCount.isHidden = true
+                }
+                
+                
+                //Download count
+                if download_count != 0{
+                    self.lblDownloadCount.isHidden = false
+                    self.lblDownloadCount.text = "\(download_count ?? 0)"
+                }else{
+                    self.lblDownloadCount.isHidden = true
+                }
+            
+            }
+            
+        }
+    }
+    
+    
     
     func reloadTable() {
         if self.arrHeader.count > 0 {

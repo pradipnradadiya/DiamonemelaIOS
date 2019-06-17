@@ -4,7 +4,12 @@ import RappleProgressHUD
 import JVFloatLabeledTextField
 
 class EditContactInfoVC: UIViewController {
-
+    
+    var country_id:String = ""
+    var country_name:String = ""
+    var region_id:String = ""
+    var region_name:String = ""
+    
     @IBOutlet weak var btnState: UIButton!
     @IBOutlet weak var btnCountry: UIButton!
     @IBOutlet weak var tvState: JVFloatLabeledTextField!
@@ -17,6 +22,8 @@ class EditContactInfoVC: UIViewController {
     @IBOutlet weak var tvEmail: JVFloatLabeledTextField!
     @IBOutlet weak var tvLnm: JVFloatLabeledTextField!
     @IBOutlet weak var tvFnm: JVFloatLabeledTextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
@@ -30,6 +37,9 @@ class EditContactInfoVC: UIViewController {
                 self.tvAddress.text=dataObject.data?.street
                 self.tvCity.text=dataObject.data?.city
                 self.tvZipCode.text=dataObject.data?.postcode
+                
+                
+                
                 //self.tvPancardNo.text=dataObject.data?.p
 //                self.tvGstin.text=dataObject.data?._isfranchisee
                 
@@ -51,13 +61,28 @@ class EditContactInfoVC: UIViewController {
     }
     
     @IBAction func btnSelectCountry(_ sender: Any) {
+        let country=self.storyboard?.instantiateViewController(withIdentifier: "SelectCountryVC") as! SelectCountryVC
+        country.myCompletion = { sdas, ds in
+            print(sdas)
+            self.country_name = sdas
+            self.country_id = ds
+            
+            if self.country_id == "IN"{
+                self.btnState.isHidden = false
+            }else{
+                self.btnState.isHidden = true
+            }
+        
+        }
+        
+        self.navigationController?.pushViewController(country, animated: true)
     }
+    
     @IBAction func btnSearch(_ sender: Any) {
     }
 }
 
 extension EditContactInfoVC{
-    
     
     func getCountry(url : String){
         RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
@@ -92,6 +117,7 @@ extension EditContactInfoVC{
             }
             
         }
+        
     }
     
     
@@ -113,6 +139,7 @@ extension EditContactInfoVC{
                "gstin": tvGstin.text!]
         
     RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        
     ApiManager.shared.apiEditContactInfo(params:par as [String : AnyObject]) { (result) in
     
     RappleActivityIndicatorView.stopAnimation()

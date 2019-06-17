@@ -40,26 +40,23 @@ extension TransactionVC {
         }
         
         let par = ["customer_id": customerId, "pagesize":pageCount] as [String : Any]
-        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+//        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         ApiManager.shared.apiGetTransactionList(params:par as [String : AnyObject]) { (result) in
             
             RESpinner.shared.hide()
-            RappleActivityIndicatorView.stopAnimation()
+//            RappleActivityIndicatorView.stopAnimation()
             
             let status = result[STATUS_CODE] as? String
             print(status as Any)
             if status == FAILURE_CODE || status == nil {
-                
-                
+            
             } else {
                 let transactionList=Mapper<TransactionItem>().map(JSON: result)
                 self.lblTotalDebit.text=priceFormat2("\(transactionList?.total_debit ?? 0)")
                 self.lblCredit.text=priceFormat2("\(transactionList?.total_credit ?? 0)")
                 self.lblDeposit.text=priceFormat2("\(transactionList?.total_deposite ?? 0)")
                 self.lblDebit.text=priceFormat2("\(transactionList?.total_debit ?? 0)")
-                
-                
-                
+              
                 let trasactionData=Mapper<TransactionItem.Data>().mapArray(JSONArray: result["data"] as! [[String : Any]])
                 
                 if trasactionData.count < 10 {
@@ -134,8 +131,8 @@ extension TransactionVC: UITableViewDelegate, UITableViewDataSource {
         }else{
             let detail = self.storyboard?.instantiateViewController(withIdentifier: "TransactionDetailVC") as? TransactionDetailVC
             detail?.arrTransactionItem=self.arrTransaction[indexPath.row].order_item!
-                   
             self.navigationController?.pushViewController(detail!, animated: true)
+            
         }
         
         

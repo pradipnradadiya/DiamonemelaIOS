@@ -90,11 +90,11 @@ extension OrderTabVC{
                    "order":orderType,
                    "pagesize":String(pageCount)]
         
-        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+       // RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         ApiManager.shared.apiGetOrder(params:par as [String : AnyObject]) { (result) in
             
             RESpinner.shared.hide()
-            RappleActivityIndicatorView.stopAnimation()
+           // RappleActivityIndicatorView.stopAnimation()
             
             let status = result[STATUS_CODE] as? String
             print(status as Any)
@@ -232,6 +232,7 @@ extension OrderTabVC: UITableViewDelegate, UITableViewDataSource {
         cell?.actionBlockView = {
             let orderDetail = self.storyboard?.instantiateViewController(withIdentifier: "OrderDetailVC") as? OrderDetailVC
             orderDetail?.orderId = self.arrOrders[indexPath.row].orderid!
+            orderDetail?.status = self.arrOrders[indexPath.row].order_status!
             self.navigationController?.pushViewController(orderDetail!, animated: true)
         }
         

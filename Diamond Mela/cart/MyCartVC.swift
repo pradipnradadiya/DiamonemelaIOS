@@ -40,8 +40,9 @@ extension MyCartVC{
             
             let status = result[STATUS_CODE] as? String
             print(status as Any)
-            if status == FAILURE_CODE || status == nil {
-                self.showAlert(title: errorTitle, message: wrongLogin)
+            if status == "fail" || status == nil {
+                self.showAlert(title: errorTitle, message: "Cart is Empty")
+                self.btnContinue.isEnabled = false
                 
             } else {
                 let carts=Mapper<CartProductListItem>().map(JSON: result)
@@ -80,8 +81,8 @@ extension MyCartVC{
             
             let status = result[STATUS_CODE] as? String
             print(status as Any)
-            if status == FAILURE_CODE || status == nil {
-                self.showAlert(title: errorTitle, message: wrongLogin)
+            if status == "fail" || status == nil {
+                self.showAlert(title: errorTitle, message: "Cart is Empty")
                 self.btnContinue.isEnabled = false
                 
             } else {

@@ -108,6 +108,12 @@ extension PopularProductVC: UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        let list = self.storyboard?.instantiateViewController(withIdentifier: "ProductDetailVC") as? ProductDetailVC
+        list?.productId = self.arrPopularProduct[indexPath.row].entity_id!
+        self.navigationController?.pushViewController(list!, animated: true)
+        
+        
+        
         //        self.arrEvents[indexPath.row].is_viewed=true
         //        self.gridEvent.reloadItems(at: [indexPath])
         

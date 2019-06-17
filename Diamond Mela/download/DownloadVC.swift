@@ -1,6 +1,7 @@
 import UIKit
 import ObjectMapper
 import RappleProgressHUD
+import Photos
 
 class DownloadVC: UIViewController {
 
@@ -9,6 +10,9 @@ class DownloadVC: UIViewController {
     var pageCount: Int = 1
     var arrDownload = [DownloadItem.Data]()
     let refreshControl = UIRefreshControl()
+    
+    var selectArr = [Int]()
+    
     var hasMoredata: Bool = false
     
     var flag:String = "1"
@@ -42,15 +46,17 @@ class DownloadVC: UIViewController {
     @IBAction func btnSearch(_ sender: Any) {
     }
     @IBAction func btnDownloadAll(_ sender: Any) {
-        
+        var i: Int = 0
         for (prodictId) in arrDownload.enumerated(){
             if prodictId.element.isSelected == true{
                 print(prodictId.element.isSelected as Any)
                 productIds.append("\(prodictId.element.product_id!),")
                 
+                
             }else{
                 
             }
+            i += 1
             
         }
         
@@ -60,21 +66,35 @@ class DownloadVC: UIViewController {
     }
     
     @IBAction func btnDeleteAll(_ sender: Any) {
-        
+     
+        self.selectArr.removeAll()
+        var i:Int = 0
         for (prodictId) in arrDownload.enumerated(){
+            
             if prodictId.element.isSelected == true{
                 print(prodictId.element.isSelected as Any)
                 productIds.append("\(prodictId.element.product_id!),")
+                selectArr.append(i)
+              
+                
+                
+                
+                //self.arrDownload.remove(at: indexPath.row)
+             //   tableView.deleteRows(at: [indexPath], with: .fade)
+             //   tblDownloadProduct.deleteRows(at: IndexPath[i], with: .fade)
+              // self.arrDownload.remove(at: i)
                 
             }else{
                 
             }
+            i += 1
            
-            
+         
         }
         
         self.deleteAllProduct(customerId: customerId, productId: productIds)
-       
+        
+       // self.tblDownloadProduct.reloadData()
         
     }
     
@@ -84,7 +104,35 @@ class DownloadVC: UIViewController {
     
 }
 
+
+
 extension DownloadVC {
+    
+    func saveToImage(filename:String) {
+        DispatchQueue.global(qos: .background).async {
+            RappleActivityIndicatorView.startAnimatingWithLabel("Please wait image is saved in photos.")
+            if let url = URL(string: filename),
+                let urlData = NSData(contentsOf: url) {
+                let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0];
+                let filePath="\(documentsPath)/tempFile.png"
+                DispatchQueue.main.async {
+                    urlData.write(toFile: filePath, atomically: true)
+                    PHPhotoLibrary.shared().performChanges({
+//                        PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: <#T##URL#>)
+                        PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: URL(fileURLWithPath: filePath))
+                        
+                    }) { completed, error in
+                        if completed {
+                            print("image is saved!")
+                            RappleActivityIndicatorView.stopAnimation()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+ 
     
     func downloadAllProduct(customerId:String , productId:String,price:String){
         
@@ -100,7 +148,11 @@ extension DownloadVC {
                 
                 
             } else {
-   
+                //let image = result["image"] as? String
+                let dData = Mapper<ImageDownloadResponse>().map(JSON: result)
+               // self.downloadImage(url: image!)
+                print(dData?.image![0] as Any)
+                self.saveToImage(filename: (dData?.image![0])!)
             }
             
         }
@@ -116,9 +168,20 @@ extension DownloadVC {
             let status = result[STATUS_CODE] as? String
             print(status as Any)
             if status == FAILURE_CODE || status == nil {
-                
-                
+          
             } else {
+                
+                
+                
+                self.selectArr.reverse()
+                    var i: Int = 0
+                for _ in self.selectArr{
+                        self.arrDownload.remove(at: self.selectArr[i])
+                        i += 1
+                    }
+                
+                self.tblDownloadProduct.reloadData()
+             
                
             }
             
@@ -135,11 +198,11 @@ extension DownloadVC {
         }
         
         let par = ["customer_id": customerId, "pagesize":pageCount] as [String : Any]
-        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+//        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         ApiManager.shared.apiGetDownloadProductList(params:par as [String : AnyObject]) { (result) in
             
             RESpinner.shared.hide()
-            RappleActivityIndicatorView.stopAnimation()
+//            RappleActivityIndicatorView.stopAnimation()
             
             let status = result[STATUS_CODE] as? String
             print(status as Any)

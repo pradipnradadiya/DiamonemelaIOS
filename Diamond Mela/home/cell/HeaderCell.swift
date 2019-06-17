@@ -8,7 +8,7 @@ class HeaderCell: UICollectionViewCell {
     
     var headerData:HeaderItem.Data?{
         didSet{
-            lblTitle.text=headerData?.name
+            lblTitle.text=headerData?.name?.uppercased()
             imgMenuIcon.sd_setImage(with: URL(string: "\(headerData?.icon_img ?? "")"), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
         }
     }

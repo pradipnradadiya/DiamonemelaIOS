@@ -52,41 +52,7 @@ class EditProfileVC: UIViewController {
         let pwd = self.storyboard?.instantiateViewController(withIdentifier: "ChangePasswordVC") as? ChangePasswordVC
         self.navigationController?.pushViewController(pwd!, animated: true)
         
-        /*
-        let alert = UIAlertController(title: "Change Password", message: nil, preferredStyle: .alert)
-        
-        alert.addTextField {
-            $0.placeholder = "Old Password"
-            $0.isSecureTextEntry = true
-            $0.addTarget(alert, action: #selector(alert.textDidChangeInLoginAlert), for: .editingChanged)
-        }
-        
-        alert.addTextField {
-            $0.placeholder = "New Password"
-            $0.isSecureTextEntry = true
-            $0.addTarget(alert, action: #selector(alert.textDidChangeInLoginAlert), for: .editingChanged)
-        }
-        
-        alert.addTextField {
-            $0.placeholder = "Confirm Password"
-            $0.isSecureTextEntry = true
-            $0.addTarget(alert, action: #selector(alert.textDidChangeInLoginAlert), for: .editingChanged)
-        }
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        
-        let loginAction = UIAlertAction(title: "Submit", style: .default) { [unowned self] _ in
-            guard let password = alert.textFields?[0].text,
-                let password1 = alert.textFields?[1].text,
-                let password2 = alert.textFields?[2].text
-                else { return } // Should never happen
-            
-            // Perform login action
-        }
-        
-        loginAction.isEnabled = false
-        alert.addAction(loginAction)
-        present(alert, animated: true)*/
+       
         
     }
     
@@ -121,7 +87,7 @@ class EditProfileVC: UIViewController {
     }
     
     @IBAction func btnManageAddress(_ sender: Any) {
-        print("manage address")
+     
         let address = self.storyboard?.instantiateViewController(withIdentifier: "ManageAddressVC") as? ManageAddressVC
         self.navigationController?.pushViewController(address!, animated: true)
         

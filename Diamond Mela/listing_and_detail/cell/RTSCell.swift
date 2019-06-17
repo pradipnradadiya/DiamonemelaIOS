@@ -60,7 +60,8 @@ class RTSCell: UICollectionViewCell {
                 lblSizeHeading.textColor = UIColor.white
                 
             }else{
-                viewBack.backgroundColor = UIColor.white
+                viewBack.firstColor = UIColor.white
+                viewBack.secondColor = UIColor.white
                 viewBack.borderWidth = 1
                 lblMetal.textColor = UIColor.black
                 lblStone.textColor = UIColor.black

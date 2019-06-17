@@ -4,6 +4,31 @@ import RappleProgressHUD
 
 class ProductDetailVC: UIViewController {
 
+    @IBOutlet weak var constraintCustomJewelaryHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var constraintBraceletsHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var constraintPendentHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var constraintRingHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var constraintBottonRingHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var constraintDiamondHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var constraintBottomDiamondHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var constraintCaratHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var constraintBottomCarat: NSLayoutConstraint!
+    
+    @IBOutlet weak var constraintMetalHeight: NSLayoutConstraint!
+    
+    
+    @IBOutlet weak var constraintBottomMetal: NSLayoutConstraint!
+    
+    
+    
     
     @IBOutlet weak var gridRtsHeight: NSLayoutConstraint!
     
@@ -12,6 +37,8 @@ class ProductDetailVC: UIViewController {
     @IBOutlet weak var constraintViewJeweHeight: NSLayoutConstraint!
     
     @IBOutlet weak var constraintBangleHeight: NSLayoutConstraint!
+    
+    
     
     var ringOptionId:String=""
     var ringOptionTypeId:String=""
@@ -289,9 +316,43 @@ extension ProductDetailVC{
                 if productDetailData?.products == "simple"{
                     self.arrRTS = (productDetailData?.rts_slider)!
                     self.gridRtsSlider.reloadData()
+                    
+                    self.constraintCustomJewelaryHeight.constant = 0
+                    self.constraintBangleHeight.constant = 0
+                    self.constraintBraceletsHeight.constant = 0
+                    self.constraintPendentHeight.constant = 0
+                    self.constraintRingHeight.constant = 0
+                    self.constraintBottonRingHeight.constant = 0
+                    self.constraintDiamondHeight.constant = 0
+                    self.constraintBottomDiamondHeight.constant = 0
+                    self.constraintCaratHeight.constant = 0
+                    self.constraintBottomCarat.constant = 0
+                    self.constraintMetalHeight.constant = 0
+                    self.constraintBottomMetal.constant = 0
+                   
+                    
+                    
+                    
+                    
                 }
                 
                 else{
+                    
+                    
+                    self.constraintCustomJewelaryHeight.constant = 60
+                    self.constraintBangleHeight.constant = 90
+                    self.constraintBraceletsHeight.constant = 90
+                    self.constraintPendentHeight.constant = 90
+                    self.constraintRingHeight.constant = 90
+                    self.constraintBottonRingHeight.constant = 1
+                    self.constraintDiamondHeight.constant = 90
+                    self.constraintBottomDiamondHeight.constant = 1
+                    self.constraintCaratHeight.constant = 90
+                    self.constraintBottomCarat.constant = 1
+                    self.constraintMetalHeight.constant = 90
+                    self.constraintBottomMetal.constant = 1
+                    
+                    
                     self.cProductId = (productDetailData?.simpleproductid)!
                     
                     
@@ -337,6 +398,8 @@ extension ProductDetailVC{
                     
                     if !self.arrRTS.isEmpty{
                         self.gridRtsSlider.reloadData()
+                    }else{
+                        self.gridRtsHeight.constant = 0
                     }
                     
                 }

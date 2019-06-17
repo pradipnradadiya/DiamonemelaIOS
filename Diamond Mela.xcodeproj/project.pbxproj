@@ -39,6 +39,11 @@
 		0417481F22A15D1C00C75E3E /* MyStockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417481E22A15D1C00C75E3E /* MyStockCell.swift */; };
 		0417482122A16D1D00C75E3E /* FilterTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417482022A16D1D00C75E3E /* FilterTitleCell.swift */; };
 		0417482322A16D3900C75E3E /* FilterDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417482222A16D3900C75E3E /* FilterDataCell.swift */; };
+		0418397422B222D400E71CBD /* ImageDownloadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418397322B222D400E71CBD /* ImageDownloadResponse.swift */; };
+		0418397622B26A2C00E71CBD /* SelectCountryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418397522B26A2C00E71CBD /* SelectCountryVC.swift */; };
+		0418397822B26DF100E71CBD /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418397722B26DF100E71CBD /* CountryCell.swift */; };
+		0418397A22B2898800E71CBD /* SelectStateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418397922B2898800E71CBD /* SelectStateVC.swift */; };
+		0418397C22B28C8000E71CBD /* StateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418397B22B28C8000E71CBD /* StateCell.swift */; };
 		0418F14A22AA557C006AE324 /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418F14922AA557C006AE324 /* ChangePasswordVC.swift */; };
 		041A3B8922A552A6008F9A47 /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041A3B8822A552A6008F9A47 /* ProductDetailVC.swift */; };
 		041B1AB622A794C600920223 /* ProductDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B1AB522A794C600920223 /* ProductDetailItem.swift */; };
@@ -190,6 +195,11 @@
 		0417481E22A15D1C00C75E3E /* MyStockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStockCell.swift; sourceTree = "<group>"; };
 		0417482022A16D1D00C75E3E /* FilterTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTitleCell.swift; sourceTree = "<group>"; };
 		0417482222A16D3900C75E3E /* FilterDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDataCell.swift; sourceTree = "<group>"; };
+		0418397322B222D400E71CBD /* ImageDownloadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadResponse.swift; sourceTree = "<group>"; };
+		0418397522B26A2C00E71CBD /* SelectCountryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCountryVC.swift; sourceTree = "<group>"; };
+		0418397722B26DF100E71CBD /* CountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
+		0418397922B2898800E71CBD /* SelectStateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStateVC.swift; sourceTree = "<group>"; };
+		0418397B22B28C8000E71CBD /* StateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateCell.swift; sourceTree = "<group>"; };
 		0418F14922AA557C006AE324 /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		041A3B8822A552A6008F9A47 /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
 		041B1AB522A794C600920223 /* ProductDetailItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailItem.swift; sourceTree = "<group>"; };
@@ -432,6 +442,8 @@
 				041BFC11228C16D0002782B3 /* EditAddressVC.swift */,
 				041BFC13228C1706002782B3 /* EditContactInfoVC.swift */,
 				0418F14922AA557C006AE324 /* ChangePasswordVC.swift */,
+				0418397522B26A2C00E71CBD /* SelectCountryVC.swift */,
+				0418397922B2898800E71CBD /* SelectStateVC.swift */,
 			);
 			path = authentication.myaccount;
 			sourceTree = "<group>";
@@ -640,6 +652,7 @@
 			isa = PBXGroup;
 			children = (
 				0474C6A1228D3D750077E489 /* DownloadItem.swift */,
+				0418397322B222D400E71CBD /* ImageDownloadResponse.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -718,6 +731,8 @@
 			children = (
 				04779581228EF57A00499CE1 /* ManageAddressCell.swift */,
 				04779583228EF5A100499CE1 /* ManageBankCell.swift */,
+				0418397722B26DF100E71CBD /* CountryCell.swift */,
+				0418397B22B28C8000E71CBD /* StateCell.swift */,
 			);
 			name = cell;
 			path = "New Group";
@@ -1130,6 +1145,8 @@
 				0405AFFE226892E500C6787A /* ViewController.swift in Sources */,
 				04A8FCEE229E96A9007ACE2E /* DrawerCell.swift in Sources */,
 				0405AFFC226892E500C6787A /* AppDelegate.swift in Sources */,
+				0418397822B26DF100E71CBD /* CountryCell.swift in Sources */,
+				0418397A22B2898800E71CBD /* SelectStateVC.swift in Sources */,
 				041B1ACC22A7CB6100920223 /* GemstoneCell.swift in Sources */,
 				0474C6A4228D42510077E489 /* TransactionItem.swift in Sources */,
 				04B764092296C262000D8D29 /* BannerItem.swift in Sources */,
@@ -1143,7 +1160,9 @@
 				04A362D92299196300A76FBD /* ContactUsVC.swift in Sources */,
 				0441E836229FDC4500ABD01E /* OrderSummaryItem.swift in Sources */,
 				0417481D22A144BF00C75E3E /* PopularProductCell.swift in Sources */,
+				0418397C22B28C8000E71CBD /* StateCell.swift in Sources */,
 				04326BEA2272D89200D549C7 /* UIImageViewX.swift in Sources */,
+				0418397422B222D400E71CBD /* ImageDownloadResponse.swift in Sources */,
 				041B1AC222A7C96D00920223 /* DiamondCell.swift in Sources */,
 				041B1ABA22A7C8EC00920223 /* RingCell.swift in Sources */,
 				041BFC18228C38AB002782B3 /* StateResponse.swift in Sources */,
@@ -1153,6 +1172,7 @@
 				041BB8EC2274274400FFBAA4 /* ManageReferralVC.swift in Sources */,
 				043CC7F52269A12900669BFE /* ForgotPasswordVC.swift in Sources */,
 				0441E834229FC20300ABD01E /* ShippingCell.swift in Sources */,
+				0418397622B26A2C00E71CBD /* SelectCountryVC.swift in Sources */,
 				0417481522A10E6200C75E3E /* OrderDetailCell.swift in Sources */,
 				041B1AC022A7C95100920223 /* CaratCell.swift in Sources */,
 			);
@@ -1333,7 +1353,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3KH483GK9E;
 				INFOPLIST_FILE = "Diamond Mela/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1358,7 +1378,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3KH483GK9E;
 				INFOPLIST_FILE = "Diamond Mela/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (

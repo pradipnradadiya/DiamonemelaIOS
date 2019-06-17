@@ -18,10 +18,27 @@ class OrderDetailVC: UIViewController {
     @IBOutlet weak var btnPrintOrder: UIButtonX!
     
     var orderId:String = ""
+    var status:String = ""
     var arrOrderDetail = [OrderDetailItem.Order_item]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if status == "Pending" {
+            buttonCancelOrder.isEnabled = true
+            btnPrintOrder.isEnabled = false
+            
+        }else if status == "Complete"{
+            buttonCancelOrder.isEnabled = false
+            btnPrintOrder.isEnabled = true
+            
+        }else if status == "Canceled"{
+            buttonCancelOrder.isEnabled = false
+            btnPrintOrder.isEnabled = false
+        }
+        
+        
+        
         self.getOrderDetail(orderId: orderId)
         // Do any additional setup after loading the view.
     }
