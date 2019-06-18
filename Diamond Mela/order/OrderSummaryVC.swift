@@ -23,6 +23,10 @@ class OrderSummaryVC: UIViewController {
     }
     
 
+    @IBAction func btnBack(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func btnPlaceOrder(_ sender: Any) {
         
         self.placeOrder()
@@ -58,8 +62,7 @@ extension OrderSummaryVC{
                         self.lblBillingAddress.text="\(dataObject.data?.default_billing_new?.firstname ?? "") ,\(dataObject.data?.default_billing_new?.lastname ?? ""), \(dataObject.data?.default_billing_new?.street ?? "") ,\(dataObject.data?.default_billing_new?.city ?? ""), \(dataObject.data?.default_billing_new?.postcode ?? "")"
                         
                         self.lblShippingAddress.text="\(dataObject.data?.default_shipping_new?.firstname ?? "") ,\(dataObject.data?.default_shipping_new?.lastname ?? ""), \(dataObject.data?.default_shipping_new?.street ?? "") ,\(dataObject.data?.default_shipping_new?.city ?? ""), \(dataObject.data?.default_shipping_new?.postcode ?? "")"
-                        
-                        
+                      
                     }
                 }
                 

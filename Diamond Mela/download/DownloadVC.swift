@@ -308,13 +308,11 @@ extension DownloadVC: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        //        self.arrQA[indexPath.row].is_viewed=true
-        //        self.tblQA.reloadRows(at: [indexPath], with: .automatic)
         
-        //        let qadetail = self.storyboard?.instantiateViewController(withIdentifier: "QADetailVC") as? QADetailVC
-        //        qadetail?.qa = self.arrQA[indexPath.row]
+                let download = self.storyboard?.instantiateViewController(withIdentifier: "DownloadDetailVC") as? DownloadDetailVC
+                download?.downloadItem = self.arrDownload[indexPath.row]
         //        qadetail?.qid = self.arrQA[indexPath.row].iD!
-        //        self.navigationController?.pushViewController(qadetail!, animated: true)
+                self.navigationController?.pushViewController(download!, animated: true)
         
     }
     

@@ -36,7 +36,11 @@ class ShippingVC: UIViewController {
          (parent as! SampleProtocol).myPayment()
     }
     @IBAction func btnShippingChange(_ sender: Any) {
+        let shipping = self.storyboard?.instantiateViewController(withIdentifier: "SelectAddressVC") as? SelectAddressVC
+        self.navigationController?.pushViewController(shipping!, animated: true)
     }
     @IBAction func btnBillingChange(_ sender: Any) {
+        let shipping = self.storyboard?.instantiateViewController(withIdentifier: "SelectAddressVC") as? SelectAddressVC
+        self.navigationController?.pushViewController(shipping!, animated: true)
     }
 }

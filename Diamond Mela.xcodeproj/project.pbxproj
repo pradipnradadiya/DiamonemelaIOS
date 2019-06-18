@@ -19,6 +19,9 @@
 		0405B006226892E800C6787A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0405B004226892E800C6787A /* LaunchScreen.storyboard */; };
 		0405B011226892E800C6787A /* Diamond_MelaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405B010226892E800C6787A /* Diamond_MelaTests.swift */; };
 		0405B01C226892E800C6787A /* Diamond_MelaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405B01B226892E800C6787A /* Diamond_MelaUITests.swift */; };
+		0405B6A222B9086F004A0B6D /* DownloadDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405B6A122B9086F004A0B6D /* DownloadDetailVC.swift */; };
+		0405B6A422B91CC2004A0B6D /* SelectAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405B6A322B91CC2004A0B6D /* SelectAddressVC.swift */; };
+		0405B6A622B91D0D004A0B6D /* SelectAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405B6A522B91D0D004A0B6D /* SelectAddressCell.swift */; };
 		0408082522B0E54C00C95492 /* PaymentCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0408082422B0E54C00C95492 /* PaymentCell2.swift */; };
 		0408082722B1086500C95492 /* ShippingCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0408082622B1086500C95492 /* ShippingCell2.swift */; };
 		040B7C002297DF2400883E7A /* MyStockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B7BFF2297DF2400883E7A /* MyStockVC.swift */; };
@@ -175,6 +178,9 @@
 		0405B017226892E800C6787A /* Diamond MelaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Diamond MelaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0405B01B226892E800C6787A /* Diamond_MelaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diamond_MelaUITests.swift; sourceTree = "<group>"; };
 		0405B01D226892E800C6787A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0405B6A122B9086F004A0B6D /* DownloadDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadDetailVC.swift; sourceTree = "<group>"; };
+		0405B6A322B91CC2004A0B6D /* SelectAddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAddressVC.swift; sourceTree = "<group>"; };
+		0405B6A522B91D0D004A0B6D /* SelectAddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAddressCell.swift; sourceTree = "<group>"; };
 		0408082422B0E54C00C95492 /* PaymentCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCell2.swift; sourceTree = "<group>"; };
 		0408082622B1086500C95492 /* ShippingCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShippingCell2.swift; sourceTree = "<group>"; };
 		040B7BFF2297DF2400883E7A /* MyStockVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStockVC.swift; sourceTree = "<group>"; };
@@ -458,6 +464,7 @@
 				04A362DE229932F000A76FBD /* ShippingVC.swift */,
 				04A362E02299334400A76FBD /* PaymentVC.swift */,
 				04A362E222995B7C00A76FBD /* SelectShippingVC.swift */,
+				0405B6A322B91CC2004A0B6D /* SelectAddressVC.swift */,
 			);
 			path = cart;
 			sourceTree = "<group>";
@@ -482,6 +489,7 @@
 				041BB8F222742A5200FFBAA4 /* model */,
 				041BB8F122742A4200FFBAA4 /* cell */,
 				041BB8EF22742A3E00FFBAA4 /* DownloadVC.swift */,
+				0405B6A122B9086F004A0B6D /* DownloadDetailVC.swift */,
 			);
 			path = download;
 			sourceTree = "<group>";
@@ -765,6 +773,7 @@
 				0441E837229FE3E500ABD01E /* OrderSummaryCell.swift */,
 				0408082422B0E54C00C95492 /* PaymentCell2.swift */,
 				0408082622B1086500C95492 /* ShippingCell2.swift */,
+				0405B6A522B91D0D004A0B6D /* SelectAddressCell.swift */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -1069,6 +1078,7 @@
 				0417481722A1200700C75E3E /* OrderDetailItem.swift in Sources */,
 				0417482322A16D3900C75E3E /* FilterDataCell.swift in Sources */,
 				041679B422956E0C00B8E7D5 /* SortFilterItem.swift in Sources */,
+				0405B6A222B9086F004A0B6D /* DownloadDetailVC.swift in Sources */,
 				04A362DB2299264B00A76FBD /* CartVC.swift in Sources */,
 				0477957A228EC1E700499CE1 /* RESpinner.swift in Sources */,
 				0417481922A143A900C75E3E /* PopularProductVC.swift in Sources */,
@@ -1135,6 +1145,7 @@
 				041CD05B22928521003A5CCC /* BankItem.swift in Sources */,
 				041B1ACA22A7CB2E00920223 /* MetalCell.swift in Sources */,
 				0461D42722A9335C005FC54E /* PrintVC.swift in Sources */,
+				0405B6A422B91CC2004A0B6D /* SelectAddressVC.swift in Sources */,
 				0408082522B0E54C00C95492 /* PaymentCell2.swift in Sources */,
 				04326BEB2272D89200D549C7 /* UIViewX.swift in Sources */,
 				04B764032296C0AE000D8D29 /* HeaderItem.swift in Sources */,
@@ -1168,6 +1179,7 @@
 				041BFC18228C38AB002782B3 /* StateResponse.swift in Sources */,
 				0478A8D12297F66B00B75BD1 /* PrivacyPolicyVC.swift in Sources */,
 				041B1AC422A7C98800920223 /* DiamondDetailCell.swift in Sources */,
+				0405B6A622B91D0D004A0B6D /* SelectAddressCell.swift in Sources */,
 				041BB8F422742B4D00FFBAA4 /* TransactionVC.swift in Sources */,
 				041BB8EC2274274400FFBAA4 /* ManageReferralVC.swift in Sources */,
 				043CC7F52269A12900669BFE /* ForgotPasswordVC.swift in Sources */,
@@ -1360,7 +1372,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.diamondmela.Diamond-Mela";
+				PRODUCT_BUNDLE_IDENTIFIER = com.diamondmela;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Diamond Mela/Diamond Mela-Bridging-Header.h";
@@ -1385,7 +1397,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.diamondmela.Diamond-Mela";
+				PRODUCT_BUNDLE_IDENTIFIER = com.diamondmela;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Diamond Mela/Diamond Mela-Bridging-Header.h";

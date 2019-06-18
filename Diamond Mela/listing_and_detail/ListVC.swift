@@ -15,7 +15,6 @@ class ListVC: UIViewController {
     var headerTitle: String?=""
     var id:String?=""
     
-    
     var price:String = ""
     var gold_purity:String = ""
     var diamond_quality:String = ""
@@ -29,11 +28,11 @@ class ListVC: UIViewController {
     @IBOutlet weak var gridList: UICollectionView!
     @IBOutlet weak var btnfilter: UIButtonX!
     @IBOutlet weak var btnsort: UIButtonX!
-    
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getCategoryProduct(categoryId: id!, groupId: groupId, page: String(pageCount), price: "", gold_purity: "", diamond_quality: "", diamond_shape: "", sku: "", availability: "", sort_by: "",showLoader: true)
+       
         // Do any additional setup after loading the view.
         
         self.navigationItem.title=headerTitle
@@ -43,10 +42,7 @@ class ListVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
        
-        
-        
         if FilterVC.filterFlag == 1{
             
             self.pageCount = 1
@@ -83,6 +79,7 @@ class ListVC: UIViewController {
     
     
     @IBAction func btnCart(_ sender: Any) {
+        
     }
     
     @IBAction func btnFilter(_ sender: Any) {
@@ -98,7 +95,42 @@ class ListVC: UIViewController {
     }
     
     @IBAction func btnDownload(_ sender: Any) {
+        var downloadString:String = ""
+        var i:Int = 0
+        var count:Int = 0
+        for _ in self.arrList {
+            
+            
+            if self.arrList[i].download_flag == 0{
+                downloadString.append("\(self.arrList[i].entity_id ?? ""),")
+                count += 1
+            }
+            
+            i += 1
+            
+        }
+        
+        if downloadString == ""{
+            showAlert(title: "", message: "Loaded Product is allready downlodaed,scroll down and download.")
+        }else{
+            
+            let alert = UIAlertController(title: "Download Product", message: "Are you sure want to add \(count) products in cart.?", preferredStyle: UIAlertController.Style.alert)
+            
+            alert.addAction(UIAlertAction(title: OK, style: UIAlertAction.Style.default, handler: { _ in
+                //Cancel Action
+                 self.addToDownloadProduct(productsId: downloadString, customerId: customerId)
+            }))
+            alert.addAction(UIAlertAction(title: CANCEL,
+                                          style: UIAlertAction.Style.destructive,
+                                          handler: {(_: UIAlertAction!) in
+                                            //Sign out action
+            }))
+            self.present(alert, animated: true, completion: nil)
+         
+        }
+       
     }
+    
     @IBAction func btnSearch(_ sender: Any) {
         
         
@@ -175,6 +207,22 @@ extension UIAlertController {
     
     
 extension ListVC{
+    
+    
+    func updateDownloadFlag(){
+        var i:Int = 0
+        for _ in self.arrList{
+            self.arrList[i].download_flag = 1
+            i += 1
+            
+        }
+        self.gridList.reloadData()
+        
+        
+    }
+    
+    
+    
     func getCategoryProduct(categoryId:String,groupId:String,page:String,price:String,gold_purity:String,diamond_quality:String,diamond_shape:String,sku:String,availability:String,sort_by:String,showLoader: Bool = false) {
         
         if showLoader {
@@ -240,14 +288,15 @@ extension ListVC{
         RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         
         ApiManager.shared.apiGetSortFilter(url: url){ (result) in
-         
-            
-//
-            
+      
             let status = result[STATUS_CODE] as? String
             print(status as Any)
+            
+            self.getCategoryProduct(categoryId: self.id!, groupId: groupId, page: String(self.pageCount), price: "", gold_purity: "", diamond_quality: "", diamond_shape: "", sku: "", availability: "", sort_by: "",showLoader: true)
+            
             if status == FAILURE_CODE || status == nil {
-                
+                self.btnsort.isEnabled = false
+                self.btnfilter.isEnabled = false
             } else {
                  RappleActivityIndicatorView.stopAnimation()
                 let sortfilterData=Mapper<SortFilterItem>().map(JSON: result)
@@ -275,7 +324,7 @@ extension ListVC{
                 
             } else {
                 
-                
+                self.updateDownloadFlag()
             }
             
         }

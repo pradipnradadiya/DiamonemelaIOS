@@ -312,6 +312,13 @@ extension DrawerVC: UITableViewDelegate, UITableViewDataSource {
       
         let cell = self.tblCategory.dequeueReusableCell(withIdentifier: "DrawerCell", for: indexPath) as? DrawerCell
         cell?.headerData = self.arrHeader[indexPath.row]
+        
+        cell?.actionBlockClick = {
+            let list = self.storyboard?.instantiateViewController(withIdentifier: "ListVC") as? ListVC
+            list?.headerTitle = self.arrHeader[indexPath.row].name
+            list?.id = self.arrHeader[indexPath.row].entity_id
+            self.navigationController?.pushViewController(list!, animated: true)
+        }
         return cell!
         
     }
@@ -328,6 +335,7 @@ extension DrawerVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
     
 }
 

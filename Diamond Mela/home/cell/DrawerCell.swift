@@ -1,7 +1,7 @@
 import UIKit
 
 class DrawerCell: UITableViewCell {
-
+var actionBlockClick: (() -> Void)? = nil
     @IBOutlet weak var lblTitle: UILabel!
     var headerData:HeaderItem.Data?{
         didSet{
@@ -20,4 +20,7 @@ class DrawerCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func btnClick(_ sender: Any) {
+        actionBlockClick?()
+    }
 }

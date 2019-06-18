@@ -1,0 +1,118 @@
+import UIKit
+import ObjectMapper
+import RappleProgressHUD
+
+class SelectAddressVC: UIViewController {
+
+     var arrManageAddress = [AddressManageResponse.Data]()
+    
+    @IBOutlet weak var tblSelectAddress: UITableView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+       self.getAllAddress()
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func btnBack(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+        
+    }
+    
+    @IBAction func btnAddNewAddress(_ sender: Any) {
+        
+    }
+    
+}
+
+extension SelectAddressVC {
+    
+    func getAllAddress(showLoader: Bool = false) {
+        
+        
+        if showLoader {
+            RESpinner.shared.show(view: self.view)
+        }
+        
+//        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        
+        let par = ["customer_id": customerId]
+        
+        ApiManager.shared.apiGetAllAddress(params:par as [String : AnyObject]) { (result) in
+            
+//            RappleActivityIndicatorView.stopAnimation()
+            RESpinner.shared.hide()
+            
+            let status = result[STATUS_CODE] as? String
+            
+            if status == FAILURE_CODE || status == nil {
+                self.showAlert(title: errorTitle, message: wrongLogin)
+            } else {
+               
+                
+                self.arrManageAddress=Mapper<AddressManageResponse.Data>().mapArray(JSONArray: result["data"] as! [[String : Any]])
+//                print(addtionalData[0].country_id as Any)
+//                print("success")
+                self.tblSelectAddress.reloadData()
+//                self.arrManageAddress = addtionalData
+                self.reloadTable()
+                
+            }
+            
+        }
+        
+    }
+  
+    
+    func reloadTable() {
+        if self.arrManageAddress.count > 0 {
+            //            self.lblNoData.isHidden = true
+        } else {
+            //            self.lblNoData.isHidden = false
+        }
+        self.tblSelectAddress.reloadData()
+    }
+   
+}
+
+
+extension SelectAddressVC: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.arrManageAddress.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = self.tblSelectAddress.dequeueReusableCell(withIdentifier: "SelectAddressCell", for: indexPath) as? SelectAddressCell
+        cell?.addressData = self.arrManageAddress[indexPath.row]
+        
+        cell?.actionBlockSelect = {
+
+//            self.deleteAddress(addressId: self.arrManageAddress[indexPath.row].entity_id!, customerId: customerId)
+//            self.arrManageAddress.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        
+       
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    
+}
+

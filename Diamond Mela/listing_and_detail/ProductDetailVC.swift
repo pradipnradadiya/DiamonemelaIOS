@@ -120,6 +120,52 @@ class ProductDetailVC: UIViewController {
     }
     
     @IBAction func btnBuynow(_ sender: Any) {
+        
+        cRingSize = ProductDetailVC.ringValue
+        cBangle = ProductDetailVC.bangleProductValue
+        cBracelet = ProductDetailVC.braceletProductValue
+        cPendentSet = ProductDetailVC.pendentValue
+        cSku = lblProductSku.text ?? ""
+        cCategoryId = productCategoryId
+        cProductType = productType
+        
+        
+        if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
+            var ringOptionId:String = ""
+            var ringOptionTypeId:String = ""
+            var stoneOptionId:String
+            var stoneOptionTypeId:String
+            
+            
+            if productType == "simple"{
+                ringOptionId = ""
+                ringOptionTypeId = ""
+                stoneOptionId = ""
+                stoneOptionTypeId = ""
+                
+            }else{
+                if productCategoryId == RING_ID{
+                    ringOptionId = self.ringOptionId
+                    ringOptionTypeId = self.ringOptionTypeId
+                }else{
+                    ringOptionId = ""
+                    ringOptionTypeId = ""
+                }
+                stoneOptionId = self.stoneOptionId
+                stoneOptionTypeId = self.stoneOptionTypeId
+            }
+            
+            
+            self.buyNow(productId: cProductId, customerId: customerId, optionId: ringOptionId, optionTypeId: ringOptionTypeId, stoneOptionId: stoneOptionId, stoneOptionTypeId: stoneOptionTypeId, qty: "1")
+            
+        }
+            
+        else{
+            
+            
+            
+        }
+        
     }
     
     @IBAction func btnAddtoCart(_ sender: Any) {
@@ -307,6 +353,11 @@ extension ProductDetailVC{
                     self.viewBangle.isHidden = true
                     self.viewBracelet.isHidden = true
                     self.viewPendent.isHidden = true
+                    self.constraintRingHeight.constant = 0
+                    self.constraintBangleHeight.constant = 0
+                    self.constraintBangleHeight.constant = 0
+                    self.constraintPendentHeight.constant = 0
+                    self.constraintBottonRingHeight.constant = 0
                 }
                 
                 self.productType =  (productDetailData?.products)!
@@ -329,16 +380,11 @@ extension ProductDetailVC{
                     self.constraintBottomCarat.constant = 0
                     self.constraintMetalHeight.constant = 0
                     self.constraintBottomMetal.constant = 0
-                   
-                    
-                    
-                    
-                    
+     
                 }
                 
                 else{
-                    
-                    
+                 
                     self.constraintCustomJewelaryHeight.constant = 60
                     self.constraintBangleHeight.constant = 90
                     self.constraintBraceletsHeight.constant = 90
@@ -580,6 +626,40 @@ extension ProductDetailVC{
         
         
     }
+    
+    func buyNow(productId:String,customerId:String,optionId:String,optionTypeId:String,stoneOptionId:String,stoneOptionTypeId:String,qty:String){
+        
+        let par = ["product_id": productId,
+                   "customer_id": customerId,
+                   "option_id": optionId,
+                   "option_type_id": optionTypeId,
+                   "stone_option_id": stoneOptionId,
+                   "stone_option_type_id": stoneOptionTypeId,
+                   "qty": qty]
+        
+        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        ApiManager.shared.apiAddToCart(params:par as [String : AnyObject]) { (result) in
+            
+            RappleActivityIndicatorView.stopAnimation()
+            
+            let status = result[STATUS_CODE] as? String
+            print(status as Any)
+            if status == FAILURE_CODE || status == nil {
+            
+            } else {
+//                self.showAlert(title: SUCCESS, message: result["message"] as? String ?? "")
+                
+                let cart = self.storyboard?.instantiateViewController(withIdentifier: "CartVC") as? CartVC
+//                productDetail?.productId=self.arrList[indexPath.row].entity_id!
+                self.navigationController?.pushViewController(cart!, animated: true)
+                
+            }
+            
+        }
+        
+        
+    }
+    
     
     func rtsProductClick(productId:String)  {
         print(productId)

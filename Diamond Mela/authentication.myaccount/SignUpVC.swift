@@ -30,16 +30,8 @@ class SignUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-             
-        
-      //  self.getCountry(url: Endpoint.getCountryList.url)
-        
-                
-        // The list of array to display. Can be changed dynamically
-        
+        self.getCountry(url: Endpoint.getCountryList.url)
       
-        // Do any additional setup after loading the view.
-                
         
     }
     
@@ -55,6 +47,55 @@ class SignUpVC: UIViewController {
         self.navigationController?.pushViewController(state, animated: true)
     }
     
+    @IBAction func btnCrateAccount(_ sender: Any) {
+        
+        if ConnectionCheck.isConnectedToNetwork() {
+            print("connected")
+            if (tvFnm.text?.isEmpty)!{
+                showAlert(title: "", message: "Please enter first name.")
+            }else if (tvLnm.text?.isEmpty)!{
+                showAlert(title: "", message: "Please enter last name.")
+            }else if (tvEmail.text?.isEmpty)!{
+                showAlert(title: "", message: "Please enter email.")
+            }else if (tvContact.text?.isEmpty)!{
+                showAlert(title: "", message: "Please enter contact no.")
+            }else if (tvAddress.text?.isEmpty)!{
+                showAlert(title: "", message: "Please enter address.")
+            }else if (tvCity.text?.isEmpty)!{
+                showAlert(title: "", message: "Please enter city.")
+            }else if (tvZipCode.text?.isEmpty)!{
+                showAlert(title: "", message: "Please enter zip code.")
+            }else if (tvPwd.text?.isEmpty)!{
+                showAlert(title: "", message: "Please enter password.")
+            }else if (tvConfirmPwd.text?.isEmpty)!{
+                showAlert(title: "", message: "Please enter confirm password.")
+            }
+            else{
+                if country_id == "IN"{
+                    
+                    if region_id == ""{
+                        showAlert(title: "", message: "Please select state.")
+                    }else{
+                         self.signUp(state: region_id)
+                    }
+                    
+                }else{
+                    if (tvState.text?.isEmpty)!{
+                        showAlert(title: "", message: "Please enter state name.")
+                    }else{
+                        self.signUp(state: tvState.text!)
+                    }
+                    
+                }
+                
+                
+            }
+//            else if (tvConfirmPwd.text?.isEmpty)! == (tvConfirmPwd.text?.isEmpty)!) {
+            
+//            }
+        }
+        
+    }
     
     @IBAction func btnSelectCountry(_ sender: Any) {
         let country=self.storyboard?.instantiateViewController(withIdentifier: "SelectCountryVC") as! SelectCountryVC
@@ -65,13 +106,14 @@ class SignUpVC: UIViewController {
             self.country_id = ds
             self.selectCountry.text = self.country_name
             
-            if self.country_id == "IN"{
+            if self.country_id == "IN" {
                 self.btnState.isHidden = false
             }else{
                 self.btnState.isHidden = true
             }
       
         }
+        
         self.navigationController?.pushViewController(country, animated: true)
         
     }
@@ -95,11 +137,12 @@ class SignUpVC: UIViewController {
             sender.isSelected=true
         }
     }
+   
 }
 
 extension SignUpVC{
     
-    func signUp() {
+    func signUp(state:String) {
         RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         
         let par = ["firstname": self.tvFnm.text!,
@@ -109,7 +152,7 @@ extension SignUpVC{
                    "community": "Dealer",
                    "street": self.tvAddress.text!,
                    "country_id": country_id,
-                   "region": region_id,
+                   "region": state,
                    "city": self.tvCity.text!,
                    "postcode": self.tvZipCode.text!,
                    "entity_customer": self.tvEmail.text!,
