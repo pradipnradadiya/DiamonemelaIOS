@@ -37,10 +37,12 @@ class ShippingVC: UIViewController {
     }
     @IBAction func btnShippingChange(_ sender: Any) {
         let shipping = self.storyboard?.instantiateViewController(withIdentifier: "SelectAddressVC") as? SelectAddressVC
+        shipping?.addressFlag = "Shipping"
         self.navigationController?.pushViewController(shipping!, animated: true)
     }
     @IBAction func btnBillingChange(_ sender: Any) {
         let shipping = self.storyboard?.instantiateViewController(withIdentifier: "SelectAddressVC") as? SelectAddressVC
+        shipping?.addressFlag = "Billing"
         self.navigationController?.pushViewController(shipping!, animated: true)
     }
 }

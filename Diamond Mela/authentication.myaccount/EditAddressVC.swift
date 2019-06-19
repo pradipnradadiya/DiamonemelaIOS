@@ -5,6 +5,8 @@ import JVFloatLabeledTextField
 
 class EditAddressVC: UIViewController {
 
+    @IBOutlet weak var btnCountry: UIButton!
+    @IBOutlet weak var btnState: UIButton!
     @IBOutlet weak var btnDefaultShipping: UIButton!
     @IBOutlet weak var btnDefaultBilling: UIButton!
     @IBOutlet weak var tvCity: JVFloatLabeledTextField!
@@ -19,8 +21,11 @@ class EditAddressVC: UIViewController {
     var countryData:[CountryResponse.Data] = []
     var stateData:[StateResponse.Data] = []
     
-    var countryId : String = ""
-    var stateId : String = ""
+    var country_id:String = ""
+    var country_name:String = ""
+    var region_id:String = ""
+    var region_name:String = ""
+    
     var billingFlag : String = "0"
     var shippingFlag :String = "0"
     
@@ -39,6 +44,20 @@ class EditAddressVC: UIViewController {
         self.postInitView()
         self.getCountry(url: Endpoint.getCountryList.url)
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func btnState(_ sender: Any) {
+        let state=self.storyboard?.instantiateViewController(withIdentifier: "SelectStateVC") as! SelectStateVC
+        state.countryId = country_id
+        state.myCompletion = { sdas, ds in
+            print(sdas)
+            self.region_name = sdas
+            self.region_id = ds
+            self.tvState.text = self.region_name
+        }
+        self.navigationController?.pushViewController(state, animated: true)
+        
+        
     }
     
     @IBAction func btnSetAsDefaultShipping(_ sender: UIButton) {
@@ -71,65 +90,89 @@ class EditAddressVC: UIViewController {
     @IBAction func btnSearch(_ sender: Any) {
     }
     @IBAction func btnSelectCountry(_ sender: Any) {
+        
+        let country=self.storyboard?.instantiateViewController(withIdentifier: "SelectCountryVC") as! SelectCountryVC
+        country.arrCountry = countryData
+        country.myCompletion = { sdas, ds in
+            print(sdas)
+            self.country_name = sdas
+            self.country_id = ds
+            if self.country_name != ""{
+                self.btnCountry.setTitle(self.country_name, for: .normal)
+            }
+            
+            if self.country_id == "IN"{
+                self.btnState.isHidden = false
+            }else{
+                self.btnState.isHidden = true
+            }
+            
+        }
+        
+        self.navigationController?.pushViewController(country, animated: true)
     }
     @IBAction func btnSave(_ sender: Any) {
         
+        if btnCountry.titleLabel?.text == "Select Country"{
+            self.showAlert(title: "", message: "Please select country.")
+        }else{
+        
         if status=="1"{
-            if countryId==INDIA_CODE {
-                self.editBillingAddress(addressId: (self.defaultBilling?.entity_id!)!, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: stateId, region: "", postCode: tvZipCode.text!, countryId: countryId, telephone: tvTel.text!)
+            if country_id==INDIA_CODE {
+                self.editBillingAddress(addressId: (self.defaultBilling?.entity_id!)!, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: region_id, region: tvState.text!, postCode: tvZipCode.text!, countryId: country_id, telephone: tvTel.text!)
             }else{
                 if tvState.text==""{
                     self.showAlert(title: "", message: ENTER_STATE)
                 }else{
-                    self.editBillingAddress(addressId: (self.defaultBilling?.entity_id!)!, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: stateId, region: "", postCode: tvZipCode.text!, countryId: countryId, telephone: tvTel.text!)
+                    self.editBillingAddress(addressId: (self.defaultBilling?.entity_id!)!, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: tvState.text!, region: tvState.text!, postCode: tvZipCode.text!, countryId: country_id, telephone: tvTel.text!)
                 }
             }
         }else if status=="2"{
-            if countryId==INDIA_CODE {
+            if country_id==INDIA_CODE {
                 
-                 self.editShippingAddress(addressId: (self.defaultShipping?.entity_id!)!, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: stateId, region: "", postCode: tvZipCode.text!, countryId: countryId, telephone: tvTel.text!)
+                 self.editShippingAddress(addressId: (self.defaultShipping?.entity_id!)!, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: region_id, region: tvState.text!, postCode: tvZipCode.text!, countryId: country_id, telephone: tvTel.text!)
                 
                 
             }else{
                 if tvState.text==""{
                     self.showAlert(title: "", message: ENTER_STATE)
                 }else{
-                    self.editShippingAddress(addressId: (self.defaultShipping?.entity_id!)!, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: stateId, region: "", postCode: tvZipCode.text!, countryId: countryId, telephone: tvTel.text!)
+                    self.editShippingAddress(addressId: (self.defaultShipping?.entity_id!)!, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: region_id, region: tvState.text!, postCode: tvZipCode.text!, countryId: country_id, telephone: tvTel.text!)
                 }
             }
             
         }else if status=="3"{
-            if countryId==INDIA_CODE {
-                self.editAdditionalAddress(addressId: (self.additionData?.entity_id!)!, address_billing_flag: billingFlag, address_shiping_flag: shippingFlag, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: stateId, region: "", postCode: tvZipCode.text!, countryId: countryId, telephone: tvTel.text!)
+            if country_id==INDIA_CODE {
+                self.editAdditionalAddress(addressId: (self.additionData?.entity_id!)!, address_billing_flag: billingFlag, address_shiping_flag: shippingFlag, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: region_id, region: tvState.text!, postCode: tvZipCode.text!, countryId: country_id, telephone: tvTel.text!)
             }else{
                 if tvState.text==""{
                     self.showAlert(title: "", message: ENTER_STATE)
                 }else{
-                    self.editAdditionalAddress(addressId: (self.additionData?.entity_id!)!, address_billing_flag: billingFlag, address_shiping_flag: shippingFlag, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: stateId, region: "", postCode: tvZipCode.text!, countryId: countryId, telephone: tvTel.text!)
+                    self.editAdditionalAddress(addressId: (self.additionData?.entity_id!)!, address_billing_flag: billingFlag, address_shiping_flag: shippingFlag, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: region_id, region: tvState.text!, postCode: tvZipCode.text!, countryId: country_id, telephone: tvTel.text!)
                 }
             }
         }else if status=="4"{
-            if countryId==INDIA_CODE {
-                self.addAddress(address_billing_flag: billingFlag, address_shipping_flag: shippingFlag, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: stateId, region: "", postCode: tvZipCode.text!, countryId: countryId, telephone: tvTel.text!)
+            if country_id==INDIA_CODE {
+                self.addAddress(address_billing_flag: billingFlag, address_shipping_flag: shippingFlag, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: region_id, region: tvState.text!, postCode: tvZipCode.text!, countryId: country_id, telephone: tvTel.text!)
             }else{
                 if self.tvState.text == ""{
                     self.showAlert(title: "", message: ENTER_STATE)
                 }else{
-                     self.addAddress(address_billing_flag: billingFlag, address_shipping_flag: shippingFlag, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: stateId, region: "", postCode: tvZipCode.text!, countryId: countryId, telephone: tvTel.text!)
+                     self.addAddress(address_billing_flag: billingFlag, address_shipping_flag: shippingFlag, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: region_id, region: tvState.text!, postCode: tvZipCode.text!, countryId: country_id, telephone: tvTel.text!)
                 }
             }
         }else if status=="5"{
-            if countryId==INDIA_CODE {
-                self.addAddress(address_billing_flag: billingFlag, address_shipping_flag: shippingFlag, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: stateId, region: "", postCode: tvZipCode.text!, countryId: countryId, telephone: tvTel.text!)
+            if country_id==INDIA_CODE {
+                self.addAddress(address_billing_flag: billingFlag, address_shipping_flag: shippingFlag, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: region_id, region: tvState.text!, postCode: tvZipCode.text!, countryId: country_id, telephone: tvTel.text!)
             }else{
                 if self.tvState.text == ""{
                     self.showAlert(title: "", message: ENTER_STATE)
                 }else{
-                    self.addAddress(address_billing_flag: billingFlag, address_shipping_flag: shippingFlag, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: stateId, region: "", postCode: tvZipCode.text!, countryId: countryId, telephone: tvTel.text!)
+                    self.addAddress(address_billing_flag: billingFlag, address_shipping_flag: shippingFlag, fnm: tvFnm.text!, lnm: tvLnm.text!, street: tvAddress1.text!, street2: tvAddress2.text!, city: tvCity.text!, regionId: region_id, region: tvState.text!, postCode: tvZipCode.text!, countryId: country_id, telephone: tvTel.text!)
                 }
             }
         }
-        
+        }
     }
     
     @IBAction func btnBack(_ sender: Any) {
@@ -204,7 +247,7 @@ extension EditAddressVC{
     }
     
     func getState(url : String){
-        let par = ["country_id": countryId]
+        let par = ["country_id": country_id]
         RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         ApiManager.shared.apiGetState(params:par as [String : AnyObject]) { (result) in
             
@@ -252,7 +295,17 @@ extension EditAddressVC{
             if status == FAILURE_CODE || status == nil {
                 
             } else {
+                // create the alert
+                let alert = UIAlertController(title: SUCCESS, message: result["message"] as? String, preferredStyle: UIAlertController.Style.alert)
                 
+                // add an action (button)
+                alert.addAction(UIAlertAction(title: OK, style: UIAlertAction.Style.destructive, handler: { action in
+                    self.navigationController?.popViewController(animated: true)
+                    
+                }))
+                
+                // show the alert
+                self.present(alert, animated: true, completion: nil)
             }
             
         }
@@ -283,7 +336,17 @@ extension EditAddressVC{
                 
                 
             } else {
+                // create the alert
+                let alert = UIAlertController(title: SUCCESS, message: result["message"] as? String, preferredStyle: UIAlertController.Style.alert)
                 
+                // add an action (button)
+                alert.addAction(UIAlertAction(title: OK, style: UIAlertAction.Style.destructive, handler: { action in
+                    self.navigationController?.popViewController(animated: true)
+                    
+                }))
+                
+                // show the alert
+                self.present(alert, animated: true, completion: nil)
             }
             
         }
@@ -314,7 +377,17 @@ extension EditAddressVC{
                 
                 
             } else {
+                // create the alert
+                let alert = UIAlertController(title: SUCCESS, message: result["message"] as? String, preferredStyle: UIAlertController.Style.alert)
                 
+                // add an action (button)
+                alert.addAction(UIAlertAction(title: OK, style: UIAlertAction.Style.destructive, handler: { action in
+                    self.navigationController?.popViewController(animated: true)
+                    
+                }))
+                
+                // show the alert
+                self.present(alert, animated: true, completion: nil)
             }
             
         }
@@ -348,7 +421,17 @@ extension EditAddressVC{
                 
                 
             } else {
+                // create the alert
+                let alert = UIAlertController(title: SUCCESS, message: result["message"] as? String, preferredStyle: UIAlertController.Style.alert)
                 
+                // add an action (button)
+                alert.addAction(UIAlertAction(title: OK, style: UIAlertAction.Style.destructive, handler: { action in
+                    self.navigationController?.popViewController(animated: true)
+                    
+                }))
+                
+                // show the alert
+                self.present(alert, animated: true, completion: nil)
             }
             
         }

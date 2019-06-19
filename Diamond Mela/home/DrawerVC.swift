@@ -4,6 +4,7 @@ import RappleProgressHUD
 
 class DrawerVC: UIViewController {
 
+    @IBOutlet weak var constraintMainView: NSLayoutConstraint!
     @IBOutlet weak var lblCartCount: UILabelX!
     @IBOutlet weak var lblDownloadCount: UILabelX!
     @IBOutlet weak var buttonLogin: UIButton!
@@ -48,7 +49,7 @@ class DrawerVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        constraintMainView.constant = 583
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapBlurButton(_:)))
         self.view.addGestureRecognizer(tapGesture)
        
@@ -92,9 +93,11 @@ class DrawerVC: UIViewController {
     }
     @IBAction func btnOurCollection(_ sender: UIButton) {
         if sender.isSelected {
+            constraintMainView.constant = 583
             tblHeightConstraint.constant=0
             sender.isSelected=false
         }else{
+            constraintMainView.constant = 963
            tblHeightConstraint.constant=400
             sender.isSelected=true
         }

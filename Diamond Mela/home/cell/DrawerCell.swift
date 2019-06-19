@@ -5,7 +5,7 @@ var actionBlockClick: (() -> Void)? = nil
     @IBOutlet weak var lblTitle: UILabel!
     var headerData:HeaderItem.Data?{
         didSet{
-            lblTitle.text=headerData?.name
+            lblTitle.text=headerData?.name!.uppercased()
         }
     }
     

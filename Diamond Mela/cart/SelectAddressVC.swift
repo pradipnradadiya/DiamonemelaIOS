@@ -4,6 +4,7 @@ import RappleProgressHUD
 
 class SelectAddressVC: UIViewController {
 
+    var addressFlag:String = ""
      var arrManageAddress = [AddressManageResponse.Data]()
     
     @IBOutlet weak var tblSelectAddress: UITableView!
@@ -26,7 +27,9 @@ class SelectAddressVC: UIViewController {
     }
     
     @IBAction func btnAddNewAddress(_ sender: Any) {
-        
+        let address = self.storyboard?.instantiateViewController(withIdentifier: "EditAddressVC") as? EditAddressVC
+        address?.status="5"
+        self.navigationController?.pushViewController(address!, animated: true)
     }
     
 }
@@ -55,7 +58,6 @@ extension SelectAddressVC {
                 self.showAlert(title: errorTitle, message: wrongLogin)
             } else {
                
-                
                 self.arrManageAddress=Mapper<AddressManageResponse.Data>().mapArray(JSONArray: result["data"] as! [[String : Any]])
 //                print(addtionalData[0].country_id as Any)
 //                print("success")
@@ -69,6 +71,33 @@ extension SelectAddressVC {
         
     }
   
+    
+    func setAddress(address_id:String,flag_shipping:String){
+        
+        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        
+        let par = ["customer_id": customerId,
+                   "address_id":address_id,
+                   "flag_shipping":flag_shipping]
+        
+        ApiManager.shared.apiSetAddress(params:par as [String : AnyObject]) { (result) in
+            
+            RappleActivityIndicatorView.stopAnimation()
+           
+            
+            let status = result[STATUS_CODE] as? String
+            
+            if status == FAILURE_CODE || status == nil {
+                self.showAlert(title: errorTitle, message: wrongLogin)
+            } else {
+                
+                self.navigationController?.popViewController(animated: true)
+                
+            }
+        }
+            
+    }
+    
     
     func reloadTable() {
         if self.arrManageAddress.count > 0 {
@@ -94,13 +123,13 @@ extension SelectAddressVC: UITableViewDelegate, UITableViewDataSource {
         cell?.addressData = self.arrManageAddress[indexPath.row]
         
         cell?.actionBlockSelect = {
-
+            
+            self.setAddress(address_id: self.arrManageAddress[indexPath.row].entity_id!, flag_shipping: self.addressFlag)
 //            self.deleteAddress(addressId: self.arrManageAddress[indexPath.row].entity_id!, customerId: customerId)
 //            self.arrManageAddress.remove(at: indexPath.row)
 //            tableView.deleteRows(at: [indexPath], with: .fade)
         }
         
-       
         return cell!
     }
     

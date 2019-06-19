@@ -90,11 +90,18 @@ enum Endpoint {
     //download - cart count
     case getCartDownloadCount
     
+    //set default address
+    case setAddress
+    
     var url: String {
         
         let baseUrl: String = BASE_URL
         
         switch self {
+            
+        //-------------------Set Address----------------
+        case .setAddress:
+            return baseUrl+"dmlapi/addtocart/setaddresses"
             
         //-------------------My Stock-------------------
         case .myStockList:
@@ -1037,6 +1044,26 @@ class ApiManager {
     func apiGetDownloadCartCount( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
         
         self.apiAlamofire(url: Endpoint.getCartDownloadCount.url, method:.post, params: params) { (response) in
+            
+            let status = response["status"] as? String
+            if status == "error" {
+                completHandler(response)
+            } else {
+                completHandler(response)
+            }
+            
+        }
+        
+    }
+    
+    
+    
+    
+    
+    //*************************** Set Address ********************************
+    func apiSetAddress( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
+        
+        self.apiAlamofire(url: Endpoint.setAddress.url, method:.post, params: params) { (response) in
             
             let status = response["status"] as? String
             if status == "error" {

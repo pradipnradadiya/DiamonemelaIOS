@@ -69,9 +69,9 @@ class ListVC: UIViewController {
             
             
             if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
-                self.getCategoryProduct(categoryId: id!, groupId: groupId, page: String(pageCount), price: price, gold_purity: gold_purity, diamond_quality: diamond_quality, diamond_shape: diamond_shape, sku: sku, availability: availability, sort_by: sort_by)
+                self.getCategoryProduct(categoryId: id!, groupId: groupId, page: String(pageCount), price: price, gold_purity: gold_purity, diamond_quality: diamond_quality, diamond_shape: diamond_shape, sku: sku, availability: availability, sort_by: sort_by,showLoader: true)
             }else{
-                self.getCategoryProduct(categoryId: id!, groupId: "", page: String(pageCount), price: price, gold_purity: gold_purity, diamond_quality: diamond_quality, diamond_shape: diamond_shape, sku: sku, availability: availability, sort_by: sort_by)
+                self.getCategoryProduct(categoryId: id!, groupId: "", page: String(pageCount), price: price, gold_purity: gold_purity, diamond_quality: diamond_quality, diamond_shape: diamond_shape, sku: sku, availability: availability, sort_by: sort_by,showLoader: true)
             }
         }
     }
@@ -159,10 +159,14 @@ class ListVC: UIViewController {
                         //print(obj.value)
                         self.sort_by = obj.value!
                         
+                        self.pageCount = 1
+                        self.arrList.removeAll()
+                        self.hasMoredata = false
+                        self.gridList.reloadData()
                         if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
-                            self.getCategoryProduct(categoryId: self.id!, groupId: groupId, page: String(self.pageCount), price: self.price, gold_purity: self.gold_purity, diamond_quality: self.diamond_quality, diamond_shape: self.diamond_shape, sku: self.sku, availability: self.availability, sort_by: self.sort_by)
+                            self.getCategoryProduct(categoryId: self.id!, groupId: groupId, page: String(self.pageCount), price: "", gold_purity: "", diamond_quality: "", diamond_shape: "", sku: "", availability: "", sort_by: self.sort_by,showLoader: true)
                         }else{
-                            self.getCategoryProduct(categoryId: self.id!, groupId: "", page: String(self.pageCount), price: self.price, gold_purity: self.gold_purity, diamond_quality: self.diamond_quality, diamond_shape: self.diamond_shape, sku: self.sku, availability: self.availability, sort_by: self.sort_by)
+                            self.getCategoryProduct(categoryId: self.id!, groupId: groupId, page: String(self.pageCount), price: "", gold_purity: "", diamond_quality: "", diamond_shape: "", sku: "", availability: "", sort_by: self.sort_by,showLoader: true)
                         }
                         
                         //action(obj.value)

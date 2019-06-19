@@ -19,12 +19,9 @@ class HomeVC: UIViewController {
     var arrBanner = [BannerItem.Slider_image]()
     var arrMostSellingProducts = [MostSellingProductItem.Data]()
     
-    
-    
-    
     //slide menu
     var menu_vc : DrawerVC!
-    
+    var count:Int = 4
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -61,7 +58,7 @@ class HomeVC: UIViewController {
             }
         }
         
-        
+        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         self.getBannerSlider(url: Endpoint.bannerSlider.url)
         self.getHeaderMenuBestCategory(url: Endpoint.headerMenu.url)
         self.getMostSellingProduct(url: Endpoint.mostSellingProducts.url)
@@ -161,17 +158,19 @@ class HomeVC: UIViewController {
 extension HomeVC{
     
     func getPopularProduct(url:String){
-        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+//        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         ApiManager.shared.apiPopularProduct(url: url){ (result) in
-            RappleActivityIndicatorView.stopAnimation()
+            self.count -= 1
+            if self.count == 0{
+                RappleActivityIndicatorView.stopAnimation()
+            }
             let status = result[STATUS_CODE] as? String
             print(status as Any)
             if status == FAILURE_CODE || status == nil {
                 
             } else {
                 let data=Mapper<PopularProductItem>().map(JSON: result)
-                
-                
+            
                 
             }
             
@@ -179,9 +178,12 @@ extension HomeVC{
     }
     
     func getMostSellingProduct(url:String){
-        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+//        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         ApiManager.shared.apiMostSellingProduct(url: url){ (result) in
-            RappleActivityIndicatorView.stopAnimation()
+            self.count -= 1
+            if self.count == 0{
+                RappleActivityIndicatorView.stopAnimation()
+            }
             let status = result[STATUS_CODE] as? String
             print(status as Any)
             if status == FAILURE_CODE || status == nil {
@@ -196,9 +198,12 @@ extension HomeVC{
     }
     
     func getHeaderMenuBestCategory (url:String){
-        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+//        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         ApiManager.shared.apiHeaderBestCategory(url: url){ (result) in
-            RappleActivityIndicatorView.stopAnimation()
+            self.count -= 1
+            if self.count == 0{
+                RappleActivityIndicatorView.stopAnimation()
+            }
             let status = result[STATUS_CODE] as? String
             print(status as Any)
             if status == FAILURE_CODE || status == nil {
@@ -254,9 +259,15 @@ extension HomeVC{
     
     
     func getBannerSlider(url:String){
-        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+//        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         ApiManager.shared.apiBannerSlider(url: url){ (result) in
-            RappleActivityIndicatorView.stopAnimation()
+            
+            self.count -= 1
+            if self.count == 0{
+                RappleActivityIndicatorView.stopAnimation()
+            }
+            
+            
             let status = result[STATUS_CODE] as? String
             print(status as Any)
             if status == FAILURE_CODE || status == nil {

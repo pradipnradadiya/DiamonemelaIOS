@@ -48,6 +48,7 @@ extension PaymentVC{
                 
                  self.arrPaymentMethod=Mapper<PaymentMethodItem.Data>().mapArray(JSONArray: result["data"] as! [[String : Any]])
                 self.arrPaymentMethod[0].isSelected = true
+                self.paymentTypes=self.arrPaymentMethod[0].value!
                 self.reloadTable()
                 
             }

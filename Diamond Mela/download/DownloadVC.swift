@@ -107,14 +107,30 @@ class DownloadVC: UIViewController {
 
 
 extension DownloadVC {
-    
+    func random(_ n: Int) -> String
+    {
+        let a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        
+        var s = ""
+        
+        for _ in 0..<n
+        {
+            let r = Int(arc4random_uniform(UInt32(a.characters.count)))
+            
+            s += String(a[a.index(a.startIndex, offsetBy: r)])
+        }
+        
+        return s
+    }
     func saveToImage(filename:String) {
         DispatchQueue.global(qos: .background).async {
             RappleActivityIndicatorView.startAnimatingWithLabel("Please wait image is saved in photos.")
             if let url = URL(string: filename),
                 let urlData = NSData(contentsOf: url) {
                 let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0];
-                let filePath="\(documentsPath)/tempFile.png"
+                let rand:String = self.random(10)
+                
+                let filePath="\(documentsPath)/\(rand)tempFile.png"
                 DispatchQueue.main.async {
                     urlData.write(toFile: filePath, atomically: true)
                     PHPhotoLibrary.shared().performChanges({

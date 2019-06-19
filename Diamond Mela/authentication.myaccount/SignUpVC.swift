@@ -4,8 +4,10 @@ import iOSDropDown
 import ObjectMapper
 import RappleProgressHUD
 
-class SignUpVC: UIViewController {
+class SignUpVC: UIViewController , UIPickerViewDataSource, UIPickerViewDelegate {
 
+    @IBOutlet weak var tvEntity: JVFloatLabeledTextField!
+    @IBOutlet weak var tvCommunity: JVFloatLabeledTextField!
     @IBOutlet weak var btnState: UIButton!
     @IBOutlet weak var selectCountry: JVFloatLabeledTextField!
     @IBOutlet weak var tvLnm: JVFloatLabeledTextField!
@@ -24,16 +26,104 @@ class SignUpVC: UIViewController {
     var country_name:String = ""
     var region_id:String = ""
     var region_name:String = ""
+    var pickOptionCommunity = ["Dealer", "Seller"]
+    var pickOptionEntity = ["Company", "Indivisual"]
     
     var countryData:[CountryResponse.Data] = []
+    let pickerView :UIPickerView = UIPickerView()
+    let pickerViewCommunity :UIPickerView = UIPickerView()
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if country_id == "IN"{
+//            tvState.text == ""
+            btnState.isHidden = false
+            
+        }else{
+            btnState.isHidden = true
+        }
+        
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+         pickerView.delegate = self
+        pickerViewCommunity.delegate = self
+        
+        ///
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor.blue
+        toolBar.sizeToFit()
+        
+        
+        let cancelButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.cancelTapped))
+        
+        toolBar.setItems([cancelButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        
+        
+        ///
+        tvEntity.inputView = pickerView
+        tvEntity.inputAccessoryView = toolBar
+        
+        
+        tvCommunity.inputView = pickerViewCommunity
+        tvCommunity.inputAccessoryView = toolBar
+        
+        
+//        let pickerView = UIPickerView()
+        
         self.getCountry(url: Endpoint.getCountryList.url)
       
         
     }
+    @objc func cancelTapped() {
+        tvEntity.resignFirstResponder()
+         tvCommunity.resignFirstResponder()
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == self.pickerViewCommunity{
+            return pickOptionCommunity.count
+        }else{
+            return pickOptionEntity.count
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == self.pickerViewCommunity{
+            return pickOptionCommunity[row]
+        }else{
+            return pickOptionEntity[row]
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+         if pickerView == self.pickerViewCommunity{
+            tvCommunity.text = pickOptionCommunity[row]
+         }else{
+            tvEntity.text = pickOptionEntity[row]
+        }
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        if pickerView == self.pickerViewCommunity{
+            return 1
+        }
+        else{
+            return 1
+        }
+        
+    }
+    
+    
     
     @IBAction func btnSelectState(_ sender: Any) {
         let state=self.storyboard?.instantiateViewController(withIdentifier: "SelectStateVC") as! SelectStateVC
@@ -59,18 +149,34 @@ class SignUpVC: UIViewController {
                 showAlert(title: "", message: "Please enter email.")
             }else if (tvContact.text?.isEmpty)!{
                 showAlert(title: "", message: "Please enter contact no.")
-            }else if (tvAddress.text?.isEmpty)!{
+            }
+            else if (tvCommunity.text?.isEmpty)!{
+                showAlert(title: "", message: "Please select community.")
+            }
+            
+            else if (tvAddress.text?.isEmpty)!{
                 showAlert(title: "", message: "Please enter address.")
             }else if (tvCity.text?.isEmpty)!{
                 showAlert(title: "", message: "Please enter city.")
             }else if (tvZipCode.text?.isEmpty)!{
                 showAlert(title: "", message: "Please enter zip code.")
-            }else if (tvPwd.text?.isEmpty)!{
+            }
+            
+            else if (tvEntity.text?.isEmpty)!{
+                showAlert(title: "", message: "Please select entity.")
+            }
+            
+            else if (tvPwd.text?.isEmpty)!{
                 showAlert(title: "", message: "Please enter password.")
             }else if (tvConfirmPwd.text?.isEmpty)!{
                 showAlert(title: "", message: "Please enter confirm password.")
             }
             else{
+                
+                if selectCountry.text == ""{
+                    self.showAlert(title: "", message: "Please select country.")
+                }else{
+                
                 if country_id == "IN"{
                     
                     if region_id == ""{
@@ -85,6 +191,8 @@ class SignUpVC: UIViewController {
                     }else{
                         self.signUp(state: tvState.text!)
                     }
+                    
+                }
                     
                 }
                 
@@ -149,13 +257,13 @@ extension SignUpVC{
                    "lastname": self.tvLnm.text!,
                    "email": self.tvEmail.text!,
                    "contact_number": self.tvContact.text!,
-                   "community": "Dealer",
+                   "community": tvCommunity.text!,
                    "street": self.tvAddress.text!,
                    "country_id": country_id,
                    "region": state,
                    "city": self.tvCity.text!,
                    "postcode": self.tvZipCode.text!,
-                   "entity_customer": self.tvEmail.text!,
+                   "entity_customer": self.tvEntity.text!,
                    "password": self.tvPwd.text!,
                    "confirmation": self.tvConfirmPwd.text!]
         

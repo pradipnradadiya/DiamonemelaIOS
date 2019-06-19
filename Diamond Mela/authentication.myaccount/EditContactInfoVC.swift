@@ -10,6 +10,8 @@ class EditContactInfoVC: UIViewController {
     var region_id:String = ""
     var region_name:String = ""
     
+     var countryData:[CountryResponse.Data] = []
+    
     @IBOutlet weak var btnState: UIButton!
     @IBOutlet weak var btnCountry: UIButton!
     @IBOutlet weak var tvState: JVFloatLabeledTextField!
@@ -26,6 +28,9 @@ class EditContactInfoVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.getCountry(url: Endpoint.getCountryList.url)
+        
         if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
             
             if let dataObject = Mapper<LoginItem>().map(JSONString: dataArrayString)  {
@@ -37,7 +42,7 @@ class EditContactInfoVC: UIViewController {
                 self.tvAddress.text=dataObject.data?.street
                 self.tvCity.text=dataObject.data?.city
                 self.tvZipCode.text=dataObject.data?.postcode
-                
+               
                 
                 
                 //self.tvPancardNo.text=dataObject.data?.p
@@ -51,8 +56,43 @@ class EditContactInfoVC: UIViewController {
     }
 
     @IBAction func btnSelectState(_ sender: Any) {
+        let state=self.storyboard?.instantiateViewController(withIdentifier: "SelectStateVC") as! SelectStateVC
+        state.countryId = country_id
+        state.myCompletion = { sdas, ds in
+            print(sdas)
+            self.region_name = sdas
+            self.region_id = ds
+            self.tvState.text = self.region_name
+        }
+        self.navigationController?.pushViewController(state, animated: true)
+        
     }
     @IBAction func btnSave(_ sender: Any) {
+        
+        if btnCountry.titleLabel?.text == "Select Country"{
+            self.showAlert(title: "", message: "Please select country.")
+        }else{
+            
+            if country_id == "IN"{
+                
+                if region_id == ""{
+                    showAlert(title: "", message: "Please select state.")
+                }else{
+                    self.editContactInfo(state: region_id)
+                }
+                
+            }else{
+                if (tvState.text?.isEmpty)!{
+                    showAlert(title: "", message: "Please enter state name.")
+                }else{
+                    self.editContactInfo(state: tvState.text!)
+                }
+                
+            }
+            
+        }
+        
+        
     }
     @IBAction func btnCart(_ sender: Any) {
     }
@@ -62,10 +102,14 @@ class EditContactInfoVC: UIViewController {
     
     @IBAction func btnSelectCountry(_ sender: Any) {
         let country=self.storyboard?.instantiateViewController(withIdentifier: "SelectCountryVC") as! SelectCountryVC
+        country.arrCountry = countryData
         country.myCompletion = { sdas, ds in
             print(sdas)
             self.country_name = sdas
             self.country_id = ds
+            if self.country_name != ""{
+                 self.btnCountry.setTitle(self.country_name, for: .normal)
+            }
             
             if self.country_id == "IN"{
                 self.btnState.isHidden = false
@@ -93,6 +137,11 @@ extension EditContactInfoVC{
             if status == FAILURE_CODE || status == nil {
                 
             } else {
+                let countryList=Mapper<CountryResponse>().map(JSON: result)
+                
+                self.countryData=(countryList?.data)!
+                
+                
                 
             }
             
@@ -123,7 +172,7 @@ extension EditContactInfoVC{
     
     
     
-    func editContactInfo(){
+    func editContactInfo(state:String){
     let par = ["notification_token": "SDFSDFDS664564",
                "customer_id": customerId,
                "firstname": tvFnm.text!,
@@ -131,8 +180,8 @@ extension EditContactInfoVC{
                "email": tvEmail.text!,
                "contact_number": tvContact.text!,
                "street": tvAddress.text!,
-               "country_id": "IN",
-               "region": "491",
+               "country_id": country_id,
+               "region": state,
                "city": tvCity.text!,
                "postcode": tvZipCode.text!,
                "pancardno": tvPancardNo.text!,
