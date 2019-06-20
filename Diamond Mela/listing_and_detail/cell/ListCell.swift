@@ -18,6 +18,16 @@ class ListCell: UICollectionViewCell {
     @IBAction func btnDownload(_ sender: Any) {
         self.actionBlockDownload?()
     }
+    
+    func nullToNil(value : AnyObject?) -> AnyObject? {
+        if value is NSNull {
+            return nil
+        } else {
+            return value
+        }
+    }
+    
+    
     var listData : ListItem.Data?{
         didSet{
             
@@ -51,8 +61,13 @@ class ListCell: UICollectionViewCell {
             
      //       imgProduct.sd_setImage(with: "\(IMAGE_URL)catalog/product\(listData?.thumbnail)")
             
+            if listData?.thumbnail != nil{
+                imgProduct.sd_setImage(with: URL(string: "\(IMAGE_URL)catalog/product\(nullToNil(value: listData?.thumbnail! as AnyObject) ?? "" as AnyObject)"), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
+            }else{
+                
+            }
             
-            imgProduct.sd_setImage(with: URL(string: "\(IMAGE_URL)catalog/product\(listData?.thumbnail! ?? "")"), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
+            
             
             
         }

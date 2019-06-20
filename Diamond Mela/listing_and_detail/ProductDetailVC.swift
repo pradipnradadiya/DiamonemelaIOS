@@ -205,7 +205,10 @@ class ProductDetailVC: UIViewController {
             }
             
             
-            self.addToCart(productId: cProductId, customerId: customerId, optionId: ringOptionId, optionTypeId: ringOptionTypeId, stoneOptionId: stoneOptionId, stoneOptionTypeId: stoneOptionTypeId, qty: "1")
+            
+            
+            self.addToCart(productId: cProductId, customerId: customerId, optionId: ringOptionId, optionTypeId: ringOptionTypeId, stoneOptionId: stoneOptionId, stoneOptionTypeId: stoneOptionTypeId, qty: cQty)
+            
             
         }
         
@@ -561,6 +564,8 @@ extension ProductDetailVC{
                     
                 }
                 
+                
+                
                 //Diamond Detail
                 self.arrDiamondDetail = (productDetail?.diamonddetails)!
                 self.tblDiamondDetail.reloadData()
@@ -713,7 +718,6 @@ extension ProductDetailVC{
                 self.lblMetalWeight.text=rtsDetail?.metaldetails?[0].metalweight
                 
                 self.lblMetalEstimatedTotal.text=priceFormat2("\(rtsDetail?.metaldetails?[0].metalestimatedprice ?? 0)")
-                
                 
                 //metal and diamone piece and price
                 self.lblMetalPrice.text="\(rtsDetail?.metalprice! ?? [0])"
@@ -965,8 +969,7 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
                     arrRTS[i].isSelected = true
                 }
                 i += 1
-                
-                
+           
             }
             
             cProductId = self.arrRTS[indexPath.row].entity_id ?? ""

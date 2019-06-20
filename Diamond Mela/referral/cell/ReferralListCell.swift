@@ -12,7 +12,8 @@ class ReferralListCell: UITableViewCell {
     
     var referralData:ReferralItem.Data?{
         didSet{
-            
+            lblName.text = "\(referralData?.firstname ?? "") \(referralData?.lastname ?? "")"
+            btnPercent.setTitle(referralData?.referral_comission, for: .normal)
         }
     }
     

@@ -67,6 +67,8 @@ class HomeVC: UIViewController {
         
         //using slide drawer
         menu_vc=self.storyboard?.instantiateViewController(withIdentifier: "DrawerVC") as! DrawerVC
+        
+        
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToGesture))
         swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
         self.view.addGestureRecognizer(swipeLeft)
@@ -80,6 +82,11 @@ class HomeVC: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func btnSearch(_ sender: Any) {
+        let search = self.storyboard?.instantiateViewController(withIdentifier: "SearchVC") as? SearchVC
+        navigationController?.pushViewController(search!, animated: true)
+        
+    }
     @IBAction func btnPeople(_ sender: Any) {
     }
     @IBAction func btnUser(_ sender: Any) {

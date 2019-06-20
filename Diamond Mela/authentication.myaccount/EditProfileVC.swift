@@ -5,6 +5,9 @@ import JVFloatLabeledTextField
 
 class EditProfileVC: UIViewController {
     
+    @IBOutlet weak var viewBank: UIView!
+    @IBOutlet weak var constraintBankView: NSLayoutConstraint!
+    @IBOutlet weak var constraintFullHeight: NSLayoutConstraint!
     @IBOutlet weak var tvBranchName: JVFloatLabeledTextField!
     @IBOutlet weak var tvIfscCode: JVFloatLabeledTextField!
     @IBOutlet weak var tvBankAccountHolderName: JVFloatLabeledTextField!
@@ -43,7 +46,9 @@ class EditProfileVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getAllAddress()
-        
+        viewBank.isHidden = true
+        constraintBankView.constant = 0
+        constraintFullHeight.constant = 1000
         // Do any additional setup after loading the view.
     }
     
@@ -76,14 +81,32 @@ class EditProfileVC: UIViewController {
     }
     
     @IBAction func btnCancel(_ sender: Any) {
+        viewBank.isHidden = true
+        constraintBankView.constant = 0
+        constraintFullHeight.constant = 1000
     }
     
     @IBAction func btnSave(_ sender: Any) {
-        
+        if (tvBankName.text?.isEmpty)!{
+            showAlert(title: "", message: "Please enter bank name.")
+        }else if (tvBankAccountNumber.text?.isEmpty)!{
+            showAlert(title: "", message: "Please enter accounht number.")
+        }else if (tvBankAccountHolderName.text?.isEmpty)!{
+            showAlert(title: "", message: "Please enter bank account holder name.")
+        }else if (tvIfscCode.text?.isEmpty)!{
+            showAlert(title: "", message: "Please enter IFSC Code.")
+        }else if (tvBranchName.text?.isEmpty)!{
+            showAlert(title: "", message: "Please branch name.")
+        }else{
         self.addBank()
+        }
+        
     }
     
     @IBAction func btnAddBankDetail(_ sender: Any) {
+        viewBank.isHidden = false
+        constraintBankView.constant = 334
+        constraintFullHeight.constant = 1000
     }
     
     @IBAction func btnManageAddress(_ sender: Any) {
@@ -184,7 +207,8 @@ extension EditProfileVC {
             let status = result[STATUS_CODE] as? String
             print(status as Any)
             if status == FAILURE_CODE || status == nil {
-                self.showAlert(title: errorTitle, message: wrongLogin)
+            //    self.showAlert(title: "", message: (result["message"] as? String)!)
+                
                 
             } else {
                self.showAlert(title: SUCCESS, message: "Bank Detail Added Successfully.")

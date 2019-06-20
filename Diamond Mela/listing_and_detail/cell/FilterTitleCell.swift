@@ -21,8 +21,17 @@ class FilterTitleCell: UITableViewCell {
     
     var filterTitleData:SortFilterItem.Data?{
         didSet{
+            if filterTitleData?.isSelect == true{
+                viewFilterTitle.backgroundColor = UIColor.selectButtonColor
+                lblTitle.textColor = UIColor.white
+            }else{
+                 viewFilterTitle.backgroundColor = UIColor.white
+                lblTitle.textColor = UIColor.black
+            }
+            imgIcon.sd_setImage(with: URL(string: (filterTitleData?.icon)!), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
             lblTitle.text=filterTitleData?.label
         }
+        
     }
     
 

@@ -24,6 +24,7 @@ struct SortFilterItem : Mappable {
         var option_type : String?
         var label : String?
         var icon : String?
+        var isSelect : Bool = false
         
         init?(map: Map) {
             

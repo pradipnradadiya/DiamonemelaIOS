@@ -93,12 +93,23 @@ enum Endpoint {
     //set default address
     case setAddress
     
+    //contact us
+    case contactUs
+    
+    //Search
+    case search
+    
     var url: String {
         
         let baseUrl: String = BASE_URL
         
         switch self {
-            
+        //-------------------Search---------------------
+        case .search:
+            return baseUrl+"dmlapi/product/search"
+        //-------------------Conatct Us-----------------
+        case .contactUs:
+            return baseUrl+"dmlapi/home/contactus"
         //-------------------Set Address----------------
         case .setAddress:
             return baseUrl+"dmlapi/addtocart/setaddresses"
@@ -1075,6 +1086,40 @@ class ApiManager {
         }
         
     }
+    
+    
+    //*************************** contact Us ********************************
+    func apiContactUs( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
+        
+        self.apiAlamofire(url: Endpoint.contactUs.url, method:.post, params: params) { (response) in
+            
+            let status = response["status"] as? String
+            if status == "error" {
+                completHandler(response)
+            } else {
+                completHandler(response)
+            }
+            
+        }
+        
+    }
+    
+    //*************************** Search ********************************
+    func apiSearch( params: [String: AnyObject],completHandler: @escaping ([String: AnyObject]) -> ()) {
+        
+        self.apiAlamofire(url: Endpoint.search.url, method:.post, params: params) { (response) in
+            
+            let status = response["status"] as? String
+            if status == "error" {
+                completHandler(response)
+            } else {
+                completHandler(response)
+            }
+            
+        }
+        
+    }
+    
     
     
 }

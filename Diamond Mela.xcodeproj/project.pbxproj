@@ -28,6 +28,7 @@
 		040B7C042297DF5000883E7A /* MyStockItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B7C032297DF5000883E7A /* MyStockItem.swift */; };
 		040C11192282A674005A3EAE /* Spinner in Resources */ = {isa = PBXBuildFile; fileRef = 040C11182282A674005A3EAE /* Spinner */; };
 		040C111B2282A683005A3EAE /* Font in Resources */ = {isa = PBXBuildFile; fileRef = 040C111A2282A683005A3EAE /* Font */; };
+		040E8CD522BBB8C30079FC57 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E8CD422BBB8C30079FC57 /* SearchVC.swift */; };
 		04109927229BCC2F001B27AB /* OrderSummaryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04109926229BCC2F001B27AB /* OrderSummaryVC.swift */; };
 		04109929229BFA08001B27AB /* PaymentMethodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04109928229BFA08001B27AB /* PaymentMethodItem.swift */; };
 		041679AA2295226400B8E7D5 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041679A92295226400B8E7D5 /* ListVC.swift */; };
@@ -187,6 +188,7 @@
 		040B7C032297DF5000883E7A /* MyStockItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStockItem.swift; sourceTree = "<group>"; };
 		040C11182282A674005A3EAE /* Spinner */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Spinner; sourceTree = "<group>"; };
 		040C111A2282A683005A3EAE /* Font */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Font; sourceTree = "<group>"; };
+		040E8CD422BBB8C30079FC57 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		04109926229BCC2F001B27AB /* OrderSummaryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSummaryVC.swift; sourceTree = "<group>"; };
 		04109928229BFA08001B27AB /* PaymentMethodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodItem.swift; sourceTree = "<group>"; };
 		041679A92295226400B8E7D5 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 				04BD84FB2273360400C48584 /* HomeVC.swift */,
 				0404634A229CFBC2003A9FD6 /* DrawerVC.swift */,
 				0417481822A143A900C75E3E /* PopularProductVC.swift */,
+				040E8CD422BBB8C30079FC57 /* SearchVC.swift */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -1131,6 +1134,7 @@
 				043CC7FC2269B98400669BFE /* AppConstants.swift in Sources */,
 				047C582322843D53001B0E06 /* ManageAddressVC.swift in Sources */,
 				0404634B229CFBC2003A9FD6 /* DrawerVC.swift in Sources */,
+				040E8CD522BBB8C30079FC57 /* SearchVC.swift in Sources */,
 				04779575228EBC5100499CE1 /* LoaderCell.swift in Sources */,
 				04A362E322995B7C00A76FBD /* SelectShippingVC.swift in Sources */,
 				041BB8EA2274270600FFBAA4 /* CreateReferralVC.swift in Sources */,

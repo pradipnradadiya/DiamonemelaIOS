@@ -19,7 +19,10 @@ class FilterVC: UIViewController {
         
         
         arrFilterDataCopy=arrFilterData
-        
+        if arrFilterData.count > 0 {
+            //            self.lblNoData.isHidden = true
+            arrFilterData[0].isSelect = true
+        }
 //        print(arrFilterData[0].label)
         // Do any additional setup after loading the view.
     }
@@ -36,7 +39,8 @@ class FilterVC: UIViewController {
     }
     
     @IBAction func btnReset(_ sender: Any) {
-        FilterVC.dict.removeAll()
+//        FilterVC.dict.removeAll()
+        arrFilterData.removeAll()
         arrFilterData=arrFilterDataCopy
         self.reloadTable()
     }
@@ -52,9 +56,11 @@ extension FilterVC{
     func reloadTable() {
         if arrFilterData.count > 0 {
             //            self.lblNoData.isHidden = true
+//             arrFilterData[0].isSelect = true
         } else {
             //            self.lblNoData.isHidden = false
         }
+        
         self.tblFilterTitle.reloadData()
     }
     
@@ -104,16 +110,38 @@ extension FilterVC: UITableViewDelegate, UITableViewDataSource {
         
         if tableView == self.tblFilterTitle {
             self.position=indexPath.row
+          
             
-          //  let cell = tableView.cellForRow(at: indexPath) as! FilterTitleCell
+//            cell?.filterTitleData = arrFilterData[indexPath.row]
             
-//            cell.viewFilterTitle.backgroundColor=UIColor.rgb(red: 155, green: 15, blue: 86)
+            var i:Int = 0
+            for _ in arrFilterData{
+                if i == indexPath.row{
+                     arrFilterData[indexPath.row].isSelect = true
+                    
+                }else{
+                    arrFilterData[i].isSelect = false
+                   
+                }
+
+                i += 1
+            }
+            
+           
+            
+            
+           // self.arrFilterDataCopy[indexPath.row].isSelect = true
+            self.tblFilterTitle.reloadData()
+            //self.reloadTable()
+            
+            
             if arrFilterData[indexPath.row].option_type=="text"{
                 self.tblFilterData.isHidden=true
             }else{
                 self.tblFilterData.isHidden=false
                 reloadFilterDataTable(position: indexPath.row)
             }
+            
             
         }
         else{
@@ -129,9 +157,6 @@ extension FilterVC: UITableViewDelegate, UITableViewDataSource {
             
             arrFilterData[self.position].option_data![indexPath.row].isSelected = true
             self.reloadFilterDataTable(position: position)
-            
-            
-            
             
             
 //            for (key, value) in dict {

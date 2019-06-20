@@ -189,6 +189,7 @@ class DrawerVC: UIViewController {
         
     }
     @IBAction func btnHome(_ sender: Any) {
+        self.closeDrawer()
     }
     
     @IBAction func btnMyAccount(_ sender: Any) {

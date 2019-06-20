@@ -90,10 +90,11 @@ extension OrderDetailVC{
                 
                 self.reloadTable()
                 
-                self.lblGrandTotal.text=orderDetailData?.data?[0].order_grandtotal!
-                self.lblTax.text=orderDetailData?.data?[0].oder_taxamount
-                self.lblShippingCharge.text=orderDetailData?.data?[0].order_shippingamount
-                self.lblSubTotal.text=orderDetailData?.data?[0].order_subtotal
+                self.lblGrandTotal.text=priceFormat2(orderDetailData?.data?[0].order_grandtotal! ?? "")
+                self.lblTax.text=priceFormat2(orderDetailData?.data?[0].oder_taxamount ?? "")
+                self.lblShippingCharge.text=priceFormat2(orderDetailData?.data?[0].order_shippingamount ?? "")
+                self.lblSubTotal.text=priceFormat2(orderDetailData?.data?[0].order_subtotal ?? "")
+                
                 self.lblPaymentMethod.text=orderDetailData?.data?[0].payment_method
                 self.lblShippingMethod.text=orderDetailData?.data?[0].shipping_description
                 self.lblShippingAddress.text=orderDetailData?.data?[0].shiiping_address

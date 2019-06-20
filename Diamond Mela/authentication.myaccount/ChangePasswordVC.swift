@@ -14,9 +14,21 @@ class ChangePasswordVC: UIViewController {
     }
     
     @IBAction func btnChangePassword(_ sender: Any) {
+        if (tvOldPassword.text?.isEmpty)!{
+            showAlert(title: "", message: "Please enter old password.")
+        }else if (tvNewPassword.text?.isEmpty)!{
+            showAlert(title: "", message: "Please enter new password.")
+        }else if (tvConfirmPassword.text?.isEmpty)!{
+            showAlert(title: "", message: "Please enter confirm password.")
+        }
+        else if (tvNewPassword.text != tvConfirmPassword.text){
+            showAlert(title: "", message: "confirm password not same as new password.")
+        }
         
-        self.changePassword(oldPassword: tvOldPassword.text!, newPassword: tvNewPassword.text!, confirmPassword: tvConfirmPassword.text!)
-        
+        else{
+            self.changePassword(oldPassword: tvOldPassword.text!, newPassword: tvNewPassword.text!, confirmPassword: tvConfirmPassword.text!)
+        }
+    
     }
     
     @IBAction func btnBack(_ sender: Any) {

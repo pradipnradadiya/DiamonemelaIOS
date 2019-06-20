@@ -37,7 +37,15 @@ class ListVC: UIViewController {
         
         self.navigationItem.title=headerTitle
         
-        self.getSortFilter(url: Endpoint.getSortFilter.url)
+        
+        
+        if id == "search"{
+            self.searchProduct(searchTerm: headerTitle!, page: String(pageCount))
+        }else{
+            self.getSortFilter(url: Endpoint.getSortFilter.url)
+        }
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -352,6 +360,56 @@ extension ListVC{
 //        self.getData()
     }
     
+    
+    
+    func searchProduct(searchTerm:String,page:String,showLoader: Bool = false)  {
+        if showLoader {
+            RESpinner.shared.show(view: self.view)
+            
+        }
+        
+        let par = ["search_term": searchTerm,
+                   "page": page]
+        
+        
+        
+        ApiManager.shared.apiSearch(params:par as [String : AnyObject]) { (result) in
+            
+            
+            
+            RESpinner.shared.hide()
+            
+            let status = result[STATUS_CODE] as? String
+            print(status as Any)
+            if status == FAILURE_CODE || status == nil {
+                self.reloadTable()
+            } else {
+                let data = Mapper<ListItem>().map(JSON: result)
+                
+                let listData = Mapper<ListItem.Data>().mapArray(JSONArray: result["data"] as! [[String : Any]])
+                
+                if listData.count < pagesize {
+                    self.hasMoredata = false
+                } else {
+                    self.hasMoredata = true
+                }
+                
+                if self.pageCount == 1 {
+                    self.arrList.removeAll()
+                    self.gridList.reloadData()
+                    self.arrList = listData
+                } else {
+                    self.arrList.append(contentsOf: listData)
+                }
+                self.reloadTable()
+                self.pageCount += 1
+                
+            }
+            
+        }
+    }
+    
+    
 }
 
 
@@ -369,11 +427,23 @@ extension ListVC: UICollectionViewDelegate, UICollectionViewDataSource,UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if hasMoredata && indexPath.row == self.arrList.count {
+            if id == "search"{
+                let cell = self.gridList.dequeueReusableCell(withReuseIdentifier: "LoaderGridCell", for: indexPath) as? LoaderGridCell
+                cell?.gridIndicator.startAnimating()
+                // self.getData()
+                self.searchProduct(searchTerm: headerTitle!, page: String(pageCount))
+                
+                
+                return cell!
+                
+            }else{
             let cell = self.gridList.dequeueReusableCell(withReuseIdentifier: "LoaderGridCell", for: indexPath) as? LoaderGridCell
             cell?.gridIndicator.startAnimating()
            // self.getData()
             self.getCategoryProduct(categoryId: id!, groupId: groupId, page: String(pageCount), price: price, gold_purity: gold_purity, diamond_quality: diamond_quality, diamond_shape: diamond_shape, sku: sku, availability: availability, sort_by: sort_by)
             return cell!
+            }
+            
         }
         
         let cell = self.gridList.dequeueReusableCell(withReuseIdentifier: "ListCell", for: indexPath) as! ListCell

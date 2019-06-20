@@ -64,8 +64,20 @@ class CreateReferralVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     @IBAction func btnAddReferral(_ sender: Any) {
         
+        if (tvFnm.text?.isEmpty)!{
+            showAlert(title: "", message: "Please enter first name.")
+        }else if (tvLnm.text?.isEmpty)!{
+            showAlert(title: "", message: "Please enter last name.")
+        }else if (tvEmail.text?.isEmpty)!{
+            showAlert(title: "", message: "Please enter email.")
+        }else if (tvTel.text?.isEmpty)!{
+            showAlert(title: "", message: "Please enter telephone.")
+        }else if (tvDiscount.text?.isEmpty)!{
+            showAlert(title: "", message: "Please select discount.")
+        }
+        else{
         self.createReferral(fnm: tvFnm.text!, lnm: tvLnm.text!, email: tvEmail.text!, telephone: tvTel.text!, discount: "10")
-        
+        }
         
 //        let vc = UIViewController()
 //        vc.preferredContentSize = CGSize(width: 250,height: 300)
