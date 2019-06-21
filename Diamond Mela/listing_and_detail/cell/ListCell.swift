@@ -67,9 +67,6 @@ class ListCell: UICollectionViewCell {
                 
             }
             
-            
-            
-            
         }
         
     }

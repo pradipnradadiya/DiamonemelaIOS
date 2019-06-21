@@ -11,7 +11,7 @@ class SelectAddressVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       self.getAllAddress()
+        self.getAllAddress(showLoader: true)
     }
     
     
@@ -124,7 +124,24 @@ extension SelectAddressVC: UITableViewDelegate, UITableViewDataSource {
         
         cell?.actionBlockSelect = {
             
-            self.setAddress(address_id: self.arrManageAddress[indexPath.row].entity_id!, flag_shipping: self.addressFlag)
+            
+            if self.addressFlag == "Billing"{
+                
+                
+                 userSessionData.set("\(self.arrManageAddress[indexPath.row].firstname ?? "")  \(self.arrManageAddress[indexPath.row].lastname ?? ""),\n\(self.arrManageAddress[indexPath.row].street ?? ""),\n\(self.arrManageAddress[indexPath.row].city ?? ""), \(self.arrManageAddress[indexPath.row].region ?? ""), \(self.arrManageAddress[indexPath.row].postcode ?? ""),\n\(self.arrManageAddress[indexPath.row].country_id ?? ""),\nT: \(self.arrManageAddress[indexPath.row].telephone ?? "")", forKey: BILLING_USERDEFAULTS)
+                
+                
+                self.setAddress(address_id: self.arrManageAddress[indexPath.row].entity_id!, flag_shipping: self.addressFlag)
+            }else if self.addressFlag == "Shipping"{
+                 userSessionData.set("\(self.arrManageAddress[indexPath.row].firstname ?? "")  \(self.arrManageAddress[indexPath.row].lastname ?? ""),\n\(self.arrManageAddress[indexPath.row].street ?? ""),\n\(self.arrManageAddress[indexPath.row].city ?? ""), \(self.arrManageAddress[indexPath.row].region ?? ""), \(self.arrManageAddress[indexPath.row].postcode ?? ""),\n\(self.arrManageAddress[indexPath.row].country_id ?? ""),\nT: \(self.arrManageAddress[indexPath.row].telephone ?? "")", forKey: SHIPPING_USERDEFAULTS)
+                self.setAddress(address_id: self.arrManageAddress[indexPath.row].entity_id!, flag_shipping: self.addressFlag)
+            }
+            
+            
+            
+            
+            
+            
 //            self.deleteAddress(addressId: self.arrManageAddress[indexPath.row].entity_id!, customerId: customerId)
 //            self.arrManageAddress.remove(at: indexPath.row)
 //            tableView.deleteRows(at: [indexPath], with: .fade)

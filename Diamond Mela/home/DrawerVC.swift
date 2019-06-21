@@ -4,6 +4,13 @@ import RappleProgressHUD
 
 class DrawerVC: UIViewController {
 
+    @IBOutlet weak var btnCreateRererral: UIButton!
+    @IBOutlet weak var btnMyAccount: UIButton!
+    @IBOutlet weak var viewLogout: UIView!
+    @IBOutlet weak var btnDownload: UIButton!
+    @IBOutlet weak var btnTransaction: UIButton!
+    @IBOutlet weak var btnOrder: UIButton!
+    @IBOutlet weak var btnMyStock: UIButton!
     @IBOutlet weak var constraintMainView: NSLayoutConstraint!
     @IBOutlet weak var lblCartCount: UILabelX!
     @IBOutlet weak var lblDownloadCount: UILabelX!
@@ -23,20 +30,40 @@ class DrawerVC: UIViewController {
         super.viewWillAppear(animated)
         
         if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
-            
+            self.getDownloadCartCoubnt()
             buttonLogin.isHidden = true
             btnSignUp.isHidden = true
             imgDot.isHidden = true
             btnUname.isHidden = false
+            viewLogout.isHidden = false
+            
+            
+            
+            btnMyStock.isEnabled = true
+            btnOrder.isEnabled = true
+            btnDownload.isEnabled = true
+            btnTransaction.isEnabled = true
+            btnMyAccount.isEnabled = true
+            btnCreateRererral.isEnabled = true
             
             if let dataObject = Mapper<LoginItem>().map(JSONString: dataArrayString)  {
                 
                 btnUname.setTitle("\(dataObject.data?.firstname ?? "") \(dataObject.data?.lastname ?? "")", for: .normal)
                 
             }
-            
-            
+                        
         }else{
+            
+            
+            btnMyStock.isEnabled = false
+            btnOrder.isEnabled = false
+            btnDownload.isEnabled = false
+            btnTransaction.isEnabled = false
+            viewLogout.isHidden = true
+            
+            btnMyAccount.isEnabled = false
+            btnCreateRererral.isEnabled = false
+            
             btnUname.isHidden = true
             buttonLogin.isHidden = false
             btnSignUp.isHidden = false
@@ -189,7 +216,9 @@ class DrawerVC: UIViewController {
         
     }
     @IBAction func btnHome(_ sender: Any) {
-        self.closeDrawer()
+//        self.closeDrawer()
+//        let myStock = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? HomeVC
+//        self.navigationController?.pushViewController(myStock!, animated: true)
     }
     
     @IBAction func btnMyAccount(_ sender: Any) {
@@ -235,7 +264,7 @@ extension DrawerVC{
         RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         ApiManager.shared.apiHeaderBestCategory(url: url){ (result) in
             RappleActivityIndicatorView.stopAnimation()
-            self.getDownloadCartCoubnt()
+            
             let status = result[STATUS_CODE] as? String
             print(status as Any)
             if status == FAILURE_CODE || status == nil {
@@ -256,10 +285,10 @@ extension DrawerVC{
     func getDownloadCartCoubnt() {
         let par = ["customer_id": customerId]
         
-        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+//        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         ApiManager.shared.apiGetDownloadCartCount(params:par as [String : AnyObject]) { (result) in
             
-            RappleActivityIndicatorView.stopAnimation()
+//            RappleActivityIndicatorView.stopAnimation()
             
             let status = result[STATUS_CODE] as? String
             print(status as Any)

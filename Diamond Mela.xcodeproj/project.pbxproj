@@ -278,6 +278,8 @@
 		04779581228EF57A00499CE1 /* ManageAddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAddressCell.swift; sourceTree = "<group>"; };
 		04779583228EF5A100499CE1 /* ManageBankCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageBankCell.swift; sourceTree = "<group>"; };
 		0478A8D02297F66B00B75BD1 /* PrivacyPolicyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyVC.swift; sourceTree = "<group>"; };
+		0478BD8B22BD0A2F00AAF890 /* montserrat_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = montserrat_regular.ttf; sourceTree = "<group>"; };
+		0478BD8C22BD0A2F00AAF890 /* montserrat_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = montserrat_bold.ttf; sourceTree = "<group>"; };
 		047C582022843203001B0E06 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		047C582222843D53001B0E06 /* ManageAddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAddressVC.swift; sourceTree = "<group>"; };
 		04A362D82299196300A76FBD /* ContactUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsVC.swift; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 		0405AFFA226892E500C6787A /* Diamond Mela */ = {
 			isa = PBXGroup;
 			children = (
+				0478BD8A22BD09F800AAF890 /* Fonts */,
 				045FA896229E7101006B84FD /* storyboard */,
 				0478A8CF2297F64C00B75BD1 /* policy */,
 				040C11172282A650005A3EAE /* helper */,
@@ -755,6 +758,15 @@
 				0478A8D02297F66B00B75BD1 /* PrivacyPolicyVC.swift */,
 			);
 			path = policy;
+			sourceTree = "<group>";
+		};
+		0478BD8A22BD09F800AAF890 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0478BD8C22BD0A2F00AAF890 /* montserrat_bold.ttf */,
+				0478BD8B22BD0A2F00AAF890 /* montserrat_regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		04A362E42299659C00A76FBD /* model */ = {

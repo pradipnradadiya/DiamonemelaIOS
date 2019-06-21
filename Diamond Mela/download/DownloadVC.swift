@@ -5,6 +5,7 @@ import Photos
 
 class DownloadVC: UIViewController {
 
+    @IBOutlet weak var viewNoData: UIView!
     @IBOutlet weak var btnWithPrice: UIButton!
     @IBOutlet weak var btnWithoutPrice: UIButton!
     var pageCount: Int = 1
@@ -223,7 +224,7 @@ extension DownloadVC {
             let status = result[STATUS_CODE] as? String
             print(status as Any)
             if status == FAILURE_CODE || status == nil {
-                
+                self.viewNoData.isHidden = false
                 
             } else {
                 let downloadList=Mapper<DownloadItem>().map(JSON: result)
@@ -256,9 +257,9 @@ extension DownloadVC {
     
     func reloadTable() {
         if self.arrDownload.count > 0 {
-            //            self.lblNoData.isHidden = true
+                        self.viewNoData.isHidden = true
         } else {
-            //            self.lblNoData.isHidden = false
+                        self.viewNoData.isHidden = false
         }
         self.tblDownloadProduct.reloadData()
     }

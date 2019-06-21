@@ -53,6 +53,8 @@ let errorTitle: String="Error"
 
 //User defaults key's name
 let USER_SESSION_DATA_KEY:String="user_data_key"
+let BILLING_USERDEFAULTS:String="billing"
+let SHIPPING_USERDEFAULTS:String="shipping"
 let INDIA_CODE:String="IN"
 
 

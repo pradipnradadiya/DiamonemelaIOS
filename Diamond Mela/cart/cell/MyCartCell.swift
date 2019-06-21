@@ -19,12 +19,31 @@ class MyCartCell: UITableViewCell {
     
     var myCart:CartProductListItem.Data?{
         didSet{
+            lblSku.attributedText = "Sku: \(myCart?.sku ?? "")".withBoldText(text: "Sku:")
             lblQty.text="\(myCart?.qty ?? 0)"
             lblPrice.text=priceFormat2("\(myCart?.price ?? "")")
-            lblStoneDetail.text=myCart?.stonedetails
-            lblMetalDetail.text=myCart?.metaldetails
-//            lblSize.text=myCart?.ringsize
+            lblStoneDetail.attributedText="Stone Detail: \(myCart?.stonedetails ?? "")".withBoldText(text: "Stone Detail:")
+            lblMetalDetail.attributedText="Metal Detail: \(myCart?.metaldetails ?? "")".withBoldText(text: "Metal Detail:")
+//
             imgProduct.sd_setImage(with: URL(string: (myCart?.image)!), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
+            
+            
+            if myCart?.ringsize != nil{
+                lblSize.isHidden = false
+                lblSize.attributedText="Ring Size: \(myCart?.ringsize ?? "")".withBoldText(text: "Ring Size:")
+            }else if myCart?.bracelets != nil{
+                 lblSize.isHidden = false
+                lblSize.attributedText="Bracelet Size: \(myCart?.ringsize ?? "")".withBoldText(text: "Bracelet Size:")
+            }else if myCart?.bangles != nil{
+                 lblSize.isHidden = false
+                lblSize.attributedText="Bangle Size: \(myCart?.ringsize ?? "")".withBoldText(text: "Bangle Size:")
+            }else if myCart?.pendents != nil{
+                 lblSize.isHidden = false
+                lblSize.attributedText="Pendent Size: \(myCart?.ringsize ?? "")".withBoldText(text: "Pendent Size:")
+            }else{
+                lblSize.isHidden = true
+            }
+            
             
             if myCart?.product_type == "simple" {
                 btnPlus.isHidden = true
@@ -33,9 +52,7 @@ class MyCartCell: UITableViewCell {
                 btnPlus.isHidden = false
                 btnMinus.isHidden = false
             }
-            
-            
-            
+        
             
         }
     }

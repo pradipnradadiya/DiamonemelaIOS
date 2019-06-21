@@ -31,18 +31,35 @@ class OrderCell: UITableViewCell {
             }
             
             if (orderData?.order_items?.count)! > 0{
-                lblSku.text=orderData?.order_items?[0].product_sku
-                lblTitle.text=orderData?.order_items?[0].product_name
-                lblMetalDetail.text=orderData?.order_items?[0].product_metalquality
-                lblStoneDetail.text=orderData?.order_items?[0].product_stonequality
+                
+                
+                lblTitle.text="\(orderData?.order_items?[0].product_name ?? "")"
+                
+              
+                
+                lblSku.attributedText = "Sku: \(orderData?.order_items?[0].product_sku ?? "")".withBoldText(text: "Sku:")
+                
+                 lblMetalDetail.attributedText = "Metal Detail: \(orderData?.order_items?[0].product_metalquality ?? "")".withBoldText(text: "Metal Detail:")
+                
+                 lblStoneDetail.attributedText = "Stone Detail: \(orderData?.order_items?[0].product_stonequality ?? "")".withBoldText(text: "Stone Detail:")
+                
                 imgProduct.sd_setImage(with: URL(string: (orderData?.order_items?[0].image)!), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
                 
             }else{
+                lblTitle.text="Title:"
                 
+                
+                
+                lblSku.attributedText = "Sku: ".withBoldText(text: "Sku:")
+                
+                lblMetalDetail.attributedText = "Metal Detail: ".withBoldText(text: "Metal Detail:")
+                
+                lblStoneDetail.attributedText = "Stone Detail: ".withBoldText(text: "Stone Detail:")
             }
                         
-            lblGrandTotal.text=priceFormat2("\(orderData?.grand_total ?? "")")
-            lblOrderNo.text=orderData?.orderno
+            lblGrandTotal.attributedText="Grand Total: \(priceFormat2("\(orderData?.grand_total ?? "")"))".withBoldText(text: "Grand Total:")
+            
+            lblOrderNo.attributedText="Order No: \(orderData?.orderno ?? "")".withBoldText(text: "Order No:")
             lblStatus.text=orderData?.order_status
             
             
@@ -99,3 +116,14 @@ class OrderCell: UITableViewCell {
           actionBlockView?()
     }
 }
+
+
+extension String {
+    func withBoldText(text: String, font: UIFont? = nil) -> NSAttributedString {
+        let _font = font ?? UIFont.systemFont(ofSize: 14, weight: .regular)
+        let fullString = NSMutableAttributedString(string: self, attributes: [NSAttributedString.Key.font: _font])
+        let boldFontAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: _font.pointSize)]
+        let range = (self as NSString).range(of: text)
+        fullString.addAttributes(boldFontAttribute, range: range)
+        return fullString
+    }}

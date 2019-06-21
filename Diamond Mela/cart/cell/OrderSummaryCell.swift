@@ -12,13 +12,35 @@ class OrderSummaryCell: UITableViewCell {
     
     var orderData : OrderSummaryItem.Data?{
         didSet{
+            
             lblSku.text=orderData?.sku
-            lblStoneQuality.text=orderData?.stonequality
-            lblMetalQuality.text=orderData?.metaldetails
+            lblStoneQuality.attributedText="Stone Quality: \(orderData?.stonequality ?? "")".withBoldText(text: "Stone Quality:")
+            lblMetalQuality.attributedText="Metal Quality: \(orderData?.metaldetails ?? "")".withBoldText(text: "Metal Quality:")
 //            lblSize.text=orderData?.ringsize
-            lblQty.text="\(orderData?.qty ?? 0)"
-            lblQtyPrice.text="\(orderData?.price ?? 0)"
+            lblQty.attributedText="Qty: \(orderData?.qty ?? 0)".withBoldText(text: "Qty:")
+            lblQtyPrice.text=priceFormat2("\(orderData?.price ?? 0)")
             lblPrice.text=priceFormat2("\(orderData?.subtotal ?? 0)")
+            
+            
+            if orderData?.ringsize != nil{
+                lblSize.isHidden = false
+                lblSize.attributedText="Ring Size: \(orderData?.ringsize ?? "")".withBoldText(text: "Ring Size:")
+            }else if orderData?.bracelets != nil{
+                lblSize.isHidden = false
+                lblSize.attributedText="Bracelet Size: \(orderData?.ringsize ?? "")".withBoldText(text: "Bracelet Size:")
+            }else if orderData?.bangles != nil{
+                lblSize.isHidden = false
+                lblSize.attributedText="Bangle Size: \(orderData?.ringsize ?? "")".withBoldText(text: "Bangle Size:")
+            }else if orderData?.pendents != nil{
+                lblSize.isHidden = false
+                lblSize.attributedText="Pendent Size: \(orderData?.ringsize ?? "")".withBoldText(text: "Pendent Size:")
+            }else{
+                lblSize.isHidden = true
+            }
+            
+            
+            
+            
         }
     }
     

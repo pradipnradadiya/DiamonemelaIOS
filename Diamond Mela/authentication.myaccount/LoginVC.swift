@@ -108,6 +108,22 @@ extension LoginVC {
                     
                     userSessionData.set(jsonString, forKey: USER_SESSION_DATA_KEY)
                     
+                    userSessionData.set("\(loginData?.data?.default_billing_new?.firstname ?? "")  \(loginData?.data?.default_billing_new?.lastname ?? ""),\n\(loginData?.data?.default_billing_new?.street ?? ""),\n\(loginData?.data?.default_billing_new?.city ?? ""), \(loginData?.data?.default_billing_new?.region ?? ""), \(loginData?.data?.default_billing_new?.postcode ?? ""),\n\(loginData?.data?.default_billing_new?.country_id ?? ""),\nT: \(loginData?.data?.default_billing_new?.telephone ?? "")", forKey: BILLING_USERDEFAULTS)
+                    
+                    
+                    userSessionData.set("\(loginData?.data?.default_shipping_new?.firstname ?? "")  \(loginData?.data?.default_shipping_new?.lastname ?? ""),\n\(loginData?.data?.default_shipping_new?.street ?? ""),\n\(loginData?.data?.default_shipping_new?.city ?? ""), \(loginData?.data?.default_shipping_new?.region ?? ""), \(loginData?.data?.default_shipping_new?.postcode ?? ""),\n\(loginData?.data?.default_shipping_new?.country_id ?? ""),\nT: \(loginData?.data?.default_shipping_new?.telephone ?? "")", forKey: SHIPPING_USERDEFAULTS)
+                    
+                   
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                 }
                 
                 /*

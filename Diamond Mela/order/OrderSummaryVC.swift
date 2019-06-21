@@ -18,6 +18,20 @@ class OrderSummaryVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let dataArrayString = (UserDefaults.standard.string(forKey: BILLING_USERDEFAULTS)) {
+            
+            lblBillingAddress.text = dataArrayString.uppercased()
+            
+            
+            
+        }
+        
+        if let dataArrayString = (UserDefaults.standard.string(forKey: SHIPPING_USERDEFAULTS)) {
+            lblShippingAddress.text = dataArrayString.uppercased()
+            
+        }
+        
+        
         self.orderSummary()
         // Do any additional setup after loading the view.
     }
@@ -56,15 +70,10 @@ extension OrderSummaryVC{
                 
                 self.lblPaymentMethod.text=orderSummary?.payment
                 
-                if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
-                    
-                    if let dataObject = Mapper<LoginItem>().map(JSONString: dataArrayString)  {
-                        self.lblBillingAddress.text="\(dataObject.data?.default_billing_new?.firstname ?? "") ,\(dataObject.data?.default_billing_new?.lastname ?? ""), \(dataObject.data?.default_billing_new?.street ?? "") ,\(dataObject.data?.default_billing_new?.city ?? ""), \(dataObject.data?.default_billing_new?.postcode ?? "")"
-                        
-                        self.lblShippingAddress.text="\(dataObject.data?.default_shipping_new?.firstname ?? "") ,\(dataObject.data?.default_shipping_new?.lastname ?? ""), \(dataObject.data?.default_shipping_new?.street ?? "") ,\(dataObject.data?.default_shipping_new?.city ?? ""), \(dataObject.data?.default_shipping_new?.postcode ?? "")"
-                      
-                    }
-                }
+               
+                
+              
+                
                 
                 self.lblSubTotal.text=priceFormat2("\(orderSummary?.subtotal ?? 0)")
                 self.lblShippingCharge.text=priceFormat2("\(orderSummary?.shipping_charges ?? 0)")

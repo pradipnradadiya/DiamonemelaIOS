@@ -330,6 +330,7 @@ extension ProductDetailVC{
                     self.btnSoldOut.isHidden=true
                 }
                 
+                
                 if self.productCategoryId == RING_ID{
                     self.viewRing.isHidden = false
                     self.viewBangle.isHidden = true
@@ -356,11 +357,20 @@ extension ProductDetailVC{
                     self.viewBangle.isHidden = true
                     self.viewBracelet.isHidden = true
                     self.viewPendent.isHidden = true
-                    self.constraintRingHeight.constant = 0
+                    
+//                    self.constraintRingHeight.constant = 0
+//                    self.constraintBangleHeight.constant = 0
+//                    self.constraintBangleHeight.constant = 0
+//                    self.constraintPendentHeight.constant = 0
+//                    self.constraintBottonRingHeight.constant = 0
+                    
                     self.constraintBangleHeight.constant = 0
-                    self.constraintBangleHeight.constant = 0
+                    self.constraintBraceletsHeight.constant = 0
                     self.constraintPendentHeight.constant = 0
+                    self.constraintRingHeight.constant = 0
                     self.constraintBottonRingHeight.constant = 0
+                    
+                    
                 }
                 
                 self.productType =  (productDetailData?.products)!
@@ -372,11 +382,13 @@ extension ProductDetailVC{
                     self.gridRtsSlider.reloadData()
                     
                     self.constraintCustomJewelaryHeight.constant = 0
+                    
                     self.constraintBangleHeight.constant = 0
                     self.constraintBraceletsHeight.constant = 0
                     self.constraintPendentHeight.constant = 0
                     self.constraintRingHeight.constant = 0
                     self.constraintBottonRingHeight.constant = 0
+                    
                     self.constraintDiamondHeight.constant = 0
                     self.constraintBottomDiamondHeight.constant = 0
                     self.constraintCaratHeight.constant = 0
@@ -727,8 +739,7 @@ extension ProductDetailVC{
                 self.lblDiamondPrice.text=priceFormat2("\(rtsDetail?.diamondmainprice?[0].dimondprice ?? "")")
                 
                 self.lblFinalPrice.text=priceFormat2("\(rtsDetail?.product_details?[0].price ?? "")")
-                
-                
+               
             }
             
         }

@@ -16,7 +16,7 @@ class DownloadDetailVC: UIViewController {
         
         lblGold.text = downloadItem?.carat
         
-        lblGrams.text = downloadItem?.metalDeatil
+        lblGrams.text = "\(downloadItem?.metalDeatil ?? "") \(downloadItem?.carat ?? "")"
         lblDiamond.text = "\(downloadItem?.stoneDetail ?? "") \(downloadItem?.diamondWeight ?? "")"
         
           imgProduct.sd_setImage(with: URL(string: (downloadItem?.image)!), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))

@@ -62,6 +62,7 @@ class OrderDetailVC: UIViewController {
     @IBAction func btnSearch(_ sender: Any) {
         
     }
+    
 }
 
 
@@ -99,7 +100,7 @@ extension OrderDetailVC{
                 self.lblShippingMethod.text=orderDetailData?.data?[0].shipping_description
                 self.lblShippingAddress.text=orderDetailData?.data?[0].shiiping_address
                 self.lblBillingAddress.text=orderDetailData?.data?[0].billing_address
-                self.lblOrderDate.text=orderDetailData?.data?[0].order_date
+                self.lblOrderDate.text="Order Data: \(orderDetailData?.data?[0].order_date ?? "")"
                 
           
             }
