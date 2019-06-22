@@ -7,6 +7,9 @@ class FilterTitleCell: UITableViewCell {
     @IBOutlet weak var imgArrow: UIImageView!
     @IBOutlet weak var imgIcon: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
+    
+    
+  
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,6 +24,10 @@ class FilterTitleCell: UITableViewCell {
     
     var filterTitleData:SortFilterItem.Data?{
         didSet{
+            
+           
+         
+            
             if filterTitleData?.isSelect == true{
                 viewFilterTitle.backgroundColor = UIColor.selectButtonColor
                 lblTitle.textColor = UIColor.white
@@ -29,9 +36,18 @@ class FilterTitleCell: UITableViewCell {
                 lblTitle.textColor = UIColor.black
             }
             imgIcon.sd_setImage(with: URL(string: (filterTitleData?.icon)!), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
+                
             lblTitle.text=filterTitleData?.label
-        }
-        
+            
+            
+          
+         
+            
+            
+                
+            }
+            
+     
     }
     
 

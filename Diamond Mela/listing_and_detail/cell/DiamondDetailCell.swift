@@ -15,6 +15,7 @@ class DiamondDetailCell: UITableViewCell {
     
     var diamondDetail : ProductDetailItem.Diamonddetails?{
         didSet{
+            
             lblShape.text=diamondDetail?.shape
             lblSetting.text=diamondDetail?.setting
             lblQuality.text=diamondDetail?.quality

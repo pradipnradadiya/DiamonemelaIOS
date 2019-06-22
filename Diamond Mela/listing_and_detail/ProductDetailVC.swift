@@ -62,8 +62,6 @@ class ProductDetailVC: UIViewController {
     static var pendentProId = ""
     
     
-    
-    
     var sliderImage: [String] = []
     var arrRTS = [ProductDetailItem.Rts_slider]()
     var arrRing = [ProductDetailItem.Ringsize]()
@@ -71,6 +69,7 @@ class ProductDetailVC: UIViewController {
     var arrBracelet = [ProductDetailItem.BraceletsSize]()
     var arrPendents = [ProductDetailItem.PendentEarring]()
     var arrDiamond = [ProductDetailItem.Stone_clarity]()
+    
     var arrCarat: [String] = []
     var arrMetal : [String] = []
     var arrMetalCopy : [String] = []
@@ -115,7 +114,7 @@ class ProductDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getProductDetail(productId: productId, metalCarat: "14K", metalQualityColor: "Yellow Gold", ringSize: "", stoneQuality: "", bangleProId: "", braceletProId: "", pendentProId: "")
+        self.getProductDetail(productId: productId, metalCarat: ProductDetailVC.caratValue, metalQualityColor: ProductDetailVC.metalValue, ringSize: "", stoneQuality: ProductDetailVC.diamondValue, bangleProId: "", braceletProId: "", pendentProId: "")
         // Do any additional setup after loading the view.
     }
     
@@ -260,6 +259,7 @@ class ProductDetailVC: UIViewController {
     func filterClick(clickAction:String) {
         
         if self.productCategoryId == RING_ID{
+            
             self.getProductDetailRefresh(productId: productId, metalCarat: ProductDetailVC.caratValue, metalQualityColor: ProductDetailVC.metalValue, ringSize: ProductDetailVC.ringValue, stoneQuality: ProductDetailVC.diamondValue, bangleProId: "", braceletProId: "", pendentProId: "", clickAction: clickAction)
             
         }else if self.productCategoryId == BRACELETS_ID{
@@ -310,16 +310,20 @@ extension ProductDetailVC{
             } else {
                 
                 let productDetailData=Mapper<ProductDetailItem>().map(JSON: result)
-                self.productCategoryId=(productDetailData?.category_id!)!
-                self.sliderImage = productDetailData?.slider ?? [""]
                 
-              
+                
+                
+                print(productDetailData as Any)
+                
+                self.productCategoryId=(productDetailData?.category_id!)!
+                
+                
+                
+                self.sliderImage = productDetailData?.slider ?? [""]
                 
                 self.gridPager.reloadData()
                 self.gridSlider.reloadData()
-                
-           
-                
+                                
                 if productDetailData?.stock == "0"{
                     self.btnAddToCart.isHidden=true
                     self.btnBuyNow.isHidden=true
@@ -435,18 +439,21 @@ extension ProductDetailVC{
                     
                     if !self.arrBracelet.isEmpty{
                         ProductDetailVC.braceletProductValue = self.arrBracelet[0].label!
-                        ProductDetailVC.braceletProductId = self.arrBangle[0].product_id!
+                        ProductDetailVC.braceletProductId = self.arrBracelet[0].product_id!
                         self.gridBracelet.reloadData()
                     }
                     
                     if !self.arrPendents.isEmpty{
                         ProductDetailVC.pendentValue = self.arrPendents[0].label!
-                        ProductDetailVC.pendentProId = self.arrBangle[0].product_id!
+                        ProductDetailVC.pendentProId = self.arrPendents[0].product_id!
                         self.gridPendent.reloadData()
                     }
                     
                     if !self.arrRing.isEmpty{
                         self.gridRingSize.reloadData()
+                        
+//                        self.getProductDetailRefresh(productId: productId, metalCarat: ProductDetailVC.caratValue, metalQualityColor: ProductDetailVC.metalValue, ringSize: ProductDetailVC.ringValue, stoneQuality: ProductDetailVC.diamondValue, bangleProId: "", braceletProId: "", pendentProId: "", clickAction: "")
+                        
                     }
                     
                     self.gridDiamond.reloadData()
@@ -467,6 +474,8 @@ extension ProductDetailVC{
                 
                  self.arrDiamondDetail = (productDetailData?.diamonddetails)!
                  self.tblDiamondDetail.reloadData()
+                
+                
                 
                 //product detail
                 self.lblProductName.text=productDetailData?.product_details?[0].product_name
@@ -508,7 +517,7 @@ extension ProductDetailVC{
                    "metalcarat": metalCarat,
                    "metalqualitycolor": metalQualityColor,
                    "ringsize": ringSize,
-                   "stone_quality": ringSize,
+                   "stone_quality": stoneQuality,
                    "bangle_pro_id": bangleProId,
                    "bracelet_pro_id": braceletProId,
                    "pendent_pro_id": pendentProId]
@@ -522,8 +531,14 @@ extension ProductDetailVC{
             print(status as Any)
             if status == FAILURE_CODE || status == nil {
                 
-                
             } else {
+                
+//                self.arrRing.removeAll()
+//                self.arrBangle.removeAll()
+//                self.arrBracelet.removeAll()
+//                self.arrPendents.removeAll()
+                
+                
                 let productDetail=Mapper<ProductDetailItem>().map(JSON: result)
                 
                 self.cProductId = (productDetail?.simpleproductid)!
@@ -569,20 +584,19 @@ extension ProductDetailVC{
                         
                         if !self.arrBracelet.isEmpty{
                             ProductDetailVC.braceletProductValue = self.arrBracelet[0].label!
-                            ProductDetailVC.braceletProductId = self.arrBangle[0].product_id!
+                            ProductDetailVC.braceletProductId = self.arrBracelet[0].product_id!
                             self.gridBracelet.reloadData()
                         }
+                        
                     }
                     
                 }
-                
-                
-                
+            
                 //Diamond Detail
                 self.arrDiamondDetail = (productDetail?.diamonddetails)!
                 self.tblDiamondDetail.reloadData()
        
-                
+                /*
                 //product detail
                 self.lblProductName.text=productDetail?.product_details?[0].product_name
                 
@@ -608,10 +622,42 @@ extension ProductDetailVC{
                 self.lblDiamondPrice.text="\(productDetail?.diamondmainprice?[0].dimondprice ?? "")"
                 
                 self.lblFinalPrice.text="\(productDetail?.product_details?[0].price ?? "")"
+                */
+                
+                
+                
+                
+                //product detail
+                self.lblProductName.text=productDetail?.product_details?[0].product_name
+                
+                self.lblProductSku.text=productDetail?.product_details?[0].sku
+                
+                self.lblProductCertificateNo.text=productDetail?.product_details?[0].certificate_no
+                
+                self.lblGrandTotal.text=priceFormat2("\(productDetail?.product_details?[0].price ?? "")")
+                
+                //metal detail
+                self.lblMetalPurity.text=productDetail?.metaldetails?[0].metalquality
+                
+                self.lblMetalWeight.text=productDetail?.metaldetails?[0].metalweight
+                
+                self.lblMetalEstimatedTotal.text=priceFormat2("\(productDetail?.metaldetails?[0].metalestimatedprice ?? 0)")
+                
+             
+                
+                //metal and diamone piece and price
+                self.lblMetalPrice.text="\(productDetail?.metalprice! ?? [0])"
+                
+                self.lblCountDiamond.text="Diamond(\(productDetail?.diamondmainprice?[0].pices ?? ""))"
+                
+                self.lblDiamondPrice.text=priceFormat2("\(productDetail?.diamondmainprice?[0].dimondprice ?? "")")
+                
+                self.lblFinalPrice.text=priceFormat2("\(productDetail?.product_details?[0].price ?? "")")
                 
             }
             
         }
+        
     }
     
     func addToCart(productId:String,customerId:String,optionId:String,optionTypeId:String,stoneOptionId:String,stoneOptionTypeId:String,qty:String){
@@ -813,6 +859,9 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
         else if collectionView==self.gridRingSize{
             let cell = self.gridRingSize.dequeueReusableCell(withReuseIdentifier: "RingCell", for: indexPath) as! RingCell
             cell.ringSize = self.arrRing[indexPath.row]
+            
+            
+            
             cell.actionClick = {
                 ProductDetailVC.ringValue = self.arrRing[indexPath.row].title!
                 
@@ -849,7 +898,7 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
             cell.braceletData = self.arrBracelet[indexPath.row]
             cell.actionClick = {
                 ProductDetailVC.braceletProductValue = self.arrBracelet[indexPath.row].label!
-                ProductDetailVC.braceletProductId = self.arrBangle[indexPath.row].product_id!
+                ProductDetailVC.braceletProductId = self.arrBracelet[indexPath.row].product_id!
                 self.filterClick(clickAction: "")
                 self.gridBracelet.reloadData()
                 
@@ -865,7 +914,7 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
             cell.pendentData = self.arrPendents[indexPath.row]
             cell.actionClick = {
                 ProductDetailVC.pendentValue = self.arrPendents[indexPath.row].label!
-                ProductDetailVC.pendentProId = self.arrBangle[indexPath.row].product_id!
+                ProductDetailVC.pendentProId = self.arrPendents[indexPath.row].product_id!
                self.filterClick(clickAction: "")
                 self.gridPendent.reloadData()
                 
@@ -1124,6 +1173,7 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
         let cell = self.tblDiamondDetail.dequeueReusableCell(withIdentifier: "DiamondDetailCell", for: indexPath) as? DiamondDetailCell
         
         cell?.diamondDetail = self.arrDiamondDetail[indexPath.row]
+        cell?.lblDiamondIndex.text = "Diamond \(indexPath.row + 1)"
    
         return cell!
         

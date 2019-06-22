@@ -18,6 +18,7 @@ class PendentCell: UICollectionViewCell {
             }
             
             btnPendent.setTitle(pendentData?.label, for: .normal)
+            
         }
         
     }

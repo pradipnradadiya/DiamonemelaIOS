@@ -28,6 +28,9 @@ class HomeVC: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
         FilterVC.dict.removeAll()
         FilterVC.filterFlag = 0
+        
+        arrFilterData.removeAll()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {

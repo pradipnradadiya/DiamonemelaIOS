@@ -19,10 +19,25 @@ class FilterVC: UIViewController {
         
         
         arrFilterDataCopy=arrFilterData
+        
         if arrFilterData.count > 0 {
             //            self.lblNoData.isHidden = true
-            arrFilterData[0].isSelect = true
+            var i:Int = 0
+            for _ in arrFilterData{
+                if i == 0{
+                    arrFilterData[0].isSelect = true
+                    
+                }else{
+                    arrFilterData[i].isSelect = false
+                    
+                }
+                
+                i += 1
+            }
         }
+        
+        
+        
 //        print(arrFilterData[0].label)
         // Do any additional setup after loading the view.
     }
