@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.8.2)
+  - FSPagerView (0.8.2)
   - ImageScrollView (1.8)
   - iOSDropDown (0.2.7)
   - JVFloatLabeledTextField (1.2.1)
@@ -15,6 +16,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
+  - FSPagerView
   - ImageScrollView
   - iOSDropDown
   - JVFloatLabeledTextField
@@ -27,6 +29,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - FSPagerView
     - ImageScrollView
     - iOSDropDown
     - JVFloatLabeledTextField
@@ -39,6 +42,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  FSPagerView: 816a18842306973cc7cc6df8a5332272f7815c30
   ImageScrollView: 82912273486297285682bdb2a806742f0d39940c
   iOSDropDown: 7a4cfc67d5166f319858747b63cd2f7760c4fb4b
   JVFloatLabeledTextField: cfc44e3c4d493b2ed92ede8035e8e89c2912ba64
@@ -49,6 +53,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
   UIActivityIndicator-for-SDWebImage: 7bf7ebbf0ed1747dedc0d6e949c4603a6d0f9e0c
 
-PODFILE CHECKSUM: 6762266df0216e724b8cebd6b90a9a3f5bbb23f7
+PODFILE CHECKSUM: 2863c7ece4c62e2db2869322dfb9e35db1874c6d
 
 COCOAPODS: 1.6.1

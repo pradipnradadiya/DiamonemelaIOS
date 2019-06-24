@@ -2,8 +2,9 @@ import UIKit
 import ObjectMapper
 import RappleProgressHUD
 
-class LoginVC: UIViewController {
 
+class LoginVC: UIViewController {
+var arrPopularProducts = [PopularProductItem.Product_img]()
     @IBOutlet weak var tvPassword: UITextField!
     @IBOutlet weak var tvEmail: UITextField!
     
@@ -24,11 +25,8 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
-            let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? HomeVC
-            self.navigationController?.pushViewController(homeVC!, animated: true)
-           
-        }
+       
+        
         
         // Do any additional setup after loading the view.
     }
@@ -82,6 +80,32 @@ class LoginVC: UIViewController {
 }
 
 extension LoginVC {
+    
+    func getPopularProduct(url:String){
+                RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        ApiManager.shared.apiPopularProduct(url: url){ (result) in
+           
+                RappleActivityIndicatorView.stopAnimation()
+          
+            let status = result[STATUS_CODE] as? String
+            print(status as Any)
+            if status == FAILURE_CODE || status == nil {
+                
+            } else {
+                let data=Mapper<PopularProductItem>().map(JSON: result)
+                self.arrPopularProducts = (data?.product_img)!
+                if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
+                    let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? HomeVC
+                    homeVC?.arrPopularProducts = self.arrPopularProducts
+                    self.navigationController?.pushViewController(homeVC!, animated: true)
+                    
+                }
+               
+            }
+            
+        }
+    }
+    
     
     func loginCustomer() {
         
@@ -137,8 +161,11 @@ extension LoginVC {
                 }
                 
                */
-                let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? HomeVC
-                self.navigationController?.pushViewController(homeVC!, animated: true)
+                
+                
+                 self.getPopularProduct(url: Endpoint.popularProducts.url)
+                
+               
                 
                 
                 

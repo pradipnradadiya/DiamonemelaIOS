@@ -45,6 +45,8 @@ class DownloadVC: UIViewController {
     }
     
     @IBAction func btnSearch(_ sender: Any) {
+        let search = self.storyboard?.instantiateViewController(withIdentifier: "SearchVC") as? SearchVC
+        navigationController?.pushViewController(search!, animated: true)
     }
     @IBAction func btnDownloadAll(_ sender: Any) {
         var i: Int = 0

@@ -16,6 +16,8 @@ target 'Diamond Mela' do
   pod 'UIActivityIndicator-for-SDWebImage'
   pod 'iOSDropDown'
   pod 'Alamofire', '~> 4.7'
+  
+  pod 'FSPagerView'
   target 'Diamond MelaTests' do
     inherit! :search_paths
     # Pods for testing

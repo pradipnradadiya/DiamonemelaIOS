@@ -47,9 +47,7 @@ class PopularProductCell: UICollectionViewCell {
             
             
             imgProduct.sd_setImage(with: URL(string: "\(IMAGE_URL)catalog/product\(popularProduct?.thumbnail! ?? "")"), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
-            
-            
-            
+        
         }
     }
     

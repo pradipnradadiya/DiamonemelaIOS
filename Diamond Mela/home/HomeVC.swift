@@ -2,9 +2,56 @@
 import UIKit
 import ObjectMapper
 import RappleProgressHUD
+import FSPagerView
 
-class HomeVC: UIViewController {
+class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
 
+    @IBOutlet weak var pagerView: FSPagerView!{
+        didSet {
+            self.pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
+            self.typeIndex = 4
+        }
+    }
+    
+    fileprivate let imageNames = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg"]
+    fileprivate let transformerNames = ["cross fading", "zoom out", "depth", "linear", "overlap", "ferris wheel", "inverted ferris wheel", "coverflow", "cubic"]
+    
+    
+    fileprivate let transformerTypes: [FSPagerViewTransformerType] = [.crossFading,
+                                                                      .zoomOut,
+                                                                      .depth,
+                                                                      .linear,
+                                                                      .overlap,
+                                                                      .ferrisWheel,
+                                                                      .invertedFerrisWheel,
+                                                                      .coverFlow,
+                                                                      .cubic]
+    fileprivate var typeIndex = 0 {
+        didSet {
+            let type = self.transformerTypes[typeIndex]
+            self.pagerView.transformer = FSPagerViewTransformer(type:type)
+            switch type {
+            case .crossFading, .zoomOut, .depth:
+                self.pagerView.itemSize = FSPagerView.automaticSize
+                self.pagerView.decelerationDistance = 1
+            case .linear, .overlap:
+                let transform = CGAffineTransform(scaleX: 0.4, y: 1)
+                self.pagerView.itemSize = self.pagerView.frame.size.applying(transform)
+                self.pagerView.decelerationDistance = FSPagerView.automaticDistance
+            case .ferrisWheel, .invertedFerrisWheel:
+                self.pagerView.itemSize = CGSize(width: 180, height: 140)
+                self.pagerView.decelerationDistance = FSPagerView.automaticDistance
+            case .coverFlow:
+                self.pagerView.itemSize = CGSize(width: 220, height: 170)
+                self.pagerView.decelerationDistance = FSPagerView.automaticDistance
+            case .cubic:
+                let transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                self.pagerView.itemSize = self.pagerView.frame.size.applying(transform)
+                self.pagerView.decelerationDistance = 1
+            }
+        }
+    }
+    
     @IBOutlet weak var imgBanner: UIImageView!
     @IBOutlet weak var gridMostSellingProduct: UICollectionView!
     @IBOutlet weak var gridBestCategory: UICollectionView!
@@ -18,10 +65,11 @@ class HomeVC: UIViewController {
     var arrHeader = [HeaderItem.Data]()
     var arrBanner = [BannerItem.Slider_image]()
     var arrMostSellingProducts = [MostSellingProductItem.Data]()
+    var arrPopularProducts = [PopularProductItem.Product_img]()
     
     //slide menu
     var menu_vc : DrawerVC!
-    var count:Int = 4
+    var count:Int = 3
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -65,7 +113,7 @@ class HomeVC: UIViewController {
         self.getBannerSlider(url: Endpoint.bannerSlider.url)
         self.getHeaderMenuBestCategory(url: Endpoint.headerMenu.url)
         self.getMostSellingProduct(url: Endpoint.mostSellingProducts.url)
-        self.getPopularProduct(url: Endpoint.popularProducts.url)
+      //  self.getPopularProduct(url: Endpoint.popularProducts.url)
         
         
         //using slide drawer
@@ -163,6 +211,42 @@ class HomeVC: UIViewController {
     
     
     
+    // MARK:- FSPagerViewDataSource
+    
+    public func numberOfItems(in pagerView: FSPagerView) -> Int {
+      
+        return arrPopularProducts.count
+        
+    }
+    
+    public func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
+        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
+        
+       
+      //  cell.imageView?.backgroundColor = UIColor.black
+        cell.imageView?.sd_setImage(with: URL(string: "\(IMAGE_URL)catalog/product\(arrPopularProducts[index].thumbnail!)"), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
+//        cell.imageView?.image = UIImage(named: self.imageNames[index])
+        
+        cell.imageView?.contentMode = .scaleAspectFill
+        cell.imageView?.clipsToBounds = true
+        return cell
+    }
+    
+    func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
+        pagerView.deselectItem(at: index, animated: true)
+        pagerView.scrollToItem(at: index, animated: true)
+        print("click")
+        
+        let list = self.storyboard?.instantiateViewController(withIdentifier: "ProductDetailVC") as? ProductDetailVC
+        list?.productId = self.arrPopularProducts[index].entity_id!
+        self.navigationController?.pushViewController(list!, animated: true)
+        
+    }
+    
+    
+    
+    
+    
 }
 
 extension HomeVC{
@@ -180,8 +264,12 @@ extension HomeVC{
                 
             } else {
                 let data=Mapper<PopularProductItem>().map(JSON: result)
-            
+                self.arrPopularProducts = (data?.product_img)!
                 
+                print(self.arrPopularProducts.count)
+                
+                self.pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
+                self.typeIndex = 4
             }
             
         }

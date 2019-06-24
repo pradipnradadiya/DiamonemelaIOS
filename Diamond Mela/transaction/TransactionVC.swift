@@ -25,6 +25,8 @@ class TransactionVC: UIViewController {
     @IBAction func btnCart(_ sender: Any) {
     }
     @IBAction func btnSearch(_ sender: Any) {
+        let search = self.storyboard?.instantiateViewController(withIdentifier: "SearchVC") as? SearchVC
+        navigationController?.pushViewController(search!, animated: true)
     }
     @IBAction func btnBack(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)

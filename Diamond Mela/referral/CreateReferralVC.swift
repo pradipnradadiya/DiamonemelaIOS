@@ -55,7 +55,8 @@ class CreateReferralVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         self.navigationController?.pushViewController(cart!, animated: true)
     }
     @IBAction func btnSearch(_ sender: Any) {
-        
+        let search = self.storyboard?.instantiateViewController(withIdentifier: "SearchVC") as? SearchVC
+        navigationController?.pushViewController(search!, animated: true)
     }
     @IBAction func btnManageReferral(_ sender: Any) {
         let manageReferral = self.storyboard?.instantiateViewController(withIdentifier: "ManageReferralVC") as? ManageReferralVC

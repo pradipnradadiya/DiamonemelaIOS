@@ -28,8 +28,6 @@ class ProductDetailVC: UIViewController {
     @IBOutlet weak var constraintBottomMetal: NSLayoutConstraint!
     
     
-    
-    
     @IBOutlet weak var gridRtsHeight: NSLayoutConstraint!
     
     @IBOutlet weak var viewCustomizeJewelarry: UIView!
@@ -37,7 +35,6 @@ class ProductDetailVC: UIViewController {
     @IBOutlet weak var constraintViewJeweHeight: NSLayoutConstraint!
     
     @IBOutlet weak var constraintBangleHeight: NSLayoutConstraint!
-    
     
     
     var ringOptionId:String=""
@@ -203,8 +200,7 @@ class ProductDetailVC: UIViewController {
                 stoneOptionTypeId = self.stoneOptionTypeId
             }
             
-            
-            
+           
             
             self.addToCart(productId: cProductId, customerId: customerId, optionId: ringOptionId, optionTypeId: ringOptionTypeId, stoneOptionId: stoneOptionId, stoneOptionTypeId: stoneOptionTypeId, qty: cQty)
             
@@ -229,7 +225,8 @@ class ProductDetailVC: UIViewController {
     }
     
     @IBAction func btnSearch(_ sender: Any) {
-        
+        let search = self.storyboard?.instantiateViewController(withIdentifier: "SearchVC") as? SearchVC
+        navigationController?.pushViewController(search!, animated: true)
     }
     
     func refreshAdapter(){
@@ -311,7 +308,8 @@ extension ProductDetailVC{
                 
                 let productDetailData=Mapper<ProductDetailItem>().map(JSON: result)
                 
-                
+                self.navigationItem.title = productDetailData?.product_details?[0].product_name
+               
                 
                 print(productDetailData as Any)
                 
