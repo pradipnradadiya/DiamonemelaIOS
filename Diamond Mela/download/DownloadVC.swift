@@ -5,6 +5,9 @@ import Photos
 
 class DownloadVC: UIViewController {
 
+    var deleteProductFlag:Int = 0
+   
+    
     @IBOutlet weak var viewNoData: UIView!
     @IBOutlet weak var btnWithPrice: UIButton!
     @IBOutlet weak var btnWithoutPrice: UIButton!
@@ -20,14 +23,22 @@ class DownloadVC: UIViewController {
     var productIds:String = ""
     
     @IBOutlet weak var tblDownloadProduct: UITableView!
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getDownloadCartCount()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getDownloadList(showLoader: true)
         
-        
         // Do any additional setup after loading the view.
         
     }
+    
+    
     
     @IBAction func btnWithPrice(_ sender: Any) {
         flag="1"
@@ -44,58 +55,114 @@ class DownloadVC: UIViewController {
     @IBAction func btnCart(_ sender: Any) {
     }
     
+    
     @IBAction func btnSearch(_ sender: Any) {
         let search = self.storyboard?.instantiateViewController(withIdentifier: "SearchVC") as? SearchVC
         navigationController?.pushViewController(search!, animated: true)
     }
+    
+    
     @IBAction func btnDownloadAll(_ sender: Any) {
-        var i: Int = 0
-        for (prodictId) in arrDownload.enumerated(){
-            if prodictId.element.isSelected == true{
-                print(prodictId.element.isSelected as Any)
-                productIds.append("\(prodictId.element.product_id!),")
-                
-                
-            }else{
+        
+        // Declare Alert
+        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to Download  products in Photos?", preferredStyle: .alert)
+        
+        // Create OK button with action handler
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+            print("Ok button click...")
+            var i: Int = 0
+            for (prodictId) in self.arrDownload.enumerated(){
+                if prodictId.element.isSelected == true{
+                    print(prodictId.element.isSelected as Any)
+                    self.productIds.append("\(prodictId.element.product_id!),")
+                    
+                }else{
+                    
+                }
+                i += 1
                 
             }
-            i += 1
             
+            let photos = PHPhotoLibrary.authorizationStatus()
+            if photos == .notDetermined {
+                PHPhotoLibrary.requestAuthorization({status in
+                    if status == .authorized{
+                       self.downloadAllProduct(customerId: customerId, productId: self.productIds, price: self.flag)
+                    } else {
+                        self.showAlert(title: "Alert", message: "Photos permission deniad, so product not download in gallery.")
+                    }
+                })
+            }else{
+                self.downloadAllProduct(customerId: customerId, productId: self.productIds, price: self.flag)
+            }
+     
+            
+        })
+        
+        // Create Cancel button with action handlder
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
+            print("Cancel button click...")
         }
         
-         self.downloadAllProduct(customerId: customerId, productId: productIds, price: flag)
+        //Add OK and Cancel button to dialog message
+        dialogMessage.addAction(ok)
+        dialogMessage.addAction(cancel)
+        
+        // Present dialog message to user
+        self.present(dialogMessage, animated: true, completion: nil)
+        
+        
+       
         //self.downloadAllProduct(customerId: customerId, productId: productIds, price: flag)
         
     }
     
     @IBAction func btnDeleteAll(_ sender: Any) {
      
-        self.selectArr.removeAll()
-        var i:Int = 0
-        for (prodictId) in arrDownload.enumerated(){
+        
+        // Declare Alert
+        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to Delete Download Products?", preferredStyle: .alert)
+        
+        // Create OK button with action handler
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+            print("Ok button click...")
             
-            if prodictId.element.isSelected == true{
-                print(prodictId.element.isSelected as Any)
-                productIds.append("\(prodictId.element.product_id!),")
-                selectArr.append(i)
-              
+            self.deleteProductFlag = 1
+            
+            self.selectArr.removeAll()
+            var i:Int = 0
+            
+            for (prodictId) in self.arrDownload.enumerated(){
                 
+                if prodictId.element.isSelected == true{
+                    print(prodictId.element.isSelected as Any)
+                    self.productIds.append("\(prodictId.element.product_id!),")
+                    self.selectArr.append(i)
+             
+                }else{
+                    
+                }
+                i += 1
                 
-                
-                //self.arrDownload.remove(at: indexPath.row)
-             //   tableView.deleteRows(at: [indexPath], with: .fade)
-             //   tblDownloadProduct.deleteRows(at: IndexPath[i], with: .fade)
-              // self.arrDownload.remove(at: i)
-                
-            }else{
                 
             }
-            i += 1
-           
-         
+            
+            self.deleteAllProduct(customerId: customerId, productId: self.productIds)
+            
+        })
+        
+        // Create Cancel button with action handlder
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
+            print("Cancel button click...")
         }
         
-        self.deleteAllProduct(customerId: customerId, productId: productIds)
+        //Add OK and Cancel button to dialog message
+        dialogMessage.addAction(ok)
+        dialogMessage.addAction(cancel)
+        
+        // Present dialog message to user
+        self.present(dialogMessage, animated: true, completion: nil)
+        
         
        // self.tblDownloadProduct.reloadData()
         
@@ -106,8 +173,6 @@ class DownloadVC: UIViewController {
     }
     
 }
-
-
 
 extension DownloadVC {
     func random(_ n: Int) -> String
@@ -124,8 +189,11 @@ extension DownloadVC {
         }
         
         return s
+        
     }
     func saveToImage(filename:String) {
+        
+        
         DispatchQueue.global(qos: .background).async {
             RappleActivityIndicatorView.startAnimatingWithLabel("Please wait image is saved in photos.")
             if let url = URL(string: filename),
@@ -170,8 +238,29 @@ extension DownloadVC {
                 //let image = result["image"] as? String
                 let dData = Mapper<ImageDownloadResponse>().map(JSON: result)
                // self.downloadImage(url: image!)
-                print(dData?.image![0] as Any)
-                self.saveToImage(filename: (dData?.image![0])!)
+               
+                let downloadData = dData?.image
+                
+                var j:Int = 0
+                for _ in self.arrDownload{
+                  
+                    self.arrDownload[j].isSelected = false
+                    j += 1
+                  
+                }
+                self.tblDownloadProduct.reloadData()
+                
+                var i:Int = 0
+                for _ in downloadData!{
+                     print(dData?.image![i] as Any)
+                      self.saveToImage(filename: (dData?.image![i])!)
+                        i += 1
+                }
+                
+              
+                
+                
+                
             }
             
         }
@@ -198,8 +287,22 @@ extension DownloadVC {
                         self.arrDownload.remove(at: self.selectArr[i])
                         i += 1
                     }
+              
                 
                 self.tblDownloadProduct.reloadData()
+                
+                if self.deleteProductFlag == 1{
+                    if self.selectArr.isEmpty{
+                        self.arrDownload.removeAll()
+                        self.reloadTable()
+                        self.deleteProductFlag = 0
+                    }
+                }
+                
+                
+                
+                
+                
              
                
             }
@@ -297,14 +400,28 @@ extension DownloadVC: UITableViewDelegate, UITableViewDataSource {
         
             cell?.downloadData = self.arrDownload[indexPath.row]
         
+        
         cell?.actionBlockDelete = {
             self.deleteAllProduct(customerId: customerId, productId: self.arrDownload[indexPath.row].product_id!)
+            
             self.arrDownload.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
         
         cell?.actionBlockDownload = {
-            self.downloadAllProduct(customerId: customerId, productId: self.arrDownload[indexPath.row].product_id!, price: self.flag)
+           
+            let photos = PHPhotoLibrary.authorizationStatus()
+            if photos == .notDetermined {
+                PHPhotoLibrary.requestAuthorization({status in
+                    if status == .authorized{
+                        self.downloadAllProduct(customerId: customerId, productId: self.arrDownload[indexPath.row].product_id!, price: self.flag)
+                    } else {
+                        self.showAlert(title: "Alert", message: "Photos permission deniad, so product not download in gallery.")
+                    }
+                })
+            }else{
+                 self.downloadAllProduct(customerId: customerId, productId: self.arrDownload[indexPath.row].product_id!, price: self.flag)
+            }
             
         }
         

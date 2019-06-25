@@ -17,9 +17,18 @@ class CreateReferralVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     var pickOption = ["1", "2", "3", "4", "5","6","7","8","9","10"]
     var pwd : String = ""
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getDownloadCartCount()
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        lblCartCount.text = "5"
+       // lblCartCount.text = "5"
         let pickerView = UIPickerView()
         pickerView.delegate = self
        

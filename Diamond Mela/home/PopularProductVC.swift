@@ -8,6 +8,11 @@ class PopularProductVC: UIViewController {
     
     var arrPopularProduct = [PopularProductItem.Product_img]()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getDownloadCartCount()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getPopularProduct(url: Endpoint.popularProducts.url)

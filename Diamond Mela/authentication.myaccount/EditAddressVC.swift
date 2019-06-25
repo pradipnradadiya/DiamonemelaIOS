@@ -36,6 +36,12 @@ class EditAddressVC: UIViewController {
     
     var btnTag : Int = 0
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getDownloadCartCount()
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // self.navigationController?.title="Add Address"

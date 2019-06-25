@@ -29,8 +29,14 @@ class EditProfileVC: UIViewController {
     
     var addressData : AddressManageResponse?
     
+    
+  
+    
+    
     override func viewWillAppear(_ animated: Bool) {
-       
+        
+       getDownloadCartCount()
+        
         if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
             
             if let dataObject = Mapper<LoginItem>().map(JSONString: dataArrayString)  {

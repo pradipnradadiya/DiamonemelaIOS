@@ -20,15 +20,15 @@ class OrderDetailCell: UITableViewCell {
             
             lblQtyPrice.text="\(priceFormat2("\(orderDetailData?.product_price ?? "")"))"
             
+            let qty = Int(Float(orderDetailData?.product_qty as! String)!)
             
-            lblQty.attributedText="QTY: \(orderDetailData?.product_qty ?? "")".withBoldText(text: "QTY:")
+            lblQty.attributedText="QTY: \(qty)".withBoldText(text: "QTY:")
             
             lblProductType.attributedText="Product Type: \(orderDetailData?.product_type ?? "")".withBoldText(text: "Product Type:")
             lblStoneDetail.attributedText="Stone Weight: \(orderDetailData?.product_stoneweight ?? "")".withBoldText(text: "Stone Weight:")
             lblMetalDetail.attributedText="Metal Detail: \(orderDetailData?.product_metalweight ?? "")".withBoldText(text: "Metal Detail:")
             lblSku.attributedText="Sku: \(orderDetailData?.product_sku ?? "")".withBoldText(text: "Sku:")
-           
-            
+                       
             imgProduct.sd_setImage(with: URL(string: (orderDetailData?.product_img)!), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
             
             
@@ -47,6 +47,7 @@ class OrderDetailCell: UITableViewCell {
     }
 
 }
+
 
 //extension String {
 //    func withBoldText(text: String, font: UIFont? = nil) -> NSAttributedString {

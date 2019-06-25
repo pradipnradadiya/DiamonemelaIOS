@@ -15,6 +15,10 @@ class OrderTabVC: UIViewController {
     let refreshControl = UIRefreshControl()
     var hasMoredata: Bool = false
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getDownloadCartCount()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

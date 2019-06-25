@@ -4,6 +4,16 @@ import RappleProgressHUD
 
 class ProductDetailVC: UIViewController {
 
+    var viewHeight:Int = 2400
+    
+    @IBOutlet weak var constraintDiamondTop: NSLayoutConstraint!
+    @IBOutlet weak var viewAboveDiamond: UIView!
+    @IBOutlet weak var constraintGemstoneHeight: NSLayoutConstraint!
+    @IBOutlet weak var viewGemstone: UIView!
+    @IBOutlet weak var constraintDiamondDetailTableHeight: NSLayoutConstraint!
+    @IBOutlet weak var constraintMainHeight: NSLayoutConstraint!
+    
+    
     @IBOutlet weak var constraintCustomJewelaryHeight: NSLayoutConstraint!
     
     @IBOutlet weak var constraintBraceletsHeight: NSLayoutConstraint!
@@ -37,10 +47,10 @@ class ProductDetailVC: UIViewController {
     @IBOutlet weak var constraintBangleHeight: NSLayoutConstraint!
     
     
-    var ringOptionId:String=""
-    var ringOptionTypeId:String=""
-    var stoneOptionId:String=""
-    var stoneOptionTypeId:String=""
+    static var ringOptionId:String=""
+    static var ringOptionTypeId:String=""
+    static var stoneOptionId:String=""
+    static var stoneOptionTypeId:String=""
     //var cProductId:String=""
     
     var productId:String = ""
@@ -109,12 +119,25 @@ class ProductDetailVC: UIViewController {
     
     var cProductId = "" , cCategoryId = "" ,cProductType = "", cSku = "", cRingSize = "", cBangle = "", cBracelet = "", cPendentSet = "", cMetalDetail = "", cMetalWeight = "", cStoneDetail = "", cStoneWeight = "", cPrice = "", cQty = "1", cImageUrl = "";
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getDownloadCartCount()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getProductDetail(productId: productId, metalCarat: ProductDetailVC.caratValue, metalQualityColor: ProductDetailVC.metalValue, ringSize: "", stoneQuality: ProductDetailVC.diamondValue, bangleProId: "", braceletProId: "", pendentProId: "")
         // Do any additional setup after loading the view.
     }
-    
+    func ScrollEnd() {
+        let lastSectionIndex = (self.gridDiamond?.numberOfSections)! - 1
+        let lastItemIndex = (self.gridDiamond.numberOfItems(inSection: lastSectionIndex)) - 1
+        let index =  IndexPath(item: lastItemIndex, section: lastSectionIndex)
+        if arrDiamond.count != 0{
+            self.gridDiamond!.scrollToItem(at: index, at: UICollectionView.ScrollPosition.bottom, animated: false)
+        }
+        
+    }
     @IBAction func btnBuynow(_ sender: Any) {
         
         cRingSize = ProductDetailVC.ringValue
@@ -127,32 +150,35 @@ class ProductDetailVC: UIViewController {
         
         
         if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
-            var ringOptionId:String = ""
-            var ringOptionTypeId:String = ""
-            var stoneOptionId:String
-            var stoneOptionTypeId:String
+            var ringsOptionId = String()
+            var ringsOptionTypeId = String()
+            var stonesOptionId = String()
+            var stonesOptionTypeId = String()
             
             
             if productType == "simple"{
-                ringOptionId = ""
-                ringOptionTypeId = ""
-                stoneOptionId = ""
-                stoneOptionTypeId = ""
+                ringsOptionId = ""
+                ringsOptionTypeId = ""
+                stonesOptionId = ""
+                stonesOptionTypeId = ""
                 
             }else{
                 if productCategoryId == RING_ID{
-                    ringOptionId = self.ringOptionId
-                    ringOptionTypeId = self.ringOptionTypeId
+                    ringsOptionId = ProductDetailVC.ringOptionId
+                    ringsOptionTypeId = ProductDetailVC.ringOptionTypeId
                 }else{
-                    ringOptionId = ""
-                    ringOptionTypeId = ""
+                    ringsOptionId = ""
+                    ringsOptionTypeId = ""
                 }
-                stoneOptionId = self.stoneOptionId
-                stoneOptionTypeId = self.stoneOptionTypeId
+                stonesOptionId = ProductDetailVC.stoneOptionId
+                stonesOptionTypeId = ProductDetailVC.stoneOptionTypeId
             }
             
             
-            self.buyNow(productId: cProductId, customerId: customerId, optionId: ringOptionId, optionTypeId: ringOptionTypeId, stoneOptionId: stoneOptionId, stoneOptionTypeId: stoneOptionTypeId, qty: "1")
+             self.buyNow(productId: cProductId, customerId: customerId, optionId: ringsOptionId, optionTypeId: ringsOptionTypeId, stoneOptionId: stonesOptionId, stoneOptionTypeId: stonesOptionTypeId, qty: cQty)
+            
+            
+//            self.buyNow(productId: cProductId, customerId: customerId, optionId: ringsOptionId, optionTypeId: ringsOptionTypeId, stonesOptionId: stoneOptionId, stonesOptionTypeId: stoneOptionTypeId, qty: "1")
             
         }
             
@@ -176,33 +202,33 @@ class ProductDetailVC: UIViewController {
         
         
         if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
-            var ringOptionId:String = ""
-            var ringOptionTypeId:String = ""
-            var stoneOptionId:String
-            var stoneOptionTypeId:String
+            var ringsOptionId = String()
+            var ringsOptionTypeId = String()
+            var stonesOptionId = String()
+            var stonesOptionTypeId = String()
             
             
             if productType == "simple"{
-                ringOptionId = ""
-                ringOptionTypeId = ""
-                stoneOptionId = ""
-                stoneOptionTypeId = ""
+                ringsOptionId = ""
+                ringsOptionTypeId = ""
+                stonesOptionId = ""
+                stonesOptionTypeId = ""
                 
             }else{
                 if productCategoryId == RING_ID{
-                    ringOptionId = self.ringOptionId
-                    ringOptionTypeId = self.ringOptionTypeId
+                    ringsOptionId = ProductDetailVC.ringOptionId
+                    ringsOptionTypeId = ProductDetailVC.ringOptionTypeId
                 }else{
-                    ringOptionId = ""
-                    ringOptionTypeId = ""
+                    ringsOptionId = ""
+                    ringsOptionTypeId = ""
                 }
-                stoneOptionId = self.stoneOptionId
-                stoneOptionTypeId = self.stoneOptionTypeId
+                stonesOptionId = ProductDetailVC.stoneOptionId
+                stonesOptionTypeId = ProductDetailVC.stoneOptionTypeId
             }
             
            
             
-            self.addToCart(productId: cProductId, customerId: customerId, optionId: ringOptionId, optionTypeId: ringOptionTypeId, stoneOptionId: stoneOptionId, stoneOptionTypeId: stoneOptionTypeId, qty: cQty)
+            self.addToCart(productId: cProductId, customerId: customerId, optionId: ringsOptionId, optionTypeId: ringsOptionTypeId, stoneOptionId: stonesOptionId, stoneOptionTypeId: stonesOptionTypeId, qty: cQty)
             
             
         }
@@ -273,8 +299,7 @@ class ProductDetailVC: UIViewController {
         }
         
     }
-    
-    
+  
 }
 
 extension ProductDetailVC{
@@ -305,6 +330,13 @@ extension ProductDetailVC{
               
                 
             } else {
+                //using gemstone
+                self.viewGemstone.isHidden = true
+                self.constraintGemstoneHeight.constant = 0
+                
+                self.viewHeight = self.viewHeight - 270
+                
+                
                 
                 let productDetailData=Mapper<ProductDetailItem>().map(JSON: result)
                 
@@ -314,8 +346,7 @@ extension ProductDetailVC{
                 print(productDetailData as Any)
                 
                 self.productCategoryId=(productDetailData?.category_id!)!
-                
-                
+               
                 
                 self.sliderImage = productDetailData?.slider ?? [""]
                 
@@ -359,6 +390,7 @@ extension ProductDetailVC{
                     self.viewBangle.isHidden = true
                     self.viewBracelet.isHidden = true
                     self.viewPendent.isHidden = true
+                    self.viewAboveDiamond.isHidden = true
                     
 //                    self.constraintRingHeight.constant = 0
 //                    self.constraintBangleHeight.constant = 0
@@ -371,7 +403,7 @@ extension ProductDetailVC{
                     self.constraintPendentHeight.constant = 0
                     self.constraintRingHeight.constant = 0
                     self.constraintBottonRingHeight.constant = 0
-                    
+                    self.constraintDiamondTop.constant = 8
                     
                 }
                 
@@ -397,23 +429,26 @@ extension ProductDetailVC{
                     self.constraintBottomCarat.constant = 0
                     self.constraintMetalHeight.constant = 0
                     self.constraintBottomMetal.constant = 0
+                    
+                    self.viewHeight = self.viewHeight - 432
+                 
      
                 }
                 
                 else{
                  
-                    self.constraintCustomJewelaryHeight.constant = 60
-                    self.constraintBangleHeight.constant = 90
-                    self.constraintBraceletsHeight.constant = 90
-                    self.constraintPendentHeight.constant = 90
-                    self.constraintRingHeight.constant = 90
-                    self.constraintBottonRingHeight.constant = 1
-                    self.constraintDiamondHeight.constant = 90
-                    self.constraintBottomDiamondHeight.constant = 1
-                    self.constraintCaratHeight.constant = 90
-                    self.constraintBottomCarat.constant = 1
-                    self.constraintMetalHeight.constant = 90
-                    self.constraintBottomMetal.constant = 1
+//                    self.constraintCustomJewelaryHeight.constant = 60
+//                    self.constraintBangleHeight.constant = 90
+//                    self.constraintBraceletsHeight.constant = 90
+//                    self.constraintPendentHeight.constant = 90
+//                    self.constraintRingHeight.constant = 90
+//                    self.constraintBottonRingHeight.constant = 1
+//                    self.constraintDiamondHeight.constant = 90
+//                    self.constraintBottomDiamondHeight.constant = 1
+//                    self.constraintCaratHeight.constant = 90
+//                    self.constraintBottomCarat.constant = 1
+//                    self.constraintMetalHeight.constant = 90
+//                    self.constraintBottomMetal.constant = 1
                     
                     
                     self.cProductId = (productDetailData?.simpleproductid)!
@@ -449,12 +484,15 @@ extension ProductDetailVC{
                     
                     if !self.arrRing.isEmpty{
                         self.gridRingSize.reloadData()
+                        self.gridRingSize?.scrollToItem(at: IndexPath(item: 9, section: 0), at: UICollectionView.ScrollPosition.right, animated: false)
                         
 //                        self.getProductDetailRefresh(productId: productId, metalCarat: ProductDetailVC.caratValue, metalQualityColor: ProductDetailVC.metalValue, ringSize: ProductDetailVC.ringValue, stoneQuality: ProductDetailVC.diamondValue, bangleProId: "", braceletProId: "", pendentProId: "", clickAction: "")
                         
                     }
                     
                     self.gridDiamond.reloadData()
+                   self.gridDiamond?.scrollToItem(at: IndexPath(item: self.arrDiamond.count - 1, section: 0), at: UICollectionView.ScrollPosition.right, animated: false)
+                    
                     self.gridCarat.reloadData()
                     
                     self.refreshAdapter()
@@ -466,12 +504,28 @@ extension ProductDetailVC{
                         self.gridRtsSlider.reloadData()
                     }else{
                         self.gridRtsHeight.constant = 0
+                        self.viewHeight = self.viewHeight - 230
                     }
                     
                 }
                 
                  self.arrDiamondDetail = (productDetailData?.diamonddetails)!
                  self.tblDiamondDetail.reloadData()
+                
+                if self.arrDiamondDetail.count > 0{
+                    self.viewHeight = self.viewHeight - 290
+                    let totalHeightDiamonDetail:Int = self.arrDiamondDetail.count * 290
+                    
+                    self.constraintDiamondDetailTableHeight.constant = CGFloat(totalHeightDiamonDetail)
+                    
+                    
+                    self.constraintMainHeight.constant = CGFloat(self.viewHeight + totalHeightDiamonDetail)
+                    
+                    
+                    
+                }else{
+                    
+                }
                 
                 
                 
@@ -567,6 +621,10 @@ extension ProductDetailVC{
                 //Diamond adapter
                 self.arrDiamond = (productDetail?.stone_clarity)!
                 self.gridDiamond.reloadData()
+                
+              
+                
+//                self.gridDiamond.scrollToItem(at: IndexPath, at: <#T##UICollectionView.ScrollPosition#>, animated: <#T##Bool#>)
               
                 if (self.productCategoryId == BANGLE_ID) || (self.productCategoryId == BRACELETS_ID) {
                     
@@ -680,7 +738,7 @@ extension ProductDetailVC{
                 
             } else {
                 self.showAlert(title: SUCCESS, message: result["message"] as? String ?? "")
-                
+                 self.getDownloadCartCount()
             }
             
         }
@@ -863,8 +921,8 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
             cell.actionClick = {
                 ProductDetailVC.ringValue = self.arrRing[indexPath.row].title!
                 
-                self.ringOptionId=self.arrRing[indexPath.row].option_id!
-                self.ringOptionTypeId=self.arrRing[indexPath.row].option_type_id!
+                ProductDetailVC.ringOptionId=self.arrRing[indexPath.row].option_id!
+                ProductDetailVC.ringOptionTypeId=self.arrRing[indexPath.row].option_type_id!
                 
                 self.filterClick(clickAction: "")
                 self.gridRingSize.reloadData()
@@ -928,13 +986,10 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
             
             cell.actionClick = {
                 ProductDetailVC.diamondValue = self.arrDiamond[indexPath.row].title!
-                self.stoneOptionId=self.arrDiamond[indexPath.row].option_id!
-                self.stoneOptionTypeId=self.arrDiamond[indexPath.row].option_type_id!
+                ProductDetailVC.stoneOptionId=self.arrDiamond[indexPath.row].option_id!
+                ProductDetailVC.stoneOptionTypeId=self.arrDiamond[indexPath.row].option_type_id!
                  self.filterClick(clickAction: "")
                 self.gridDiamond.reloadData()
-                
-                
-                
                
             }
             
@@ -963,7 +1018,7 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
                 }
                 
                 self.filterClick(clickAction: "carat")
-                 self.gridCarat.reloadData()
+                self.gridCarat.reloadData()
                 
                 
             }

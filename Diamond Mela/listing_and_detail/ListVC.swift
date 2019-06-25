@@ -23,7 +23,7 @@ class ListVC: UIViewController {
     var availability:String = ""
     var sort_by:String = "";
     
-      var sheetData = [SortFilterItem.Sort_by]()
+    var sheetData = [SortFilterItem.Sort_by]()
     
     @IBOutlet weak var gridList: UICollectionView!
     @IBOutlet weak var btnfilter: UIButtonX!
@@ -43,8 +43,8 @@ class ListVC: UIViewController {
           ProductDetailVC.bangleProductId = ""
           ProductDetailVC.braceletProductId = ""
           ProductDetailVC.pendentProId = ""
-        
-        
+          ProductDetailVC.ringOptionId = ""
+          ProductDetailVC.ringOptionTypeId = ""
         
         
         // Do any additional setup after loading the view.
@@ -65,6 +65,13 @@ class ListVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
        
+        
+        getDownloadCartCount()
+       
+        
+        
+        
+        
         if FilterVC.filterFlag == 1{
             
             self.pageCount = 1

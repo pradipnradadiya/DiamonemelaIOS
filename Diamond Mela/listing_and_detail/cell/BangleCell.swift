@@ -10,6 +10,7 @@ class BangleCell: UICollectionViewCell {
                 btnBangle.borderColor = UIColor.selectButtonColor
                 btnBangle.borderWidth = 1
                 btnBangle.setTitleColor(UIColor.selectButtonColor, for: .normal)
+               
             }else{
                 btnBangle.borderColor = UIColor.unSelectButtonColor
                 btnBangle.borderWidth = 1

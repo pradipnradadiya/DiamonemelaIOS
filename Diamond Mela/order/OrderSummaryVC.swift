@@ -12,7 +12,9 @@ class OrderSummaryVC: UIViewController {
     @IBOutlet weak var lblBillingAddress: UILabel!
     @IBOutlet weak var lblPaymentMethod: UILabel!
     
+    @IBOutlet weak var constraintTableHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var constraintMainHeight: NSLayoutConstraint!
     var arrOrderProduct = [OrderSummaryItem.Data]()
     
     
@@ -92,8 +94,19 @@ extension OrderSummaryVC{
     func reloadTable(){
         if self.arrOrderProduct.count > 0 {
             //            self.lblNoData.isHidden = true
+            
+            let totalHeight:Int = self.arrOrderProduct.count * 180
+            
+            constraintTableHeight.constant = CGFloat(50 + totalHeight)
+            
+            
+            self.constraintMainHeight.constant = CGFloat(530 + totalHeight)
+            
         } else {
             //            self.lblNoData.isHidden = false
+            
+            
+            
         }
         self.tblOrderSummary.reloadData()
     }

@@ -9,6 +9,11 @@ class DownloadDetailVC: UIViewController {
     @IBOutlet weak var imgProduct: UIImageView!
     var downloadItem : DownloadItem.Data?
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getDownloadCartCount()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

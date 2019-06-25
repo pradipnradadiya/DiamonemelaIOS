@@ -21,6 +21,15 @@ class ManageAddressVC: UIViewController {
     @IBOutlet weak var lblDefaultBillingCityState: UILabel!
     @IBOutlet weak var lblDefaultBillingAddress: UILabel!
     @IBOutlet weak var lblDefaultBillingName: UILabel!
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getDownloadCartCount()
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getAllAddress()

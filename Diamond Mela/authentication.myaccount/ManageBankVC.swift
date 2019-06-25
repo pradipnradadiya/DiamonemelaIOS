@@ -7,6 +7,11 @@ class ManageBankVC: UIViewController {
     var arrManageBank = [BankItem.Data]()
     @IBOutlet weak var tblManageBank: UITableView!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getDownloadCartCount()
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -10,44 +10,26 @@ class MyStockVC: UIViewController {
     var hasMoredata: Bool = false
         
     @IBOutlet weak var gridMyStock: UICollectionView!
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getDownloadCartCount()
+        
+    }
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // badge label
-        let label = UILabel(frame: CGRect(x: 10, y: -10, width: 20, height: 20))
-        label.layer.borderColor = UIColor.clear.cgColor
-        label.layer.borderWidth = 2
-        label.layer.cornerRadius = label.bounds.size.height / 2
-        label.textAlignment = .center
-        label.layer.masksToBounds = true
-//        label.font = UIFont(name: "SanFranciscoText-Light", size: 13)
-        label.textColor = .white
-        label.backgroundColor = .red
-        label.text = "80"
-        
-        // button
-        let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 18, height: 16))
-        rightButton.setBackgroundImage(UIImage(named: "cart_ic"), for: .normal)
-        rightButton.addTarget(self, action: #selector(rightButtonTouched), for: .touchUpInside)
-        rightButton.addSubview(label)
-        
-        // Bar button item
-        let rightBarButtomItem = UIBarButtonItem(customView: rightButton)
-        
-        navigationItem.rightBarButtonItem = rightBarButtomItem
-        
-        
-        
-        
+      //  self.cartDisplayWithCount(count: "1")
+    
         
         
         self.getMyStockProducts(group_id: groupId, pagesize: String(pageCount), price: "", gold_purity: "", diamonod_quality: "", diamond_shape: "", sku: "", availability: "", sort_by: "")
         // Do any additional setup after loading the view.
     }
     
-    @objc func rightButtonTouched() {
-        print("right button touched")
-    }
+   
     
     @IBAction func btnBack(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -58,6 +40,9 @@ class MyStockVC: UIViewController {
     }
     
 }
+
+
+
 
 extension MyStockVC{
     

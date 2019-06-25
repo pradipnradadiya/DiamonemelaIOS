@@ -62,18 +62,23 @@ func priceFormat(_ price: String)-> String {
     
 }
 
-
-
 func priceFormat2(_ price: String)-> String {
     let formatter = NumberFormatter()
     formatter.numberStyle = .currency
     formatter.locale = NSLocale.current
-    return formatter.string(from: NSNumber(value: Float(price)!))!
+    
+    var price:String  = formatter.string(from: NSNumber(value: Float(price)!))!
+    price.removeLast(3)
+    return price
+//    return formatter.string(from: NSNumber(value: Float(price)!))!
+    
     
 }
-
-
-
+extension Float {
+    var cleanValue: String {
+        return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
+    }
+}
 
 extension Dictionary {
     var prettyPrintedJSON: String? {
@@ -96,6 +101,102 @@ extension UIColor {
     
     
 }
+
+extension UIViewController{
+    
+    func cartDisplayWithCount(count:String){
+        // badge label
+        let label = UILabel(frame: CGRect(x: 12, y: -10, width: 20, height: 20))
+        label.layer.borderColor = UIColor.clear.cgColor
+        label.layer.borderWidth = 0
+        label.layer.cornerRadius = label.bounds.size.height / 2
+        label.textAlignment = .center
+        label.layer.masksToBounds = true
+        label.font = UIFont(name: "Montserrat-Regular", size: 8)
+        label.textColor = .white
+        label.backgroundColor = .black
+        label.text = count
+        //label.sizeToFit()
+        
+        if count == "0"{
+            label.isHidden = true
+        }
+        
+        // button
+        let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 18, height: 16))
+        rightButton.setBackgroundImage(UIImage(named: "cart_ic"), for: .normal)
+        rightButton.addTarget(self, action: #selector(rightButtonTouched), for: .touchUpInside)
+        rightButton.tintColor = UIColor.black
+        rightButton.addSubview(label)
+        
+        // Bar button item
+        let rightBarButtomItem = UIBarButtonItem(customView: rightButton)
+        
+        navigationItem.rightBarButtonItem = rightBarButtomItem
+    }
+    
+    
+    @objc func rightButtonTouched() {
+        print("right button touched")
+        if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
+            let cart = self.storyboard?.instantiateViewController(withIdentifier: "CartVC") as? CartVC
+            self.navigationController?.pushViewController(cart!, animated: true)
+        }
+            
+        else{
+            
+        }
+        
+        
+    }
+    
+    func getDownloadCartCount() {
+        let par = ["customer_id": customerId]
+        
+        //        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        ApiManager.shared.apiGetDownloadCartCount(params:par as [String : AnyObject]) { (result) in
+            
+            //            RappleActivityIndicatorView.stopAnimation()
+            
+            let status = result[STATUS_CODE] as? String
+            print(status as Any)
+            if status == FAILURE_CODE || status == nil {
+                
+            } else {
+                let total_qty = result["total_qty"] as? Int
+                let download_count = result["download_count"] as? Int
+                
+                
+                //Cart count
+                if total_qty != 0{
+                    self.cartDisplayWithCount(count: "\(total_qty ?? 0)")
+                    
+                }else{
+                    self.cartDisplayWithCount(count: "0")
+                }
+                
+                
+                //Download count
+                if download_count != 0{
+                   
+                }else{
+                    
+                }
+                
+            }
+            
+        }
+    }
+    
+    
+    
+    
+    
+}
+
+
+
+
 
 extension UIViewController {
     func showAlert(title: String, message: String) {

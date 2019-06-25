@@ -26,6 +26,12 @@ class EditContactInfoVC: UIViewController {
     @IBOutlet weak var tvFnm: JVFloatLabeledTextField!
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getDownloadCartCount()
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

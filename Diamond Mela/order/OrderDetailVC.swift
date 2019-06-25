@@ -3,6 +3,9 @@ import ObjectMapper
 import RappleProgressHUD
 class OrderDetailVC: UIViewController {
 
+    @IBOutlet weak var constraintTableHeight: NSLayoutConstraint!
+    @IBOutlet weak var constraintMainHeight: NSLayoutConstraint!
+    @IBOutlet weak var lblOrderStatus: UILabel!
     @IBOutlet weak var lblGrandTotal: UILabel!
     @IBOutlet weak var lblTax: UILabel!
     @IBOutlet weak var lblShippingCharge: UILabel!
@@ -21,8 +24,17 @@ class OrderDetailVC: UIViewController {
     var status:String = ""
     var arrOrderDetail = [OrderDetailItem.Order_item]()
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getDownloadCartCount()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        constraintMainHeight.constant = 900
+        self.lblOrderStatus.text="Order Status: \(status)"
+        
         
         if status == "Pending" {
             buttonCancelOrder.isEnabled = true
@@ -173,8 +185,7 @@ extension OrderDetailVC{
 //                let print = self.storyboard?.instantiateViewController(withIdentifier: "PrintVC") as? PrintVC
 //                print?.printFile = pdfUrl!
 //                self.navigationController?.pushViewController(print!, animated: true)
-               
-                
+              
                 
             }
             
@@ -184,8 +195,19 @@ extension OrderDetailVC{
     func reloadTable() {
         if self.arrOrderDetail.count > 0 {
             //            self.lblNoData.isHidden = true
+            
+            let totalHeight:Int = self.arrOrderDetail.count * 200
+            
+            constraintTableHeight.constant = CGFloat(60 + totalHeight)
+            
+            
+            self.constraintMainHeight.constant = CGFloat(700 + totalHeight)
+            
         } else {
             //            self.lblNoData.isHidden = false
+           
+           
+            
         }
         self.tblOrderDetail.reloadData()
     }

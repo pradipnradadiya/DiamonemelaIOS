@@ -16,6 +16,14 @@ class TransactionVC: UIViewController {
     @IBOutlet weak var lblCredit: UILabel!
     @IBOutlet weak var lblDeposit: UILabel!
     @IBOutlet weak var lblDebit: UILabel!
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getDownloadCartCount()
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getTransactionList(showLoader: true)

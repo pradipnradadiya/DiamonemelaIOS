@@ -2,7 +2,8 @@ import UIKit
 
 class FilterVC: UIViewController {
 
-   
+    @IBOutlet weak var tvSku: UITextField!
+    
      var arrFilterDataCopy = [SortFilterItem.Data]()
     
     @IBOutlet weak var tblFilterData: UITableView!
@@ -16,7 +17,7 @@ class FilterVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.tvSku.addDoneButtonOnKeyboard()
         
         arrFilterDataCopy=arrFilterData
         

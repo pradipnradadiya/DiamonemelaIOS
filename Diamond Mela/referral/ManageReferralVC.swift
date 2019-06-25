@@ -13,6 +13,12 @@ class ManageReferralVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getDownloadCartCount()
+    }
+    
+    
     @IBAction func btnCart(_ sender: Any) {
     }
     @IBAction func btnSearch(_ sender: Any) {

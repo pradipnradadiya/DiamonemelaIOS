@@ -6,6 +6,8 @@ import FSPagerView
 
 class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
 
+    @IBOutlet weak var lblCartCount: UILabelX!
+    
     @IBOutlet weak var pagerView: FSPagerView!{
         didSet {
             self.pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
@@ -13,7 +15,8 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
         }
     }
     
-    fileprivate let imageNames = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg"]
+    @IBOutlet weak var btnCaClick: UIButton!
+    //  fileprivate let imageNames = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg"]
     fileprivate let transformerNames = ["cross fading", "zoom out", "depth", "linear", "overlap", "ferris wheel", "inverted ferris wheel", "coverflow", "cubic"]
     
     
@@ -79,8 +82,22 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
         
         arrFilterData.removeAll()
         
+        self.getCartCount()
+        
+        
     }
     
+    @IBAction func btnCarClick(_ sender: Any) {
+        if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
+            let cart = self.storyboard?.instantiateViewController(withIdentifier: "CartVC") as? CartVC
+            self.navigationController?.pushViewController(cart!, animated: true)
+        }
+            
+        else{
+            
+        }
+        
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -117,7 +134,7 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
         
         
         //using slide drawer
-        menu_vc=self.storyboard?.instantiateViewController(withIdentifier: "DrawerVC") as! DrawerVC
+        menu_vc=self.storyboard?.instantiateViewController(withIdentifier: "DrawerVC") as? DrawerVC
         
         
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToGesture))
@@ -250,6 +267,48 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
 }
 
 extension HomeVC{
+    
+    func getCartCount() {
+        let par = ["customer_id": customerId]
+        
+        //        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        ApiManager.shared.apiGetDownloadCartCount(params:par as [String : AnyObject]) { (result) in
+            
+            //            RappleActivityIndicatorView.stopAnimation()
+            
+            let status = result[STATUS_CODE] as? String
+            print(status as Any)
+            if status == FAILURE_CODE || status == nil {
+                
+            } else {
+                let total_qty = result["total_qty"] as? Int
+                let download_count = result["download_count"] as? Int
+                
+                
+                //Cart count
+                if total_qty != 0{
+                    self.lblCartCount.isHidden = false
+                    self.lblCartCount.text = "\(total_qty ?? 0)"
+                    
+                }else{
+                    self.lblCartCount.isHidden = true
+                }
+                
+                
+                //Download count
+                if download_count != 0{
+                    
+                }else{
+                    
+                }
+                
+            }
+            
+        }
+    }
+    
+    
+    
     
     func getPopularProduct(url:String){
 //        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)

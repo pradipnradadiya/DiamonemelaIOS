@@ -8,6 +8,10 @@ class SearchVC: UIViewController {
     @IBOutlet weak var tvSearch: UITextField!
      var arrHeader = [HeaderItem.Data]()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getDownloadCartCount()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
