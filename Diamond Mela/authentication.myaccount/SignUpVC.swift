@@ -47,10 +47,17 @@ class SignUpVC: UIViewController , UIPickerViewDataSource, UIPickerViewDelegate 
     }
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         pickerView.delegate = self
+        selectCountry.addTarget(self, action: #selector(textFieldDidChange(_:)),
+                                for: UIControl.Event.editingChanged)
+        
+       // selectCountry.inputView = selectCountryScreen()
+        
+        
+        pickerView.delegate = self
         pickerViewCommunity.delegate = self
         
         ///
@@ -83,6 +90,15 @@ class SignUpVC: UIViewController , UIPickerViewDataSource, UIPickerViewDelegate 
       
         
     }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        selectCountryScreen()
+    }
+    
+    @objc func textFieldDidChangeState(_ textField: UITextField) {
+        selectStateScreen()
+    }
+    
     @objc func cancelTapped() {
         tvEntity.resignFirstResponder()
          tvCommunity.resignFirstResponder()
@@ -126,15 +142,7 @@ class SignUpVC: UIViewController , UIPickerViewDataSource, UIPickerViewDelegate 
     
     
     @IBAction func btnSelectState(_ sender: Any) {
-        let state=self.storyboard?.instantiateViewController(withIdentifier: "SelectStateVC") as! SelectStateVC
-        state.countryId = country_id
-        state.myCompletion = { sdas, ds in
-            print(sdas)
-            self.region_name = sdas
-            self.region_id = ds
-            self.tvState.text = self.region_name
-        }
-        self.navigationController?.pushViewController(state, animated: true)
+      selectStateScreen()
     }
     
     @IBAction func btnCrateAccount(_ sender: Any) {
@@ -206,6 +214,11 @@ class SignUpVC: UIViewController , UIPickerViewDataSource, UIPickerViewDelegate 
     }
     
     @IBAction func btnSelectCountry(_ sender: Any) {
+       selectCountryScreen()
+        
+    }
+    
+    func selectCountryScreen(){
         let country=self.storyboard?.instantiateViewController(withIdentifier: "SelectCountryVC") as! SelectCountryVC
         country.arrCountry = countryData
         country.myCompletion = { sdas, ds in
@@ -216,14 +229,28 @@ class SignUpVC: UIViewController , UIPickerViewDataSource, UIPickerViewDelegate 
             
             if self.country_id == "IN" {
                 self.btnState.isHidden = false
+                self.tvState.addTarget(self, action: #selector(self.textFieldDidChangeState(_:)),
+                                        for: UIControl.Event.editingChanged)
             }else{
                 self.btnState.isHidden = true
             }
-      
+            
         }
         
         self.navigationController?.pushViewController(country, animated: true)
-        
+    }
+    
+    
+    func selectStateScreen(){
+        let state=self.storyboard?.instantiateViewController(withIdentifier: "SelectStateVC") as! SelectStateVC
+        state.countryId = country_id
+        state.myCompletion = { sdas, ds in
+            print(sdas)
+            self.region_name = sdas
+            self.region_id = ds
+            self.tvState.text = self.region_name
+        }
+        self.navigationController?.pushViewController(state, animated: true)
     }
     
     @IBAction func itemBack(_ sender: Any) {

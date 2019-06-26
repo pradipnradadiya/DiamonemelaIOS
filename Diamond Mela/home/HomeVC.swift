@@ -231,9 +231,7 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
     // MARK:- FSPagerViewDataSource
     
     public func numberOfItems(in pagerView: FSPagerView) -> Int {
-      
         return arrPopularProducts.count
-        
     }
     
     public func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
@@ -247,7 +245,9 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
         cell.imageView?.contentMode = .scaleAspectFill
         cell.imageView?.clipsToBounds = true
         return cell
+        
     }
+    
     
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
         pagerView.deselectItem(at: index, animated: true)

@@ -61,7 +61,6 @@ extension ManageReferralVC{
                 
             } else {
                 let referralData=Mapper<ReferralItem.Data>().mapArray(JSONArray: result["data"] as! [[String : Any]])
-                
                     self.tblManageReferral.reloadData()
                     self.arrReferral = referralData
                     self.reloadTable()
@@ -117,9 +116,35 @@ extension ManageReferralVC: UITableViewDelegate, UITableViewDataSource {
         let cell = self.tblManageReferral.dequeueReusableCell(withIdentifier: "ReferralListCell", for: indexPath) as? ReferralListCell
             cell?.referralData = self.arrReferral[indexPath.row]
         cell?.actionBlockDelete =  {
-            self.deleteReferral(referralCustomerId: self.arrReferral[indexPath.row].entity_id!)
-            self.arrReferral.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            // Declare Alert
+            let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to delete Referrals?", preferredStyle: .alert)
+            
+            // Create OK button with action handler
+            let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+                print("Ok button click...")
+                
+                self.deleteReferral(referralCustomerId: self.arrReferral[indexPath.row].entity_id!)
+                self.arrReferral.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                
+            })
+            
+            // Create Cancel button with action handlder
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
+                print("Cancel button click...")
+            }
+            
+            //Add OK and Cancel button to dialog message
+            dialogMessage.addAction(ok)
+            dialogMessage.addAction(cancel)
+            
+            // Present dialog message to user
+            self.present(dialogMessage, animated: true, completion: nil)
+            
+          
+            
+            
         }
         
         return cell!

@@ -3,6 +3,8 @@ import ObjectMapper
 import RappleProgressHUD
 class OrderDetailVC: UIViewController {
 
+    @IBOutlet weak var imgCancel: UIImageView!
+    @IBOutlet weak var imgPrint: UIImageView!
     @IBOutlet weak var constraintTableHeight: NSLayoutConstraint!
     @IBOutlet weak var constraintMainHeight: NSLayoutConstraint!
     @IBOutlet weak var lblOrderStatus: UILabel!
@@ -39,14 +41,20 @@ class OrderDetailVC: UIViewController {
         if status == "Pending" {
             buttonCancelOrder.isEnabled = true
             btnPrintOrder.isEnabled = false
+            imgPrint.tintColor = UIColor.gray
+            
             
         }else if status == "Complete"{
             buttonCancelOrder.isEnabled = false
             btnPrintOrder.isEnabled = true
+            imgCancel.tintColor = UIColor.gray
+            
             
         }else if status == "Canceled"{
             buttonCancelOrder.isEnabled = false
             btnPrintOrder.isEnabled = false
+            imgPrint.tintColor = UIColor.gray
+            imgCancel.tintColor = UIColor.gray
         }
         
         
@@ -157,34 +165,36 @@ extension OrderDetailVC{
                 let pdfUrl = result["pdf"] as? String
                
                 
-                let printController = UIPrintInteractionController.shared
-            
-                let printInfo = UIPrintInfo(dictionary:nil)
-                printInfo.outputType = UIPrintInfo.OutputType.general
-                printInfo.jobName = "Order invoice"
-                printInfo.duplex = UIPrintInfo.Duplex.none
-                printInfo.orientation = UIPrintInfo.Orientation.portrait
-                
-                let link:URL = URL.init(string: pdfUrl!)!
-                print(link.absoluteString)
-                //New stuff
-               // printController.printPageRenderer = nil
-               // printController.printingItems = nil
-                printController.printingItem = link.absoluteString
-                //New stuff
-                
-                printController.printInfo = printInfo
-                printController.showsPageRange = true
-                printController.showsNumberOfCopies = true
-               // printController.present(animated: true, completionHandler: nil)
-                
-                
-                printController.present(animated: true, completionHandler: nil)
+//                let printController = UIPrintInteractionController.shared
+//
+//                let printInfo = UIPrintInfo(dictionary:nil)
+//                printInfo.outputType = UIPrintInfo.OutputType.general
+//                printInfo.jobName = "Order invoice"
+//                printInfo.duplex = UIPrintInfo.Duplex.none
+//                printInfo.orientation = UIPrintInfo.Orientation.portrait
+//
+//                let link:URL = URL.init(string: pdfUrl!)!
+//                print(link.absoluteString)
+//                //New stuff
+//               // printController.printPageRenderer = nil
+//               // printController.printingItems = nil
+//                printController.printingItem = link.absoluteString
+//                //New stuff
+//
+//                printController.printInfo = printInfo
+//                printController.showsPageRange = true
+//                printController.showsNumberOfCopies = true
+//               // printController.present(animated: true, completionHandler: nil)
+//
+//
+//                printController.present(animated: true, completionHandler: nil)
                 
 //                printController.present(from: btnPrintOrder, animated: true, completionHandler: nil)
-//                let print = self.storyboard?.instantiateViewController(withIdentifier: "PrintVC") as? PrintVC
-//                print?.printFile = pdfUrl!
-//                self.navigationController?.pushViewController(print!, animated: true)
+                
+                
+                let print = self.storyboard?.instantiateViewController(withIdentifier: "PrintVC") as? PrintVC
+                print?.printFile = pdfUrl!
+                self.navigationController?.pushViewController(print!, animated: true)
               
                 
             }

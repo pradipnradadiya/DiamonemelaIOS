@@ -898,7 +898,6 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
         if collectionView==self.gridPager{
             let cell = self.gridPager.dequeueReusableCell(withReuseIdentifier: "SliderPagerCell", for: indexPath) as! SliderPagerCell
             cell.slider = [self.sliderImage[indexPath.row]]
-            
             return cell
         }
             

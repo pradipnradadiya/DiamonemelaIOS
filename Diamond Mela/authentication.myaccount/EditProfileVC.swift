@@ -46,7 +46,6 @@ class EditProfileVC: UIViewController {
             }
         }
         
-        
     }
     
     override func viewDidLoad() {
@@ -54,7 +53,7 @@ class EditProfileVC: UIViewController {
         self.getAllAddress()
         viewBank.isHidden = true
         constraintBankView.constant = 0
-        constraintFullHeight.constant = 1000
+        constraintFullHeight.constant = 800
         // Do any additional setup after loading the view.
     }
     
@@ -89,7 +88,7 @@ class EditProfileVC: UIViewController {
     @IBAction func btnCancel(_ sender: Any) {
         viewBank.isHidden = true
         constraintBankView.constant = 0
-        constraintFullHeight.constant = 1000
+        constraintFullHeight.constant = 800
     }
     
     @IBAction func btnSave(_ sender: Any) {
@@ -104,7 +103,7 @@ class EditProfileVC: UIViewController {
         }else if (tvBranchName.text?.isEmpty)!{
             showAlert(title: "", message: "Please branch name.")
         }else{
-        self.addBank()
+            self.addBank()
         }
         
     }

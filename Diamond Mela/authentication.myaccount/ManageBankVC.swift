@@ -38,7 +38,7 @@ class ManageBankVC: UIViewController {
 extension ManageBankVC{
     
     func getBankList(showLoader: Bool = false) {
-        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+//        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         
         if showLoader {
             RESpinner.shared.show(view: self.view)
@@ -48,7 +48,7 @@ extension ManageBankVC{
         
         ApiManager.shared.apiListBank(params:par as [String : AnyObject]) { (result) in
             
-            RappleActivityIndicatorView.stopAnimation()
+//            RappleActivityIndicatorView.stopAnimation()
              RESpinner.shared.hide()
             let status = result[STATUS_CODE] as? String
             
@@ -135,17 +135,40 @@ extension ManageBankVC: UITableViewDelegate, UITableViewDataSource {
         let cell = self.tblManageBank.dequeueReusableCell(withIdentifier: "ManageBankCell", for: indexPath) as? ManageBankCell
         cell?.bankData = self.arrManageBank[indexPath.row]
         cell?.actionBlockDelete = {
-            print("delete click")
-            self.deleteBank(bankId: self.arrManageBank[indexPath.row].bank_id!)
-            self.arrManageBank.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            // Declare Alert
+            let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to delete bank?", preferredStyle: .alert)
+            
+            // Create OK button with action handler
+            let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+                
+                print("delete click")
+                self.deleteBank(bankId: self.arrManageBank[indexPath.row].bank_id!)
+                self.arrManageBank.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                
+            })
+            
+            // Create Cancel button with action handlder
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
+                print("Cancel button click...")
+            }
+            
+            //Add OK and Cancel button to dialog message
+            dialogMessage.addAction(ok)
+            dialogMessage.addAction(cancel)
+            
+            // Present dialog message to user
+            self.present(dialogMessage, animated: true, completion: nil)
+      
+            
         }
         
         cell?.actionBlockEdit = {
             print("edit click")
             
             //1. Create the alert controller.
-            let alert = UIAlertController(title: "Edit", message: "Edit a bank detail", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Bank Detail", message: "Edit a bank detail", preferredStyle: .alert)
             
             //2. Add the text field. You can configure it however you need.
             alert.addTextField { (textField) in
@@ -184,6 +207,10 @@ extension ManageBankVC: UITableViewDelegate, UITableViewDataSource {
                 
                 
             }))
+            
+             alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { [weak alert] (_) in
+                
+                 }))
             
             // 4. Present the alert.
             self.present(alert, animated: true, completion: nil)
