@@ -84,6 +84,10 @@ class ProductDetailVC: UIViewController {
     var arrDiamondDetail = [ProductDetailItem.Diamonddetails]()
     var arrDiamondDetailRTS = [RTSItem.Diamonddetails]()
     
+    //cart array dictionry
+     var arrayOfDict = [[String: String]]()
+    var dictCart =  [String: String]()
+    
     @IBOutlet weak var viewRing: UIView!
     @IBOutlet weak var viewPendent: UIView!
     @IBOutlet weak var viewBangle: UIView!
@@ -126,6 +130,12 @@ class ProductDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if (UserDefaults.standard.array(forKey: CART_USERDEFAULTS)) != nil {
+             arrayOfDict = userSessionData.value(forKey: CART_USERDEFAULTS) as! [[String : String]]
+        }
+        
+        
         self.getProductDetail(productId: productId, metalCarat: ProductDetailVC.caratValue, metalQualityColor: ProductDetailVC.metalValue, ringSize: "", stoneQuality: ProductDetailVC.diamondValue, bangleProId: "", braceletProId: "", pendentProId: "")
         // Do any additional setup after loading the view.
     }
@@ -183,15 +193,32 @@ class ProductDetailVC: UIViewController {
         }
             
         else{
-            
-            
+       
+          showAlert(title: "ALERT", message: "Please first login.")
             
         }
         
     }
     
     @IBAction func btnAddtoCart(_ sender: Any) {
+    
         
+//        arrayOfDict = userSessionData.value(forKey: "CART") as! [[String : String]]
+        
+//        print(arrayOfDict[0][PRODUCT_ID] as Any)
+        
+        //arrayOfDict.remove(at: 1)
+//        arrayOfDict[0][PRODUCT_ID] = "pradip"
+        
+        
+        
+        var ringsOptionId = String()
+        var ringsOptionTypeId = String()
+        var stonesOptionId = String()
+        var stonesOptionTypeId = String()
+        
+        cMetalDetail = "\(ProductDetailVC.caratValue) \(ProductDetailVC.metalValue)"
+        cStoneDetail = "\(ProductDetailVC.diamondValue)"
         cRingSize = ProductDetailVC.ringValue
         cBangle = ProductDetailVC.bangleProductValue
         cBracelet = ProductDetailVC.braceletProductValue
@@ -202,10 +229,6 @@ class ProductDetailVC: UIViewController {
         
         
         if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
-            var ringsOptionId = String()
-            var ringsOptionTypeId = String()
-            var stonesOptionId = String()
-            var stonesOptionTypeId = String()
             
             
             if productType == "simple"{
@@ -235,6 +258,138 @@ class ProductDetailVC: UIViewController {
         
         else{
            
+            if arrayOfDict.isEmpty{
+                if productType == "simple"{
+                    ringsOptionId = ""
+                    ringsOptionTypeId = ""
+                    stonesOptionId = ""
+                    stonesOptionTypeId = ""
+                }else{
+                    if productCategoryId == RING_ID{
+                        ringsOptionId = ProductDetailVC.ringOptionId
+                        ringsOptionTypeId = ProductDetailVC.ringOptionTypeId
+                    }else{
+                        ringsOptionId = ""
+                        ringsOptionTypeId = ""
+                    }
+                    stonesOptionId = ProductDetailVC.stoneOptionId
+                    stonesOptionTypeId = ProductDetailVC.stoneOptionTypeId
+                }
+                cProductType = productType
+                cCategoryId = productCategoryId
+                
+                
+                dictCart[PRODUCT_ID] = cProductId
+                dictCart[CATEGORY_ID] = cCategoryId
+                dictCart[PRODUCT_TYPE] = cProductType
+                dictCart[SKU] = cSku
+                dictCart[RING_SIZE] = cRingSize
+                dictCart[BANGLE_SIZE] = cBangle
+                dictCart[BRACELET_SIZE] = cBracelet
+                dictCart[PENDENT_SET_TYPE] = cPendentSet
+                dictCart[METAL_DETAIL] = "\(cMetalDetail) \(cMetalWeight) "
+                dictCart[STONE_DETAIL] = "\(cStoneDetail) \(cStoneWeight)"
+                dictCart[PRICE] = cPrice
+                dictCart[QTY] = cQty
+                dictCart[PRODUCT_IMAGE] = cImageUrl
+                dictCart[RING_OPTION_ID] = ringsOptionId
+                dictCart[RING_OPTION_TYPE_ID] = ringsOptionTypeId
+                dictCart[STONE_OPTION_ID] = stonesOptionId
+                dictCart[STONE_OPTION_TYPE_ID] = stonesOptionTypeId
+                
+                arrayOfDict.append(dictCart)
+                
+                userSessionData.set(arrayOfDict, forKey: CART_USERDEFAULTS)
+                
+                showAlert(title: SUCCESS, message: "Item added to cart.")
+                 self.getDownloadCartCount()
+                
+                
+            }else{
+                var i:Int = 0
+                for _ in arrayOfDict{
+                    
+                    if arrayOfDict[i][PRODUCT_ID] == cProductId{
+                        showAlert(title: "CART", message: "Product is already in cart")
+                    }else{
+                        
+                        if productType == "simple"{
+                            ringsOptionId = ""
+                            ringsOptionTypeId = ""
+                            stonesOptionId = ""
+                            stonesOptionTypeId = ""
+                        }else{
+                            if productCategoryId == RING_ID{
+                                ringsOptionId = ProductDetailVC.ringOptionId
+                                ringsOptionTypeId = ProductDetailVC.ringOptionTypeId
+                                
+                            }else{
+                                ringsOptionId = ""
+                                ringsOptionTypeId = ""
+                                cRingSize = ""
+                            }
+                            stonesOptionId = ProductDetailVC.stoneOptionId
+                            stonesOptionTypeId = ProductDetailVC.stoneOptionTypeId
+                        }
+                        cProductType = productType
+                        cCategoryId = productCategoryId
+                        
+                        
+                        print(cProductId)
+                        print(cCategoryId)
+                        print(cProductType)
+                        print(cSku)
+                        print(cRingSize)
+                        print(cBangle)
+                        print(cBracelet)
+                        print(cPendentSet)
+                        print("\(cMetalDetail) \(cMetalWeight) ")
+                        print("\(cStoneDetail) \(cStoneWeight)")
+                        print(cPrice)
+                        print(cQty)
+                        print(cImageUrl)
+                        print(ringsOptionId)
+                        print(ringsOptionTypeId)
+                        print(stonesOptionId)
+                        print(stonesOptionTypeId)
+                        
+                       
+                        dictCart[PRODUCT_ID] = cProductId
+                        dictCart[CATEGORY_ID] = cCategoryId
+                        dictCart[PRODUCT_TYPE] = cProductType
+                        dictCart[SKU] = cSku
+                        dictCart[RING_SIZE] = cRingSize
+                        dictCart[BANGLE_SIZE] = cBangle
+                        dictCart[BRACELET_SIZE] = cBracelet
+                        dictCart[PENDENT_SET_TYPE] = cPendentSet
+                        dictCart[METAL_DETAIL] = "\(cMetalDetail) \(cMetalWeight) "
+                        dictCart[STONE_DETAIL] = "\(cStoneDetail) \(cStoneWeight)"
+                        dictCart[PRICE] = cPrice
+                        dictCart[QTY] = cQty
+                        dictCart[PRODUCT_IMAGE] = cImageUrl
+                        dictCart[RING_OPTION_ID] = ringsOptionId
+                        dictCart[RING_OPTION_TYPE_ID] = ringsOptionTypeId
+                        dictCart[STONE_OPTION_ID] = stonesOptionId
+                        dictCart[STONE_OPTION_TYPE_ID] = stonesOptionTypeId
+                        
+                        arrayOfDict.append(dictCart)
+                        
+                        userSessionData.set(arrayOfDict, forKey: CART_USERDEFAULTS)
+                        
+                        
+                        showAlert(title: SUCCESS, message: "Item added to cart.")
+                         self.getDownloadCartCount()
+                        
+                   
+                        
+                    }
+                    
+                    i += 1
+                    
+                }
+            }
+           
+            
             
             
         }
@@ -349,6 +504,7 @@ extension ProductDetailVC{
                
                 
                 self.sliderImage = productDetailData?.slider ?? [""]
+                self.cImageUrl = productDetailData?.slider?[0] ?? ""
                 
                 self.gridPager.reloadData()
                 self.gridSlider.reloadData()
@@ -537,6 +693,7 @@ extension ProductDetailVC{
                 self.lblProductCertificateNo.text=productDetailData?.product_details?[0].certificate_no
               
                 self.lblGrandTotal.text=priceFormat2("\(productDetailData?.product_details?[0].price ?? "")")
+                self.cPrice = "\(productDetailData?.product_details?[0].price ?? "")"
                 
                 //metal detail
                 self.lblMetalPurity.text=productDetailData?.metaldetails?[0].metalquality
@@ -691,6 +848,7 @@ extension ProductDetailVC{
                 self.lblProductCertificateNo.text=productDetail?.product_details?[0].certificate_no
                 
                 self.lblGrandTotal.text=priceFormat2("\(productDetail?.product_details?[0].price ?? "")")
+                 self.cPrice = "\(productDetail?.product_details?[0].price ?? "")"
                 
                 //metal detail
                 self.lblMetalPurity.text=productDetail?.metaldetails?[0].metalquality
@@ -825,6 +983,7 @@ extension ProductDetailVC{
                 self.lblProductCertificateNo.text=rtsDetail?.product_details?[0].certificate_no
                 
                 self.lblGrandTotal.text=priceFormat2("\(rtsDetail?.product_details?[0].price ?? "")")
+                self.cPrice = "\(rtsDetail?.product_details?[0].price ?? "")"
                 
                 //metal detail
                 self.lblMetalPurity.text=rtsDetail?.metaldetails?[0].metalquality

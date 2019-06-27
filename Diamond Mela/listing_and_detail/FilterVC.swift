@@ -38,7 +38,6 @@ class FilterVC: UIViewController {
         }
         
         
-        
 //        print(arrFilterData[0].label)
         // Do any additional setup after loading the view.
     }
@@ -76,7 +75,6 @@ extension FilterVC{
         } else {
             //            self.lblNoData.isHidden = false
         }
-        
         self.tblFilterTitle.reloadData()
     }
     

@@ -175,7 +175,9 @@ class DrawerVC: UIViewController {
         }
             
         else{
-            
+            self.closeDrawer()
+            let cart = self.storyboard?.instantiateViewController(withIdentifier: "CartVC") as? CartVC
+            self.navigationController?.pushViewController(cart!, animated: true)
         }
         
         

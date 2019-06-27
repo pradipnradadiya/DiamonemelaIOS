@@ -56,6 +56,7 @@ let USER_SESSION_DATA_KEY:String="user_data_key"
 let BILLING_USERDEFAULTS:String="billing"
 let SHIPPING_USERDEFAULTS:String="shipping"
 let INDIA_CODE:String="IN"
+let CART_USERDEFAULTS = "CART"
 
 
 //validation message
@@ -73,3 +74,24 @@ var arrFilterData = [SortFilterItem.Data]()
 
 let w :Float = 50
 let h :Float = 45
+
+
+
+let ID = "id";
+let PRODUCT_ID = "product_id";
+let CATEGORY_ID = "category_id";
+let PRODUCT_TYPE = "category_type";
+let SKU = "sku";
+let RING_SIZE = "ring_size";
+let RING_OPTION_ID = "option_id";
+let RING_OPTION_TYPE_ID = "option_type_id";
+let BANGLE_SIZE = "bangle_size";
+let BRACELET_SIZE = "bracelet_size";
+let PENDENT_SET_TYPE = "pendent_set_type";
+let METAL_DETAIL = "metal_detail";
+let STONE_DETAIL = "stone_detail";
+let STONE_OPTION_ID = "stone_option_id";
+let STONE_OPTION_TYPE_ID = "stone_option_type_id";
+let PRICE = "price";
+let QTY = "qty";
+let PRODUCT_IMAGE = "pro_image";

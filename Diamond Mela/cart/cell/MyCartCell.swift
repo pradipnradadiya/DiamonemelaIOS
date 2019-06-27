@@ -19,6 +19,7 @@ class MyCartCell: UITableViewCell {
     
     var myCart:CartProductListItem.Data?{
         didSet{
+            
             lblSku.attributedText = "Sku: \(myCart?.sku ?? "")".withBoldText(text: "Sku:")
             lblQty.text="\(myCart?.qty ?? 0)"
             lblPrice.text=priceFormat2("\(myCart?.price ?? "")")
@@ -33,13 +34,13 @@ class MyCartCell: UITableViewCell {
                 lblSize.attributedText="Ring Size: \(myCart?.ringsize ?? "")".withBoldText(text: "Ring Size:")
             }else if myCart?.bracelets != nil{
                  lblSize.isHidden = false
-                lblSize.attributedText="Bracelet Size: \(myCart?.ringsize ?? "")".withBoldText(text: "Bracelet Size:")
+                lblSize.attributedText="Bracelet Size: \(myCart?.bracelets ?? "")".withBoldText(text: "Bracelet Size:")
             }else if myCart?.bangles != nil{
                  lblSize.isHidden = false
-                lblSize.attributedText="Bangle Size: \(myCart?.ringsize ?? "")".withBoldText(text: "Bangle Size:")
+                lblSize.attributedText="Bangle Size: \(myCart?.bangles ?? "")".withBoldText(text: "Bangle Size:")
             }else if myCart?.pendents != nil{
                  lblSize.isHidden = false
-                lblSize.attributedText="Pendent Size: \(myCart?.ringsize ?? "")".withBoldText(text: "Pendent Size:")
+                lblSize.attributedText="Pendent Size: \(myCart?.pendents ?? "")".withBoldText(text: "Pendent Size:")
             }else{
                 lblSize.isHidden = true
             }

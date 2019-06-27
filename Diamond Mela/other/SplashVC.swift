@@ -47,8 +47,8 @@ extension SplashVC{
                     self.navigationController?.pushViewController(homeVC!, animated: true)
                     
                 }else{
-                    let login = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC
-                  
+                    let login = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? HomeVC
+                    login?.arrPopularProducts = self.arrPopularProducts
                     self.navigationController?.pushViewController(login!, animated: true)
                 }
                 

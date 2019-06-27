@@ -33,18 +33,7 @@ class ListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-          ProductDetailVC.caratValue = "14K"
-          ProductDetailVC.metalValue = "Yellow Gold"
-          ProductDetailVC.diamondValue = "SI-IJ"
-          ProductDetailVC.ringValue = "12"
-          ProductDetailVC.braceletProductValue = ""
-          ProductDetailVC.bangleProductValue = ""
-          ProductDetailVC.pendentValue = ""
-          ProductDetailVC.bangleProductId = ""
-          ProductDetailVC.braceletProductId = ""
-          ProductDetailVC.pendentProId = ""
-          ProductDetailVC.ringOptionId = ""
-          ProductDetailVC.ringOptionTypeId = ""
+        
         
         
         // Do any additional setup after loading the view.
@@ -64,7 +53,19 @@ class ListVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
+        
+        ProductDetailVC.caratValue = "14K"
+        ProductDetailVC.metalValue = "Yellow Gold"
+        ProductDetailVC.diamondValue = "SI-IJ"
+        ProductDetailVC.ringValue = "12"
+        ProductDetailVC.braceletProductValue = ""
+        ProductDetailVC.bangleProductValue = ""
+        ProductDetailVC.pendentValue = ""
+        ProductDetailVC.bangleProductId = ""
+        ProductDetailVC.braceletProductId = ""
+        ProductDetailVC.pendentProId = ""
+        ProductDetailVC.ringOptionId = ""
+        ProductDetailVC.ringOptionTypeId = ""
         
         getDownloadCartCount()
        

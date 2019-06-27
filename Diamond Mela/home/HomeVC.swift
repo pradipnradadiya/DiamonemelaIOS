@@ -72,6 +72,7 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
     
     //slide menu
     var menu_vc : DrawerVC!
+    
     var count:Int = 3
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,10 +112,8 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
     }
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
             
@@ -127,6 +126,7 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
         }
         
         RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        
         self.getBannerSlider(url: Endpoint.bannerSlider.url)
         self.getHeaderMenuBestCategory(url: Endpoint.headerMenu.url)
         self.getMostSellingProduct(url: Endpoint.mostSellingProducts.url)
@@ -140,10 +140,7 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToGesture))
         swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
         self.view.addGestureRecognizer(swipeLeft)
-        
-        
-        
-        
+       
         
        //  let tapView = UITapGestureRecognizer(target: self, action: #selector(self.respondToTapGesture))
       //  self.view.addGestureRecognizer(tapView)
@@ -237,7 +234,6 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
     public func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
         
-       
       //  cell.imageView?.backgroundColor = UIColor.black
         cell.imageView?.sd_setImage(with: URL(string: "\(IMAGE_URL)catalog/product\(arrPopularProducts[index].thumbnail!)"), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
 //        cell.imageView?.image = UIImage(named: self.imageNames[index])
@@ -269,6 +265,10 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
 extension HomeVC{
     
     func getCartCount() {
+        
+        if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
+      
+        
         let par = ["customer_id": customerId]
         
         //        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
@@ -305,6 +305,26 @@ extension HomeVC{
             }
             
         }
+    }
+        
+        else{
+            //cart array dictionry
+            var arrayOfDict = [[String: String]]()
+            if (UserDefaults.standard.array(forKey: CART_USERDEFAULTS)) != nil {
+                arrayOfDict = userSessionData.value(forKey: CART_USERDEFAULTS) as! [[String : String]]
+                
+                if arrayOfDict.isEmpty{
+                    self.lblCartCount.isHidden = true
+                }else{
+                    self.lblCartCount.isHidden = false
+                    self.lblCartCount.text = String(arrayOfDict.count)
+                }
+                
+            }
+        }
+        
+        
+        
     }
     
     

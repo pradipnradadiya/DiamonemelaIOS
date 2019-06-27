@@ -138,54 +138,69 @@ extension UIViewController{
     
     @objc func rightButtonTouched() {
         print("right button touched")
-        if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
+        if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
             let cart = self.storyboard?.instantiateViewController(withIdentifier: "CartVC") as? CartVC
             self.navigationController?.pushViewController(cart!, animated: true)
         }
             
         else{
-            
+            let cart = self.storyboard?.instantiateViewController(withIdentifier: "CartVC") as? CartVC
+            self.navigationController?.pushViewController(cart!, animated: true)
         }
-        
-        
+                
     }
     
     func getDownloadCartCount() {
-        let par = ["customer_id": customerId]
         
-        //        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
-        ApiManager.shared.apiGetDownloadCartCount(params:par as [String : AnyObject]) { (result) in
+        if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
             
-            //            RappleActivityIndicatorView.stopAnimation()
-            
-            let status = result[STATUS_CODE] as? String
-            print(status as Any)
-            if status == FAILURE_CODE || status == nil {
+            let par = ["customer_id": customerId]
+            ApiManager.shared.apiGetDownloadCartCount(params:par as [String : AnyObject]) { (result) in
                 
-            } else {
-                let total_qty = result["total_qty"] as? Int
-                let download_count = result["download_count"] as? Int
-                
-                
-                //Cart count
-                if total_qty != 0{
-                    self.cartDisplayWithCount(count: "\(total_qty ?? 0)")
+                let status = result[STATUS_CODE] as? String
+                print(status as Any)
+                if status == FAILURE_CODE || status == nil {
                     
-                }else{
-                    self.cartDisplayWithCount(count: "0")
-                }
-                
-                
-                //Download count
-                if download_count != 0{
-                   
-                }else{
+                } else {
+                    let total_qty = result["total_qty"] as? Int
+                    let download_count = result["download_count"] as? Int
+                    
+                    //Cart count
+                    if total_qty != 0{
+                        self.cartDisplayWithCount(count: "\(total_qty ?? 0)")
+                        
+                    }else{
+                        self.cartDisplayWithCount(count: "0")
+                    }
+                    //Download count
+                    if download_count != 0{
+                        
+                    }else{
+                        
+                    }
                     
                 }
                 
             }
             
+        }else{
+            
+            //cart array dictionry
+            var arrayOfDict = [[String: String]]()
+            if (UserDefaults.standard.array(forKey: CART_USERDEFAULTS)) != nil {
+                arrayOfDict = userSessionData.value(forKey: CART_USERDEFAULTS) as! [[String : String]]
+                
+                if arrayOfDict.isEmpty{
+                    cartDisplayWithCount(count: "0")
+                }else{
+                    cartDisplayWithCount(count: String(arrayOfDict.count))
+                }
+                
+            }
+            
         }
+        
+        
     }
     
     
@@ -274,9 +289,9 @@ extension UIViewController {
             print("cancel selected!")
         })
         
-        let register = UIAlertAction(title: "Register", style: .default, handler: { (action) -> Void in
+        let register = UIAlertAction(title: "Login", style: .default, handler: { (action) -> Void in
             print("register selected!")
-            let dashBoard = self.storyboard?.instantiateViewController(withIdentifier: "SignUpVC") as? SignUpVC
+            let dashBoard = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC
             switchRootViewController(rootViewController: dashBoard!, animated: true, completion: nil)
         })
         

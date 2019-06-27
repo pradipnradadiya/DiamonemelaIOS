@@ -4,10 +4,16 @@ import RappleProgressHUD
 
 
 class LoginVC: UIViewController {
+    
 var arrPopularProducts = [PopularProductItem.Product_img]()
+    var count = Int()
+    var customerId = String()
+    //cart array dictionry
+    var arrayOfDict = [[String: String]]()
+    
+    
     @IBOutlet weak var tvPassword: UITextField!
     @IBOutlet weak var tvEmail: UITextField!
-    
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,8 +63,12 @@ var arrPopularProducts = [PopularProductItem.Product_img]()
             }else if(tvPassword.text?.isEmpty)!{
                 showAlert(title: "", message: "Please enter password.")
             }else{
+                
+                
                 RappleActivityIndicatorView.startAnimating()
                self.loginCustomer()
+                
+                
             }
         }else{
             print("disconnected")
@@ -81,6 +91,38 @@ var arrPopularProducts = [PopularProductItem.Product_img]()
 
 extension LoginVC {
     
+    func addToCart(productId:String,customerId:String,optionId:String,optionTypeId:String,stoneOptionId:String,stoneOptionTypeId:String,qty:String){
+        
+        let par = ["product_id": productId,
+                   "customer_id": customerId,
+                   "option_id": optionId,
+                   "option_type_id": optionTypeId,
+                   "stone_option_id": stoneOptionId,
+                   "stone_option_type_id": stoneOptionTypeId,
+                   "qty": qty]
+        
+        
+        ApiManager.shared.apiAddToCart(params:par as [String : AnyObject]) { (result) in
+            
+            let status = result[STATUS_CODE] as? String
+            print(status as Any)
+            if status == FAILURE_CODE || status == nil {
+                
+            } else {
+                //self.showAlert(title: SUCCESS, message: result["message"] as? String ?? "")
+                self.count -= 1
+                if self.count == 0{
+                    userSessionData.removeObject(forKey: CART_USERDEFAULTS)
+                    let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? HomeVC
+                    homeVC?.arrPopularProducts = self.arrPopularProducts
+                    self.navigationController?.pushViewController(homeVC!, animated: true)
+                    RappleActivityIndicatorView.stopAnimation()
+                }
+            }
+        }
+    }
+    
+    
     func getPopularProduct(url:String){
                 RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         ApiManager.shared.apiPopularProduct(url: url){ (result) in
@@ -95,9 +137,31 @@ extension LoginVC {
                 let data=Mapper<PopularProductItem>().map(JSON: result)
                 self.arrPopularProducts = (data?.product_img)!
                 if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
-                    let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? HomeVC
-                    homeVC?.arrPopularProducts = self.arrPopularProducts
-                    self.navigationController?.pushViewController(homeVC!, animated: true)
+                
+                    
+                    if (UserDefaults.standard.array(forKey: CART_USERDEFAULTS)) != nil {
+                        self.arrayOfDict = userSessionData.value(forKey: CART_USERDEFAULTS) as! [[String : String]]
+                        if self.arrayOfDict.isEmpty{
+                            let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? HomeVC
+                            homeVC?.arrPopularProducts = self.arrPopularProducts
+                            self.navigationController?.pushViewController(homeVC!, animated: true)
+                        }else{
+                            self.count = self.arrayOfDict.count
+                            
+                            var i:Int = 0
+                            RappleActivityIndicatorView.startAnimatingWithLabel("Please wait item is adding to cart.")
+                            for _ in self.arrayOfDict{
+                                
+                                self.addToCart(productId: self.arrayOfDict[i][PRODUCT_ID] ?? "", customerId: self.customerId, optionId: self.arrayOfDict[i][RING_OPTION_ID] ?? "", optionTypeId: self.arrayOfDict[i][RING_OPTION_TYPE_ID] ?? "", stoneOptionId: self.arrayOfDict[i][STONE_OPTION_ID] ?? "", stoneOptionTypeId: self.arrayOfDict[i][STONE_OPTION_TYPE_ID] ?? "", qty: self.arrayOfDict[i][QTY] ?? "")
+                                
+                                i += 1
+                                
+                            }
+                        }
+                        
+                        
+                    }
+                    
                     
                 }
                
@@ -140,27 +204,19 @@ extension LoginVC {
                    
                     
                     
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
                 }
                 
-                /*
+                
                 //retrieve from UserDefaults
                 if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
                     
                     if let dataObject = Mapper<LoginItem>().map(JSONString: dataArrayString)  {
-                        loginData = dataObject
-                        print(dataObject.customer_role as Any)
+                      
+                        self.customerId = dataObject.data?.entity_id ?? ""
                     }
                 }
                 
-               */
+               
                 
                 
                  self.getPopularProduct(url: Endpoint.popularProducts.url)
