@@ -298,8 +298,8 @@ class ApiManager {
     
     private let manager: Alamofire.SessionManager = {
         let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 10
-        configuration.timeoutIntervalForResource = 10
+        configuration.timeoutIntervalForRequest = 120
+        configuration.timeoutIntervalForResource = 120
         return Alamofire.SessionManager(configuration: configuration)
     }()
     

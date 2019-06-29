@@ -161,8 +161,11 @@ class DrawerVC: UIViewController {
         
     }
     func logoutFun()  {
-//        customerId = ""
-//        userSessionData.removeObject(forKey: USER_SESSION_DATA_KEY)
+        customerId = ""
+        userSessionData.removeObject(forKey: USER_SESSION_DATA_KEY)
+        userSessionData.removeObject(forKey: SHIPPING_USERDEFAULTS)
+        userSessionData.removeObject(forKey: BILLING_USERDEFAULTS)
+        
         let login = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC
         self.navigationController?.pushViewController(login!, animated: true)
         
@@ -189,14 +192,14 @@ class DrawerVC: UIViewController {
         self.navigationController?.pushViewController(policy!, animated: true)
     }
     @IBAction func btnDownload(_ sender: Any) {
-         if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
+        if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
         self.closeDrawer()
         let download = self.storyboard?.instantiateViewController(withIdentifier: "DownloadVC") as? DownloadVC
         self.navigationController?.pushViewController(download!, animated: true)
         }
     }
     @IBAction func btnTransaction(_ sender: Any) {
-         if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
+        if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
         self.closeDrawer()
         let transaction = self.storyboard?.instantiateViewController(withIdentifier: "TransactionVC") as? TransactionVC
         self.navigationController?.pushViewController(transaction!, animated: true)

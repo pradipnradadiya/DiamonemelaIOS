@@ -79,6 +79,17 @@ extension PrivacyPolicyVC{
             } else {
               
                 let data = result["data"] as? String
+                if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+                    let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
+                    if theme == BLACK_THEME_KEY{
+                       self.tfPolicy.textColor = UIColor.dmlWhite
+                    }else if theme == WHITE_THEME_KEY{
+                       self.tfPolicy.textColor = UIColor.dmlBlack
+                    }else{
+                       self.tfPolicy.textColor = UIColor.dmlBlack
+                    }
+                    
+                }
                 self.tfPolicy.set(html: data!)
                 
             }

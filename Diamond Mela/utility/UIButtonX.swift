@@ -3,7 +3,31 @@ import UIKit
 @IBDesignable
 class UIButtonX: UIButton {
     
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
         
+        //retrieve from UserDefaults
+        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+            let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
+            if theme == BLACK_THEME_KEY{
+                self.setTitleColor(UIColor.dmlWhite, for: .normal)
+                self.tintColor = UIColor.dmlWhite
+                self.borderColor = UIColor.transactionLineColorBlack
+            }else if theme == WHITE_THEME_KEY{
+                self.setTitleColor(UIColor.dmlBlack, for: .normal)
+                self.tintColor = UIColor.dmlBlack
+                self.borderColor = UIColor.transactionLineColorWhite
+            }else{
+                self.setTitleColor(UIColor.dmlBlack, for: .normal)
+                self.tintColor = UIColor.dmlBlack
+                self.borderColor = UIColor.transactionLineColorWhite
+            }
+            
+        }
+      
+    }
+    
     enum FromDirection:Int {
         case Top = 0
         case Right = 1

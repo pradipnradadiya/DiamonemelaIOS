@@ -118,8 +118,7 @@ class ProductDetailVC: UIViewController {
     @IBOutlet weak var lblProductName: UILabel!
     @IBOutlet weak var gridSlider: UICollectionView!
     @IBOutlet weak var gridPager: UICollectionView!
-    
-    
+        
     
     var cProductId = "" , cCategoryId = "" ,cProductType = "", cSku = "", cRingSize = "", cBangle = "", cBracelet = "", cPendentSet = "", cMetalDetail = "", cMetalWeight = "", cStoneDetail = "", cStoneWeight = "", cPrice = "", cQty = "1", cImageUrl = "";
     

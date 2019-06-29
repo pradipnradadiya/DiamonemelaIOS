@@ -206,8 +206,10 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
     }
     
     @IBAction func btnEditProfile(_ sender: Any) {
+        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
         let editProfile = self.storyboard?.instantiateViewController(withIdentifier: "EditProfileVC") as? EditProfileVC
         self.navigationController?.pushViewController(editProfile!, animated: true)
+        }
         
 //        let editProfile = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as? ViewController
 //        self.navigationController?.pushViewController(editProfile!, animated: true)
@@ -215,12 +217,16 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
         
     }
     @IBAction func btnOrder(_ sender: Any) {
+        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
         let orderTab = self.storyboard?.instantiateViewController(withIdentifier: "OrderTabVC") as? OrderTabVC
         self.navigationController?.pushViewController(orderTab!, animated: true)
+        }
     }
     @IBAction func btnTransaction(_ sender: Any) {
+        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
         let transaction = self.storyboard?.instantiateViewController(withIdentifier: "TransactionVC") as? TransactionVC
         self.navigationController?.pushViewController(transaction!, animated: true)
+        }
     }
     
     
@@ -235,6 +241,21 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
         
       //  cell.imageView?.backgroundColor = UIColor.black
+        
+        //retrieve from UserDefaults
+        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+            let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
+            if theme == BLACK_THEME_KEY{
+               cell.imageView?.layer.borderWidth = 1
+                cell.imageView?.layer.borderColor = UIColor.transactionLineColorBlack.cgColor
+            }else if theme == WHITE_THEME_KEY{
+               
+            }else{
+                
+            }
+            
+        }
+        
         cell.imageView?.sd_setImage(with: URL(string: "\(IMAGE_URL)catalog/product\(arrPopularProducts[index].thumbnail!)"), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
 //        cell.imageView?.image = UIImage(named: self.imageNames[index])
         

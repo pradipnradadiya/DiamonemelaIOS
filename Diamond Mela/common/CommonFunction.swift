@@ -91,6 +91,8 @@ extension Dictionary {
     }
 }
 
+
+
 extension UIColor {
     static var selectButtonColor = UIColor.init(red: 155/255, green: 15/255, blue: 86/255, alpha: 1)
     static var unSelectButtonColor = UIColor.init(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
@@ -98,9 +100,23 @@ extension UIColor {
     static var rtsStartColor = UIColor.init(red: 142/255, green: 142/255, blue: 142/255, alpha: 1)
     static var rtsEndColor = UIColor.init(red: 185/255, green: 185/255, blue: 185/255, alpha: 1)
     
+    static var transactionLineColorWhite = UIColor.init(red: 183/255, green: 183/255, blue: 183/255, alpha: 1)
+    static var transactionRoundBackWhite = UIColor.init(red: 238/255, green: 236/255, blue: 237/255, alpha: 1)
     
+    static var transactionLineColorBlack = UIColor.init(red: 67/255, green: 66/255, blue: 66/255, alpha: 1)
+    static var transactionRoundBackBlack = UIColor.init(red: 47/255, green: 47/255, blue: 47/255, alpha: 1)
+    
+    static var dmlWhite = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+    static var dmlBlack = UIColor.init(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
+    
+    
+    
+   
     
 }
+
+
+
 
 extension UIViewController{
     
@@ -126,7 +142,7 @@ extension UIViewController{
         let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 18, height: 16))
         rightButton.setBackgroundImage(UIImage(named: "cart_ic"), for: .normal)
         rightButton.addTarget(self, action: #selector(rightButtonTouched), for: .touchUpInside)
-        rightButton.tintColor = UIColor.black
+        //rightButton.tintColor = UIColor.black
         rightButton.addSubview(label)
         
         // Bar button item

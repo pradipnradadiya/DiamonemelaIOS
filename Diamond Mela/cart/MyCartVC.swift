@@ -115,7 +115,6 @@ class MyCartVC: UIViewController {
         
     }
     
-
 }
 
 extension MyCartVC{
@@ -180,11 +179,10 @@ extension MyCartVC{
                 self.lblSubTotal.text=priceFormat2("\(carts?.subtotal ?? 0)")
                 self.lblTax.text=priceFormat2("\(carts?.tax ?? 0)")
                 self.lblGrandTotal.text=priceFormat2("\(carts?.grandtotal ?? 0)")
+                self.tblCart.reloadData()
              
             }
-            
         }
-        
     }
     
     func updateCart(itemId:String,qty:String) {

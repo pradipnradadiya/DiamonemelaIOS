@@ -57,6 +57,10 @@ let BILLING_USERDEFAULTS:String="billing"
 let SHIPPING_USERDEFAULTS:String="shipping"
 let INDIA_CODE:String="IN"
 let CART_USERDEFAULTS = "CART"
+let THEME_USEDEFAULTS = "theme"
+
+let BLACK_THEME_KEY = "black"
+let WHITE_THEME_KEY = "white"
 
 
 //validation message

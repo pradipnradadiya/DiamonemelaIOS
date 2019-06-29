@@ -8,6 +8,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        
+        let navigationBarAppearace = UINavigationBar.appearance()
+        
+        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+            let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
+            if theme == BLACK_THEME_KEY{
+                
+                navigationBarAppearace.tintColor = UIColor.dmlWhite
+                navigationBarAppearace.barTintColor = UIColor.transactionRoundBackBlack
+                
+                // change navigation item title color
+                navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.dmlWhite]
+            }else if theme == WHITE_THEME_KEY{
+                navigationBarAppearace.tintColor = UIColor.dmlBlack
+                navigationBarAppearace.barTintColor = UIColor.transactionRoundBackWhite
+                
+                // change navigation item title color
+                navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.dmlBlack]
+            }else{
+                navigationBarAppearace.tintColor = UIColor.dmlBlack
+                navigationBarAppearace.barTintColor = UIColor.transactionRoundBackWhite
+                
+                // change navigation item title color
+                navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.dmlBlack]
+            }
+            
+        }
+        
+       
+        
+        
         return true
     }
 

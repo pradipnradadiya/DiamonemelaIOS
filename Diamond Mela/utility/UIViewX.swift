@@ -3,11 +3,17 @@ import UIKit
 @IBDesignable
 class UIViewX: UIView {
     
+   
+    
+    
+    
+    
     // MARK: - Gradient
     
     @IBInspectable var firstColor: UIColor = UIColor.white {
         didSet {
             updateView()
+            
         }
     }
     

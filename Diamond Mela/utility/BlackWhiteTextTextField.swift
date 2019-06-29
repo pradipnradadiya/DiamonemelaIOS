@@ -13,16 +13,26 @@ class BlackWhiteTextTextField: UITextField {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        if userAlreadyExist(kUsernameKey: "theme"){
-            if saveTheme.string(forKey: "userId")! == "black"{
-                self.textColor=whitetxtColor
+        
+        //retrieve from UserDefaults
+        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+            let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
+            if theme == BLACK_THEME_KEY{
+                self.textColor = UIColor.dmlWhite
+            }else if theme == WHITE_THEME_KEY{
+                self.textColor = UIColor.dmlBlack
             }else{
-                self.textColor=blacktxtColor
+                self.textColor = UIColor.dmlBlack
             }
-        }else{
-            self.textColor=whitetxtColor
+            
         }
+        
+        
+        
+        
     }
+    
+    
     @IBInspectable var blacktxtColor: UIColor = UIColor.blackColor() {
         didSet {
             self.textColor = blacktxtColor

@@ -160,6 +160,10 @@ extension LoginVC {
                         }
                         
                         
+                    }else{
+                        let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? HomeVC
+                        homeVC?.arrPopularProducts = self.arrPopularProducts
+                        self.navigationController?.pushViewController(homeVC!, animated: true)
                     }
                     
                     

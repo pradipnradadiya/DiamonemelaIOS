@@ -1,7 +1,7 @@
 import UIKit
 
 @IBDesignable
-class UIImageViewX: UIImageView {
+class ImageViewBorder: UIImageView {
     
     // MARK: - Properties
     
@@ -25,15 +25,15 @@ class UIImageViewX: UIImageView {
         if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
             let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
             if theme == BLACK_THEME_KEY{
-               self.tintColor = UIColor.dmlWhite
+               self.borderColor = UIColor.transactionLineColorBlack
             }else if theme == WHITE_THEME_KEY{
-               self.tintColor = UIColor.dmlBlack
+               
             }else{
-                self.tintColor = UIColor.dmlWhite
+                
             }
             
         }
-       
+        
     }
     
     
@@ -86,15 +86,15 @@ class UIImageViewX: UIImageView {
             //layer.shadowOffset.height = shadowOffsetY
         }
     }
-
+    
     // MARK: - FUNCTIONS
     override func layoutSubviews() {
-//        super.layoutSubviews()
-//        layer.shadowColor = shadowColor.cgColor
-//        layer.shadowOpacity = Float(shadowOpacity)
-//        layer.shadowRadius = shadowRadius
-//        layer.masksToBounds = false
-//        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
+        //        super.layoutSubviews()
+        //        layer.shadowColor = shadowColor.cgColor
+        //        layer.shadowOpacity = Float(shadowOpacity)
+        //        layer.shadowRadius = shadowRadius
+        //        layer.masksToBounds = false
+        //        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
     }
     
     

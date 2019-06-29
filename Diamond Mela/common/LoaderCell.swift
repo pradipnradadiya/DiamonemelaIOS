@@ -3,6 +3,9 @@ import UIKit
 class LoaderCell: UITableViewCell {
 
     @IBOutlet weak var indicator: UIActivityIndicatorView!
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

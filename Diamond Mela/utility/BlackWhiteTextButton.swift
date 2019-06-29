@@ -2,17 +2,26 @@
 import UIKit
 @IBDesignable
 class BlackWhiteTextButton: UIButton {
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        if userAlreadyExist(kUsernameKey: "theme"){
-        if saveTheme.string(forKey: "userId")! == "black"{
-            self.setTitleColor(UIColor.whiteColor(), for: .normal)
-        }else{
-            self.setTitleColor(UIColor.blackColor(), for: .normal)
+        
+        //retrieve from UserDefaults
+        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+            let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
+            if theme == BLACK_THEME_KEY{
+                self.setTitleColor(UIColor.dmlWhite, for: .normal)
+            }else if theme == WHITE_THEME_KEY{
+                self.setTitleColor(UIColor.dmlBlack, for: .normal)
+            }else{
+                self.setTitleColor(UIColor.dmlBlack, for: .normal)
+            }
+            
         }
-        }else{
-            self.setTitleColor(UIColor.blackColor(), for: .normal)
-        }
+        
+       
+        
+        
     }
     
     enum FromDirection:Int {

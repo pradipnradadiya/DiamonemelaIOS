@@ -44,6 +44,21 @@ public class RESpinner {
         
         overlayView = UIView(frame: UIScreen.main.bounds)
         overlayView.backgroundColor = UIColor.clear
+        
+        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+            
+            let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
+            if theme == BLACK_THEME_KEY{
+                imageView.tintColor = UIColor.dmlWhite
+            }else if theme == WHITE_THEME_KEY{
+                imageView.tintColor = UIColor.dmlBlack
+            }else{
+                imageView.tintColor = UIColor.dmlBlack
+            }
+            
+        }
+        
+        
         imageView.image = UIImage(named: "progress_loader")
         imageView.center = overlayView.center
         overlayView.addSubview(imageView)

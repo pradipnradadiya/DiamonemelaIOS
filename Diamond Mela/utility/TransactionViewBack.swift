@@ -1,8 +1,9 @@
 import UIKit
 
 @IBDesignable
-class BlackWhiteBackgroundView: UIView {
-
+class TransactionViewBack: UIView {
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -11,21 +12,28 @@ class BlackWhiteBackgroundView: UIView {
         if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
             let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
             if theme == BLACK_THEME_KEY{
-               self.backgroundColor=UIColor.dmlBlack
+                self.backgroundColor=UIColor.transactionRoundBackBlack
+               
             }else if theme == WHITE_THEME_KEY{
-                self.backgroundColor=UIColor.dmlWhite
+                self.backgroundColor=UIColor.transactionRoundBackWhite
+                
             }else{
-                self.backgroundColor=UIColor.dmlWhite
+                self.backgroundColor=UIColor.transactionRoundBackWhite
             }
             
         }
-    
-    }
         
+    }
+    
+    
+    
+    
     // MARK: - Gradient
+    
     @IBInspectable var firstColor: UIColor = UIColor.white {
         didSet {
             updateView()
+            
         }
     }
     
@@ -105,5 +113,4 @@ class BlackWhiteBackgroundView: UIView {
             layer.shadowOffset.height = shadowOffsetY
         }
     }
-
 }

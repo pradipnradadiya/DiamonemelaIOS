@@ -17,12 +17,24 @@ class SplashVC: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getPopularProduct(url: Endpoint.popularProducts.url)
         
         
+        //retrieve from UserDefaults
+        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+            let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
+            if theme == BLACK_THEME_KEY{
+                
+            }else if theme == WHITE_THEME_KEY{
+                userSessionData.set(BLACK_THEME_KEY, forKey: THEME_USEDEFAULTS)
+            }
+            
+        }else{
+            userSessionData.set(WHITE_THEME_KEY, forKey: THEME_USEDEFAULTS)
+        }
+     
         // Do any additional setup after loading the view.
     }
 

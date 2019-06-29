@@ -136,9 +136,7 @@ class EditProfileVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    
-    
-    
+  
     
 }
 
@@ -179,8 +177,6 @@ extension EditProfileVC {
                 
                 self.lblDefaultShippingCountry.text=self.addressData?.default_shipping?.country
                 self.lblDefaultShippingTel.text=self.addressData?.default_shipping?.telephone
-                
-                
                 
                 
                 let addtionalData=Mapper<AddressManageResponse.Data>().mapArray(JSONArray: result["data"] as! [[String : Any]])

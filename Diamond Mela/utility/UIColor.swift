@@ -24,10 +24,7 @@ extension UIColor {
     static func lineColor() -> UIColor {
         return UIColor().colorFromHexString("B7B7B7")
     }
-    
-    
-    
-    
+  
     
     func colorFromHexString (_ hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
