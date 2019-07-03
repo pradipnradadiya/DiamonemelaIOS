@@ -8,6 +8,33 @@ class DashedLineView : UIView {
     @IBInspectable var dashColor: UIColor = UIColor.lightGray
     
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        //retrieve from UserDefaults
+        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+            let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
+            if theme == BLACK_THEME_KEY{
+                self.dashColor = UIColor.dmlWhite
+                self.perDashLength = 1
+                self.spaceBetweenDash = 1
+            }else if theme == WHITE_THEME_KEY{
+                self.dashColor = UIColor.dmlBlack
+                self.perDashLength = 1
+                self.spaceBetweenDash = 1
+                
+            }else{
+                self.dashColor = UIColor.dmlBlack
+                self.perDashLength = 1
+                self.spaceBetweenDash = 1
+            }
+            
+        }
+        
+    }
+    
+    
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         let  path = UIBezierPath()

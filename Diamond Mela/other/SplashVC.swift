@@ -28,7 +28,7 @@ class SplashVC: UIViewController {
             if theme == BLACK_THEME_KEY{
                 
             }else if theme == WHITE_THEME_KEY{
-                userSessionData.set(BLACK_THEME_KEY, forKey: THEME_USEDEFAULTS)
+//                userSessionData.set(BLACK_THEME_KEY, forKey: THEME_USEDEFAULTS)
             }
             
         }else{

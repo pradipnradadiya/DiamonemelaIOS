@@ -15,7 +15,7 @@ class PopularProductVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getPopularProduct(url: Endpoint.popularProducts.url)
+        self.getPopularProduct(url: Endpoint.popularProducts.url,showLoader: true)
         // Do any additional setup after loading the view.
     }
     
@@ -27,10 +27,20 @@ class PopularProductVC: UIViewController {
 }
 
 extension PopularProductVC {
-    func getPopularProduct(url:String){
-        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+    func getPopularProduct(url:String,showLoader: Bool = false){
+//        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+        
+        
+        if showLoader {
+            RESpinner.shared.show(view: self.view)
+            
+        }
+        
+        
         ApiManager.shared.apiPopularProduct(url: url){ (result) in
-            RappleActivityIndicatorView.stopAnimation()
+//            RappleActivityIndicatorView.stopAnimation()
+            RESpinner.shared.hide()
+            
             let status = result[STATUS_CODE] as? String
             print(status as Any)
             if status == FAILURE_CODE || status == nil {

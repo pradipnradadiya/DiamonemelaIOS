@@ -8,7 +8,7 @@ class ListVC: UIViewController {
     var pageCount: Int = 1
     var arrList = [ListItem.Data]()
     
-    
+    var addToDownloadFlag : Int = 0
     var filterData = [SortFilterItem.Data]()
     let refreshControl = UIRefreshControl()
     var hasMoredata: Bool = false
@@ -125,6 +125,7 @@ class ListVC: UIViewController {
     }
     
     @IBAction func btnDownload(_ sender: Any) {
+        
         var downloadString:String = ""
         var i:Int = 0
         var count:Int = 0
@@ -148,6 +149,7 @@ class ListVC: UIViewController {
             
             alert.addAction(UIAlertAction(title: OK, style: UIAlertAction.Style.default, handler: { _ in
                 //Cancel Action
+                self.addToDownloadFlag = 1
                  self.addToDownloadProduct(productsId: downloadString, customerId: customerId)
             }))
             alert.addAction(UIAlertAction(title: CANCEL,
@@ -199,6 +201,8 @@ class ListVC: UIViewController {
                         }else{
                             self.getCategoryProduct(categoryId: self.id!, groupId: groupId, page: String(self.pageCount), price: "", gold_purity: "", diamond_quality: "", diamond_shape: "", sku: "", availability: "", sort_by: self.sort_by,showLoader: true)
                         }
+                        
+                        
                         
                         //action(obj.value)
                     }
@@ -252,7 +256,7 @@ extension ListVC{
             
         }
         self.gridList.reloadData()
-        
+        self.addToDownloadFlag = 0
         
     }
     
@@ -358,8 +362,9 @@ extension ListVC{
             if status == FAILURE_CODE || status == nil {
                 
             } else {
-                
+                if self.addToDownloadFlag == 1 {
                 self.updateDownloadFlag()
+                }
             }
             
         }
@@ -374,6 +379,7 @@ extension ListVC{
         }
         self.gridList.reloadData()
     }
+    
     
     @objc func refresh() {
         self.pageCount = 1
@@ -484,8 +490,7 @@ extension ListVC: UICollectionViewDelegate, UICollectionViewDataSource,UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        
+      
         let productDetail = self.storyboard?.instantiateViewController(withIdentifier: "ProductDetailVC") as? ProductDetailVC
         productDetail?.productId=self.arrList[indexPath.row].entity_id!
         self.navigationController?.pushViewController(productDetail!, animated: true)

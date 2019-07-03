@@ -19,6 +19,9 @@ class RTSCell: UICollectionViewCell {
     var rtsData:ProductDetailItem.Rts_slider?{
         didSet{
             
+           
+            
+            
             if flag==0{
                 
                 if productDetailInstance.productType == "simple"{
@@ -43,36 +46,181 @@ class RTSCell: UICollectionViewCell {
                 
             }
             
-            if rtsData?.isSelected == true{
-                //viewBack.backgroundColor = UIColor.selectButtonColor
-                viewBack.firstColor = UIColor.rtsStartColor
-                viewBack.secondColor = UIColor.rtsEndColor
-                viewBack.borderWidth = 0
+            //retrieve from UserDefaults
+            if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+                let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
+                if theme == BLACK_THEME_KEY{
+                    //retrieve from UserDefaults
+                    if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+                        let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
+                        if theme == BLACK_THEME_KEY{
+                            
+                            if rtsData?.isSelected == true{
+                                //viewBack.backgroundColor = UIColor.selectButtonColor
+                                viewBack.firstColor = UIColor.transactionLineColorBlack
+                                viewBack.secondColor = UIColor.transactionRoundBackBlack
+                                viewBack.borderWidth = 0
+                                
+                                lblMetal.textColor = UIColor.white
+                                lblStone.textColor = UIColor.white
+                                lblDiamondWeight.textColor = UIColor.white
+                                lblSize.textColor = UIColor.white
+                                
+                                lblMetailHeading.textColor = UIColor.white
+                                lblStoneHeading.textColor = UIColor.white
+                                lblDiamondWeightHeading.textColor = UIColor.white
+                                lblSizeHeading.textColor = UIColor.white
+                                
+                            }else{
+                                viewBack.firstColor = UIColor.black
+                                viewBack.secondColor = UIColor.black
+                                viewBack.borderWidth = 1
+                                viewBack.borderColor = UIColor.dmlWhite
+                                //                                        viewBack.backgroundColor = UIColor.dmlBlack
+                                lblMetal.textColor = UIColor.white
+                                lblStone.textColor = UIColor.white
+                                lblDiamondWeight.textColor = UIColor.white
+                                lblSize.textColor = UIColor.white
+                                
+                                lblMetailHeading.textColor = UIColor.white
+                                lblStoneHeading.textColor = UIColor.white
+                                lblDiamondWeightHeading.textColor = UIColor.white
+                                lblSizeHeading.textColor = UIColor.white
+                            }
+                            
+                        }else if theme == WHITE_THEME_KEY{
+                            if rtsData?.isSelected == true{
+                                //viewBack.backgroundColor = UIColor.selectButtonColor
+                                viewBack.firstColor = UIColor.rtsStartColor
+                                viewBack.secondColor = UIColor.rtsEndColor
+                                viewBack.borderWidth = 0
+                                
+                                lblMetal.textColor = UIColor.white
+                                lblStone.textColor = UIColor.white
+                                lblDiamondWeight.textColor = UIColor.white
+                                lblSize.textColor = UIColor.white
+                                
+                                lblMetailHeading.textColor = UIColor.white
+                                lblStoneHeading.textColor = UIColor.white
+                                lblDiamondWeightHeading.textColor = UIColor.white
+                                lblSizeHeading.textColor = UIColor.white
+                                
+                            }else{
+                                viewBack.firstColor = UIColor.white
+                                viewBack.secondColor = UIColor.white
+                                viewBack.borderWidth = 1
+                                lblMetal.textColor = UIColor.black
+                                lblStone.textColor = UIColor.black
+                                lblDiamondWeight.textColor = UIColor.black
+                                lblSize.textColor = UIColor.black
+                                
+                                lblMetailHeading.textColor = UIColor.black
+                                lblStoneHeading.textColor = UIColor.black
+                                lblDiamondWeightHeading.textColor = UIColor.black
+                                lblSizeHeading.textColor = UIColor.black
+                            }
+                            
+                        }else{
+                            if rtsData?.isSelected == true{
+                                //viewBack.backgroundColor = UIColor.selectButtonColor
+                                viewBack.firstColor = UIColor.rtsStartColor
+                                viewBack.secondColor = UIColor.rtsEndColor
+                                viewBack.borderWidth = 0
+                                
+                                lblMetal.textColor = UIColor.white
+                                lblStone.textColor = UIColor.white
+                                lblDiamondWeight.textColor = UIColor.white
+                                lblSize.textColor = UIColor.white
+                                
+                                lblMetailHeading.textColor = UIColor.white
+                                lblStoneHeading.textColor = UIColor.white
+                                lblDiamondWeightHeading.textColor = UIColor.white
+                                lblSizeHeading.textColor = UIColor.white
+                                
+                            }else{
+                                viewBack.firstColor = UIColor.white
+                                viewBack.secondColor = UIColor.white
+                                viewBack.borderWidth = 1
+                                lblMetal.textColor = UIColor.black
+                                lblStone.textColor = UIColor.black
+                                lblDiamondWeight.textColor = UIColor.black
+                                lblSize.textColor = UIColor.black
+                                
+                                lblMetailHeading.textColor = UIColor.black
+                                lblStoneHeading.textColor = UIColor.black
+                                lblDiamondWeightHeading.textColor = UIColor.black
+                                lblSizeHeading.textColor = UIColor.black
+                            }
+                        }
+                        
+                    }
+                    
+                }else if theme == WHITE_THEME_KEY{
+                    if rtsData?.isSelected == true{
+                        //viewBack.backgroundColor = UIColor.selectButtonColor
+                        viewBack.firstColor = UIColor.rtsStartColor
+                        viewBack.secondColor = UIColor.rtsEndColor
+                        viewBack.borderWidth = 0
+                        
+                        lblMetal.textColor = UIColor.white
+                        lblStone.textColor = UIColor.white
+                        lblDiamondWeight.textColor = UIColor.white
+                        lblSize.textColor = UIColor.white
+                        
+                        lblMetailHeading.textColor = UIColor.white
+                        lblStoneHeading.textColor = UIColor.white
+                        lblDiamondWeightHeading.textColor = UIColor.white
+                        lblSizeHeading.textColor = UIColor.white
+                        
+                    }else{
+                        viewBack.firstColor = UIColor.white
+                        viewBack.secondColor = UIColor.white
+                        viewBack.borderWidth = 1
+                        lblMetal.textColor = UIColor.black
+                        lblStone.textColor = UIColor.black
+                        lblDiamondWeight.textColor = UIColor.black
+                        lblSize.textColor = UIColor.black
+                        
+                        lblMetailHeading.textColor = UIColor.black
+                        lblStoneHeading.textColor = UIColor.black
+                        lblDiamondWeightHeading.textColor = UIColor.black
+                        lblSizeHeading.textColor = UIColor.black
+                    }
+                }else{
+                    if rtsData?.isSelected == true{
+                        //viewBack.backgroundColor = UIColor.selectButtonColor
+                        viewBack.firstColor = UIColor.rtsStartColor
+                        viewBack.secondColor = UIColor.rtsEndColor
+                        viewBack.borderWidth = 0
+                        
+                        lblMetal.textColor = UIColor.white
+                        lblStone.textColor = UIColor.white
+                        lblDiamondWeight.textColor = UIColor.white
+                        lblSize.textColor = UIColor.white
+                        
+                        lblMetailHeading.textColor = UIColor.white
+                        lblStoneHeading.textColor = UIColor.white
+                        lblDiamondWeightHeading.textColor = UIColor.white
+                        lblSizeHeading.textColor = UIColor.white
+                        
+                    }else{
+                        viewBack.firstColor = UIColor.white
+                        viewBack.secondColor = UIColor.white
+                        viewBack.borderWidth = 1
+                        lblMetal.textColor = UIColor.black
+                        lblStone.textColor = UIColor.black
+                        lblDiamondWeight.textColor = UIColor.black
+                        lblSize.textColor = UIColor.black
+                        
+                        lblMetailHeading.textColor = UIColor.black
+                        lblStoneHeading.textColor = UIColor.black
+                        lblDiamondWeightHeading.textColor = UIColor.black
+                        lblSizeHeading.textColor = UIColor.black
+                    }
+                }
                 
-                lblMetal.textColor = UIColor.white
-                lblStone.textColor = UIColor.white
-                lblDiamondWeight.textColor = UIColor.white
-                lblSize.textColor = UIColor.white
-                
-                lblMetailHeading.textColor = UIColor.white
-                lblStoneHeading.textColor = UIColor.white
-                lblDiamondWeightHeading.textColor = UIColor.white
-                lblSizeHeading.textColor = UIColor.white
-                
-            }else{
-                viewBack.firstColor = UIColor.white
-                viewBack.secondColor = UIColor.white
-                viewBack.borderWidth = 1
-                lblMetal.textColor = UIColor.black
-                lblStone.textColor = UIColor.black
-                lblDiamondWeight.textColor = UIColor.black
-                lblSize.textColor = UIColor.black
-                
-                lblMetailHeading.textColor = UIColor.black
-                lblStoneHeading.textColor = UIColor.black
-                lblDiamondWeightHeading.textColor = UIColor.black
-                lblSizeHeading.textColor = UIColor.black
             }
+            
             
             lblMetal.text=rtsData?.metal_quality_value
             lblStone.text=rtsData?.rts_stone_quality

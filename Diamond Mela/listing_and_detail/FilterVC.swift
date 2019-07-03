@@ -17,6 +17,21 @@ class FilterVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       
+        //retrieve from UserDefaults
+        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+            let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
+            if theme == BLACK_THEME_KEY{
+                tblFilterTitle.backgroundColor = UIColor.dmlBlack
+            }else if theme == WHITE_THEME_KEY{
+               tblFilterTitle.backgroundColor = UIColor.dmlWhite
+            }else{
+               tblFilterTitle.backgroundColor = UIColor.dmlWhite
+            }
+            
+        }
+        
+    
         self.tvSku.addDoneButtonOnKeyboard()
         
         arrFilterDataCopy=arrFilterData
@@ -135,13 +150,11 @@ extension FilterVC: UITableViewDelegate, UITableViewDataSource {
                     
                 }else{
                     arrFilterData[i].isSelect = false
-                   
+                  
                 }
 
                 i += 1
             }
-            
-           
             
             
            // self.arrFilterDataCopy[indexPath.row].isSelect = true
@@ -151,17 +164,17 @@ extension FilterVC: UITableViewDelegate, UITableViewDataSource {
             
             if arrFilterData[indexPath.row].option_type=="text"{
                 self.tblFilterData.isHidden=true
+                self.tvSku.isHidden = false
             }else{
                 self.tblFilterData.isHidden=false
+                self.tvSku.isHidden = true
                 reloadFilterDataTable(position: indexPath.row)
             }
-            
             
         }
         else{
             //self.position=indexPath.row
-            
-            FilterVC.dict[arrFilterData[self.position].option_name!]=arrFilterData[self.position].option_data![indexPath.row].value
+    FilterVC.dict[arrFilterData[self.position].option_name!]=arrFilterData[self.position].option_data![indexPath.row].value
             
             var i:Int=0
             for _ in arrFilterData[self.position].option_data!{

@@ -17,8 +17,6 @@ enum Endpoint {
     case getAllCountry
     case getAllState
     
-    
-    
     //-----------Home page--------------------
     case bannerSlider
     case headerMenu

@@ -4,6 +4,8 @@ import RappleProgressHUD
 
 class DrawerVC: UIViewController {
 
+    
+//    @IBOutlet weak var themeSwitch: UISwitch!
     @IBOutlet weak var btnCreateRererral: UIButton!
     @IBOutlet weak var btnMyAccount: UIButton!
     @IBOutlet weak var viewLogout: UIView!
@@ -28,6 +30,8 @@ class DrawerVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        
         
         if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
             self.getDownloadCartCoubnt()
@@ -73,6 +77,7 @@ class DrawerVC: UIViewController {
     }
     
     
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,6 +105,18 @@ class DrawerVC: UIViewController {
        self.getHeaderMenuBestCategory(url: Endpoint.headerMenu.url)
         // Do any additional setup after loading the view.
     
+//        //retrieve from UserDefaults
+//        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+//            let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
+//            if theme == BLACK_THEME_KEY{
+//                themeSwitch.isOn = false
+//            }else if theme == WHITE_THEME_KEY{
+//               themeSwitch.isOn = true
+//            }
+        
+//        }
+       
+        
     }
     
     @IBAction func btnLogin(_ sender: Any) {

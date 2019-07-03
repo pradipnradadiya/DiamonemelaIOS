@@ -26,6 +26,19 @@ class MyCartVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        //retrieve from UserDefaults
+        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+            let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
+            if theme == BLACK_THEME_KEY{
+                tblCart.backgroundColor = UIColor.dmlBlack
+            }else if theme == WHITE_THEME_KEY{
+                tblCart.backgroundColor = UIColor.dmlWhite
+            }else{
+                tblCart.backgroundColor = UIColor.dmlWhite
+            }
+            
+        }
         
         
         if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
@@ -36,11 +49,7 @@ class MyCartVC: UIViewController {
             flag = 1
             manageCart()
 //            if let dataArrayString = (UserDefaults.standard.string(forKey: CART_USERDEFAULTS)) {
-            
-            
-            
-            
-            
+          
 //            }else{
 //                self.showAlert(title: errorTitle, message: "Cart is Empty")
 //                self.btnContinue.isEnabled = false

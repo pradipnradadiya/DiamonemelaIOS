@@ -11,6 +11,7 @@ class SelectShippingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reloadTable()
+        self.btnContinue.isEnabled = false
         print(shippingData[0].method_title as Any)
         // Do any additional setup after loading the view.
     }
@@ -55,7 +56,7 @@ extension SelectShippingVC {
             if status == FAILURE_CODE || status == nil {
                                 
             } else {
-                
+                self.btnContinue.isEnabled = true
             }
             
         }

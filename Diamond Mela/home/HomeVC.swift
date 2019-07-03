@@ -6,7 +6,12 @@ import FSPagerView
 
 class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
 
-    @IBOutlet weak var lblCartCount: UILabelX!
+    @IBOutlet weak var switchTheme: UISwitch!
+    @IBOutlet weak var lblCartProductCount: UILabel!
+    @IBOutlet weak var viewCircle: UIViewX!
+    @IBOutlet weak var viewCart: TransactionViewBack!
+    // @IBOutlet weak var btnMenu: UIBarButtonItem!
+//    @IBOutlet weak var lblCartCount: UILabelX!
     
     @IBOutlet weak var pagerView: FSPagerView!{
         didSet {
@@ -15,7 +20,7 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
         }
     }
     
-    @IBOutlet weak var btnCaClick: UIButton!
+//    @IBOutlet weak var btnCaClick: UIButton!
     //  fileprivate let imageNames = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg"]
     fileprivate let transformerNames = ["cross fading", "zoom out", "depth", "linear", "overlap", "ferris wheel", "inverted ferris wheel", "coverflow", "cubic"]
     
@@ -75,9 +80,11 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
     
     var count:Int = 3
     
+  //  @IBOutlet weak var toolBar: UIToolbar!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        
         FilterVC.dict.removeAll()
         FilterVC.filterFlag = 0
         
@@ -88,20 +95,21 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
         
     }
     
-    @IBAction func btnCarClick(_ sender: Any) {
-        if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
-            let cart = self.storyboard?.instantiateViewController(withIdentifier: "CartVC") as? CartVC
-            self.navigationController?.pushViewController(cart!, animated: true)
-        }
-            
-        else{
-            
-        }
+    @IBAction func btnCartClicks(_ sender: Any) {
+        
+        let cart = self.storyboard?.instantiateViewController(withIdentifier: "CartVC") as? CartVC
+        self.navigationController?.pushViewController(cart!, animated: true)
         
     }
+    
+  
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+//        if let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as? UIView{
+//            statusBar.isHidden = true
+//        }
     }
     
     @IBAction func btnViewAll(_ sender: Any) {
@@ -112,8 +120,102 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
     }
     
     
+    
+    @IBAction func switchClick(_ sender: Any) {
+        
+        if switchTheme.isOn {
+            print("ON")
+            showAlert(title: "", message: "You are select dark theme.")
+            userSessionData.set(BLACK_THEME_KEY, forKey: THEME_USEDEFAULTS)
+            
+        }
+        else {
+            print ("OFF")
+            showAlert(title: "", message: "You are select light theme.")
+            userSessionData.set(WHITE_THEME_KEY, forKey: THEME_USEDEFAULTS)
+            
+        }
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+//                if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+//                    let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
+//                    if theme == BLACK_THEME_KEY{
+//                        switchTheme.isOn = false
+////                        switchTheme.thumbTintColor = UIColor.transactionLineColorBlack
+////                        switchTheme.tintColor = UIColor.white
+//                        switchTheme.onTintColor = UIColor.white
+//                    }else if theme == WHITE_THEME_KEY{
+//                       switchTheme.isOn = true
+////                        switchTheme.thumbTintColor = UIColor.transactionLineColorBlack
+//                        switchTheme.onTintColor = UIColor.dmlBlack
+//                    }else{
+//                        switchTheme.isOn = true
+////                        switchTheme.thumbTintColor = UIColor.transactionLineColorBlack
+//                        switchTheme.onTintColor = UIColor.dmlBlack
+//                    }
+//
+//                }
+        
+        
+    
+        
+       
+        if UIDevice().userInterfaceIdiom == .phone {
+            switch UIScreen.main.nativeBounds.height {
+            case 1136:
+                print("iPhone 5 or 5S or 5C")
+                viewCart.cornerRadius = (viewCart.frame.width / 2) - 10
+            case 1334:
+                print("iPhone 6/6S/7/8")
+             
+            case 1920, 2208:
+                print("iPhone 6+/6S+/7+/8+")
+            
+            case 2436:
+                print("iPhone X,XS")
+             
+            case 2688:
+                print("iPhone XS Max")
+                
+            case 1792:
+                print("iPhone XR")
+            default:
+                print("unknown")
+                
+            }
+            
+        }
+
+        
+        
+        
+        
+        
+        
+        
+        //retrieve from UserDefaults
+        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+            let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
+            if theme == BLACK_THEME_KEY{
+             //  btnMenu.tintColor = UIColor.dmlWhite
+             //   toolBar.backgroundColor = UIColor.transactionLineColorBlack
+                
+                
+            }else if theme == WHITE_THEME_KEY{
+             //   btnMenu.tintColor = UIColor.dmlBlack
+               // toolBar.backgroundColor = UIColor.transactionLineColorWhite
+                
+            }else{
+              //  btnMenu.tintColor = UIColor.dmlBlack
+                //toolBar.backgroundColor = UIColor.transactionLineColorWhite
+            }
+            
+        }
+        
+        
         
         if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
             
@@ -147,6 +249,9 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
         // Do any additional setup after loading the view.
     }
 
+    
+    
+    
     @IBAction func btnSearch(_ sender: Any) {
         let search = self.storyboard?.instantiateViewController(withIdentifier: "SearchVC") as? SearchVC
         navigationController?.pushViewController(search!, animated: true)
@@ -308,11 +413,13 @@ extension HomeVC{
                 
                 //Cart count
                 if total_qty != 0{
-                    self.lblCartCount.isHidden = false
-                    self.lblCartCount.text = "\(total_qty ?? 0)"
+                    self.lblCartProductCount.isHidden = false
+//                    self.lblCartCount.text = "\(total_qty ?? 0)"
+                    self.lblCartProductCount.text = "\(total_qty ?? 0)"
                     
                 }else{
-                    self.lblCartCount.isHidden = true
+//                    self.lblCartCount.isHidden = true
+                    self.lblCartProductCount.isHidden = true
                 }
                 
                 
@@ -335,10 +442,10 @@ extension HomeVC{
                 arrayOfDict = userSessionData.value(forKey: CART_USERDEFAULTS) as! [[String : String]]
                 
                 if arrayOfDict.isEmpty{
-                    self.lblCartCount.isHidden = true
+                    self.lblCartProductCount.isHidden = true
                 }else{
-                    self.lblCartCount.isHidden = false
-                    self.lblCartCount.text = String(arrayOfDict.count)
+                    self.lblCartProductCount.isHidden = false
+                    self.lblCartProductCount.text = String(arrayOfDict.count)
                 }
                 
             }
@@ -504,6 +611,11 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource,UICollect
             return CGSize(width: self.gridBanner.frame.width, height: 224)
         }
     }
+    
+    
+    
+    
+    
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.gridHeader {
@@ -516,7 +628,6 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource,UICollect
         else if collectionView == self.gridMostSellingProduct{
             return self.arrMostSellingProducts.count
         }
-        
         else {
             self.pageControl.numberOfPages=self.arrBanner.count
             return self.arrBanner.count
@@ -530,8 +641,9 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource,UICollect
         
         if collectionView == self.gridHeader {
             let cell = self.gridHeader.dequeueReusableCell(withReuseIdentifier: "HeaderCell", for: indexPath) as! HeaderCell
-            
             cell.headerData = self.arrHeader[indexPath.row]
+            
+            
             return cell
         }
         else if collectionView == self.gridBestCategory{
@@ -567,7 +679,9 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource,UICollect
         else{
             self.pageControl.currentPage = indexPath.row
         }
+        
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         

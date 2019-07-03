@@ -9,6 +9,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+//        let storyboard = UIStoryboard.init(name: "SplashVC", bundle: nil)
+//        
+//        // controller identifier sets up in storyboard utilities
+//        // panel (on the right), it called Storyboard ID
+//        let viewController = storyboard.instantiateViewController(withIdentifier: "SplashVC") as! SplashVC
+//        
+//        self.window?.rootViewController = viewController
+//        self.window?.makeKeyAndVisible()
+//        
+//        
+        
         
         let navigationBarAppearace = UINavigationBar.appearance()
         
@@ -21,6 +32,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 // change navigation item title color
                 navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.dmlWhite]
+                
+                if let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as? UIView{
+                    statusBar.isHidden = true
+                }
+       
+                
             }else if theme == WHITE_THEME_KEY{
                 navigationBarAppearace.tintColor = UIColor.dmlBlack
                 navigationBarAppearace.barTintColor = UIColor.transactionRoundBackWhite
@@ -35,6 +52,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.dmlBlack]
             }
             
+        }else{
+            navigationBarAppearace.tintColor = UIColor.dmlBlack
+            navigationBarAppearace.barTintColor = UIColor.transactionRoundBackWhite
+            
+            // change navigation item title color
+            navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.dmlBlack]
         }
         
        

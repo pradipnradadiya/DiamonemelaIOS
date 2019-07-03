@@ -683,6 +683,8 @@ extension ProductDetailVC{
                 }
                 
                 
+                self.lblMetalType.text = "\(ProductDetailVC.caratValue) \(ProductDetailVC.metalValue)"
+                
                 
                 //product detail
                 self.lblProductName.text=productDetailData?.product_details?[0].product_name
@@ -866,6 +868,14 @@ extension ProductDetailVC{
                 self.lblDiamondPrice.text=priceFormat2("\(productDetail?.diamondmainprice?[0].dimondprice ?? "")")
                 
                 self.lblFinalPrice.text=priceFormat2("\(productDetail?.product_details?[0].price ?? "")")
+                
+            
+                if ProductDetailVC.caratValue == "Platinum(950)"{
+                    self.lblMetalType.text = "\(ProductDetailVC.caratValue)"
+                }else{
+                    self.lblMetalType.text = "\(ProductDetailVC.caratValue) \(ProductDetailVC.metalValue)"
+                }
+                
                 
             }
             
@@ -1114,8 +1124,7 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
                 ProductDetailVC.braceletProductId = self.arrBracelet[indexPath.row].product_id!
                 self.filterClick(clickAction: "")
                 self.gridBracelet.reloadData()
-                
-               
+            
             }
             
             return cell
@@ -1130,8 +1139,7 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
                 ProductDetailVC.pendentProId = self.arrPendents[indexPath.row].product_id!
                self.filterClick(clickAction: "")
                 self.gridPendent.reloadData()
-                
-                
+            
             }
             
             return cell
@@ -1191,7 +1199,7 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
                 ProductDetailVC.metalValue = self.arrMetal[indexPath.row]
                 self.filterClick(clickAction: "")
                 self.gridMetal.reloadData()
-                
+               
             }
             
             
@@ -1204,7 +1212,6 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
            
             return cell
         }
-       
         
     }
     
@@ -1214,7 +1221,6 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
         }
         
     }
-    
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -1253,7 +1259,7 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
             
             print(self.arrRTS[indexPath.row].entity_id!)
             self.rtsProductClick(productId: self.arrRTS[indexPath.row].entity_id!)
-            
+            self.lblMetalType.text = "\(self.arrRTS[indexPath.row].metal_quality_value ?? "")"
             self.gridRtsSlider.reloadData()
             
             

@@ -22,7 +22,7 @@ struct MyStockItem: Mappable {
         var product_id : String?
         var image : String?
         var sku : String?
-        var price : String?
+        var price : Float?
         var metal_quality : String?
         var stone_quality : String?
         var size : String?

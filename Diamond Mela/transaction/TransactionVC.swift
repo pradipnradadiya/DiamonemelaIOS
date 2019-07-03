@@ -7,6 +7,7 @@ class TransactionVC: UIViewController {
 
     @IBOutlet weak var tblTransaction: UITableView!
     
+    @IBOutlet weak var viewNoData: BlackWhiteBackgroundView!
     
     var pageCount: Int = 1
     var arrTransaction = [TransactionItem.Data]()
@@ -92,9 +93,9 @@ extension TransactionVC {
     
     func reloadTable() {
         if self.arrTransaction.count > 0 {
-//            self.lblNoData.isHidden = true
+            self.viewNoData.isHidden = true
         } else {
-//            self.lblNoData.isHidden = false
+            self.viewNoData.isHidden = false
         }
         self.tblTransaction.reloadData()
     }

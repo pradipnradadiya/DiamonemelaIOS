@@ -11,11 +11,12 @@ class MyStockCell: UICollectionViewCell {
     
     var myStockData:MyStockItem.Data?{
         didSet{
-            imgProduct.sd_setImage(with: URL(string: (myStockData?.image)!), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
+//            imgProduct.sd_setImage(with: URL(string: (myStockData?.image)!), placeholderImage: UIImage(named: "Diamond-mela-mobile-logo.png"))
             
             lblName.text = myStockData?.sku
             lblSku.text = myStockData?.sku
-            lblPrice.text = priceFormat2("\(myStockData?.price ?? "")")
+            print(myStockData?.price as Any)
+            lblPrice.text = "Rs. \(myStockData?.price ?? 0)"
             lblGold.text = myStockData?.metal_quality
         }
     }
