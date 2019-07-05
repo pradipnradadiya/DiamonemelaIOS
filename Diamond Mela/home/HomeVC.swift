@@ -72,6 +72,7 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
     @IBOutlet weak var btnHome: UIButton!
     var arrHeader = [HeaderItem.Data]()
     var arrBanner = [BannerItem.Slider_image]()
+  
     var arrMostSellingProducts = [MostSellingProductItem.Data]()
     var arrPopularProducts = [PopularProductItem.Product_img]()
     
@@ -119,20 +120,51 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
         
     }
     
-    
+    func restartApplication () {
+        let viewController = HomeVC()
+        let navCtrl = UINavigationController(rootViewController: viewController)
+        
+        guard
+            let window = UIApplication.shared.keyWindow,
+            let rootViewController = window.rootViewController
+            else {
+                return
+        }
+        
+        navCtrl.view.frame = rootViewController.view.frame
+        navCtrl.view.layoutIfNeeded()
+        
+        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            window.rootViewController = navCtrl
+        })
+        
+    }
     
     @IBAction func switchClick(_ sender: Any) {
         
         if switchTheme.isOn {
             print("ON")
-            showAlert(title: "", message: "You are select dark theme.")
+//            showAlert(title: "", message: "You are select dark theme.")
             userSessionData.set(BLACK_THEME_KEY, forKey: THEME_USEDEFAULTS)
+            setNavigationControler()
+            let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "ThemeChangeVC") as? ThemeChangeVC
+            homeVC?.arrPopularProducts = self.arrPopularProducts
+            self.navigationController?.pushViewController(homeVC!, animated: true)
+            
+//            exit(0)
+           
             
         }
         else {
             print ("OFF")
-            showAlert(title: "", message: "You are select light theme.")
+//            showAlert(title: "", message: "You are select light theme.")
             userSessionData.set(WHITE_THEME_KEY, forKey: THEME_USEDEFAULTS)
+            setNavigationControler()
+            let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "ThemeChangeVC") as? ThemeChangeVC
+            homeVC?.arrPopularProducts = self.arrPopularProducts
+            self.navigationController?.pushViewController(homeVC!, animated: true)
+            
+//           exit(0)
             
         }
         
@@ -140,27 +172,26 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-//                if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
-//                    let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
-//                    if theme == BLACK_THEME_KEY{
-//                        switchTheme.isOn = false
-////                        switchTheme.thumbTintColor = UIColor.transactionLineColorBlack
-////                        switchTheme.tintColor = UIColor.white
-//                        switchTheme.onTintColor = UIColor.white
-//                    }else if theme == WHITE_THEME_KEY{
-//                       switchTheme.isOn = true
-////                        switchTheme.thumbTintColor = UIColor.transactionLineColorBlack
-//                        switchTheme.onTintColor = UIColor.dmlBlack
-//                    }else{
-//                        switchTheme.isOn = true
-////                        switchTheme.thumbTintColor = UIColor.transactionLineColorBlack
-//                        switchTheme.onTintColor = UIColor.dmlBlack
-//                    }
-//
-//                }
+        setNavigationControler()
         
-        
-    
+                if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+                    let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
+                    if theme == BLACK_THEME_KEY{
+                        switchTheme.isOn = true
+                        switchTheme.thumbTintColor = UIColor.white
+//                        switchTheme.tintColor = UIColor.white
+                        switchTheme.onTintColor = UIColor.transactionLineColorBlack
+                    }else if theme == WHITE_THEME_KEY{
+                       switchTheme.isOn = false
+//                        switchTheme.thumbTintColor = UIColor.transactionLineColorBlack
+                        switchTheme.onTintColor = UIColor.dmlBlack
+                    }else{
+                        switchTheme.isOn = false
+//                        switchTheme.thumbTintColor = UIColor.transactionLineColorBlack
+                        switchTheme.onTintColor = UIColor.dmlBlack
+                    }
+
+                }
         
        
         if UIDevice().userInterfaceIdiom == .phone {
@@ -190,33 +221,6 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
         }
 
         
-        
-        
-        
-        
-        
-        
-        //retrieve from UserDefaults
-        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
-            let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
-            if theme == BLACK_THEME_KEY{
-             //  btnMenu.tintColor = UIColor.dmlWhite
-             //   toolBar.backgroundColor = UIColor.transactionLineColorBlack
-                
-                
-            }else if theme == WHITE_THEME_KEY{
-             //   btnMenu.tintColor = UIColor.dmlBlack
-               // toolBar.backgroundColor = UIColor.transactionLineColorWhite
-                
-            }else{
-              //  btnMenu.tintColor = UIColor.dmlBlack
-                //toolBar.backgroundColor = UIColor.transactionLineColorWhite
-            }
-            
-        }
-        
-        
-        
         if let dataArrayString = (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) {
             
             if let dataObject = Mapper<LoginItem>().map(JSONString: dataArrayString)  {
@@ -226,12 +230,15 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
                 
             }
         }
-        
+       
         RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
-        
         self.getBannerSlider(url: Endpoint.bannerSlider.url)
         self.getHeaderMenuBestCategory(url: Endpoint.headerMenu.url)
         self.getMostSellingProduct(url: Endpoint.mostSellingProducts.url)
+        
+        
+        
+        
       //  self.getPopularProduct(url: Endpoint.popularProducts.url)
         
         
@@ -311,9 +318,11 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
     }
     
     @IBAction func btnEditProfile(_ sender: Any) {
-        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+        if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
         let editProfile = self.storyboard?.instantiateViewController(withIdentifier: "EditProfileVC") as? EditProfileVC
         self.navigationController?.pushViewController(editProfile!, animated: true)
+        }else{
+            self.registerPopop()
         }
         
 //        let editProfile = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as? ViewController
@@ -322,15 +331,20 @@ class HomeVC: UIViewController,FSPagerViewDataSource,FSPagerViewDelegate {
         
     }
     @IBAction func btnOrder(_ sender: Any) {
-        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+        if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
         let orderTab = self.storyboard?.instantiateViewController(withIdentifier: "OrderTabVC") as? OrderTabVC
         self.navigationController?.pushViewController(orderTab!, animated: true)
+        }else{
+            self.registerPopop()
         }
     }
+    
     @IBAction func btnTransaction(_ sender: Any) {
-        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+        if (UserDefaults.standard.string(forKey: USER_SESSION_DATA_KEY)) != nil {
         let transaction = self.storyboard?.instantiateViewController(withIdentifier: "TransactionVC") as? TransactionVC
         self.navigationController?.pushViewController(transaction!, animated: true)
+        }else{
+            self.registerPopop()
         }
     }
     
@@ -462,7 +476,7 @@ extension HomeVC{
 //        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         ApiManager.shared.apiPopularProduct(url: url){ (result) in
             self.count -= 1
-            if self.count == 0{
+            if self.count == 0 || self.count == 1{
                 RappleActivityIndicatorView.stopAnimation()
             }
             let status = result[STATUS_CODE] as? String
@@ -486,7 +500,7 @@ extension HomeVC{
 //        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         ApiManager.shared.apiMostSellingProduct(url: url){ (result) in
             self.count -= 1
-            if self.count == 0{
+            if self.count == 0 || self.count==1{
                 RappleActivityIndicatorView.stopAnimation()
             }
             let status = result[STATUS_CODE] as? String
@@ -506,7 +520,7 @@ extension HomeVC{
 //        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         ApiManager.shared.apiHeaderBestCategory(url: url){ (result) in
             self.count -= 1
-            if self.count == 0{
+            if self.count == 0 || self.count==1{
                 RappleActivityIndicatorView.stopAnimation()
             }
             let status = result[STATUS_CODE] as? String
@@ -568,7 +582,7 @@ extension HomeVC{
         ApiManager.shared.apiBannerSlider(url: url){ (result) in
             
             self.count -= 1
-            if self.count == 0{
+            if self.count == 0 || self.count==1{
                 RappleActivityIndicatorView.stopAnimation()
             }
             
@@ -612,10 +626,6 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource,UICollect
         }
     }
     
-    
-    
-    
-    
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.gridHeader {
@@ -655,8 +665,7 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource,UICollect
             let cell = self.gridMostSellingProduct.dequeueReusableCell(withReuseIdentifier: "MostSellingCell", for: indexPath) as! MostSellingCell
             cell.mostSellingData = self.arrMostSellingProducts[indexPath.row]
             return cell
-            
-            
+      
         }
             
         else{

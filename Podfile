@@ -18,6 +18,7 @@ target 'Diamond Mela' do
   pod 'Alamofire', '~> 4.7'
   
   pod 'FSPagerView'
+#  pod 'RIGImageGallery'
   target 'Diamond MelaTests' do
     inherit! :search_paths
     # Pods for testing

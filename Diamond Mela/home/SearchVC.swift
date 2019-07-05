@@ -2,7 +2,7 @@ import UIKit
 import ObjectMapper
 import RappleProgressHUD
 
-class SearchVC: UIViewController {
+class SearchVC: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var gridHeader: UICollectionView!
     @IBOutlet weak var tvSearch: UITextField!
@@ -13,10 +13,44 @@ class SearchVC: UIViewController {
         getDownloadCartCount()
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tvSearch.delegate = self
+        
+       
+        
         self.getHeaderMenuBestCategory(url: Endpoint.headerMenu.url)
         // Do any additional setup after loading the view.
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SearchVC.dismisKeyboard))
+        
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+        
+        view.addGestureRecognizer(tap)
+        
+        
+        
+    }
+    
+    //Calls this function when the tap is recognized.
+    @objc func dismisKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    func textFieldShouldReturn(_ scoreText: UITextField) -> Bool {
+        self.view.endEditing(true)
+        
+        let list = self.storyboard?.instantiateViewController(withIdentifier: "ListVC") as? ListVC
+        list?.headerTitle = tvSearch.text!
+        list?.id = "search"
+        self.navigationController?.pushViewController(list!, animated: true)
+        return true
+      
     }
     
     @IBAction func btnSearch(_ sender: Any) {
@@ -111,5 +145,3 @@ extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource,UIColle
     }
     
 }
-
-

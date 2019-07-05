@@ -59,10 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // change navigation item title color
             navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.dmlBlack]
         }
-        
-       
-        
-        
+      
         return true
     }
 

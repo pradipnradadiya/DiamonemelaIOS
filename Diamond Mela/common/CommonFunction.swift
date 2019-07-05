@@ -120,6 +120,50 @@ extension UIColor {
 
 extension UIViewController{
     
+    func setNavigationControler(){
+        let navigationBarAppearace = UINavigationBar.appearance()
+        
+        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+            let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
+            if theme == BLACK_THEME_KEY{
+                
+                navigationBarAppearace.tintColor = UIColor.dmlWhite
+                navigationBarAppearace.barTintColor = UIColor.transactionRoundBackBlack
+                
+                // change navigation item title color
+                navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.dmlWhite]
+                
+                if let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as? UIView{
+                    statusBar.isHidden = true
+                }
+                
+                
+            }else if theme == WHITE_THEME_KEY{
+                navigationBarAppearace.tintColor = UIColor.dmlBlack
+                navigationBarAppearace.barTintColor = UIColor.transactionRoundBackWhite
+                
+                // change navigation item title color
+                navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.dmlBlack]
+            }else{
+                navigationBarAppearace.tintColor = UIColor.dmlBlack
+                navigationBarAppearace.barTintColor = UIColor.transactionRoundBackWhite
+                
+                // change navigation item title color
+                navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.dmlBlack]
+            }
+            
+        }else{
+            navigationBarAppearace.tintColor = UIColor.dmlBlack
+            navigationBarAppearace.barTintColor = UIColor.transactionRoundBackWhite
+            
+            // change navigation item title color
+            navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.dmlBlack]
+        }
+        
+    }
+    
+    
+    
     func cartDisplayWithCount(count:String){
         // badge label
         let label = UILabel(frame: CGRect(x: 12, y: -10, width: 20, height: 20))

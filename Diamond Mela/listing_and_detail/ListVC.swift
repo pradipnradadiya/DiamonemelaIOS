@@ -32,10 +32,7 @@ class ListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        
-        
-        
+    
         // Do any additional setup after loading the view.
         
         self.navigationItem.title=headerTitle
@@ -43,7 +40,7 @@ class ListVC: UIViewController {
         
         
         if id == "search"{
-            self.searchProduct(searchTerm: headerTitle!, page: String(pageCount))
+            self.searchProduct(searchTerm: headerTitle!, page: String(pageCount),showLoader: true)
         }else{
             self.getSortFilter(url: Endpoint.getSortFilter.url)
         }
@@ -68,11 +65,7 @@ class ListVC: UIViewController {
         ProductDetailVC.ringOptionTypeId = ""
         
         getDownloadCartCount()
-       
-        
-        
-        
-        
+    
         if FilterVC.filterFlag == 1{
             
             self.pageCount = 1
@@ -201,9 +194,7 @@ class ListVC: UIViewController {
                         }else{
                             self.getCategoryProduct(categoryId: self.id!, groupId: groupId, page: String(self.pageCount), price: "", gold_purity: "", diamond_quality: "", diamond_shape: "", sku: "", availability: "", sort_by: self.sort_by,showLoader: true)
                         }
-                        
-                        
-                        
+                  
                         //action(obj.value)
                     }
                 )

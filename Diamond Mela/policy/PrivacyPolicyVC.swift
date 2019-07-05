@@ -79,18 +79,33 @@ extension PrivacyPolicyVC{
             } else {
               
                 let data = result["data"] as? String
+                
+                self.tfPolicy.set(html: data!)
                 if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
                     let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
                     if theme == BLACK_THEME_KEY{
                        self.tfPolicy.textColor = UIColor.dmlWhite
+                        self.tfPolicy.font = .systemFont(ofSize: 16)
+                        
+
+//                    self.tfPolicy.font = UIFont(name: "Montserrat-Regular", size: 17)
+//                        self.tfPolicy.tintColor = UIColor.dmlWhite
+                       
                     }else if theme == WHITE_THEME_KEY{
                        self.tfPolicy.textColor = UIColor.dmlBlack
+                        self.tfPolicy.font = .systemFont(ofSize: 16)
+//                        self.tfPolicy.font = UIFont(name: "Montserrat-Regular", size: 17)
+//                        self.tfPolicy.tintColor = UIColor.dmlBlack
                     }else{
                        self.tfPolicy.textColor = UIColor.dmlBlack
+                        self.tfPolicy.font = .systemFont(ofSize: 16)
+//                        self.tfPolicy.font = UIFont(name: "Montserrat-Regular", size: 17)
+//                        self.tfPolicy.tintColor = UIColor.dmlBlack
                     }
                     
                 }
-                self.tfPolicy.set(html: data!)
+                
+               
                 
             }
             

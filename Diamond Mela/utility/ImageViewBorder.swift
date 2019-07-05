@@ -21,6 +21,7 @@ class ImageViewBorder: UIImageView {
                 self.transform = CGAffineTransform.identity
             }, completion: nil)
         }
+        
         //retrieve from UserDefaults
         if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
             let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""

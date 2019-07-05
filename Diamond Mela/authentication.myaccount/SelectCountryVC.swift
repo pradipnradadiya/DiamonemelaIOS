@@ -17,8 +17,7 @@ class SelectCountryVC: UIViewController , UISearchResultsUpdating {
     
     typealias CompletionBloack = (String, String) -> Void
     var myCompletion: CompletionBloack?
-    
-    
+  
     
     @IBOutlet weak var tblCountry: UITableView!
     @IBOutlet weak var tvSearch: UITextField!
@@ -26,6 +25,22 @@ class SelectCountryVC: UIViewController , UISearchResultsUpdating {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+        
+        //retrieve from UserDefaults
+        if (UserDefaults.standard.string(forKey: THEME_USEDEFAULTS)) != nil {
+            let theme = UserDefaults.standard.string(forKey: THEME_USEDEFAULTS) ?? ""
+            if theme == BLACK_THEME_KEY{
+                tblCountry.backgroundColor = UIColor.dmlBlack
+            }else if theme == WHITE_THEME_KEY{
+                tblCountry.backgroundColor = UIColor.dmlWhite
+            }else{
+                tblCountry.backgroundColor = UIColor.dmlWhite
+            }
+            
+        }
+       
         print(arrCountry as NSArray)
         
         
@@ -79,7 +94,7 @@ class SelectCountryVC: UIViewController , UISearchResultsUpdating {
          filteredTableData = arrCountry
         
         filteredTableData = arrCountry.filter { (country: CountryResponse.Data) -> Bool in
-            print(country.name?.contains("Indi"))
+            print(country.name?.contains("Indi") as Any)
             return country.name!.lowercased().contains("\(searchPredicate)")
         }
         

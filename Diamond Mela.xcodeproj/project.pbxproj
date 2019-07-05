@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0403C86422CF283200AB1424 /* ThemeChangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0403C86322CF283200AB1424 /* ThemeChangeVC.swift */; };
+		0403C86622CF3AB800AB1424 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0403C86522CF3AB800AB1424 /* CustomButton.swift */; };
 		040402B022C5F588000E2C8C /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040402AF22C5F588000E2C8C /* LineView.swift */; };
 		040402B222C5F8B9000E2C8C /* ViewRoundMost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040402B122C5F8B9000E2C8C /* ViewRoundMost.swift */; };
 		040402B422C5FC1E000E2C8C /* ImageViewBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040402B322C5FC1E000E2C8C /* ImageViewBorder.swift */; };
@@ -86,6 +88,8 @@
 		041BFC16228C3892002782B3 /* CountryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041BFC15228C3892002782B3 /* CountryResponse.swift */; };
 		041BFC18228C38AB002782B3 /* StateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041BFC17228C38AB002782B3 /* StateResponse.swift */; };
 		041CD05B22928521003A5CCC /* BankItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041CD05A22928521003A5CCC /* BankItem.swift */; };
+		041E6C3022CDD3F80059AE07 /* ImageFullVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E6C2F22CDD3F80059AE07 /* ImageFullVC.swift */; };
+		041E6C3222CDDDCC0059AE07 /* FullImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E6C3122CDDDCC0059AE07 /* FullImageCell.swift */; };
 		042C215622C77A8E00A9E27E /* ViewBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042C215522C77A8E00A9E27E /* ViewBorder.swift */; };
 		042C215822C7924500A9E27E /* JTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042C215722C7924500A9E27E /* JTextfield.swift */; };
 		042C215A22C7937A00A9E27E /* ViewBlackWhite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042C215922C7937A00A9E27E /* ViewBlackWhite.swift */; };
@@ -175,6 +179,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0403C86322CF283200AB1424 /* ThemeChangeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeChangeVC.swift; sourceTree = "<group>"; };
+		0403C86522CF3AB800AB1424 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		040402AF22C5F588000E2C8C /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		040402B122C5F8B9000E2C8C /* ViewRoundMost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRoundMost.swift; sourceTree = "<group>"; };
 		040402B322C5FC1E000E2C8C /* ImageViewBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewBorder.swift; sourceTree = "<group>"; };
@@ -260,6 +266,8 @@
 		041BFC15228C3892002782B3 /* CountryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryResponse.swift; sourceTree = "<group>"; };
 		041BFC17228C38AB002782B3 /* StateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateResponse.swift; sourceTree = "<group>"; };
 		041CD05A22928521003A5CCC /* BankItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankItem.swift; sourceTree = "<group>"; };
+		041E6C2F22CDD3F80059AE07 /* ImageFullVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFullVC.swift; sourceTree = "<group>"; };
+		041E6C3122CDDDCC0059AE07 /* FullImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullImageCell.swift; sourceTree = "<group>"; };
 		042C215522C77A8E00A9E27E /* ViewBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBorder.swift; sourceTree = "<group>"; };
 		042C215722C7924500A9E27E /* JTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JTextfield.swift; sourceTree = "<group>"; };
 		042C215922C7937A00A9E27E /* ViewBlackWhite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBlackWhite.swift; sourceTree = "<group>"; };
@@ -548,6 +556,7 @@
 				041679A92295226400B8E7D5 /* ListVC.swift */,
 				04B763FB2296853F000D8D29 /* FilterVC.swift */,
 				041A3B8822A552A6008F9A47 /* ProductDetailVC.swift */,
+				041E6C2F22CDD3F80059AE07 /* ImageFullVC.swift */,
 			);
 			path = listing_and_detail;
 			sourceTree = "<group>";
@@ -581,6 +590,7 @@
 				043CC7FB2269B98400669BFE /* AppConstants.swift */,
 				04A362D82299196300A76FBD /* ContactUsVC.swift */,
 				04AE2E8722C0D4E200725A3A /* SplashVC.swift */,
+				0403C86322CF283200AB1424 /* ThemeChangeVC.swift */,
 			);
 			path = other;
 			sourceTree = "<group>";
@@ -663,6 +673,7 @@
 				041B1ACB22A7CB6100920223 /* GemstoneCell.swift */,
 				041B1ACD22A7CCB600920223 /* SliderPagerCell.swift */,
 				041B1ACF22A7CCCC00920223 /* SliderCell.swift */,
+				041E6C3122CDDDCC0059AE07 /* FullImageCell.swift */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -746,6 +757,7 @@
 				04167FE022CB9212003D98A3 /* WhiteToBlackButton.swift */,
 				04167FE222CB9228003D98A3 /* WhitetoBlackLabel.swift */,
 				04167FE422CB923B003D98A3 /* WhiteBlackView.swift */,
+				0403C86522CF3AB800AB1424 /* CustomButton.swift */,
 			);
 			path = utility;
 			sourceTree = "<group>";
@@ -1124,6 +1136,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0403C86422CF283200AB1424 /* ThemeChangeVC.swift in Sources */,
 				043CC7F72269A14E00669BFE /* TermsConditionVC.swift in Sources */,
 				041BB8F022742A3E00FFBAA4 /* DownloadVC.swift in Sources */,
 				041679B22295544000B8E7D5 /* ListCell.swift in Sources */,
@@ -1215,6 +1228,7 @@
 				041B1ACA22A7CB2E00920223 /* MetalCell.swift in Sources */,
 				0461D42722A9335C005FC54E /* PrintVC.swift in Sources */,
 				0405B6A422B91CC2004A0B6D /* SelectAddressVC.swift in Sources */,
+				041E6C3222CDDDCC0059AE07 /* FullImageCell.swift in Sources */,
 				0408082522B0E54C00C95492 /* PaymentCell2.swift in Sources */,
 				04326BEB2272D89200D549C7 /* UIViewX.swift in Sources */,
 				04B764032296C0AE000D8D29 /* HeaderItem.swift in Sources */,
@@ -1251,6 +1265,7 @@
 				041B1ABA22A7C8EC00920223 /* RingCell.swift in Sources */,
 				041BFC18228C38AB002782B3 /* StateResponse.swift in Sources */,
 				0478A8D12297F66B00B75BD1 /* PrivacyPolicyVC.swift in Sources */,
+				041E6C3022CDD3F80059AE07 /* ImageFullVC.swift in Sources */,
 				041B1AC422A7C98800920223 /* DiamondDetailCell.swift in Sources */,
 				0405B6A622B91D0D004A0B6D /* SelectAddressCell.swift in Sources */,
 				041BB8F422742B4D00FFBAA4 /* TransactionVC.swift in Sources */,
@@ -1258,6 +1273,7 @@
 				043CC7F52269A12900669BFE /* ForgotPasswordVC.swift in Sources */,
 				042C215A22C7937A00A9E27E /* ViewBlackWhite.swift in Sources */,
 				0441E834229FC20300ABD01E /* ShippingCell.swift in Sources */,
+				0403C86622CF3AB800AB1424 /* CustomButton.swift in Sources */,
 				0418397622B26A2C00E71CBD /* SelectCountryVC.swift in Sources */,
 				0417481522A10E6200C75E3E /* OrderDetailCell.swift in Sources */,
 				041B1AC022A7C95100920223 /* CaratCell.swift in Sources */,

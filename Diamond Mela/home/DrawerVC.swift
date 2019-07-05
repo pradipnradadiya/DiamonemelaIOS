@@ -42,13 +42,14 @@ class DrawerVC: UIViewController {
             viewLogout.isHidden = false
             
             
+//            btnMyStock.isEnabled = true
+//            btnOrder.isEnabled = true
+//            btnDownload.isEnabled = true
+//            btnTransaction.isEnabled = true
+//            btnMyAccount.isEnabled = true
+//            btnCreateRererral.isEnabled = true
             
-            btnMyStock.isEnabled = true
-            btnOrder.isEnabled = true
-            btnDownload.isEnabled = true
-            btnTransaction.isEnabled = true
-            btnMyAccount.isEnabled = true
-            btnCreateRererral.isEnabled = true
+            
             
             if let dataObject = Mapper<LoginItem>().map(JSONString: dataArrayString)  {
                 
@@ -57,17 +58,13 @@ class DrawerVC: UIViewController {
             }
                         
         }else{
-            
-            
-            btnMyStock.isEnabled = false
-            btnOrder.isEnabled = false
-            btnDownload.isEnabled = false
-            btnTransaction.isEnabled = false
+//            btnMyStock.isEnabled = false
+//            btnOrder.isEnabled = false
+//            btnDownload.isEnabled = false
+//            btnTransaction.isEnabled = false
             viewLogout.isHidden = true
-            
-            btnMyAccount.isEnabled = false
-            btnCreateRererral.isEnabled = false
-            
+//            btnMyAccount.isEnabled = false
+//            btnCreateRererral.isEnabled = false
             btnUname.isHidden = true
             buttonLogin.isHidden = false
             btnSignUp.isHidden = false
@@ -135,6 +132,8 @@ class DrawerVC: UIViewController {
         self.navigationController?.pushViewController(profile!, animated: true)
         
     }
+    
+    
     @IBAction func btnOurCollection(_ sender: UIButton) {
         if sender.isSelected {
             constraintMainView.constant = 583
@@ -213,6 +212,8 @@ class DrawerVC: UIViewController {
         self.closeDrawer()
         let download = self.storyboard?.instantiateViewController(withIdentifier: "DownloadVC") as? DownloadVC
         self.navigationController?.pushViewController(download!, animated: true)
+        }else{
+            self.registerPopop()
         }
     }
     @IBAction func btnTransaction(_ sender: Any) {
@@ -220,6 +221,8 @@ class DrawerVC: UIViewController {
         self.closeDrawer()
         let transaction = self.storyboard?.instantiateViewController(withIdentifier: "TransactionVC") as? TransactionVC
         self.navigationController?.pushViewController(transaction!, animated: true)
+        }else{
+            self.registerPopop()
         }
     }
     @IBAction func btnMyOrder(_ sender: Any) {
@@ -227,6 +230,8 @@ class DrawerVC: UIViewController {
         self.closeDrawer()
         let order = self.storyboard?.instantiateViewController(withIdentifier: "OrderTabVC") as? OrderTabVC
         self.navigationController?.pushViewController(order!, animated: true)
+         }else{
+            self.registerPopop()
         }
     }
     @IBAction func btnMyStock(_ sender: Any) {
@@ -234,6 +239,8 @@ class DrawerVC: UIViewController {
         self.closeDrawer()
         let myStock = self.storyboard?.instantiateViewController(withIdentifier: "MyStockVC") as? MyStockVC
         self.navigationController?.pushViewController(myStock!, animated: true)
+         }else{
+            self.registerPopop()
         }
         
     }
@@ -248,6 +255,8 @@ class DrawerVC: UIViewController {
         self.closeDrawer()
         let editProfile = self.storyboard?.instantiateViewController(withIdentifier: "EditProfileVC") as? EditProfileVC
         self.navigationController?.pushViewController(editProfile!, animated: true)
+         }else{
+            self.registerPopop()
         }
     }
     
@@ -256,6 +265,8 @@ class DrawerVC: UIViewController {
         self.closeDrawer()
         let referral = self.storyboard?.instantiateViewController(withIdentifier: "CreateReferralVC") as? CreateReferralVC
         self.navigationController?.pushViewController(referral!, animated: true)
+         }else{
+            self.registerPopop()
         }
     }
     
@@ -283,9 +294,9 @@ class DrawerVC: UIViewController {
 }
 extension DrawerVC{
     func getHeaderMenuBestCategory (url:String){
-        RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
+     //   RappleActivityIndicatorView.startAnimatingWithLabel(loadingMsg)
         ApiManager.shared.apiHeaderBestCategory(url: url){ (result) in
-            RappleActivityIndicatorView.stopAnimation()
+           // RappleActivityIndicatorView.stopAnimation()
             
             let status = result[STATUS_CODE] as? String
             print(status as Any)

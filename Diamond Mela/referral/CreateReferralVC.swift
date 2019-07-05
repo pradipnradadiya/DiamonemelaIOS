@@ -8,7 +8,7 @@ class CreateReferralVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     typealias CompletionBloack = (String, String) -> Void
     var myCompletion: CompletionBloack?
 
-    @IBOutlet weak var lblCartCount: UILabelX!
+  //  @IBOutlet weak var lblCartCount: UILabelX!
     @IBOutlet weak var tvDiscount: JVFloatLabeledTextField!
     @IBOutlet weak var tvTel: JVFloatLabeledTextField!
     @IBOutlet weak var tvEmail: JVFloatLabeledTextField!
@@ -59,10 +59,7 @@ class CreateReferralVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
       tvDiscount.resignFirstResponder()
     }
     
-    @IBAction func btnCart(_ sender: Any) {
-        let cart = self.storyboard?.instantiateViewController(withIdentifier: "CartVC") as? CartVC
-        self.navigationController?.pushViewController(cart!, animated: true)
-    }
+   
     @IBAction func btnSearch(_ sender: Any) {
         let search = self.storyboard?.instantiateViewController(withIdentifier: "SearchVC") as? SearchVC
         navigationController?.pushViewController(search!, animated: true)

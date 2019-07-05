@@ -193,7 +193,7 @@ class ProductDetailVC: UIViewController {
             
         else{
        
-          showAlert(title: "ALERT", message: "Please first login.")
+          self.registerPopop()
             
         }
         
@@ -517,13 +517,13 @@ extension ProductDetailVC{
                     self.btnBuyNow.isHidden=false
                     self.btnSoldOut.isHidden=true
                 }
-                
-                
+                                
                 if self.productCategoryId == RING_ID{
                     self.viewRing.isHidden = false
                     self.viewBangle.isHidden = true
                     self.viewBracelet.isHidden = true
                     self.viewPendent.isHidden = true
+                    
                 }else if self.productCategoryId == BRACELETS_ID{
                     self.viewRing.isHidden = true
                     self.viewBangle.isHidden = true
@@ -569,7 +569,7 @@ extension ProductDetailVC{
                 if productDetailData?.products == "simple"{
                     self.arrRTS = (productDetailData?.rts_slider)!
                     self.gridRtsSlider.reloadData()
-                    
+                    self.viewCustomizeJewelarry.isHidden = true
                     self.constraintCustomJewelaryHeight.constant = 0
                     
                     self.constraintBangleHeight.constant = 0
@@ -857,8 +857,6 @@ extension ProductDetailVC{
                 self.lblMetalWeight.text=productDetail?.metaldetails?[0].metalweight
                 
                 self.lblMetalEstimatedTotal.text=priceFormat2("\(productDetail?.metaldetails?[0].metalestimatedprice ?? 0)")
-                
-             
                 
                 //metal and diamone piece and price
                 self.lblMetalPrice.text="\(productDetail?.metalprice! ?? [0])"
@@ -1226,11 +1224,15 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView==self.gridPager{
-            
+            let fullImage = self.storyboard?.instantiateViewController(withIdentifier: "ImageFullVC") as? ImageFullVC
+                    fullImage?.sliderImage = self.sliderImage
+                    self.navigationController?.pushViewController(fullImage!, animated: true)
         }
             
         else if collectionView == self.gridSlider {
             self.gridPager.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            
+            
         }
             
         else if collectionView==self.gridRtsSlider{
